@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="205" height="73" viewBox="0 0 205 73">
+  <g id="Group_20" data-name="Group 20" transform="translate(-71 -17)">
+    <rect id="Rectangle_1" data-name="Rectangle 1" width="73" height="73" rx="15" transform="translate(71 17)" fill="#fff7e6"/>
+    <path id="graduation-cap-solid" d="M19.793,32a4.378,4.378,0,0,0-1.467.254L.964,38.524a1.489,1.489,0,0,0,0,2.8l3.584,1.294a10.19,10.19,0,0,0-1.591,5.472v1.739a11.742,11.742,0,0,1-1.38,5A16.411,16.411,0,0,1,.184,57.156a.993.993,0,0,0,.551,1.56l3.962.99a.987.987,0,0,0,.768-.124.97.97,0,0,0,.439-.644,15.958,15.958,0,0,0-.13-6.728,13.689,13.689,0,0,0-.836-2.6V48.087a8.22,8.22,0,0,1,1.727-5.045,7.557,7.557,0,0,1,3.045-2.21l9.718-3.819a.988.988,0,0,1,.724,1.838l-9.718,3.819a5.682,5.682,0,0,0-1.993,1.337l9.879,3.565a4.366,4.366,0,0,0,2.934,0l17.369-6.252a1.489,1.489,0,0,0,0-2.8L21.26,32.254A4.378,4.378,0,0,0,19.793,32ZM7.909,55.274c0,2.185,5.323,4.457,11.885,4.457s11.885-2.272,11.885-4.457l-.947-9-8.8,3.182a6.325,6.325,0,0,1-4.271,0l-8.8-3.182Z" transform="translate(87.544 7.469)" fill="#ff8000"/>
+    <text id="SMART" transform="translate(156 52)" font-size="32" font-family="Poppins-Medium, Poppins" font-weight="500" letter-spacing="0.02em"><tspan x="0" y="0">SMART</tspan></text>
+    <text id="learning" transform="translate(156 55)" fill="#6f88a7" font-size="24" font-family="Poppins-Regular, Poppins" letter-spacing="0.095em"><tspan x="0" y="25">learning</tspan></text>
+  </g>
+</svg>

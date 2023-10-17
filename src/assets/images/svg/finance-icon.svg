@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+  <g id="Group_36" data-name="Group 36" transform="translate(-35 -309)">
+    <g id="Ellipse_2" data-name="Ellipse 2" transform="translate(35 309)" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="0.5">
+      <circle cx="7.5" cy="7.5" r="7.5" stroke="none"/>
+      <circle cx="7.5" cy="7.5" r="7.25" fill="none"/>
+    </g>
+    <path id="indian-rupee-sign-solid" d="M0,32.533A.532.532,0,0,1,.529,32H4.791a.533.533,0,0,1,0,1.065H3.855a2.415,2.415,0,0,1,.345.8h.591a.533.533,0,0,1,0,1.065H4.2a2.4,2.4,0,0,1-2.034,1.846l2.4,1.716a.532.532,0,1,1-.619.866L.22,36.694a.532.532,0,0,1,.31-.965H1.861a1.329,1.329,0,0,0,1.22-.8H.529a.533.533,0,0,1,0-1.065H3.081a1.329,1.329,0,0,0-1.22-.8H.529A.532.532,0,0,1,0,32.533Z" transform="translate(39.84 280.771)" fill="rgba(255,255,255,0.6)"/>
+  </g>
+</svg>
