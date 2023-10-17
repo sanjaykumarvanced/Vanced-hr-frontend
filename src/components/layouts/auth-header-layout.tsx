@@ -1,11 +1,10 @@
-import { AppBar, Badge, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { AppBar, Box,  IconButton, Toolbar, Typography } from '@mui/material';
 import { LEFT_SIDEBAR_WIDTH } from '../consts/layout.const';
 import { themeColors, themeFonts } from '../../configs';
 import { BarIconSvg, DownArrowIcon, ProfilePicture, SearchIcon } from '../../svgs';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { useState } from 'react';
-import { AdminDropDown } from '../dropdown/addministator-info-dropdown';
+import { ProfileMenu } from '../dropdown/profile-menu';
 
 export const AuthHeaderLayout = ({
   handleDrawerClose,
@@ -127,7 +126,7 @@ export const AuthHeaderLayout = ({
                 aria-controls={isOpen ? 'isLive' : undefined}
                 aria-haspopup="true"
                 aria-expanded={isOpen ? 'true' : undefined}
-                // onClick={handleClick}
+                onClick={handleClick}
               >
                 <DownArrowIcon />
               </IconButton>
@@ -135,7 +134,7 @@ export const AuthHeaderLayout = ({
           </Box>
         </Toolbar>
       </AppBar>
-      {isOpen && <AdminDropDown handleClose={handleClose} anchorEl={anchorEl} open={isOpen} />}
+      {isOpen && <ProfileMenu handleClose={handleClose} anchorEl={anchorEl} open={isOpen} />}
     </>
   );
 };
