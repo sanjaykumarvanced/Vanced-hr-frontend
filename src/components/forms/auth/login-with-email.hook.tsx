@@ -41,9 +41,7 @@ export const useLoginWithEmailHook = ({ next }: { next: () => void }) => {
             incorrectCredentials: "Incorrect email or password",
           });
         });
-      if (!response) {
-        return;
-      } else {
+      if (response) {
         dispatch(
           authenticationSlice.actions.setCredentials({
             accessToken: response.token,

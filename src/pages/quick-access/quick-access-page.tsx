@@ -2,6 +2,7 @@ import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import { themeFonts, themeColors } from "../../configs";
 import { DownArrowIcon1 } from "../../svgs";
 import SocialDashboard from "./SocialDashboard";
+import { TodaysLeavesDetails } from "./todays-leaves-details";
 
 export const QuickAccessPage = () => {
   return (
@@ -57,19 +58,14 @@ export const QuickAccessPage = () => {
             flexDirection: "row",
             paddingLeft: "0px !important",
             paddingTop: "0px !important",
-            gap: "25px",
+            gap: "20px",
           }}
         >
-          <Grid
-            item
-            xs={8}
-          >
+          <Grid item xs={9}>
             <SocialDashboard />
           </Grid>
-          <Grid
-            item
-            xs={7}
-          >
+          <Grid item xs={8}>
+            <TodaysLeavesDetails />
           </Grid>
         </Grid>
       </Grid>

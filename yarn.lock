@@ -1487,6 +1487,33 @@
   "resolved" "https://registry.npmjs.org/@faker-js/faker/-/faker-8.0.2.tgz"
   "version" "8.0.2"
 
+"@floating-ui/core@^1.4.2":
+  "integrity" "sha512-kK1h4m36DQ0UHGj5Ah4db7R0rHemTqqO0QLvUqi1/mUUp3LuAWbWxdxSIf/XsnH9VS6rRVPLJCncjRzUvyCLXg=="
+  "resolved" "https://registry.npmjs.org/@floating-ui/core/-/core-1.5.0.tgz"
+  "version" "1.5.0"
+  dependencies:
+    "@floating-ui/utils" "^0.1.3"
+
+"@floating-ui/dom@^1.5.1":
+  "integrity" "sha512-ClAbQnEqJAKCJOEbbLo5IUlZHkNszqhuxS4fHAVxRPXPya6Ysf2G8KypnYcOTpx6I8xcgF9bbHb6g/2KpbV8qA=="
+  "resolved" "https://registry.npmjs.org/@floating-ui/dom/-/dom-1.5.3.tgz"
+  "version" "1.5.3"
+  dependencies:
+    "@floating-ui/core" "^1.4.2"
+    "@floating-ui/utils" "^0.1.3"
+
+"@floating-ui/react-dom@^2.0.2":
+  "integrity" "sha512-5qhlDvjaLmAst/rKb3VdlCinwTF4EYMiVxuuc/HVUjs46W0zgtbMmAZ1UTsDrRTxRmUEzl92mOtWbeeXL26lSQ=="
+  "resolved" "https://registry.npmjs.org/@floating-ui/react-dom/-/react-dom-2.0.2.tgz"
+  "version" "2.0.2"
+  dependencies:
+    "@floating-ui/dom" "^1.5.1"
+
+"@floating-ui/utils@^0.1.3":
+  "integrity" "sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A=="
+  "resolved" "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.1.6.tgz"
+  "version" "0.1.6"
+
 "@formatjs/ecma402-abstract@1.17.0":
   "integrity" "sha512-6ueQTeJZtwKjmh23bdkq/DMqH4l4bmfvtQH98blOSbiXv/OUiyijSW6jU22IT8BNM1ujCaEvJfTtyCYVH38EMQ=="
   "resolved" "https://registry.npmjs.org/@formatjs/ecma402-abstract/-/ecma402-abstract-1.17.0.tgz"
@@ -1924,6 +1951,19 @@
     "prop-types" "^15.8.1"
     "react-is" "^18.2.0"
 
+"@mui/base@5.0.0-beta.20":
+  "integrity" "sha512-CS2pUuqxST7ch9VNDCklRYDbJ3rru20Tx7na92QvVVKfu3RL4z/QLuVIc8jYGsdCnauMaeUSlFNLAJNb0yXe6w=="
+  "resolved" "https://registry.npmjs.org/@mui/base/-/base-5.0.0-beta.20.tgz"
+  "version" "5.0.0-beta.20"
+  dependencies:
+    "@babel/runtime" "^7.23.1"
+    "@floating-ui/react-dom" "^2.0.2"
+    "@mui/types" "^7.2.6"
+    "@mui/utils" "^5.14.13"
+    "@popperjs/core" "^2.11.8"
+    "clsx" "^2.0.0"
+    "prop-types" "^15.8.1"
+
 "@mui/core-downloads-tracker@^5.14.5":
   "integrity" "sha512-3ZUbzcH4yloLKlV6Y+S0Edn2wef9t+EGHSfEkwVCn8E0ULdshifEFgfEroKRegQifDIwcKS/ofccxuZ8njTAYg=="
   "resolved" "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.14.13.tgz"
@@ -1935,6 +1975,20 @@
   "version" "5.14.3"
   dependencies:
     "@babel/runtime" "^7.22.6"
+
+"@mui/lab@^5.0.0-alpha.149":
+  "integrity" "sha512-azOkKcyVX4KBZAqSp7eRD4OfKrUrvQXo7x2BjFJil+UeAJiMpB6I5lALo2PDZz3vjtJnHqlURnZtxZOHs1zfEA=="
+  "resolved" "https://registry.npmjs.org/@mui/lab/-/lab-5.0.0-alpha.149.tgz"
+  "version" "5.0.0-alpha.149"
+  dependencies:
+    "@babel/runtime" "^7.23.1"
+    "@mui/base" "5.0.0-beta.20"
+    "@mui/system" "^5.14.14"
+    "@mui/types" "^7.2.6"
+    "@mui/utils" "^5.14.13"
+    "@mui/x-tree-view" "6.0.0-alpha.1"
+    "clsx" "^2.0.0"
+    "prop-types" "^15.8.1"
 
 "@mui/material@^5.0.0", "@mui/material@^5.14.5", "@mui/material@^5.4.1", "@mui/material@^5.8.6":
   "integrity" "sha512-4qa4GMfuZH0Ai3mttk5ccXP8a3sf7aPlAJwyMrUSz6h9hPri6BPou94zeu3rENhhmKLby9S/W1y+pmficy8JKA=="
@@ -1954,10 +2008,10 @@
     "react-is" "^18.2.0"
     "react-transition-group" "^4.4.5"
 
-"@mui/private-theming@^5.14.13":
-  "integrity" "sha512-5EFqk4tqiSwPguj4NW/6bUf4u1qoUWXy9lrKfNh9H6oAohM+Ijv/7qSxFjnxPGBctj469/Sc5aKAR35ILBKZLQ=="
-  "resolved" "https://registry.npmjs.org/@mui/private-theming/-/private-theming-5.14.13.tgz"
-  "version" "5.14.13"
+"@mui/private-theming@^5.14.14":
+  "integrity" "sha512-n77au3CQj9uu16hak2Y+rvbGSBaJKxziG/gEbOLVGrAuqZ+ycVSkorCfN6Y/4XgYOpG/xvmuiY3JwhAEOzY3iA=="
+  "resolved" "https://registry.npmjs.org/@mui/private-theming/-/private-theming-5.14.14.tgz"
+  "version" "5.14.14"
   dependencies:
     "@babel/runtime" "^7.23.1"
     "@mui/utils" "^5.14.13"
@@ -1973,13 +2027,13 @@
     "csstype" "^3.1.2"
     "prop-types" "^15.8.1"
 
-"@mui/system@^5.14.5", "@mui/system@^5.4.1", "@mui/system@^5.8.0":
-  "integrity" "sha512-+5+Dx50lG4csbx2sGjrKLozXQJeCpJ4dIBZolyFLkZ+XphD1keQWouLUvJkPQ3MSglLLKuD37pp52YjMncZMEQ=="
-  "resolved" "https://registry.npmjs.org/@mui/system/-/system-5.14.13.tgz"
-  "version" "5.14.13"
+"@mui/system@^5.14.14", "@mui/system@^5.14.5", "@mui/system@^5.4.1", "@mui/system@^5.8.0":
+  "integrity" "sha512-y4InFmCgGGWXnz+iK4jRTWVikY0HgYnABjz4wgiUgEa2W1H8M4ow+27BegExUWPkj4TWthQ2qG9FOGSMtI+PKA=="
+  "resolved" "https://registry.npmjs.org/@mui/system/-/system-5.14.14.tgz"
+  "version" "5.14.14"
   dependencies:
     "@babel/runtime" "^7.23.1"
-    "@mui/private-theming" "^5.14.13"
+    "@mui/private-theming" "^5.14.14"
     "@mui/styled-engine" "^5.14.13"
     "@mui/types" "^7.2.6"
     "@mui/utils" "^5.14.13"
@@ -1992,7 +2046,7 @@
   "resolved" "https://registry.npmjs.org/@mui/types/-/types-7.2.6.tgz"
   "version" "7.2.6"
 
-"@mui/utils@^5.13.7", "@mui/utils@^5.14.13", "@mui/utils@^5.14.5":
+"@mui/utils@^5.13.7", "@mui/utils@^5.14.13", "@mui/utils@^5.14.3", "@mui/utils@^5.14.5":
   "integrity" "sha512-2AFpyXWw7uDCIqRu7eU2i/EplZtks5LAMzQvIhC79sPV9IhOZU2qwOWVnPtdctRXiQJOAaXulg+A37pfhEueQw=="
   "resolved" "https://registry.npmjs.org/@mui/utils/-/utils-5.14.13.tgz"
   "version" "5.14.13"
@@ -2057,6 +2111,18 @@
   dependencies:
     "@babel/runtime" "^7.22.6"
     "@mui/utils" "^5.13.7"
+
+"@mui/x-tree-view@6.0.0-alpha.1":
+  "integrity" "sha512-JUG3HmBrmGEALbCFg1b+i7h726e1dWYZs4db3syO1j+Q++E3nbvE4Lehp5yGTFm+8esH0Tny50tuJaa4WX6VSA=="
+  "resolved" "https://registry.npmjs.org/@mui/x-tree-view/-/x-tree-view-6.0.0-alpha.1.tgz"
+  "version" "6.0.0-alpha.1"
+  dependencies:
+    "@babel/runtime" "^7.22.6"
+    "@mui/utils" "^5.14.3"
+    "@types/react-transition-group" "^4.4.6"
+    "clsx" "^2.0.0"
+    "prop-types" "^15.8.1"
+    "react-transition-group" "^4.4.5"
 
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   "integrity" "sha512-54/JRvkLIzzDWshCWfuhadfrfZVPiElY8Fcgmg1HroEly/EDSszzhBAsarCux+D/kOslTRquNzuyGSmUSTTHGg=="
