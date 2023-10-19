@@ -12,8 +12,12 @@ import { themeColors, themeFonts } from "../../configs";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProfilePicture } from "../../svgs";
+import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
+import { TodaysLeavesTabs } from "../../components/consts/consts";
+import { useGetLeavesDetailsQuery } from "../../components/apis/leavesApi";
+import { apiBaseUrl } from "../../components/consts/api-url.const";
 
 export const getStyles = () => {
   return {
@@ -40,17 +44,30 @@ export const getStyles = () => {
 };
 
 export const TodaysLeavesDetails = () => {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("All");
   const styles = getStyles();
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+  const handleChange = (event: any) => {
+    setValue(event);
   };
   const today = new Date().toLocaleString("en-in", {
     month: "short",
     day: "numeric",
   });
   console.log(today);
+  const { data } = useGetLeavesDetailsQuery();
+  const [filteredLeaves, setFilteredLeaves] = useState([]);
 
+  useEffect(() => {
+    if (data) {
+      if (value === "All") {
+        setFilteredLeaves(data);
+      } else {
+        setFilteredLeaves(
+          data && data.filter((item: any) => item.leaveType === value)
+        );
+      }
+    }
+  }, [data, value]);
   return (
     <Grid
       item
@@ -59,6 +76,7 @@ export const TodaysLeavesDetails = () => {
         background: themeColors["#FFFFFF"],
         boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
         borderRadius: "6px",
+        maxHeight: 415,
       }}
     >
       <Box
@@ -80,40 +98,37 @@ export const TodaysLeavesDetails = () => {
         >
           On Leave Today
         </Typography>
-        <TabContext value={value}>
-          <Box>
-            <TabList
-              onChange={handleChange}
-              sx={{
-                "& span.MuiTabs-indicator": {
-                  display: "none",
-                },
-                "& .MuiTabs-flexContainer": {
-                  display: "flex",
-                  gap: "10px !important",
-                },
-              }}
-            >
-              <Tab sx={styles.tabsButtons} label="ALL" value="1" />
-              <Tab sx={styles.tabsButtons} label="Short leave" value="2" />
-              <Tab sx={styles.tabsButtons} label="Half day Leave" value="3" />
-              <Tab sx={styles.tabsButtons} label="Full day Leave" value="4" />
-            </TabList>
-          </Box>
-        </TabContext>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
+          }}
+        >
+          {TodaysLeavesTabs.map((val) => (
+            <>
+              <CustomTabs
+                sx={styles.tabsButtons}
+                label={val.label}
+                onChange={handleChange}
+                value={val.value}
+                value1={value}
+              />
+            </>
+          ))}
+        </Box>
       </Box>
-      <Divider sx={{ width: "100%" }} />
 
+      <Divider sx={{ width: "100%" }} />
       <Box
         sx={{
           display: "flex",
           flexDirection: "row",
-          //   alignItems: "center",
-          //   justifyContent: "space-between",
           padding: "13px",
           paddingTop: 0,
           width: "100%",
           gap: "20px",
+          overflow: "auto",
         }}
       >
         <Typography
@@ -136,10 +151,13 @@ export const TodaysLeavesDetails = () => {
           {today}
         </Typography>
         <Box sx={{ width: "100%" }}>
-          <TabContext value={value}>
-            <TabPanel sx={styles.tabPanel} value="1">
+          {TodaysLeavesTabs.map((tabs, ind) => (
+            <CustomTabsPanel
+              sx={styles.tabPanel}
+              value={tabs.value}
+              value1={value}
+            >
               <List
-                // key={ind}
                 sx={{
                   padding: "0px",
                   "&:before": {
@@ -157,229 +175,91 @@ export const TodaysLeavesDetails = () => {
                   position: "relative",
                 }}
               >
-                <ListItem
-                  sx={{
-                    padding: "0px",
-                    marginTop: "26px",
-                    paddingLeft: "13px",
-                    "&:after": {
-                      content: '" "',
-                      display: "block",
-                      position: "absolute",
-                      zIndex: 5,
-                      left: "-10px",
-                      height: "14px",
-                      width: "14px",
-                      borderRadius: "10px",
-                      opacity: 1,
-                      border: " 1px solid #B9B9B9",
-                      background: themeColors["#FFFFFF"],
-                    },
-                  }}
-                >
-                  <ListItemText
-                    sx={{
-                      "& .MuiListItemText-primary": {
-                        display: "flex",
-                        gap: "10px",
-                        fontSize: "12px",
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        color: themeColors["#0C345D"],
-                      },
-                      width: "50%",
-                    }}
-                  >
-                    <Box
+                {filteredLeaves &&
+                  filteredLeaves.map((val: any) => (
+                    <ListItem
                       sx={{
-                        width: "30px",
-                        height: "30px",
-                        borderRadius: "5px",
-                        overflow: "hidden",
-                        alignItems: "center",
-                        display: "flex",
-                        justifyContent: "center",
+                        padding: "0px",
+                        marginTop: "26px",
+                        paddingLeft: "13px",
+                        "&:after": {
+                          content: '" "',
+                          display: "block",
+                          position: "absolute",
+                          zIndex: 5,
+                          left: "-10px",
+                          height: "14px",
+                          width: "14px",
+                          borderRadius: "10px",
+                          opacity: 1,
+                          border: " 1px solid #B9B9B9",
+                          background: themeColors["#FFFFFF"],
+                        },
                       }}
                     >
-                      <ProfilePicture />
-                    </Box>
-                    Deepak Kumar
-                  </ListItemText>
+                      <ListItemText
+                        sx={{
+                          "& .MuiListItemText-primary": {
+                            display: "flex",
+                            gap: "10px",
+                            fontSize: "12px",
+                            fontFamily: themeFonts["Poppins-Regular"],
+                            color: themeColors["#0C345D"],
+                            alignItems: "center",
+                          },
+                          width: "50%",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            width: "30px",
+                            height: "30px",
+                            borderRadius: "5px",
+                            overflow: "hidden",
+                            alignItems: "center",
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <img
+                            src={apiBaseUrl + "/" + val.image.path}
+                            height={30}
+                            width={30}
+                            alt="profile"
+                          />
+                        </Box>
+                        {val.employee.userName}
+                      </ListItemText>
 
-                  <ListItemText
-                    sx={{
-                      "& .MuiListItemText-primary": {
-                        fontSize: "12px",
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        color: "rgb(0 0 0 / 50%)",
-                      },
-                      width: "50%",
-                    }}
-                  >
-                    Frontend Developer
-                  </ListItemText>
+                      <ListItemText
+                        sx={{
+                          "& .MuiListItemText-primary": {
+                            fontSize: "12px",
+                            fontFamily: themeFonts["Poppins-Regular"],
+                            color: "rgb(0 0 0 / 50%)",
+                          },
+                          width: "50%",
+                        }}
+                      >
+                        {val.employee.designation}
+                      </ListItemText>
 
-                  <ListItemText
-                    sx={{
-                      "& .MuiListItemText-primary": {
-                        fontSize: "12px",
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        color: themeColors["#8BC34A"],
-                      },
-                      width: "50%",
-                    }}
-                  >
-                    On Half day Leave
-                  </ListItemText>
-                </ListItem>
-                <ListItem
-                  sx={{
-                    padding: "0px",
-                    marginTop: "26px",
-                    paddingLeft: "13px",
-                    "&:after": {
-                      content: '" "',
-                      display: "block",
-                      position: "absolute",
-                      zIndex: 5,
-                      left: "-10px",
-                      height: "14px",
-                      width: "14px",
-                      borderRadius: "10px",
-                      opacity: 1,
-                      border: " 1px solid #B9B9B9",
-                      background: themeColors["#FFFFFF"],
-                    },
-                  }}
-                >
-                  <ListItemText
-                    sx={{
-                      "& .MuiListItemText-primary": {
-                        display: "flex",
-                        gap: "10px",
-                        fontSize: "12px",
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        color: themeColors["#0C345D"],
-                      },
-                      width: "50%",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "30px",
-                        height: "30px",
-                        borderRadius: "5px",
-                        overflow: "hidden",
-                        alignItems: "center",
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <ProfilePicture />
-                    </Box>
-                    Deepak Kumar
-                  </ListItemText>
-
-                  <ListItemText
-                    sx={{
-                      "& .MuiListItemText-primary": {
-                        fontSize: "12px",
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        color: "rgb(0 0 0 / 50%)",
-                      },
-                      width: "50%",
-                    }}
-                  >
-                    Frontend Developer
-                  </ListItemText>
-
-                  <ListItemText
-                    sx={{
-                      "& .MuiListItemText-primary": {
-                        fontSize: "12px",
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        color: themeColors["#8BC34A"],
-                      },
-                      width: "50%",
-                    }}
-                  >
-                    On Half day Leave
-                  </ListItemText>
-                </ListItem>
-                <ListItem
-                  sx={{
-                    padding: "0px",
-                    marginTop: "26px",
-                    paddingLeft: "13px",
-                    "&:after": {
-                      content: '" "',
-                      display: "block",
-                      position: "absolute",
-                      zIndex: 5,
-                      left: "-10px",
-                      height: "14px",
-                      width: "14px",
-                      borderRadius: "10px",
-                      opacity: 1,
-                      border: " 1px solid #B9B9B9",
-                      background: themeColors["#FFFFFF"],
-                    },
-                  }}
-                >
-                  <ListItemText
-                    sx={{
-                      "& .MuiListItemText-primary": {
-                        display: "flex",
-                        gap: "10px",
-                        fontSize: "12px",
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        color: themeColors["#0C345D"],
-                      },
-                      width: "50%",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "30px",
-                        height: "30px",
-                        borderRadius: "5px",
-                        overflow: "hidden",
-                        alignItems: "center",
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <ProfilePicture />
-                    </Box>
-                    Deepak Kumar
-                  </ListItemText>
-
-                  <ListItemText
-                    sx={{
-                      "& .MuiListItemText-primary": {
-                        fontSize: "12px",
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        color: "rgb(0 0 0 / 50%)",
-                      },
-                      width: "50%",
-                    }}
-                  >
-                    Frontend Developer
-                  </ListItemText>
-
-                  <ListItemText
-                    sx={{
-                      "& .MuiListItemText-primary": {
-                        fontSize: "12px",
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        color: themeColors["#8BC34A"],
-                      },
-                      width: "50%",
-                    }}
-                  >
-                    On Half day Leave
-                  </ListItemText>
-                </ListItem>
+                      <ListItemText
+                        sx={{
+                          "& .MuiListItemText-primary": {
+                            fontSize: "12px",
+                            fontFamily: themeFonts["Poppins-Regular"],
+                            color: themeColors["#8BC34A"],
+                          },
+                          width: "50%",
+                        }}
+                      >
+                        {val.leaveType}
+                      </ListItemText>
+                    </ListItem>
+                  ))}
               </List>
+
               <Divider
                 orientation="vertical"
                 variant="middle"
@@ -408,41 +288,8 @@ export const TodaysLeavesDetails = () => {
                   height: "-webkit-fill-available",
                 }}
               />
-            </TabPanel>
-            <TabPanel sx={styles.tabPanel} value="2">
-              <List
-                // key={ind}
-                sx={{
-                  paddingX: "30px",
-                }}
-              >
-                <ListItem
-                  sx={{
-                    background: "aliceblue",
-                    borderRadius: "5px",
-                    border: "1px solid #EDEDED",
-                  }}
-                >
-                  <ListItemText sx={{ width: "50%" }}>njhjk</ListItemText>
-                  <Divider
-                    orientation="vertical"
-                    variant="middle"
-                    flexItem
-                    sx={{
-                      marginX: "20px",
-                    }}
-                  />
-                  <ListItemText sx={{ width: "50%" }}>hjk</ListItemText>
-                </ListItem>
-              </List>
-            </TabPanel>
-            <TabPanel sx={styles.tabPanel} value="3">
-              Item Three
-            </TabPanel>
-            <TabPanel sx={styles.tabPanel} value="4">
-              Item four
-            </TabPanel>
-          </TabContext>
+            </CustomTabsPanel>
+          ))}
         </Box>
       </Box>
     </Grid>

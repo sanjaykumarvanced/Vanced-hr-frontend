@@ -1,14 +1,14 @@
 import { emptySplitApi as api } from "./emptyApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getHolidaysDetails: builder.query<HolidaysData[], HolidaysApiArg>({
+    getHolidaysDetails: builder.query<[], HolidaysApiArg>({
       query: (queryArg) => {
         return {
           url: `api/holiday/get-list/${queryArg.year}`,
         };
       },
     }),
-    getHolidaysDetailsById: builder.query<HolidaysData[], HolidaysApiArg>({
+    getHolidaysDetailsById: builder.query<[], HolidaysApiArg>({
       query: (queryArg) => {
         return {
           url: `/holidays/${queryArg.id}`,
@@ -23,7 +23,7 @@ const injectedRtkApi = api.injectEndpoints({
         };
       },
     }),
-    createHolidaysDetails: builder.mutation<any, Partial<HolidaysData>>({
+    createHolidaysDetails: builder.mutation<any, Partial<[]>>({
       query: (item) => {
         return {
           url: `/holidays`,
@@ -32,7 +32,7 @@ const injectedRtkApi = api.injectEndpoints({
         };
       },
     }),
-    updateHolidaysDetails: builder.mutation<any, Partial<HolidaysData>>({
+    updateHolidaysDetails: builder.mutation<any, Partial<HolidaysApiArg>>({
       query: (queryArg) => {
         return {
           url: `/holidays/${queryArg.id}`,
@@ -44,14 +44,7 @@ const injectedRtkApi = api.injectEndpoints({
   }),
 });
 export { injectedRtkApi as enhancedApi };
-export interface HolidaysData {
-  id?: any;
-  holidayName?: string;
-  startDate?: string;
-  endDate?: string;
-  year?: number;
-  description?: any;
-}
+
 export type HolidaysApiArg = { year?: number; id?: number };
 
 export const {
