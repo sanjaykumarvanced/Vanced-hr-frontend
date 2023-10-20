@@ -3,6 +3,7 @@ import { themeFonts, themeColors } from "../../configs";
 import { DownArrowIcon1 } from "../../svgs";
 import SocialDashboard from "./SocialDashboard";
 import { TodaysLeavesDetails } from "./todays-leaves-details";
+import { TodaysAnnouncement } from "./today-announcement -page";
 
 export const QuickAccessPage = () => {
   return (
@@ -61,8 +62,13 @@ export const QuickAccessPage = () => {
             gap: "20px",
           }}
         >
-          <Grid item xs={9}>
+          <Grid
+            item
+            xs={9}
+            sx={{ display: "flex", flexDirection: "column", gap: "20px" }}
+          >
             <SocialDashboard />
+            <TodaysAnnouncement />
           </Grid>
           <Grid item xs={8}>
             <TodaysLeavesDetails />

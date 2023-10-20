@@ -32,3 +32,4 @@ export { ReactComponent as AccountSettingsIcon } from "../assets/images/svg/acco
 export { ReactComponent as NeedHepIcon } from "../assets/images/svg/need-help-icon.svg";
 export { ReactComponent as SignOutIcon } from "../assets/images/svg/sign-out-icon.svg";
 export { ReactComponent as DownArrowIcon1 } from "../assets/images/svg/down-arrow-icon-1.svg";
+export { ReactComponent as BirthdayWishSvg } from "../assets/images/svg/birthday-wish.svg";

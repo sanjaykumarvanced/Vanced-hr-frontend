@@ -5,21 +5,16 @@ import {
   List,
   ListItem,
   ListItemText,
-  Tab,
   Typography,
 } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
 import { useEffect, useState } from "react";
-import { ProfilePicture } from "../../svgs";
 import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
 import { TodaysLeavesTabs } from "../../components/consts/consts";
 import { useGetLeavesDetailsQuery } from "../../components/apis/leavesApi";
 import { apiBaseUrl } from "../../components/consts/api-url.const";
 
-export const getStyles = () => {
+export const getStyles = (TodaysAnnouncement?: any) => {
   return {
     tabsButtons: {
       minHeight: "29px",
@@ -30,6 +25,7 @@ export const getStyles = () => {
       fontSize: "10px",
       color: themeColors["#0C345D"],
       background: themeColors["#E1E1E1"],
+      lineHeight: "15px",
       "&.Mui-selected": {
         background: themeColors["#0C345D"],
         color: themeColors["#FFFFFF"],
@@ -38,7 +34,7 @@ export const getStyles = () => {
     tabPanel: {
       padding: 0,
       position: "relative",
-      paddingLeft: "10px",
+      paddingLeft: TodaysAnnouncement ? 0 : "10px",
     },
   };
 };
@@ -76,7 +72,7 @@ export const TodaysLeavesDetails = () => {
         background: themeColors["#FFFFFF"],
         boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
         borderRadius: "6px",
-        maxHeight: 415,
+        height: 418,
       }}
     >
       <Box
@@ -87,6 +83,7 @@ export const TodaysLeavesDetails = () => {
           justifyContent: "space-between",
           padding: "13px",
           width: "100%",
+          maxHeight: 55,
         }}
       >
         <Typography
@@ -150,144 +147,166 @@ export const TodaysLeavesDetails = () => {
         >
           {today}
         </Typography>
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%", maxHeight: "350px", overflow: "auto" }}>
           {TodaysLeavesTabs.map((tabs, ind) => (
             <CustomTabsPanel
               sx={styles.tabPanel}
               value={tabs.value}
               value1={value}
             >
-              <List
-                sx={{
-                  padding: "0px",
-                  "&:before": {
-                    content: '" "',
-                    display: "block",
-                    position: "absolute",
-                    zIndex: 1,
-                    left: "-3.5px",
-                    height: "-webkit-fill-available",
-                    top: "0px",
-                    width: "1px",
-                    opacity: 1,
-                    background: "#B9B9B9",
-                  },
-                  position: "relative",
-                }}
-              >
-                {filteredLeaves &&
-                  filteredLeaves.map((val: any) => (
-                    <ListItem
-                      sx={{
-                        padding: "0px",
-                        marginTop: "26px",
-                        paddingLeft: "13px",
-                        "&:after": {
-                          content: '" "',
-                          display: "block",
-                          position: "absolute",
-                          zIndex: 5,
-                          left: "-10px",
-                          height: "14px",
-                          width: "14px",
-                          borderRadius: "10px",
-                          opacity: 1,
-                          border: " 1px solid #B9B9B9",
-                          background: themeColors["#FFFFFF"],
-                        },
-                      }}
-                    >
-                      <ListItemText
+              {filteredLeaves && filteredLeaves.length > 0 ? (
+                <>
+                  <List
+                    sx={{
+                      padding: "0px",
+                      "&:before": {
+                        content: '" "',
+                        display: "block",
+                        position: "absolute",
+                        zIndex: 1,
+                        left: "-3.5px",
+                        height: "-webkit-fill-available",
+                        top: "0px",
+                        width: "1px",
+                        opacity: 1,
+                        background: "#B9B9B9",
+                      },
+                      position: "relative",
+                    }}
+                  >
+                    {filteredLeaves.map((val: any) => (
+                      <ListItem
                         sx={{
-                          "& .MuiListItemText-primary": {
-                            display: "flex",
-                            gap: "10px",
-                            fontSize: "12px",
-                            fontFamily: themeFonts["Poppins-Regular"],
-                            color: themeColors["#0C345D"],
-                            alignItems: "center",
+                          padding: "0px",
+                          marginTop: "26px",
+                          paddingLeft: "13px",
+                          "&:after": {
+                            content: '" "',
+                            display: "block",
+                            position: "absolute",
+                            zIndex: 5,
+                            left: "-10px",
+                            height: "14px",
+                            width: "14px",
+                            borderRadius: "10px",
+                            opacity: 1,
+                            border: " 1px solid #B9B9B9",
+                            background: themeColors["#FFFFFF"],
                           },
-                          width: "50%",
                         }}
                       >
-                        <Box
+                        <ListItemText
                           sx={{
-                            width: "30px",
-                            height: "30px",
-                            borderRadius: "5px",
-                            overflow: "hidden",
-                            alignItems: "center",
-                            display: "flex",
-                            justifyContent: "center",
+                            "& .MuiListItemText-primary": {
+                              display: "flex",
+                              gap: "10px",
+                              fontSize: "12px",
+                              fontFamily: themeFonts["Poppins-Regular"],
+                              color: themeColors["#0C345D"],
+                              alignItems: "center",
+                            },
+                            width: "50%",
                           }}
                         >
-                          <img
-                            src={apiBaseUrl + "/" + val.image.path}
-                            height={30}
-                            width={30}
-                            alt="profile"
-                          />
-                        </Box>
-                        {val.employee.userName}
-                      </ListItemText>
+                          <Box
+                            sx={{
+                              width: "30px",
+                              height: "30px",
+                              borderRadius: "5px",
+                              overflow: "hidden",
+                              alignItems: "center",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <img
+                              src={apiBaseUrl + "/" + val.image.path}
+                              height={30}
+                              width={30}
+                              alt="USER"
+                            />
+                          </Box>
+                          {val.employee.firstName} {val.employee.lastName}
+                        </ListItemText>
 
-                      <ListItemText
-                        sx={{
-                          "& .MuiListItemText-primary": {
-                            fontSize: "12px",
-                            fontFamily: themeFonts["Poppins-Regular"],
-                            color: "rgb(0 0 0 / 50%)",
-                          },
-                          width: "50%",
-                        }}
-                      >
-                        {val.employee.designation}
-                      </ListItemText>
+                        <ListItemText
+                          sx={{
+                            "& .MuiListItemText-primary": {
+                              fontSize: "12px",
+                              fontFamily: themeFonts["Poppins-Regular"],
+                              color: "rgb(0 0 0 / 50%)",
+                            },
+                            width: "50%",
+                          }}
+                        >
+                          {val.employee.designation}
+                        </ListItemText>
 
-                      <ListItemText
-                        sx={{
-                          "& .MuiListItemText-primary": {
-                            fontSize: "12px",
-                            fontFamily: themeFonts["Poppins-Regular"],
-                            color: themeColors["#8BC34A"],
-                          },
-                          width: "50%",
-                        }}
-                      >
-                        {val.leaveType}
-                      </ListItemText>
-                    </ListItem>
-                  ))}
-              </List>
-
-              <Divider
-                orientation="vertical"
-                variant="middle"
-                flexItem
-                sx={{
-                  marginX: "20px",
-                  marginY: "0px",
-                  position: "absolute",
-                  zIndex: 1,
-                  top: 0,
-                  left: "27%",
-                  height: "-webkit-fill-available",
-                }}
-              />
-              <Divider
-                orientation="vertical"
-                variant="middle"
-                flexItem
-                sx={{
-                  marginX: "20px",
-                  marginY: "0px",
-                  position: "absolute",
-                  zIndex: 1,
-                  top: 0,
-                  left: "60%",
-                  height: "-webkit-fill-available",
-                }}
-              />
+                        <ListItemText
+                          sx={{
+                            "& .MuiListItemText-primary": {
+                              fontSize: "12px",
+                              fontFamily: themeFonts["Poppins-Regular"],
+                              color: themeColors["#8BC34A"],
+                            },
+                            width: "50%",
+                          }}
+                        >
+                          {val.leaveType}
+                        </ListItemText>
+                      </ListItem>
+                    ))}
+                  </List>
+                  <Divider
+                    orientation="vertical"
+                    variant="middle"
+                    flexItem
+                    sx={{
+                      marginX: "20px",
+                      marginY: "0px",
+                      position: "absolute",
+                      zIndex: 1,
+                      top: 0,
+                      left: "27%",
+                      height: "-webkit-fill-available",
+                    }}
+                  />
+                  <Divider
+                    orientation="vertical"
+                    variant="middle"
+                    flexItem
+                    sx={{
+                      marginX: "20px",
+                      marginY: "0px",
+                      position: "absolute",
+                      zIndex: 1,
+                      top: 0,
+                      left: "60%",
+                      height: "-webkit-fill-available",
+                    }}
+                  />
+                </>
+              ) : (
+                <Box
+                  sx={{
+                    display: "flex",
+                    height: "100%",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    paddingTop: "13px",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: themeFonts["Poppins-SemiBold"],
+                      fontSize: "25px",
+                      color: themeColors["#0C345D"],
+                    }}
+                  >
+                    NO LEAVES
+                  </Typography>
+                </Box>
+              )}
             </CustomTabsPanel>
           ))}
         </Box>

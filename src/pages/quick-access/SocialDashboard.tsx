@@ -1,10 +1,37 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
 import { HolidaysBackground, Inbox } from "../../pngs";
 import { useGetHolidaysDetailsQuery } from "../../components/apis/holidaysDetailsApi";
 import { AddNewStudentDialog } from "../../components/modals/view-all-modal";
 import { useState } from "react";
+import { SocialTabs } from "../../components/consts/consts";
+import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
 
+export const getStyles = () => {
+  return {
+    socialButtons: {
+      minHeight: "17px",
+      minWidth: "0px",
+      paddingY: 0,
+      paddingX: "9px",
+      borderRadius: "9px",
+      fontFamily: themeFonts["Poppins-SemiBold"],
+      fontSize: "10px",
+     lineHeight: "15px",
+      color: "rgb(0 0 0 / 60%)",
+      "&.Mui-selected": {
+        background: themeColors["#0C345D"],
+        color: themeColors["#FFFFFF"],
+      },
+    },
+    tabPanel: {
+      padding: 0,
+      position: "relative",
+      paddingLeft: "10px",
+      height: "100%",
+    },
+  };
+};
 const SocialDashboard = () => {
   const year = new Date().getFullYear();
   const { data }: any = useGetHolidaysDetailsQuery({ year });
@@ -22,6 +49,11 @@ const SocialDashboard = () => {
       );
 
   const upcomingHoliday = upcomingHolidays && upcomingHolidays[0];
+  const [value, setValue] = useState("Post");
+  const styles = getStyles();
+  const handleChange = (event: any) => {
+    setValue(event);
+  };
   const handleClose = () => {
     setIsOpen(false);
   };
@@ -187,12 +219,58 @@ const SocialDashboard = () => {
           </Button>
         </Grid>
       </Grid>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          background: themeColors["#FFFFFF"],
+          boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
+          borderRadius: "6px",
+          padding: "13px",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            maxHeight: "17px",
+          }}
+        >
+          {SocialTabs.map((val) => (
+            <>
+              <CustomTabs
+                sx={styles.socialButtons}
+                label={val.label}
+                onChange={handleChange}
+                value={val.value}
+                value1={value}
+              />
+            </>
+          ))}
+        </Box>
+        <Box sx={{ width: "100%", paddingTop: "13px" }}>
+          {SocialTabs.map((tabs, ind) => (
+            <CustomTabsPanel
+              sx={styles.tabPanel}
+              value={tabs.value}
+              value1={value}
+            >
+              <TextField
+                multiline
+                rows={7}
+                placeholder="Write Your Post Here"
+                sx={{
+                  "&.MuiFormControl-root.MuiTextField-root": { width: "100%" },
+                }}
+              />
+            </CustomTabsPanel>
+          ))}
+        </Box>
+      </Grid>
       {isOpen && (
-        <AddNewStudentDialog
-          open={isOpen}
-          onClose={handleClose}
-          data={data}
-        />
+        <AddNewStudentDialog open={isOpen} onClose={handleClose} data={data} />
       )}
     </>
   );
