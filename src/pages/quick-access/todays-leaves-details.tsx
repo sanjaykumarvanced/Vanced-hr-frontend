@@ -72,7 +72,8 @@ export const TodaysLeavesDetails = () => {
         background: themeColors["#FFFFFF"],
         boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
         borderRadius: "6px",
-        height: 418,
+         height: 418,
+        maxHeight: 418,
       }}
     >
       <Box

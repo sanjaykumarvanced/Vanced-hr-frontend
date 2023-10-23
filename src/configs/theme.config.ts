@@ -118,6 +118,9 @@ export const themeColors = {
   "#FFF2F2": "#FFF2F2",
   "#D7E0ED": "#D7E0ED",
   "#96BCDB": "#96BCDB",
+  "#F6C863": "#F6C863",
+  "#EF5261": "#EF5261",
+  "#FF3C38": "#FF3C38",
 };
 
 export const themeFonts = {

@@ -96,7 +96,7 @@ export const TodaysAnnouncement = () => {
           width: "100%",
           gap: "20px",
           overflow: "auto",
-          maxHeight: "500px",
+          maxHeight: "600px",
         }}
       >
         <Box sx={{ width: "100%" }}>
