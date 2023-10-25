@@ -19,18 +19,12 @@ import { DataStatusSection } from "./DataStatusSection";
 import { useState } from "react";
 
 export const QuickAccessPage = () => {
-  const [selectedValue, setSelectedValue] = useState(); // Initialize with an initial value if needed
+  const [selectedValue, setSelectedValue] = useState(); 
 
   const handleChange = (event: any) => {
     setSelectedValue(event.target.value);
   };
 
-  const handleIconClick = (event: any) => {
-    const selectInput = document.getElementById("my-select-input"); // Replace with the actual ID of your Select component's input element
-    if (selectInput) {
-      selectInput.click();
-    }
-  };
   return (
     <>
       <Grid
@@ -99,7 +93,7 @@ export const QuickAccessPage = () => {
               },
             }}
             IconComponent={() => <DownArrowIcon1 />}
-            defaultValue={10}
+            defaultValue={'Organization'}
             onChange={handleChange}
             value={selectedValue}
             MenuProps={{
@@ -118,8 +112,8 @@ export const QuickAccessPage = () => {
               },
             }}
           >
-            <MenuItem value={"10"}>Organization</MenuItem>
-            <MenuItem value={"20"}>Development</MenuItem>
+            <MenuItem value={"Organization"}>Organization</MenuItem>
+            <MenuItem value={"Development"}>Development</MenuItem>
           </Select>
         </Box>
         <Grid

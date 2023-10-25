@@ -46,10 +46,10 @@ export const useLoginWithEmailHook = ({ next }: { next: () => void }) => {
           authenticationSlice.actions.setCredentials({
             accessToken: response.token,
             user: values.email,
+            id: response.user._id,
           })
         );
         console.log("Login successful:", response);
-        navigate(ROUTES.HOME);
       }
       next();
     },

@@ -14,7 +14,7 @@ import { TodaysLeavesTabs } from "../../components/consts/consts";
 import { useGetLeavesDetailsQuery } from "../../components/apis/leavesApi";
 import { apiBaseUrl } from "../../components/consts/api-url.const";
 
-export const getStyles = (TodaysAnnouncement?: any) => {
+export const getStyles = (TodaysLeavesDetails?: any) => {
   return {
     tabsButtons: {
       minHeight: "29px",
@@ -34,14 +34,15 @@ export const getStyles = (TodaysAnnouncement?: any) => {
     tabPanel: {
       padding: 0,
       position: "relative",
-      paddingLeft: TodaysAnnouncement ? 0 : "10px",
+      paddingLeft: TodaysLeavesDetails ? "10px" : 0,
     },
   };
 };
 
 export const TodaysLeavesDetails = () => {
   const [value, setValue] = useState("All");
-  const styles = getStyles();
+  const TodaysLeavesDetails = "TodaysLeavesDetails";
+  const styles = getStyles(TodaysLeavesDetails);
   const handleChange = (event: any) => {
     setValue(event);
   };
@@ -72,7 +73,7 @@ export const TodaysLeavesDetails = () => {
         background: themeColors["#FFFFFF"],
         boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
         borderRadius: "6px",
-         height: 418,
+        height: 418,
         maxHeight: 418,
       }}
     >
@@ -118,45 +119,46 @@ export const TodaysLeavesDetails = () => {
       </Box>
 
       <Divider sx={{ width: "100%" }} />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          padding: "13px",
-          paddingTop: 0,
-          width: "100%",
-          gap: "20px",
-          overflow: "auto",
-        }}
-      >
-        <Typography
-          sx={{
-            height: "40px",
-            width: "40px",
-            background: themeColors["#BEDEFF"],
-            textAlign: "center",
-            borderRadius: "5px",
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "26px",
-            alignItems: "center",
-            fontSize: "14px",
-            fontFamily: themeFonts["Poppins-SemiBold"],
-            color: themeColors["#0C345D"],
-            minWidth: "40px",
-          }}
-        >
-          {today}
-        </Typography>
-        <Box sx={{ width: "100%", maxHeight: "350px", overflow: "auto" }}>
-          {TodaysLeavesTabs.map((tabs, ind) => (
-            <CustomTabsPanel
-              sx={styles.tabPanel}
-              value={tabs.value}
-              value1={value}
+      {filteredLeaves && filteredLeaves.length > 0 ? (
+        <>
+          {" "}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              padding: "13px",
+              paddingTop: 0,
+              width: "100%",
+              gap: "20px",
+              overflow: "auto",
+            }}
+          >
+            <Typography
+              sx={{
+                height: "40px",
+                width: "40px",
+                background: themeColors["#BEDEFF"],
+                textAlign: "center",
+                borderRadius: "5px",
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "26px",
+                alignItems: "center",
+                fontSize: "14px",
+                fontFamily: themeFonts["Poppins-SemiBold"],
+                color: themeColors["#0C345D"],
+                minWidth: "40px",
+              }}
             >
-              {filteredLeaves && filteredLeaves.length > 0 ? (
-                <>
+              {today}
+            </Typography>
+            <Box sx={{ width: "100%", maxHeight: "350px", overflow: "auto" }}>
+              {TodaysLeavesTabs.map((tabs, ind) => (
+                <CustomTabsPanel
+                  sx={styles.tabPanel}
+                  value={tabs.value}
+                  value1={value}
+                >
                   <List
                     sx={{
                       padding: "0px",
@@ -286,32 +288,32 @@ export const TodaysLeavesDetails = () => {
                       height: "-webkit-fill-available",
                     }}
                   />
-                </>
-              ) : (
-                <Box
-                  sx={{
-                    display: "flex",
-                    height: "100%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    paddingTop: "13px",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontFamily: themeFonts["Poppins-SemiBold"],
-                      fontSize: "25px",
-                      color: themeColors["#0C345D"],
-                    }}
-                  >
-                    NO LEAVES
-                  </Typography>
-                </Box>
-              )}
-            </CustomTabsPanel>
-          ))}
+                </CustomTabsPanel>
+              ))}
+            </Box>
+          </Box>
+        </>
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: "13px",
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: themeFonts["Poppins-SemiBold"],
+              fontSize: "25px",
+              color: themeColors["#0C345D"],
+            }}
+          >
+            NO LEAVES
+          </Typography>
         </Box>
-      </Box>
+      )}
     </Grid>
   );
 };

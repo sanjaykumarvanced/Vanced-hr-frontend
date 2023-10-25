@@ -16,5 +16,13 @@ export const AnnouncementTabs = [
   { label: "New Joinee ", value: "NewJoinee" },
   { label: "Birthday ", value: "Birthday" },
   { label: "Work Anniversary ", value: "Anniversary" },
-  // { label: "Praise", value: "Praise" },
+];
+export const AboutMeTabs = [
+  { label: "Leave ", value: "Leave" },
+  { label: "Attendance ", value: "Attendance" },
+  { label: "Performance ", value: "Performance" },
+];
+export const MyLeaveTabs = [
+  { label: "Weekly Pattern ", value: "Weekly" },
+  { label: "Monthly Pattern ", value: "Monthly" },
 ];

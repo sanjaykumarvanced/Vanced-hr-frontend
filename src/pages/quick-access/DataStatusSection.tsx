@@ -1,8 +1,10 @@
 import { Box, Button, Divider, Grid, Typography, styled } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
 import Chart from "react-google-charts";
+import { useGetLeaveBalanceByIdQuery } from "../../components/apis/leaveBalanceApi";
+import { useSelector } from "react-redux";
 
-export const pieOptions = {
+export const pieLeaveOptions = {
   legend: "none",
   slices: {
     0: { offset: 0.1, color: "#EF5261" },
@@ -25,11 +27,11 @@ export const pieOptions1 = {
   },
   pieSliceBorderColor: "none",
 };
-export const pieData = [
-  ["Language", "Speakers (in millions)"],
-  ["7", 100],
-  ["12", 170],
-];
+// export const pieData = [
+//   ["label", "leaves"],
+//   ["7", 7],
+//   ["12", 12],
+// ];
 export const pieData1 = [
   ["Lang", "Speakers"],
   ["", 12],
@@ -37,6 +39,10 @@ export const pieData1 = [
   ["", 12],
 ];
 export const DataStatusSection = () => {
+  const Id = useSelector((state: any) => state.authentication.user);
+  const { data }: any = useGetLeaveBalanceByIdQuery({ id: Id });
+  console.log(data, Id);
+
   return (
     <>
       <Grid
@@ -97,22 +103,29 @@ export const DataStatusSection = () => {
           <Divider sx={{ width: "100%" }} />
 
           <Box>
-            <Chart
-              chartType="PieChart"
-              data={pieData}
-              options={pieOptions}
-              width={"100%"}
-              height={"360px"}
-              legend_toggle
-              chartEvents={[
-                {
-                  eventName: "error",
-                  callback: (chart) => {
-                    console.error("Chart error:", chart);
-                  },
-                },
-              ]}
-            />
+            {data &&
+              data.map((val: any) => (
+                <Chart
+                  chartType="PieChart"
+                  data={[
+                    ["label", "leaves"],
+                    ["7", 7],
+                    [`${val.totalLeave}`, val.totalLeave],
+                  ]}
+                  options={pieLeaveOptions}
+                  width={"100%"}
+                  height={"360px"}
+                  legend_toggle
+                  chartEvents={[
+                    {
+                      eventName: "error",
+                      callback: (chart) => {
+                        console.error("Chart error:", chart);
+                      },
+                    },
+                  ]}
+                />
+              ))}
           </Box>
           <Box
             sx={{
@@ -267,44 +280,42 @@ export const DataStatusSection = () => {
               gap: "10px",
             }}
           >
-         
+            <Typography
+              sx={{
+                fontFamily: themeFonts["Poppins-Regular"],
+                fontSize: "16px",
+                color: themeColors["#000000"],
+                display: "flex",
+                position: "relative",
+                lineHeight: "23px",
+                alignItems: "center",
+              }}
+            >
+              Total Projects
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
                   fontSize: "16px",
                   color: themeColors["#000000"],
-                  display: "flex",
                   position: "relative",
-                  lineHeight: "23px",
+                  display: "flex",
                   alignItems: "center",
+                  justifyContent: "flex-end",
+                  width: "calc(100% - 33%)",
+                  "&::before": {
+                    content: '""',
+                    width: "11px",
+                    height: "11px",
+                    left: "10px",
+                    borderRadius: "100%",
+                    position: "absolute",
+                    background: themeColors["#F6C863"],
+                  },
                 }}
               >
-                Total Projects
-                <Typography
-                  sx={{
-                    fontFamily: themeFonts["Poppins-Regular"],
-                    fontSize: "16px",
-                    color: themeColors["#000000"],
-                    position: "relative",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                    width: "calc(100% - 33%)",
-                    "&::before": {
-                      content: '""',
-                      width: "11px",
-                      height: "11px",
-                      left: "10px",
-                      borderRadius: "100%",
-                      position: "absolute",
-                      background: themeColors["#F6C863"],
-                    },
-                  }}
-                >
-                  02
-                </Typography>
+                02
               </Typography>
-            
+            </Typography>
 
             <Typography
               sx={{
@@ -317,7 +328,7 @@ export const DataStatusSection = () => {
                 alignItems: "center",
               }}
             >
-              Completed Task 
+              Completed Task
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
@@ -353,7 +364,7 @@ export const DataStatusSection = () => {
                 alignItems: "center",
               }}
             >
-             Pending Task
+              Pending Task
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],

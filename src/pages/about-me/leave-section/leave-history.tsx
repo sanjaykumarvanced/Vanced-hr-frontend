@@ -1,0 +1,233 @@
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
+import { useGetLeavesDetailsQuery } from "../../../components/apis/leavesApi";
+import { apiBaseUrl } from "../../../components/consts/api-url.const";
+import { TodaysLeavesTabs } from "../../../components/consts/consts";
+import {
+  CustomTabs,
+  CustomTabsPanel,
+} from "../../../components/tabs/custom-tabs";
+import { themeColors, themeFonts } from "../../../configs";
+import { useSelector } from "react-redux";
+import { useGetLeaveHistoryByIdQuery } from "../../../components/apis/leaveHistoryApi";
+
+export const LeaveHistory = () => {
+  //   const today = new Date().toLocaleString("en-in", {
+  //     month: "short",
+  //     day: "numeric",
+  //   });
+  //   console.log(today);
+  const Id = useSelector((state: any) => state.authentication.user);
+  const { data }: any = useGetLeaveHistoryByIdQuery({ id: Id });
+  console.log(data, Id);
+  return (
+    <Grid
+      item
+      xs={12}
+      sx={{
+        background: themeColors["#FFFFFF"],
+        boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
+        borderRadius: "6px",
+        height: 234,
+        maxHeight: 234,
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "13px",
+          width: "100%",
+          maxHeight: 55,
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: themeFonts["Poppins-SemiBold"],
+            fontSize: "15px",
+            color: themeColors["#0C345D"],
+          }}
+        >
+          Leave History
+        </Typography>
+        <Button
+          variant="text"
+          sx={{
+            fontFamily: themeFonts["Poppins-Regular"],
+            fontSize: "12px",
+            color: themeColors["#0C345D"],
+            textDecoration: "underline",
+            height: 17,
+            padding: 0,
+          }}
+        >
+          Clear History
+        </Button>
+      </Box>
+
+      <Divider sx={{ width: "100%" }} />
+
+      {/* <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          padding: "13px",
+          paddingTop: 0,
+          width: "100%",
+          gap: "20px",
+          overflow: "auto",
+        }}
+      > */}
+      <Box
+        sx={{
+          width: "100%",
+          maxHeight: "175px",
+          overflow: "auto",
+          paddingTop: "30px",
+          paddingX: "13px",
+        }}
+      >
+        <Box
+          sx={{
+            padding: 0,
+            position: "relative",
+          }}
+        >
+          <List
+            sx={{
+              padding: "0px",
+              "&:before": {
+                content: '" "',
+                display: "block",
+                position: "absolute",
+                zIndex: 1,
+                left: "54px",
+                height: "-webkit-fill-available",
+                top: "0px",
+                width: "1px",
+                opacity: 1,
+                background: "#B9B9B9",
+              },
+              position: "relative",
+            }}
+          >
+            {data &&
+              data.map((val: any) => {
+                const leaveDate = new Date(val.leaveDate).toLocaleString(
+                  "en-in",
+                  {
+                    month: "short",
+                    day: "numeric",
+                  }
+                );
+                return (
+                  <ListItem
+                    sx={{
+                      padding: "0px",
+                      paddingLeft: "13px",
+                      marginBottom: "19px",
+                    }}
+                  >
+                    <ListItemText
+                      sx={{
+                        maxWidth: "max-content",
+                        marginRight: "40px",
+                        marginY: 0,
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          height: "20px",
+                          width: "20px",
+                          background: themeColors["#BEDEFF"],
+                          textAlign: "center",
+                          borderRadius: "5px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          fontSize: "7px",
+                          fontFamily: themeFonts["Poppins-SemiBold"],
+                          color: themeColors["#0C345D"],
+                          minWidth: "20px",
+                          margin: 0,
+                        }}
+                      >
+                        {leaveDate}
+                      </Typography>
+                    </ListItemText>
+                    <ListItemText
+                      sx={{
+                        "& .MuiListItemText-primary": {
+                          display: "flex",
+                          gap: "10px",
+                          fontSize: "14px",
+                          fontFamily: themeFonts["Poppins-Regular"],
+                          color: themeColors["#000000"],
+                          alignItems: "center",
+                          "&:after": {
+                            content: '" "',
+                            display: "block",
+                            position: "absolute",
+                            zIndex: 5,
+                            left: "-26px",
+                            height: "14px",
+                            width: "14px",
+                            borderRadius: "10px",
+                            opacity: 1,
+                            border: " 1px solid #B9B9B9",
+                            background: themeColors["#FFFFFF"],
+                          },
+                        },
+                        position: "relative",
+                      }}
+                    >
+                      {val.leaveType}
+                    </ListItemText>
+
+                    <ListItemText
+                      sx={{
+                        "& .MuiListItemText-primary": {
+                          fontSize: "14px",
+                          fontFamily: themeFonts["Poppins-Regular"],
+                          color: themeColors["#000000"],
+                        },
+                        width: "40%",
+                      }}
+                    >
+                      {val.reason}
+                    </ListItemText>
+                  </ListItem>
+                );
+              })}
+          </List>
+          <Divider
+            orientation="vertical"
+            variant="middle"
+            flexItem
+            sx={{
+              marginX: "20px",
+              marginY: "0px",
+              position: "absolute",
+              zIndex: 1,
+              top: 0,
+              left: "27%",
+              height: "-webkit-fill-available",
+            }}
+          />
+        </Box>
+      </Box>
+      {/* </Box> */}
+    </Grid>
+  );
+};

@@ -44,16 +44,6 @@ const injectedRtkApi = api.injectEndpoints({
   }),
 });
 export { injectedRtkApi as enhancedApi };
-// export interface LeavesData {
-//   id?: any;
-//   // employee?: any;
-//   startDate?: any;
-//   endDate?: any;
-//   leaveType?: any;
-//   noOfDays?: any;
-//   reason?: any;
-//   notify?: any;
-// }
 export type LeavesApiArg = { id?: number };
 
 export const {

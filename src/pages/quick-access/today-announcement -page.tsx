@@ -4,7 +4,6 @@ import {
   Grid,
   List,
   ListItem,
-  ListItemText,
   Typography,
 } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
@@ -17,8 +16,7 @@ import { BirthdayWishSvg } from "../../svgs";
 
 export const TodaysAnnouncement = () => {
   const [value, setValue] = useState("NewJoinee");
-  const TodaysAnnouncement = "TodaysAnnouncement";
-  const styles = getStyles(TodaysAnnouncement);
+  const styles = getStyles();
   const handleChange = (event: any) => {
     setValue(event);
   };

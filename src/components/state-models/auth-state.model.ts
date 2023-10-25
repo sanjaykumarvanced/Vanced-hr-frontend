@@ -4,6 +4,7 @@ export interface IAuthState {
   token: string;
   loading: boolean;
   me?: IAuthMe;
+  user?:IAuthMe
 }
 
 // export interface IOrganizationMemberShip {
@@ -19,7 +20,7 @@ export interface IAuthMe {
   email: string;
   username: string;
   system_user_type: string;
-
+  _id: any;
   // organization_membership: IOrganizationMemberShip[];
   // default_org: number | null;
 }

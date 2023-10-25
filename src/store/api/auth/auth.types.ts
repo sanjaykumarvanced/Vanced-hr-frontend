@@ -1,6 +1,4 @@
-
-import { string } from 'yargs';
-import { IAuthMe } from '../../../components/state-models';
+import { IAuthMe } from "../../../components/state-models";
 
 /**
  * Types
@@ -21,6 +19,14 @@ export type AuthResetPasswordRequest = {
 export type UpdateUserProfileApiResponse = UpdateUserProfile;
 export type AuthLoginApiResponse = {
   token: string;
+  user: {
+    address: any;
+    bankInformation: any;
+    birthday: any;
+    dateOfJoining: any;
+    designation: any;
+    _id: any;
+  };
 };
 
 export type AuthResetPasswordApiResponse = {
@@ -53,7 +59,7 @@ export type ChangePasswordApiArg = {
 };
 
 export type AuthRegisterApiArg = {
- email: string;
+  email: string;
   password: {
     password: string;
     confirm_password: string;
