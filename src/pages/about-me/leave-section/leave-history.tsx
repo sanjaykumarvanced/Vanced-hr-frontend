@@ -8,24 +8,11 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { useGetLeavesDetailsQuery } from "../../../components/apis/leavesApi";
-import { apiBaseUrl } from "../../../components/consts/api-url.const";
-import { TodaysLeavesTabs } from "../../../components/consts/consts";
-import {
-  CustomTabs,
-  CustomTabsPanel,
-} from "../../../components/tabs/custom-tabs";
 import { themeColors, themeFonts } from "../../../configs";
 import { useSelector } from "react-redux";
 import { useGetLeaveHistoryByIdQuery } from "../../../components/apis/leaveHistoryApi";
 
 export const LeaveHistory = () => {
-  //   const today = new Date().toLocaleString("en-in", {
-  //     month: "short",
-  //     day: "numeric",
-  //   });
-  //   console.log(today);
   const Id = useSelector((state: any) => state.authentication.user);
   const { data }: any = useGetLeaveHistoryByIdQuery({ id: Id });
   console.log(data, Id);
@@ -78,17 +65,6 @@ export const LeaveHistory = () => {
 
       <Divider sx={{ width: "100%" }} />
 
-      {/* <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          padding: "13px",
-          paddingTop: 0,
-          width: "100%",
-          gap: "20px",
-          overflow: "auto",
-        }}
-      > */}
       <Box
         sx={{
           width: "100%",
@@ -227,7 +203,6 @@ export const LeaveHistory = () => {
           />
         </Box>
       </Box>
-      {/* </Box> */}
     </Grid>
   );
 };

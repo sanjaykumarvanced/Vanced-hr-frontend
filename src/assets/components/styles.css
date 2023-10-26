@@ -1,12 +1,36 @@
 ::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #D4D4D4;
-    border-radius: 3px;
+  background: #D4D4D4;
+  border-radius: 3px;
 }
 
-.custom-select ul.MuiList-root{
-    padding: 0 !important;
-  }
+.custom-select ul.MuiList-root {
+  padding: 0 !important;
+}
+
+.MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer {
+  display: "none",
+}
+
+.MuiDataGrid-columnHeaderTitle {
+  font-family: 'Poppins-SemiBold';
+  font-size: 16px;
+  color: #000000;
+}
+
+.MuiDataGrid-columnHeaders:hover .MuiDataGrid-columnSeparator {
+  visibility: hidden !important
+}
+
+.MuiDataGrid-root .MuiDataGrid-columnHeader:focus-within {
+  outline: none !important;
+}
+
+.MuiDataGrid-cell.MuiDataGrid-cell--textLeft.MuiDataGrid-withBorderColor {
+  font-family: 'Poppins-Regular';
+  font-size: 14px;
+  color: #000000;
+}

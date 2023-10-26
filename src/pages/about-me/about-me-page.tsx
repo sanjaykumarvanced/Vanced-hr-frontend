@@ -11,6 +11,7 @@ import { useState } from "react";
 import { getStyles } from "../quick-access/todays-leaves-details";
 import { MyLeaveStats } from "./leave-section/my-leaves-stats";
 import { LeaveHistory } from "./leave-section/leave-history";
+import { LeaveRequestTable } from "../../table/leave-request-table";
 
 export const AboutMePage = () => {
   const [value, setValue] = useState("Leave");
@@ -83,6 +84,9 @@ export const AboutMePage = () => {
                 <Grid item xs={8}>
                   <LeaveHistory />
                 </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <LeaveRequestTable />
               </Grid>
             </CustomTabsPanel>
           ))}
