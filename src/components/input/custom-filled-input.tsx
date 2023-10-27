@@ -67,7 +67,7 @@ export const CustomFilledInput = ({
             sx={{
               fontFamily: themeFonts['Poppins-SemiBold'],
               fontWeight: fontWeight ? { fontWeight } : '600',
-              color: color ? { color } : themeColors['#1C223E'],
+              color:  themeColors['#000000'],
               fontSize: fontSize ? { fontSize } : 16,
             }}
           >
@@ -98,16 +98,16 @@ export const CustomFilledInput = ({
           placeholder={placeholder}
           disabled={disabled}
           sx={{
-            fontFamily: themeFonts['Poppins-SemiBold'],
-            color: color ? { color } : `${themeColors['#BABABA']} `,
-            fontSize: 13,
+            fontFamily: themeFonts['Poppins-Regular'],
+            color: color ? { color } : `${themeColors['rgb(0 0 0 / 50%)']} `,
+            fontSize: 12,
             marginLeft: 0.5,
             marginTop: marginTop ? { marginTop } : '',
             flex: 1,
             direction: direction,
             '& .MuiInputBase-input': {
-              fontFamily: themeFonts['Poppins-SemiBold'],
-              color: color ? { color } : `${themeColors['#BABABA']}`,
+              fontFamily: themeFonts['Poppins-Regular'],
+              color: color ? { color } : `${themeColors['rgb(0 0 0 / 50%)']}`,
               fontSize: 13,
             },
           }}

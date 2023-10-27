@@ -6,10 +6,8 @@ import {
 } from '@reduxjs/toolkit/query';
 import { toast } from 'react-toastify';
 import { Mutex } from 'async-mutex';
-import { authenticationSlice } from '../store/slices/auth.slice';
 
 import { store } from '../store/reducer';
-import { allowedRequsets } from './helpers';
 import { apiBaseUrl } from '../components/consts/api-url.const';
 
 const mutex = new Mutex();
@@ -43,7 +41,6 @@ export const fetchbase: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
     // checking whether the mutex is locked
 
     if (!mutex.isLocked()) {
-      const release = await mutex.acquire();
     } else {
       // wait until the mutex is available without locking it
       await mutex.waitForUnlock();
@@ -65,7 +62,6 @@ function getFirstErrorFromObject(obj: any) {
     if (Array.isArray(obj.detail)) {
       const eItem = obj.detail[0];
       if (eItem) {
-        const location = eItem?.loc?.join('.');
         return `${eItem.msg}`;
       }
     } else if (obj.detail) {

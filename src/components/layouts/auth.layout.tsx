@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Box, Typography } from '@mui/material';
+import { Box} from '@mui/material';
 
 import { AuthLeftSidebarLayout } from './auth-left-sidebar.layout';
 import { AuthMainLayout } from './auth-main.layout';

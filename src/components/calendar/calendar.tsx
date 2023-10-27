@@ -1,19 +1,22 @@
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
-import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDateRangeField';
-import { CalenderIcon1Svg } from '../../svgs';
-import { themeColors } from '../../configs';
-import '../../assets/components/styles.css';
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
+import { CalenderIcon1Svg } from "../../svgs";
+import { themeColors } from "../../configs";
+import "../../assets/components/styles.css";
+import { DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DatePicker } from "@mui/x-date-pickers";
+import { CustomLabel } from "../label";
 
-export const SingleInputDateRangePicker = () => {
+export const SingleInputDateRangePicker = ({ label }: { label?: any }) => {
   const customDayOfWeekFormatter = (dayAbbreviation: string) => {
     debugger;
-    const daysAbbreviations = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    const daysAbbreviations = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
     const dayIndex = daysAbbreviations.indexOf(dayAbbreviation);
 
     if (dayIndex !== -1) {
-      const daysFullNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const daysFullNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       return daysFullNames[dayIndex];
     }
 
@@ -22,37 +25,33 @@ export const SingleInputDateRangePicker = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       {/* <DemoContainer components={['SingleInputDateRangeField']}> */}
-
-      <DateRangePicker
-        slots={{ field: SingleInputDateRangeField }}
-        slotProps={{ textField: { InputProps: { endAdornment: <CalenderIcon1Svg /> } } }}
-        sx={{
-          '& .MuiInputBase-root.MuiOutlinedInput-root': {
-            backgroundColor: themeColors['#F2F2F2'],
-            borderRadius: '8px',
-            fontSize: '10px',
-            minWidth: '212px',
-          },
-          '& input': {
-            paddingY: '8px',
-          },
-          '& fieldset.MuiOutlinedInput-notchedOutline': {
-            border: '0 !important',
-          },
-          '& .MuiPickersCalendarHeader-labelContainer.css-cyfsxc-MuiPickersCalendarHeader-labelContainer':
-            {
-              position: 'absolute !important',
-              /* left: inherit; */
-              right: '117px',
-            },
+      {label && <CustomLabel label={label} fontSize="12px" />}
+      <DatePicker
+        slots={{
+          openPickerIcon: CalenderIcon1Svg,
         }}
-        calendars={1}
-        //defaultCalendarMonth={3}
+        sx={{
+          "& .MuiInputBase-root.MuiOutlinedInput-root": {
+            borderRadius: "5px",
+            fontSize: "12px",
+            height: "39px",
+          },
+          "& input": {
+            paddingY: "0px",
+          },
+          "& .MuiPickersCalendarHeader-labelContainer.css-cyfsxc-MuiPickersCalendarHeader-labelContainer":
+            {
+              position: "absolute !important",
+              right: "117px",
+            },
+          "&.MuiFormControl-root.MuiTextField-root": {
+            marginTop: "0px",
+          },
+        }}
         showDaysOutsideCurrentMonth={true}
         fixedWeekNumber={6}
         dayOfWeekFormatter={customDayOfWeekFormatter}
       />
-      {/* </DemoContainer> */}
     </LocalizationProvider>
   );
 };

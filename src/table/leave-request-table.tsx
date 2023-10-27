@@ -7,6 +7,7 @@ import { DeleteIconSvg, EditIconSvg } from "../svgs";
 import { apiBaseUrl } from "../components/consts/api-url.const";
 import { format } from "date-fns";
 import { useState } from "react";
+import { RequestLeavesDialog } from "../components/modals/request-leaves-modal";
 
 const columns: GridColDef[] = [
   {
@@ -41,9 +42,16 @@ const columns: GridColDef[] = [
 ];
 
 export const LeaveRequestTable = () => {
-  const [pageSize, setPageSize] = useState(10);
   const Id = useSelector((state: any) => state.authentication.user);
   const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  const handleOpen = (data: any) => {
+    setIsOpen(true);
+  };
+
   console.log(data, Id);
 
   if (!data) {
@@ -126,6 +134,7 @@ export const LeaveRequestTable = () => {
                   backgroundColor: "rgb(21 94 158)",
                 },
               }}
+              onClick={handleOpen}
             >
               Request Leaves
             </Button>
@@ -249,6 +258,9 @@ export const LeaveRequestTable = () => {
           />
         </Box>
       </Grid>
+      {isOpen && (
+        <RequestLeavesDialog open={isOpen} onClose={handleClose} data={data} />
+      )}
     </>
   );
 };

@@ -20,7 +20,7 @@ export const CustomLabel = ({ label, fontSize, fontWeight }: CustomLabelProps) =
         sx={{
           fontFamily: themeFonts['Poppins-SemiBold'],
           fontWeight: fontWeight ? { fontWeight } : '600',
-          color: themeColors['#1C223E'],
+          color: themeColors['#000000'],
           fontSize: fontSize ? { fontSize } : 16,
         }}
       >

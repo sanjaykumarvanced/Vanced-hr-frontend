@@ -2,8 +2,6 @@ import { useFormik } from "formik";
 
 import * as Yup from "yup";
 import { useAuthLoginMutation } from "../../../store/api/auth";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../consts/routes.consts";
 import { authenticationSlice } from "../../../store/slices/auth.slice";
 import { useDispatch } from "react-redux";
 
@@ -11,7 +9,6 @@ export const useLoginWithEmailHook = ({ next }: { next: () => void }) => {
   // debugger;
   const [mutate] = useAuthLoginMutation();
   const rememberMe = window.localStorage.getItem("email") || "";
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const formManager = useFormik({
     initialValues: {

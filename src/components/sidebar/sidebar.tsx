@@ -7,9 +7,6 @@ import {
   ListItemIcon as MuiListItemIcon,
   listItemIconClasses,
   ListItemIconProps,
-  ListItemText as MuiListItemText,
-  listItemTextClasses,
-  ListItemTextProps,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 

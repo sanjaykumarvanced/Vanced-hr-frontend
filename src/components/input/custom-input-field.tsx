@@ -1,13 +1,12 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import { InputProps } from '@mui/material/Input';
-import InputAdornment from '@mui/material/InputAdornment';
-import TextField, { TextFieldProps } from '@mui/material/TextField';
-import { ReactNode } from 'react';
-import { UserIcon } from '../../svgs';
-import { themeColors, themeFonts } from '../../configs';
-import { ErrorStatusMessage } from './error-status-message';
-import { FormHelperText } from '@mui/material';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import { InputProps } from "@mui/material/Input";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField, { TextFieldProps } from "@mui/material/TextField";
+import { ReactNode } from "react";
+import { themeColors, themeFonts } from "../../configs";
+import { ErrorStatusMessage } from "./error-status-message";
+import { FormHelperText } from "@mui/material";
 
 interface CustomInputFieldProps extends InputProps {
   label?: string;
@@ -42,7 +41,7 @@ interface CustomInputFieldProps extends InputProps {
 export const CustomInputField = ({
   label,
   placeholder = label,
-  value = '',
+  value = "",
   type,
   onChangeValue,
   errorStatus,
@@ -62,7 +61,7 @@ export const CustomInputField = ({
   borderRadius,
   alignItems,
   marginTop,
-  direction = 'ltr',
+  direction = "ltr",
   endAdornment,
   errorSx,
   fontFamily,
@@ -71,35 +70,37 @@ export const CustomInputField = ({
   ...rest
 }: CustomInputFieldProps) => {
   return (
-    <Box sx={{ width: '100%', paddingTop: paddingTop ? { paddingTop } : '' }}>
+    <Box sx={{ width: "100%", paddingTop: paddingTop ? { paddingTop } : "" }}>
       <TextField
         InputProps={{
-          startAdornment: <InputAdornment position="start">{titleComponent}</InputAdornment>,
+          startAdornment: (
+            <InputAdornment position="start">{titleComponent}</InputAdornment>
+          ),
           endAdornment: endAdornment,
         }}
         sx={{
-          '&.MuiFormControl-root.MuiTextField-root': {
-            width: '100%',
-            '& ::placeholder': {
-              fontFamily: themeFonts['Poppins-Regular'],
-              color: themeColors['#000000'],
-              fontSize: '16px',
+          "&.MuiFormControl-root.MuiTextField-root": {
+            width: "100%",
+            "& ::placeholder": {
+              fontFamily: themeFonts["Poppins-Regular"],
+              color: themeColors["#000000"],
+              fontSize: "16px",
               opacity: 1,
             },
           },
-          '& .MuiInputBase-root.MuiInput-root.MuiInput-underline': {
-            paddingBottom: '8px',
+          "& .MuiInputBase-root.MuiInput-root.MuiInput-underline": {
+            paddingBottom: "8px",
           },
-          '& input:-internal-autofill-selected': {
-            backgroundColor: 'transparent !important',
+          "& input:-internal-autofill-selected": {
+            backgroundColor: "transparent !important",
           },
 
-          '& ::after': {
-            borderBottom: '2px solid #000000 !important',
+          "& ::after": {
+            borderBottom: "2px solid #000000 !important",
           },
-          fontFamily: themeFonts['Poppins-Regular'],
-          color: themeColors['#000000'],
-          fontSize: '16px',
+          fontFamily: themeFonts["Poppins-Regular"],
+          color: themeColors["#000000"],
+          fontSize: "16px",
         }}
         variant="standard"
         placeholder={placeholder}
@@ -119,8 +120,8 @@ export const CustomInputField = ({
       {!!helperText && (
         <FormHelperText
           sx={{
-            fontFamily: themeFonts['Poppins-Bold'],
-            color: themeColors['#FF3939'],
+            fontFamily: themeFonts["Poppins-Bold"],
+            color: themeColors["#FF3939"],
             fontSize: 14,
             marginLeft: 0,
           }}

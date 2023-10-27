@@ -119,6 +119,7 @@ export const themeColors = {
   "rgb(128 199 98 / 31%)": "rgb(128 199 98 / 31%)",
   "rgb(98 111 199 / 31%)": "rgb(98 111 199 / 31%)",
   "rgb(199 98 98 / 31%)": "rgb(199 98 98 / 31%)",
+  "rgb(0 0 0 / 50%)": "rgb(0 0 0 / 50%)",
   "#092ACC": "#092ACC",
   "#FFF2F2": "#FFF2F2",
   "#D7E0ED": "#D7E0ED",
@@ -128,6 +129,7 @@ export const themeColors = {
   "#FF3C38": "#FF3C38",
   "#42971B": "#42971B",
   "#971B1B": "#971B1B",
+  "#0A2A4A": "#0A2A4A",
 };
 
 export const themeFonts = {

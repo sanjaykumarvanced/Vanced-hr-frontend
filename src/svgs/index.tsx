@@ -35,3 +35,5 @@ export { ReactComponent as DownArrowIcon1 } from "../assets/images/svg/down-arro
 export { ReactComponent as BirthdayWishSvg } from "../assets/images/svg/birthday-wish.svg";
 export { ReactComponent as EditIconSvg } from "../assets/images/svg/edit-icon.svg";
 export { ReactComponent as DeleteIconSvg } from "../assets/images/svg/delete-icon.svg";
+export { ReactComponent as CloseIconSvg1 } from "../assets/images/svg/close-icon-1.svg";
+export { ReactComponent as DownArrowIcon2 } from "../assets/images/svg/down-arrow-icon-2.svg";

@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Grid, Typography, styled } from "@mui/material";
+import { Box, Button, Divider, Grid, Typography} from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
 import Chart from "react-google-charts";
 import { useGetLeaveBalanceByIdQuery } from "../../components/apis/leaveBalanceApi";

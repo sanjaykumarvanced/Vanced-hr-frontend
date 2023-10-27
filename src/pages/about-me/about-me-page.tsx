@@ -1,11 +1,6 @@
 import { Grid, Box } from "@mui/material";
 import { themeColors } from "../../configs";
-
-import {
-  AboutMeTabs,
-  MyLeaveTabs,
-  SocialTabs,
-} from "../../components/consts/consts";
+import { AboutMeTabs } from "../../components/consts/consts";
 import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
 import { useState } from "react";
 import { getStyles } from "../quick-access/todays-leaves-details";

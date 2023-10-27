@@ -57,7 +57,7 @@ const SocialDashboard = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
-  const handleClickEditOpen = (data: any) => {
+  const handleOpen = (data: any) => {
     setIsOpen(true);
   };
 
@@ -213,7 +213,7 @@ const SocialDashboard = () => {
               height: 13,
               padding: 0,
             }}
-            onClick={handleClickEditOpen}
+            onClick={handleOpen}
           >
             View All
           </Button>

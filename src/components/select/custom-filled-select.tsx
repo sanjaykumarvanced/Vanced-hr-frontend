@@ -97,7 +97,7 @@ export const CustomFilledSelect = ({
         sx={{
           height: height ? { height } : 50,
           borderRadius: 2,
-          background: filled ? '#F2F2F2' : '#FFF',
+          background: filled ? '#F2F2F2' : 'transparent',
           '& .MuiOutlinedInput-notchedOutline': {
             border: borderStyle(),
           },
