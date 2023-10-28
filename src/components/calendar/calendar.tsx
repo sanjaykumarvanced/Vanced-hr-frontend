@@ -1,11 +1,7 @@
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
 import { CalenderIcon1Svg } from "../../svgs";
-import { themeColors } from "../../configs";
 import "../../assets/components/styles.css";
-import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { DatePicker } from "@mui/x-date-pickers";
 import { CustomLabel } from "../label";
 
@@ -15,7 +11,7 @@ export const SingleInputDateRangePicker = ({ label }: { label?: any }) => {
     const daysAbbreviations = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
     const dayIndex = daysAbbreviations.indexOf(dayAbbreviation);
 
-    if (dayIndex !== -1) {
+    if (dayIndex === -1) {
       const daysFullNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
       return daysFullNames[dayIndex];
     }
@@ -46,10 +42,10 @@ export const SingleInputDateRangePicker = ({ label }: { label?: any }) => {
             },
           "&.MuiFormControl-root.MuiTextField-root": {
             marginTop: "0px",
+            width: "100%",
           },
         }}
         showDaysOutsideCurrentMonth={true}
-        fixedWeekNumber={6}
         dayOfWeekFormatter={customDayOfWeekFormatter}
       />
     </LocalizationProvider>

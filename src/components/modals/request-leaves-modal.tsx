@@ -12,7 +12,6 @@ import {
 import { themeFonts, themeColors } from "../../configs";
 import { CloseIconSvg1 } from "../../svgs";
 import { CustomSelect } from "../select/custom-select";
-import { CustomInputField } from "../input/custom-input-field";
 import { CustomFilledInput } from "../input";
 import { SingleInputDateRangePicker } from "../calendar/calendar";
 import { CustomLabel } from "../label";
@@ -84,11 +83,11 @@ export const RequestLeavesDialog = (props: any) => {
             <CustomSelect
               label="Select Type of leave you want to apply"
               options={[
-                { label: "Casual Leave", value: "Casual " },
+                { label: "Casual leave : 10 days available", value: "Casual " },
                 { label: "Full Day Leave", value: "FullDay " },
                 { label: "Half Day Leave", value: "HalfDay" },
               ]}
-              defaultValue={"Casual leave : 10 days available"}
+              value={"Casual"}
             />
           </Grid>
           <Grid item xs={6}>
@@ -142,7 +141,6 @@ export const RequestLeavesDialog = (props: any) => {
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
-            gap: "8px",
           }}
         >
           <CustomLabel label={"fghfh"} fontSize="12px" />
