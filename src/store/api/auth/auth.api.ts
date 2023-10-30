@@ -3,7 +3,7 @@ import { AuthLoginApiResponse, AuthMeReadableCollectionResponse } from './auth.t
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    // Define your authentication endpoints here
+
     authLogin: builder.mutation<AuthLoginApiResponse, LoginCredentials>({
       query: (data) => ({
         url: 'api/auth/login',
@@ -39,5 +39,4 @@ export type RegistrationData = {
   username: string;
   password: string;
   email: string;
-  // Additional registration fields
 };

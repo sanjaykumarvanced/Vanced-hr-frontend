@@ -9,15 +9,7 @@ import {
   UserIcon,
 } from '../svgs';
 import { ROUTES } from '../components/consts/routes.consts';
-// import {
-//   IconBarchartSvg,
-//   IconKippos1Svg,
-//   IconSettings1Svg,
-//   IconLiveDonations1Svg,
-//   IconReportsAndLogs1Svg,
-//   IconDeviceManager1Svg,
-//   IconAdsManagerSvg,
-// } from 'svgs';
+
 
 export interface IMenuList {
   icon?: ReactNode;

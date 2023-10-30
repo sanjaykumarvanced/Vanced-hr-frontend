@@ -36,13 +36,10 @@ interface LoginWithEmailFormProps {
 
 export const LoginForm = forwardRef(
   ({ next = () => {}, toggleForm }: LoginWithEmailFormProps, ref) => {
-    // debugger;
-    // const [loginError, setLoginError] = useState<string | null>(null);
     const formManager = useLoginWithEmailHook({ next });
     const { loading } = useSelector(selectAuthState);
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
-      // Toggle the password visibility
       setShowPassword(!showPassword);
     };
     useImperativeHandle(
@@ -147,7 +144,6 @@ export const LoginForm = forwardRef(
               name="email"
               value={formManager.values.email}
               onChangeValue={(value) => formManager.setFieldValue('email', value)}
-              // onChangeValue={formManager.handleChange}
               error={formManager.touched.email && Boolean(formManager.errors.email)}
               helperText={formManager.touched.email && formManager.errors.email}
               titleComponent={<UserIcon1 />}

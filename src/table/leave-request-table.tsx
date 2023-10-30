@@ -8,6 +8,7 @@ import { apiBaseUrl } from "../components/consts/api-url.const";
 import { format } from "date-fns";
 import { useState } from "react";
 import { RequestLeavesDialog } from "../components/modals/request-leaves-modal";
+import { SingleInputDateRangePicker } from "../components/calendar/calendar";
 
 const columns: GridColDef[] = [
   {
@@ -58,18 +59,16 @@ export const LeaveRequestTable = () => {
     return null;
   }
 
-  // Map your data to rows
   const rows = data.map((item: any) => ({
-    id: item._id, // Each row should have a unique identifier
+    id: item._id, 
     leaveType: item.leaveType,
-    from: format(new Date(item.startDate), "dd/MM/yyyy"), // Format the start date
+    from: format(new Date(item.startDate), "dd/MM/yyyy"),
     to: format(new Date(item.endDate), "dd/MM/yyyy"),
     noOfDays: item.noOfDays,
     reason: item.reason,
     approvedBy: item.approvedBy,
     status: item.status,
-    employerImage: item.approvedBy.employerImage.path, // Add the path to the employer's image
-    employerName: `Mr. ${item.approvedBy.employer.firstName} ${item.approvedBy.employer.lastName}`,
+    employerImage: item.approvedBy.employerImage.path,
   }));
   return (
     <>
@@ -119,8 +118,10 @@ export const LeaveRequestTable = () => {
               display: "flex",
               alignItems: "center",
               paddingX: "24px !important",
+              gap: "20px",
             }}
           >
+            <SingleInputDateRangePicker />
             <Button
               variant="contained"
               sx={{

@@ -18,10 +18,7 @@ export const CustomTabs = ({
   value1,
   sx,
 }: CustomSelectProps) => {
-  //   const handleChange = (event?: React.SyntheticEvent, newValue?: any) => {
-  //     setValues(newValue);
-  //     if (onChange) onChange(newValue);
-  //   };
+
   return (
     <TabContext value={value1}>
       <Box>

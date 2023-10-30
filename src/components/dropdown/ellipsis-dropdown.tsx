@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import { Box, Dialog, IconButton, Menu, MenuItem } from '@mui/material';
-// import { IconMore1Svg } from '../../svgs';
 import { themeColors, themeFonts } from '../../configs';
-// // import { usePutApiAdsByAdIdPauseMutation } from 'generatedStore/adsSuperUserApi';
-// import { useNavigate } from 'react-router-dom';
 import { CloseIconSvg, EditIcon1Svg, EllipsisIconSvg, RefreshIconSvg } from '../../svgs';
 
 export const EllipsisDropDown = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  // const adId = item.id;
-  // const [update] = usePutApiAdsByAdIdPauseMutation();
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -17,17 +12,6 @@ export const EllipsisDropDown = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // const navigate = useNavigate();
-  // const onTab = ({ baseRoute, id }: { baseRoute: string; id: number }) => {
-  //   navigate(baseRoute.replace(':id', `${id}`));
-  // };
-  // const showAllTransactions = (): void => {
-  //   onTab({
-  //     baseRoute: ROUTES.KIPPOS_DETAILS_ALL_DONATIONS,
-  //     id: 2770,
-  //   });
-  // };
 
   return (
     <>

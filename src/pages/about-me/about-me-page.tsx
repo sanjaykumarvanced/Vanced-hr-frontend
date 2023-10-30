@@ -4,9 +4,8 @@ import { AboutMeTabs } from "../../components/consts/consts";
 import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
 import { useState } from "react";
 import { getStyles } from "../quick-access/todays-leaves-details";
-import { MyLeaveStats } from "./leave-section/my-leaves-stats";
-import { LeaveHistory } from "./leave-section/leave-history";
-import { LeaveRequestTable } from "../../table/leave-request-table";
+import { LeavePage } from "./leave-section/leave-page";
+import { AttendancePage } from "./attendance-section/attendance-page";
 
 export const AboutMePage = () => {
   const [value, setValue] = useState("Leave");
@@ -65,24 +64,8 @@ export const AboutMePage = () => {
               value={tabs.value}
               value1={value}
             >
-              <Grid
-                item
-                xs={12}
-                sx={{
-                  display: "flex",
-                  gap: "20px",
-                }}
-              >
-                <Grid item xs={6}>
-                  <MyLeaveStats />
-                </Grid>
-                <Grid item xs={8}>
-                  <LeaveHistory />
-                </Grid>
-              </Grid>
-              <Grid item xs={12}>
-                <LeaveRequestTable />
-              </Grid>
+              {value === "Leave" && <LeavePage />}
+              {value==="Attendance"&& <AttendancePage/>}
             </CustomTabsPanel>
           ))}
         </Box>

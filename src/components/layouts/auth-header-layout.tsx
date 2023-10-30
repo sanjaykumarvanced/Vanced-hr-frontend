@@ -32,7 +32,6 @@ export const AuthHeaderLayout = ({
     <>
       <AppBar
         sx={{
-          // position: 'absolute',
           width: `auto`,
           left: !open ? `${LEFT_SIDEBAR_WIDTH}px` : "72px",
           backgroundColor: "white",

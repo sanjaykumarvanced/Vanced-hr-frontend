@@ -1,20 +1,11 @@
-import {
-  LocalizationProvider,
-  SingleInputDateRangeField,
-} from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { CalenderIcon1Svg } from "../../svgs";
 import "../../assets/components/styles.css";
-import { themeColors, themeFonts } from "../../configs";
+import { DatePicker } from "@mui/x-date-pickers";
+import { CustomLabel } from "../label";
 
-export const SingleInputDateRangePicker = ({
-  value,
-  onChange,
-}: {
-  value?: any;
-  onChange?: any;
-}) => {
+export const CustomDatePicker = ({ label }: { label?: any }) => {
   const customDayOfWeekFormatter = (dayAbbreviation: string) => {
     debugger;
     const daysAbbreviations = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -29,44 +20,33 @@ export const SingleInputDateRangePicker = ({
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateRangePicker
-        slots={{ field: SingleInputDateRangeField }}
-        slotProps={{
-          textField: {
-            InputProps: {
-              endAdornment: <CalenderIcon1Svg />,
-              placeholder: "Jan 2023 - Dec 2023",
-            },
-          },
+      {label && <CustomLabel label={label} fontSize="12px" />}
+      <DatePicker
+        slots={{
+          openPickerIcon: CalenderIcon1Svg,
         }}
         sx={{
           "& .MuiInputBase-root.MuiOutlinedInput-root": {
             borderRadius: "5px",
-            fontSize: "15px",
-            fontFamily: themeFonts["Poppins-SemiBold"],
+            fontSize: "12px",
             height: "39px",
-            width: "196px",
-            color: themeColors["#0C345D"],
           },
           "& input": {
-            paddingY: "8px",
-          },
-          "& fieldset.MuiOutlinedInput-notchedOutline": {
-            width: "100%",
-            borderColor: themeColors["#0C345D"],
+            paddingY: "0px",
           },
           "& .MuiPickersCalendarHeader-labelContainer.css-cyfsxc-MuiPickersCalendarHeader-labelContainer":
             {
               position: "absolute !important",
               right: "117px",
             },
+          "&.MuiFormControl-root.MuiTextField-root": {
+            marginTop: "0px",
+            width: "100%",
+          },
         }}
-        calendars={1}
         showDaysOutsideCurrentMonth={true}
         dayOfWeekFormatter={customDayOfWeekFormatter}
-        onChange={onChange}
-        value={value}
-        format="DD/MM/YY"
+        format={'DD/MM/YY'}
       />
     </LocalizationProvider>
   );

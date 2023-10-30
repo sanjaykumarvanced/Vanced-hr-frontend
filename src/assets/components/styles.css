@@ -40,7 +40,7 @@
 } */
 .css-31ca4x-MuiPickersFadeTransitionGroup-root {
   position: absolute !important;
-  left: 75px !important;
+  left: 68px !important;
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -50,7 +50,7 @@
 .MuiDateCalendar-root {
   background-color: #0C345D;
   color: white;
-  width: 245px;
+  width: 312px !important;
   border-radius: 8px;
 }
 .MuiSvgIcon-fontSizeMedium.MuiPickersCalendarHeader-switchViewIcon{
@@ -59,7 +59,7 @@
 
 button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd.MuiPickersArrowSwitcher-button {
   position: absolute !important;
-  left: 60px !important;
+  left:52px !important;
   color:rgb(255 255 255 / 40%)
 }
 
@@ -109,4 +109,39 @@ button.MuiButtonBase-root.MuiPickersDay-root.Mui-selected{
   font-size: 12px;
   border:0;
   background-color: transparent;
+}
+
+
+.MuiDateRangeCalendar-monthContainer {
+  background-color: #0C345D;
+  color: white;
+  min-width: 245px;
+  border-radius: 8px;
+}
+
+.MuiDateRangePickerDay-notSelectedDate.MuiDateRangePickerDay-dayOutsideRangeInterval {
+  color: #FFFFFF;
+  font-family: 'Poppins-Regular';
+  font-size: 12px;
+}
+.MuiPickersDay-dayOutsideMonth.MuiDateRangePickerDay-dayOutsideRangeInterval{
+  color: rgb(255 255 255 / 12%);
+  font-family: 'Poppins-Regular';
+  font-size: 12px
+}
+
+
+button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today{
+  color: #FF8800;
+  font-family: 'Poppins-Regular';
+  font-size: 12px;
+  border:0
+}
+
+.MuiPickersCalendarHeader-root{
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+.MuiPickersPopper-paper{
+  margin-top: 5px;
 }

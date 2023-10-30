@@ -13,7 +13,7 @@ import { themeFonts, themeColors } from "../../configs";
 import { CloseIconSvg1 } from "../../svgs";
 import { CustomSelect } from "../select/custom-select";
 import { CustomFilledInput } from "../input";
-import { SingleInputDateRangePicker } from "../calendar/calendar";
+import { CustomDatePicker } from "../calendar/custom-date-picker";
 import { CustomLabel } from "../label";
 
 export const RequestLeavesDialog = (props: any) => {
@@ -115,10 +115,10 @@ export const RequestLeavesDialog = (props: any) => {
           }}
         >
           <Grid item xs={4}>
-            <SingleInputDateRangePicker label={"From"} />
+            <CustomDatePicker label={"From"} />
           </Grid>
           <Grid item xs={4}>
-            <SingleInputDateRangePicker label={"To"} />
+            <CustomDatePicker label={"To"} />
           </Grid>
           <Grid item xs={4}>
             <CustomFilledInput

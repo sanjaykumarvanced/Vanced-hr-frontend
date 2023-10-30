@@ -27,11 +27,7 @@ export const pieOptions1 = {
   },
   pieSliceBorderColor: "none",
 };
-// export const pieData = [
-//   ["label", "leaves"],
-//   ["7", 7],
-//   ["12", 12],
-// ];
+
 export const pieData1 = [
   ["Lang", "Speakers"],
   ["", 12],

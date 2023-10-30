@@ -341,8 +341,7 @@ export const passwordTests = () => {
     );
 };
 
-// https://stackoverflow.com/a/58089332/12549223
-// added typing and
+
 export function Object_assign(target: any, ...sources: object[]) {
   sources.forEach((source: any) => {
     Object.keys(source).forEach((key) => {

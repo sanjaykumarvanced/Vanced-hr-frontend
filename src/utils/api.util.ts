@@ -50,7 +50,6 @@ export const fetchbase: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
     let msg = getFirstErrorFromObject(result.error.data);
     if (!msg) {
       msg = `Internal server error`;
-      // api.dispatch(authenticationSlice.actions.logout());
     }
     if (!(result.error.data instanceof Blob)) toast.error(msg);
   }

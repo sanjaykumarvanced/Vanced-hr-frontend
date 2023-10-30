@@ -5,7 +5,6 @@ import { CustomFilledInput } from '../../input';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../consts/routes.consts';
 import { FacebookIconSvg, GoogleIconSvg, RegisterLogSvg } from '../../../svgs';
-//import { Link } from 'react-router-dom';
 
 export const RegisterForm = ({ toggleForm }: { toggleForm?: any }) => {
   const [loading] = useState(false);

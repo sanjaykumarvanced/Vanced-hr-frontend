@@ -1,5 +1,4 @@
 import { BrowserRouter as Router } from "react-router-dom";
-// import './App.css';
 import { persistor, store } from "./store/reducer";
 import { RootNavigator } from "./navigator/root.navigator";
 import { Provider } from "react-redux";

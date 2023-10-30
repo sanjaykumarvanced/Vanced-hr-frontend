@@ -26,14 +26,13 @@ export const LoginPage = () => {
           backgroundSize: 'cover',
           margin: 0,
           width: '100%',
-          // minHeight: { xl: '100vh' },
         }}
       >
         <Grid
           item
-          xs={7} // Full width on all screen sizes
-          sm={12} // Full width on all screen sizes
-          md={8} // Takes up 8 out of 12 columns on medium screens and larger
+          xs={7} 
+          sm={12} 
+          md={8} 
           lg={7}
           sx={{
             maxWidth: '1186px',

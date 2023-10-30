@@ -32,14 +32,11 @@ export const CustomDatePickerCalendar = ({
   
   const [selectValue, setSelectValue] = React.useState(value ?? '');
   const today = dayjs()
-  //.format('YYYY-MM-DD');
   console.log(today, 'today');
 
   const handleDateChange = (date: any) => {
-    // Update the selectValue state
     setSelectValue(date);
 
-    // Call the provided onChange function if it exists
     if (onChange) onChange(date);
   };
   return (
@@ -64,7 +61,6 @@ export const CustomDatePickerCalendar = ({
       >
         <DemoItem label="Date Of admit">
           <MobileDatePicker
-            // defaultValue={dayjs('2022-04-17').format('DD-MM-YYYY')}
             sx={{
               '& .MuiInputBase-formControl.MuiInputBase-root.MuiOutlinedInput-root': {
                 height: '45px',
@@ -78,8 +74,7 @@ export const CustomDatePickerCalendar = ({
               },
               '& .MuiFormControl-root.MuiTextField-root': { margin: 0 },
             }}
-            // type={name}
-            onChange={handleDateChange} // Update Formik state
+            onChange={handleDateChange}
             value={selectValue}
             maxDate={today}
           />

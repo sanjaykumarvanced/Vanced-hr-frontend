@@ -25,7 +25,6 @@ export const FilterSearchComponents = ({
       {!isEmpty && (
         <Button
           size="small"
-          // onClick={clearFilters}
           sx={{ position: 'relative', marginRight: '20px' }}
         >
           Clear Filters

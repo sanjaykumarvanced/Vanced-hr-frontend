@@ -37,3 +37,5 @@ export { ReactComponent as EditIconSvg } from "../assets/images/svg/edit-icon.sv
 export { ReactComponent as DeleteIconSvg } from "../assets/images/svg/delete-icon.svg";
 export { ReactComponent as CloseIconSvg1 } from "../assets/images/svg/close-icon-1.svg";
 export { ReactComponent as DownArrowIcon2 } from "../assets/images/svg/down-arrow-icon-2.svg";
+export { ReactComponent as FingerPrintSvg } from "../assets/images/svg/fingerprint.svg";
+export { ReactComponent as DownArrowIcon3 } from "../assets/images/svg/down-arrow-icon-3.svg";

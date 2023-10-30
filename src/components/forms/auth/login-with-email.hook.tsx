@@ -6,7 +6,6 @@ import { authenticationSlice } from "../../../store/slices/auth.slice";
 import { useDispatch } from "react-redux";
 
 export const useLoginWithEmailHook = ({ next }: { next: () => void }) => {
-  // debugger;
   const [mutate] = useAuthLoginMutation();
   const rememberMe = window.localStorage.getItem("email") || "";
   const dispatch = useDispatch();

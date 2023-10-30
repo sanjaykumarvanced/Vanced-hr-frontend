@@ -8,10 +8,6 @@ export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      // TODO: return if find a way to save non serializable image
-      // serializableCheck: {
-      //   ignoredActions: ['persist/PERSIST'],
-      // },
       serializableCheck: false,
     }).concat(baseApi.middleware),
 });
