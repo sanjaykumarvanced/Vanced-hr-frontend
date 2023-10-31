@@ -2,7 +2,6 @@ import { Grid, Box, Typography, Divider, Button } from "@mui/material";
 import { themeColors, themeFonts } from "../../../configs";
 import { FingerPrintSvg } from "../../../svgs";
 import { Chart } from "react-google-charts";
-import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,19 +21,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-export const lineChartOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top" as const,
-    },
-    title: {
-      display: true,
-      text: "Chart.js Line Chart",
-    },
-  },
-};
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+
 export const data = [
   ["Task", "Hours per Day"],
   ["", 70],
@@ -159,7 +146,7 @@ export const Timing = () => {
           <Box>
             <Chart
               chartType="PieChart"
-              width="0%"
+              width="100%"
               height="227px"
               data={data}
               options={options}

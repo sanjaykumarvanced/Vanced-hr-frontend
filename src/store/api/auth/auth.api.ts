@@ -1,23 +1,25 @@
-import { baseApi } from '../base';
-import { AuthLoginApiResponse, AuthMeReadableCollectionResponse } from './auth.types';
+import { baseApi } from "../base";
+import {
+  AuthLoginApiResponse,
+  AuthMeReadableCollectionResponse,
+} from "./auth.types";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-
     authLogin: builder.mutation<AuthLoginApiResponse, LoginCredentials>({
       query: (data) => ({
-        url: 'api/auth/login',
-        method: 'POST',
+        url: "api/auth/login",
+        method: "POST",
         body: data,
       }),
     }),
     authMe: builder.query<AuthMeReadableCollectionResponse, null | undefined>({
-      query: () => ({ url: `/api/auth/me`, method: 'GET' }),
+      query: () => ({ url: `/api/auth/me`, method: "GET" }),
     }),
     authRegister: builder.mutation<any, RegistrationData>({
       query: (data) => ({
-        url: 'api/auth/register',
-        method: 'POST',
+        url: "api/auth/register",
+        method: "POST",
         body: data,
       }),
     }),

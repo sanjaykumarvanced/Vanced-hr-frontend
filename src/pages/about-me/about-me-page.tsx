@@ -6,6 +6,7 @@ import { useState } from "react";
 import { getStyles } from "../quick-access/todays-leaves-details";
 import { LeavePage } from "./leave-section/leave-page";
 import { AttendancePage } from "./attendance-section/attendance-page";
+import { PerformancePage } from "./performance-sectioon/performance-page";
 
 export const AboutMePage = () => {
   const [value, setValue] = useState("Leave");
@@ -65,7 +66,8 @@ export const AboutMePage = () => {
               value1={value}
             >
               {value === "Leave" && <LeavePage />}
-              {value==="Attendance"&& <AttendancePage/>}
+              {value === "Attendance" && <AttendancePage />}
+              {value === "Performance" && <PerformancePage />}
             </CustomTabsPanel>
           ))}
         </Box>

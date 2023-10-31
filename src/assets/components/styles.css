@@ -145,3 +145,7 @@ button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today{
 .MuiPickersPopper-paper{
   margin-top: 5px;
 }
+
+.MuiDataGrid-footerContainer.MuiDataGrid-withBorderColor{
+  border: none;
+}

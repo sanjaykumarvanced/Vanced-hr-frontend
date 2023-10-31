@@ -1,14 +1,13 @@
 import { Grid, Box, Typography, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { themeFonts, themeColors } from "../configs";
-import { useSelector } from "react-redux";
-import { useGetLeaveRequestByIdQuery } from "../components/apis/leaveRequestApi";
+
 import { DeleteIconSvg, EditIconSvg } from "../svgs";
 import { apiBaseUrl } from "../components/consts/api-url.const";
-import { format } from "date-fns";
-import { useState } from "react";
-import { RequestLeavesDialog } from "../components/modals/request-leaves-modal";
+
 import { SingleInputDateRangePicker } from "../components/calendar/calendar";
+import { CustomDatePickerCalendar } from "../components/calendar/custom-calendar";
+import { CustomDatePicker } from "../components/calendar/custom-date-picker";
 
 const columns: GridColDef[] = [
   {
@@ -18,19 +17,19 @@ const columns: GridColDef[] = [
     minWidth: 10,
   },
   {
-    field: "leaveType",
-    headerName: "Leave Type",
+    field: "date",
+    headerName: "Date",
     flex: 1,
   },
-  { field: "from", headerName: "From", flex: 1 },
-  { field: "to", headerName: "To", flex: 1 },
+  { field: "checkIn", headerName: "Check In", flex: 1 },
+  { field: "checkOut", headerName: "Check Out", flex: 1 },
   {
-    field: "noOfDays",
-    headerName: "No. of Days",
+    field: "workingHours",
+    headerName: "Working Hours",
     flex: 1,
   },
-  { field: "reason", headerName: "Reason", flex: 1 },
-  { field: "approvedBy", headerName: "Approved By", flex: 1 },
+  { field: "breakTime", headerName: "Break Time", flex: 1 },
+  { field: "shift", headerName: "Shift", flex: 1 },
   {
     field: "status",
     headerName: "Status",
@@ -42,34 +41,34 @@ const columns: GridColDef[] = [
   },
 ];
 
-export const LeaveRequestTable = () => {
-  const Id = useSelector((state: any) => state.authentication.user);
-  const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
-  const [isOpen, setIsOpen] = useState(false);
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-  const handleOpen = (data: any) => {
-    setIsOpen(true);
-  };
+export const AttendanceLogTable = () => {
+  //   const Id = useSelector((state: any) => state.authentication.user);
+  //   const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
+  //   const [isOpen, setIsOpen] = useState(false);
+  //   const handleClose = () => {
+  //     setIsOpen(false);
+  //   };
+  //   const handleOpen = (data: any) => {
+  //     setIsOpen(true);
+  //   };
 
-  console.log(data, Id);
+  //   console.log(data, Id);
 
-  if (!data) {
-    return null;
-  }
+  //   if (!data) {
+  //     return null;
+  //   }
 
-  const rows = data.map((item: any) => ({
-    id: item._id,
-    leaveType: item.leaveType,
-    from: format(new Date(item.startDate), "dd/MM/yyyy"),
-    to: format(new Date(item.endDate), "dd/MM/yyyy"),
-    noOfDays: item.noOfDays,
-    reason: item.reason,
-    approvedBy: item.approvedBy,
-    status: item.status,
-    employerImage: item.approvedBy.employerImage.path,
-  }));
+  //   const rows = data.map((item: any) => ({
+  //     id: item._id,
+  //     leaveType: item.leaveType,
+  //     from: format(new Date(item.startDate), "dd/MM/yyyy"),
+  //     to: format(new Date(item.endDate), "dd/MM/yyyy"),
+  //     noOfDays: item.noOfDays,
+  //     reason: item.reason,
+  //     approvedBy: item.approvedBy,
+  //     status: item.status,
+  //     employerImage: item.approvedBy.employerImage.path,
+  //   }));
   return (
     <>
       <Grid
@@ -109,7 +108,7 @@ export const LeaveRequestTable = () => {
                 color: themeColors["#0C345D"],
               }}
             >
-              Leave Request
+              Attendance Log
             </Typography>
           </Box>
 
@@ -121,29 +120,34 @@ export const LeaveRequestTable = () => {
               gap: "20px",
             }}
           >
-            <SingleInputDateRangePicker placeholder={"Jan 2023 - Dec 2023"} />
             <Button
               variant="contained"
               sx={{
                 height: 39,
                 borderRadius: "6px",
-                backgroundColor: themeColors["#0C345D"],
+                backgroundColor: themeColors["#D7D9DB"],
                 fontFamily: themeFonts["Poppins-SemiBold"],
                 fontSize: "15px",
-                color: themeColors["#FFFFFF"],
+                color: themeColors["#0C345D"],
                 "&:hover": {
                   backgroundColor: "rgb(21 94 158)",
                 },
               }}
-              onClick={handleOpen}
             >
-              Request Leaves
+              Shift Schedule
             </Button>
+            <CustomDatePicker
+              width={120}
+              placeholder={"Oct 2023"}
+              fontFamily={"Poppins-SemiBold"}
+              color={"#0C345D"}
+              fontSize={"15px"}
+            />
           </Box>
         </Box>
         <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={rows || []}
+            rows={[]}
             columns={columns.map((col) => ({
               ...col,
               renderCell: (params) =>
@@ -259,9 +263,6 @@ export const LeaveRequestTable = () => {
           />
         </Box>
       </Grid>
-      {isOpen && (
-        <RequestLeavesDialog open={isOpen} onClose={handleClose} data={data} />
-      )}
     </>
   );
 };

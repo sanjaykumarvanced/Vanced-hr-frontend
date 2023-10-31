@@ -4,8 +4,23 @@ import { CalenderIcon1Svg } from "../../svgs";
 import "../../assets/components/styles.css";
 import { DatePicker } from "@mui/x-date-pickers";
 import { CustomLabel } from "../label";
+import { themeColors, themeFonts } from "../../configs";
 
-export const CustomDatePicker = ({ label }: { label?: any }) => {
+export const CustomDatePicker = ({
+  label,
+  width,
+  placeholder,
+  fontFamily,
+  color,
+  fontSize,
+}: {
+  label?: any;
+  width?: any;
+  placeholder?: any;
+  fontFamily?: keyof typeof themeFonts;
+  color?: any;
+  fontSize?: any;
+}) => {
   const customDayOfWeekFormatter = (dayAbbreviation: string) => {
     debugger;
     const daysAbbreviations = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -16,7 +31,7 @@ export const CustomDatePicker = ({ label }: { label?: any }) => {
       return daysFullNames[dayIndex];
     }
 
-    return dayAbbreviation; 
+    return dayAbbreviation;
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -25,11 +40,20 @@ export const CustomDatePicker = ({ label }: { label?: any }) => {
         slots={{
           openPickerIcon: CalenderIcon1Svg,
         }}
+        slotProps={{
+          textField: {
+            InputProps: {
+              placeholder: `${placeholder}`,
+            },
+          },
+        }}
         sx={{
           "& .MuiInputBase-root.MuiOutlinedInput-root": {
             borderRadius: "5px",
-            fontSize: "12px",
+            fontSize: fontSize ? { fontSize } : "12px",
             height: "39px",
+            fontFamily: { fontFamily },
+            color: { color },
           },
           "& input": {
             paddingY: "0px",
@@ -41,12 +65,12 @@ export const CustomDatePicker = ({ label }: { label?: any }) => {
             },
           "&.MuiFormControl-root.MuiTextField-root": {
             marginTop: "0px",
-            width: "100%",
+            width: width ? { width } : "100%",
           },
         }}
         showDaysOutsideCurrentMonth={true}
         dayOfWeekFormatter={customDayOfWeekFormatter}
-        format={'DD/MM/YY'}
+        format={"DD/MM/YY"}
       />
     </LocalizationProvider>
   );

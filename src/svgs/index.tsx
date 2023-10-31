@@ -39,3 +39,8 @@ export { ReactComponent as CloseIconSvg1 } from "../assets/images/svg/close-icon
 export { ReactComponent as DownArrowIcon2 } from "../assets/images/svg/down-arrow-icon-2.svg";
 export { ReactComponent as FingerPrintSvg } from "../assets/images/svg/fingerprint.svg";
 export { ReactComponent as DownArrowIcon3 } from "../assets/images/svg/down-arrow-icon-3.svg";
+export { ReactComponent as PunchInIcon } from "../assets/images/svg/punch-in-icon.svg";
+export { ReactComponent as PunchOutIcon } from "../assets/images/svg/punch-out-icon.svg";
+export { ReactComponent as DownArrowIcon4 } from "../assets/images/svg/down-arrow-icon-4.svg";
+export { ReactComponent as EmployeesSvg } from "../assets/images/svg/employees-svg.svg";
+export { ReactComponent as ArrivalClock } from "../assets/images/svg/arrival-clock.svg";

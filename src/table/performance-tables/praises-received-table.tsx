@@ -1,14 +1,14 @@
-import { Grid, Box, Typography, Button } from "@mui/material";
+import { Grid, Box, Typography, Button, Select, MenuItem } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { themeFonts, themeColors } from "../configs";
-import { useSelector } from "react-redux";
-import { useGetLeaveRequestByIdQuery } from "../components/apis/leaveRequestApi";
-import { DeleteIconSvg, EditIconSvg } from "../svgs";
-import { apiBaseUrl } from "../components/consts/api-url.const";
-import { format } from "date-fns";
+import { CustomDatePicker } from "../../components/calendar/custom-date-picker";
+import { apiBaseUrl } from "../../components/consts/api-url.const";
+import { themeColors, themeFonts } from "../../configs";
+import {
+  EditIconSvg,
+  DeleteIconSvg,
+  DownArrowIcon4,
+} from "../../svgs";
 import { useState } from "react";
-import { RequestLeavesDialog } from "../components/modals/request-leaves-modal";
-import { SingleInputDateRangePicker } from "../components/calendar/calendar";
 
 const columns: GridColDef[] = [
   {
@@ -18,58 +18,57 @@ const columns: GridColDef[] = [
     minWidth: 10,
   },
   {
-    field: "leaveType",
-    headerName: "Leave Type",
+    field: "date",
+    headerName: "Date",
     flex: 1,
   },
-  { field: "from", headerName: "From", flex: 1 },
-  { field: "to", headerName: "To", flex: 1 },
+  { field: "projectName", headerName: "Project Name", flex: 1 },
+  { field: "comments", headerName: "Comments", flex: 1 },
   {
-    field: "noOfDays",
-    headerName: "No. of Days",
+    field: "Added By",
+    headerName: "Working Hours",
     flex: 1,
   },
-  { field: "reason", headerName: "Reason", flex: 1 },
-  { field: "approvedBy", headerName: "Approved By", flex: 1 },
   {
     field: "status",
     headerName: "Status",
     flex: 1,
   },
-  {
-    field: "action",
-    headerName: "Action",
-  },
 ];
 
-export const LeaveRequestTable = () => {
-  const Id = useSelector((state: any) => state.authentication.user);
-  const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
-  const [isOpen, setIsOpen] = useState(false);
-  const handleClose = () => {
-    setIsOpen(false);
+export const PraisesReceivedTable = () => {
+  //   const Id = useSelector((state: any) => state.authentication.user);
+  //   const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
+  //   const [isOpen, setIsOpen] = useState(false);
+  //   const handleClose = () => {
+  //     setIsOpen(false);
+  //   };
+  //   const handleOpen = (data: any) => {
+  //     setIsOpen(true);
+  //   };
+
+  //   console.log(data, Id);
+
+  //   if (!data) {
+  //     return null;
+  //   }
+
+  //   const rows = data.map((item: any) => ({
+  //     id: item._id,
+  //     leaveType: item.leaveType,
+  //     from: format(new Date(item.startDate), "dd/MM/yyyy"),
+  //     to: format(new Date(item.endDate), "dd/MM/yyyy"),
+  //     noOfDays: item.noOfDays,
+  //     reason: item.reason,
+  //     approvedBy: item.approvedBy,
+  //     status: item.status,
+  //     employerImage: item.approvedBy.employerImage.path,
+  //   }));
+  const [selectedValue, setSelectedValue] = useState();
+
+  const handleChange = (event: any) => {
+    setSelectedValue(event.target.value);
   };
-  const handleOpen = (data: any) => {
-    setIsOpen(true);
-  };
-
-  console.log(data, Id);
-
-  if (!data) {
-    return null;
-  }
-
-  const rows = data.map((item: any) => ({
-    id: item._id,
-    leaveType: item.leaveType,
-    from: format(new Date(item.startDate), "dd/MM/yyyy"),
-    to: format(new Date(item.endDate), "dd/MM/yyyy"),
-    noOfDays: item.noOfDays,
-    reason: item.reason,
-    approvedBy: item.approvedBy,
-    status: item.status,
-    employerImage: item.approvedBy.employerImage.path,
-  }));
   return (
     <>
       <Grid
@@ -109,7 +108,18 @@ export const LeaveRequestTable = () => {
                 color: themeColors["#0C345D"],
               }}
             >
-              Leave Request
+              Praises Received
+              <Typography
+                component={"span"}
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "15px",
+                  color: themeColors["#808080"],
+                  paddingLeft: "3px",
+                }}
+              >
+                ( This section contains the praises received by me . )
+              </Typography>
             </Typography>
           </Box>
 
@@ -121,29 +131,75 @@ export const LeaveRequestTable = () => {
               gap: "20px",
             }}
           >
-            <SingleInputDateRangePicker placeholder={"Jan 2023 - Dec 2023"} />
-            <Button
-              variant="contained"
+            <Select
               sx={{
-                height: 39,
-                borderRadius: "6px",
-                backgroundColor: themeColors["#0C345D"],
                 fontFamily: themeFonts["Poppins-SemiBold"],
                 fontSize: "15px",
-                color: themeColors["#FFFFFF"],
-                "&:hover": {
-                  backgroundColor: "rgb(21 94 158)",
+                color: themeColors["#0C345D"],
+                height: 39,
+                background: themeColors["#E1E1E1"],
+                paddingX: "12px",
+                paddingY: "9px",
+                cursor: "pointer",
+                borderRadius: "6px",
+                "& .MuiInputBase-input.MuiOutlinedInput-input.MuiSelect-outlined.MuiSelect-select":
+                  {
+                    position: "relative",
+                    padding: 0,
+                    width: "132px",
+                    overflow: "overlay",
+                    zIndex: 1,
+                  },
+                "& svg": {
+                  position: "absolute",
+                  right: "12px",
+                },
+                "& fieldset.MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline":
+                  {
+                    border: "none",
+                  },
+              }}
+              IconComponent={() => <DownArrowIcon4 />}
+              defaultValue={"Monthly Report"}
+              onChange={handleChange}
+              value={selectedValue}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    "& li.MuiButtonBase-root.MuiMenuItem-root.Mui-selected": {
+                      background: "rgb(12 52 93 / 14%) !important",
+                    },
+                    "& ul.MuiList-root.MuiList-padding.MuiMenu-list": {
+                      padding: 0,
+                    },
+                    "&.MuiPaper-root.MuiPopover-paper.MuiMenu-paper": {
+                      marginTop: "7px !important",
+                      borderRadius: "6px",
+                    },
+                    "& li": {
+                      fontFamily: themeFonts["Poppins-SemiBold"],
+                      fontSize: "10px",
+                      color: themeColors["#0C345D"],
+                    },
+                  },
                 },
               }}
-              onClick={handleOpen}
             >
-              Request Leaves
-            </Button>
+              <MenuItem value={"Monthly Report"}>Monthly Report</MenuItem>
+              <MenuItem value={"Yearly Report"}>Yearly Report</MenuItem>
+            </Select>
+            <CustomDatePicker
+              width={120}
+              placeholder={"Oct 2023"}
+              fontFamily={"Poppins-SemiBold"}
+              color={"#0C345D"}
+              fontSize={"15px"}
+            />
           </Box>
         </Box>
         <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={rows || []}
+            rows={[]}
             columns={columns.map((col) => ({
               ...col,
               renderCell: (params) =>
@@ -259,9 +315,6 @@ export const LeaveRequestTable = () => {
           />
         </Box>
       </Grid>
-      {isOpen && (
-        <RequestLeavesDialog open={isOpen} onClose={handleClose} data={data} />
-      )}
     </>
   );
 };

@@ -11,9 +11,11 @@ import { themeColors, themeFonts } from "../../configs";
 export const SingleInputDateRangePicker = ({
   value,
   onChange,
+  placeholder,
 }: {
   value?: any;
   onChange?: any;
+  placeholder?: any;
 }) => {
   const customDayOfWeekFormatter = (dayAbbreviation: string) => {
     debugger;
@@ -25,7 +27,7 @@ export const SingleInputDateRangePicker = ({
       return daysFullNames[dayIndex];
     }
 
-    return dayAbbreviation; 
+    return dayAbbreviation;
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -35,7 +37,7 @@ export const SingleInputDateRangePicker = ({
           textField: {
             InputProps: {
               endAdornment: <CalenderIcon1Svg />,
-              placeholder: "Jan 2023 - Dec 2023",
+              placeholder: `${placeholder}`,
             },
           },
         }}

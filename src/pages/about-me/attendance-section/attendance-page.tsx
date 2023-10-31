@@ -1,10 +1,9 @@
-import React from "react";
-import { LeaveRequestTable } from "../../../table/leave-request-table";
+
 import { Grid } from "@mui/material";
-import { LeaveHistory } from "../leave-section/leave-history";
-import { MyLeaveStats } from "../leave-section/my-leaves-stats";
 import { Timing } from "./timig";
 import { AttendanceStats } from "./attendance-stats";
+import { TodayActivity } from "./today-activity";
+import { AttendanceLogTable } from "../../../table/attendance-log-table";
 
 export const AttendancePage = () => {
   return (
@@ -24,11 +23,11 @@ export const AttendancePage = () => {
           <AttendanceStats />
         </Grid>
         <Grid item xs={10}>
-          <LeaveHistory />
+          <TodayActivity />
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <LeaveRequestTable />
+        <AttendanceLogTable />
       </Grid>
     </>
   );
