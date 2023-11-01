@@ -6,7 +6,7 @@ import { useState } from "react";
 import { getStyles } from "../quick-access/todays-leaves-details";
 import { LeavePage } from "./leave-section/leave-page";
 import { AttendancePage } from "./attendance-section/attendance-page";
-import { PerformancePage } from "./performance-sectioon/performance-page";
+import { PerformancePage } from "./performance-section/performance-page";
 
 export const AboutMePage = () => {
   const [value, setValue] = useState("Leave");

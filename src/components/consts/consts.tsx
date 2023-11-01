@@ -26,3 +26,9 @@ export const MyLeaveTabs = [
   { label: "Weekly Pattern ", value: "Weekly" },
   { label: "Monthly Pattern ", value: "Monthly" },
 ];
+
+export const FinanceTabs = [
+  { label: "Summary ", value: "Summary" },
+  { label: "My Pay ", value: "My Pay" },
+  { label: "Manage Tax ", value: "Manage Tax" },
+];

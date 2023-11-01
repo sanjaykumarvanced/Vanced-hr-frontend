@@ -18,6 +18,7 @@ export const AuthMainLayout: FC<AuthMainLayoutProps> = (props) => {
         overflow: " hidden",
         position: "relative",
         background: themeColors["#F5FAFF"],
+        paddingBottom: 0,
       }}
     >
       <Box sx={{ height: "74px" }} />

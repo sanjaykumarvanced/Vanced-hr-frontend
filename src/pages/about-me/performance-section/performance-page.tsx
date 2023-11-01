@@ -1,6 +1,4 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
-
-import { AttendanceLogTable } from "../../../table/attendance-log-table";
 import { themeFonts, themeColors } from "../../../configs";
 import { PraisesReceivedTable } from "../../../table/performance-tables/praises-received-table";
 

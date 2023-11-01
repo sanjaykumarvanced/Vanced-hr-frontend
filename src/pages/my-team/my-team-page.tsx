@@ -5,6 +5,7 @@ import { AttendanceLogTable } from "../../table/attendance-log-table";
 import { TodayAbsentees } from "./header-section/today-absentees";
 import { NotInYetTodaySection } from "./header-section/not-in-yet-today-section";
 import { EmployeePresenceInfo } from "./header-section/employee-presence-info";
+import { TeamTime } from "./middle-section/team-time";
 
 export const MyTeamPage = () => {
   return (
@@ -72,7 +73,9 @@ export const MyTeamPage = () => {
               <NotInYetTodaySection />
             </Grid>
           </Grid>
-
+          <Grid item xs={12}>
+            <TeamTime />
+          </Grid>
           <Grid item xs={12}>
             <AttendanceLogTable />
           </Grid>
