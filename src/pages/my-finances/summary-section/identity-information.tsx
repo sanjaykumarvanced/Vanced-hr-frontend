@@ -1,6 +1,6 @@
 import { Grid, Box, Typography, Divider } from "@mui/material";
 import { themeColors, themeFonts } from "../../../configs";
-import { ProfilePicture } from "../../../svgs";
+import { FlagIconSvg, ProfilePicture } from "../../../svgs";
 
 export const IdentityInformation = () => {
   return (
@@ -45,23 +45,16 @@ export const IdentityInformation = () => {
       >
         <Box
           sx={{
-            paddingTop: "26px",
+            paddingTop: "26px !important",
             display: "flex",
-            flexDirection: "column",
-            gap: "2px",
+            flexDirection: "row",
+            gap: "6px",
             padding: "13px",
+            height: "max-content",
+            alignItems: "center",
           }}
         >
-          <Typography
-            sx={{
-              fontFamily: themeFonts["Poppins-Regular"],
-              fontSize: "10px",
-              color: themeColors["#2980BA"],
-            }}
-          >
-            Salary payment mode
-          </Typography>
-
+          <FlagIconSvg />
           <Typography
             sx={{
               fontFamily: themeFonts["Poppins-SemiBold"],
@@ -69,7 +62,21 @@ export const IdentityInformation = () => {
               color: themeColors["#000000"],
             }}
           >
-            Bank Server
+            PAN Card
+          </Typography>
+
+          <Typography
+            sx={{
+              fontFamily: themeFonts["Poppins-SemiBold"],
+              fontSize: "10px",
+              color: themeColors["#27AE60"],
+              paddingY: "1px",
+              paddingX: "16px",
+              background: "rgb(39 174 96 / 27%)",
+              borderRadius: "9px",
+            }}
+          >
+            Verified
           </Typography>
         </Box>
 
@@ -77,6 +84,7 @@ export const IdentityInformation = () => {
           sx={{
             width: 669,
             borderLeft: "0.5px solid rgb(0 0 0 / 12%)",
+            height: 245,
           }}
         >
           {/* <Box
@@ -111,25 +119,32 @@ export const IdentityInformation = () => {
                 gap: "25px",
               }}
             >
-              <Typography
+              <Box
                 sx={{
-                  fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "10px",
-                  color: themeColors["#2980BA"],
                   display: "flex",
                   flexDirection: "column",
-                  gap: "40px",
+                  gap: "28px",
                   maxWidth: "118px",
                   height: "100%",
                 }}
               >
-                Photo ID
                 <Typography
-                  component={"span"}
+                  sx={{
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    fontSize: "10px",
+                    color: themeColors["#2980BA"],
+                    height: 35,
+                    textAlign: "center",
+                  }}
+                >
+                  Photo ID
+                </Typography>
+                <Typography
                   sx={{
                     fontFamily: themeFonts["Poppins-SemiBold"],
-                    fontSize: "15px",
+                    fontSize: "10px",
                     color: themeColors["#000000"],
+                    textAlign: "center",
                   }}
                 >
                   <Box
@@ -146,143 +161,163 @@ export const IdentityInformation = () => {
                     <ProfilePicture />
                   </Box>
                 </Typography>
-              </Typography>
-              <Typography
+              </Box>
+              <Box
                 sx={{
-                  fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "10px",
-                  color: themeColors["#2980BA"],
                   display: "flex",
                   flexDirection: "column",
-                  gap: "40px",
+                  gap: "28px",
                   maxWidth: "118px",
                   height: "100%",
                 }}
               >
-                Name
                 <Typography
-                  component={"span"}
+                  sx={{
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    fontSize: "10px",
+                    color: themeColors["#2980BA"],
+                    height: 35,
+                    textAlign: "center",
+                  }}
+                >
+                  Name
+                </Typography>
+                <Typography
                   sx={{
                     fontFamily: themeFonts["Poppins-SemiBold"],
                     fontSize: "10px",
                     color: themeColors["#000000"],
-                    display: "flex",
-                    alignItems: "center",
-                    height: "100%",
+                    textAlign: "center",
                   }}
                 >
                   Udyam Kumar
                 </Typography>
-              </Typography>{" "}
-              <Typography
+              </Box>
+              <Box
                 sx={{
-                  fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "10px",
-                  color: themeColors["#2980BA"],
                   display: "flex",
                   flexDirection: "column",
-                  gap: "40px",
+                  gap: "28px",
                   maxWidth: "118px",
                   height: "100%",
                 }}
               >
-                Date Of Birth
                 <Typography
-                  component={"span"}
+                  sx={{
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    fontSize: "10px",
+                    color: themeColors["#2980BA"],
+                    height: 35,
+                    textAlign: "center",
+                  }}
+                >
+                  Date Of Birth
+                </Typography>
+                <Typography
                   sx={{
                     fontFamily: themeFonts["Poppins-SemiBold"],
                     fontSize: "10px",
                     color: themeColors["#000000"],
-                    display: "flex",
-                    alignItems: "center",
-                    height: "100%",
+                    textAlign: "center",
                   }}
                 >
                   02/10/1990
                 </Typography>
-              </Typography>
-              <Typography
+              </Box>
+              <Box
                 sx={{
-                  fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "10px",
-                  color: themeColors["#2980BA"],
                   display: "flex",
                   flexDirection: "column",
-                  gap: "40px",
+                  gap: "28px",
                   maxWidth: "118px",
                   height: "100%",
                 }}
               >
-                Parent's Name
                 <Typography
-                  component={"span"}
+                  sx={{
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    fontSize: "10px",
+                    color: themeColors["#2980BA"],
+                    height: 35,
+                    textAlign: "center",
+                  }}
+                >
+                  Parent's Name
+                </Typography>
+                <Typography
                   sx={{
                     fontFamily: themeFonts["Poppins-SemiBold"],
                     fontSize: "10px",
                     color: themeColors["#000000"],
-                    display: "flex",
-                    alignItems: "center",
-                    height: "100%",
+                    textAlign: "center",
                   }}
                 >
                   Ramanuj Sharma
                 </Typography>
-              </Typography>
-              <Typography
+              </Box>
+              <Box
                 sx={{
-                  fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "10px",
-                  color: themeColors["#2980BA"],
                   display: "flex",
                   flexDirection: "column",
-                  gap: "40px",
+                  gap: "28px",
                   maxWidth: "118px",
                   height: "100%",
                 }}
               >
-                Permanent Account Number
                 <Typography
-                  component={"span"}
+                  sx={{
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    fontSize: "10px",
+                    color: themeColors["#2980BA"],
+                    height: 35,
+                    textAlign: "center",
+                  }}
+                >
+                  Permanent Account Number
+                </Typography>
+                <Typography
                   sx={{
                     fontFamily: themeFonts["Poppins-SemiBold"],
                     fontSize: "10px",
                     color: themeColors["#000000"],
-                    display: "flex",
-                    alignItems: "center",
-                    height: "100%",
+                    textAlign: "center",
                   }}
                 >
                   xxxxxxxxxxx
                 </Typography>
-              </Typography>
-              <Typography
+              </Box>
+              <Box
                 sx={{
-                  fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "10px",
-                  color: themeColors["#2980BA"],
                   display: "flex",
                   flexDirection: "column",
-                  gap: "40px",
+                  gap: "28px",
                   maxWidth: "118px",
                   height: "100%",
                 }}
               >
-                Address Proof
                 <Typography
-                  component={"span"}
+                  sx={{
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    fontSize: "10px",
+                    color: themeColors["#2980BA"],
+                    height: 35,
+                    textAlign: "center",
+                  }}
+                >
+                  Address Proof
+                </Typography>
+                <Typography
                   sx={{
                     fontFamily: themeFonts["Poppins-SemiBold"],
                     fontSize: "10px",
                     color: themeColors["#000000"],
-                    display: "flex",
-                    alignItems: "center",
-                    height: "100%",
+                    textAlign: "center",
                   }}
                 >
                   Cecilia Chapman 711-2880 Nulla St. Mankato Mississippi 96522
                   (257) 563-7401
                 </Typography>
-              </Typography>
+              </Box>
             </Box>
             <Divider
               sx={{

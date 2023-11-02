@@ -7,6 +7,7 @@ import { PerformancePage } from "../about-me/performance-section/performance-pag
 import { useState } from "react";
 import { getStyles } from "../quick-access/todays-leaves-details";
 import { SummarySection } from "./summary-section/summary-section";
+import { MyPayPage } from "./my-pay-sections/my-pay-page";
 
 export const MyFinancesPage = () => {
   const [value, setValue] = useState("Summary");
@@ -41,7 +42,7 @@ export const MyFinancesPage = () => {
               display: "flex",
               gap: "10px",
               alignItems: "center",
-              maxHeight: "17px",
+              maxHeight: "29px",
             }}
           >
             {FinanceTabs.map((val) => (
@@ -66,7 +67,7 @@ export const MyFinancesPage = () => {
               value1={value}
             >
               {value === "Summary" && <SummarySection />}
-              {value === "Attendance" && <AttendancePage />}
+              {value === "My Pay" && <MyPayPage />}
               {value === "Performance" && <PerformancePage />}
             </CustomTabsPanel>
           ))}

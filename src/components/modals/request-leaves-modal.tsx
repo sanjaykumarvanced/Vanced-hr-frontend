@@ -143,7 +143,7 @@ export const RequestLeavesDialog = (props: any) => {
             alignItems: "flex-start",
           }}
         >
-          <CustomLabel label={"fghfh"} fontSize="12px" />
+          <CustomLabel label={"Reason"} fontSize="12px" />
           <TextField
             multiline
             rows={3.4}

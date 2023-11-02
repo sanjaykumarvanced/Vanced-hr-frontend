@@ -43,7 +43,7 @@ export const CustomDatePicker = ({
         slotProps={{
           textField: {
             InputProps: {
-              placeholder: `${placeholder}`,
+              placeholder: `${placeholder ? placeholder : ""}`,
             },
           },
         }}

@@ -53,7 +53,7 @@ export const LeaveRequestTable = () => {
     setIsOpen(true);
   };
 
-  console.log(data, Id);
+  console.log(data, Id, "leave-request");
 
   if (!data) {
     return null;
@@ -69,7 +69,10 @@ export const LeaveRequestTable = () => {
     approvedBy: item.approvedBy,
     status: item.status,
     employerImage: item.approvedBy.employerImage.path,
+    employerFirstName: item.approvedBy.employer.firstName,
+    employerLastName: item.approvedBy.employer.lastName,
   }));
+
   return (
     <>
       <Grid
@@ -237,7 +240,7 @@ export const LeaveRequestTable = () => {
                         color: themeColors["#000000"],
                       }}
                     >
-                      {params.row.employerName}
+                      {params.row.employerFirstName} {params.row.employerLastName}
                     </Typography>
                   </Box>
                 ) : (

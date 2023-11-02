@@ -45,3 +45,4 @@ export { ReactComponent as DownArrowIcon4 } from "../assets/images/svg/down-arro
 export { ReactComponent as EmployeesSvg } from "../assets/images/svg/employees-svg.svg";
 export { ReactComponent as ArrivalClock } from "../assets/images/svg/arrival-clock.svg";
 export { ReactComponent as PayrollSummarySvg } from "../assets/images/svg/payroll-summary-svg.svg";
+export { ReactComponent as FlagIconSvg } from "../assets/images/svg/flag-icon-svg.svg";

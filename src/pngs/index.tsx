@@ -4,6 +4,7 @@ import HolidaysBackground from "../assets/images/png/holidays-background.png";
 import Profile from "../assets/images/png/profile.png";
 import WorkingImg from "../assets/images/png/working-img.png";
 import RemoteClock from "../assets/images/png/remote-clock.png";
+import CompensationImg from "../assets/images/png/Compensation.png";
 export {
   LogBackground,
   Inbox,
@@ -11,4 +12,5 @@ export {
   Profile,
   WorkingImg,
   RemoteClock,
+  CompensationImg
 };

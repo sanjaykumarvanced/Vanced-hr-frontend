@@ -32,3 +32,10 @@ export const FinanceTabs = [
   { label: "My Pay ", value: "My Pay" },
   { label: "Manage Tax ", value: "Manage Tax" },
 ];
+
+
+export const MyPayTabs = [
+  { label: "My Salary ", value: "My Salary" },
+  { label: "Pay Slips ", value: "Pay Slips" },
+  { label: "Income Tax ", value: "Income Tax" },
+];

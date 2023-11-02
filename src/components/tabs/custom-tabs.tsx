@@ -2,6 +2,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Box, Tab } from "@mui/material";
+import { themeColors } from "../../configs";
 interface CustomSelectProps {
   label?: string;
   value?: any;
@@ -18,7 +19,6 @@ export const CustomTabs = ({
   value1,
   sx,
 }: CustomSelectProps) => {
-
   return (
     <TabContext value={value1}>
       <Box>
@@ -52,6 +52,36 @@ export const CustomTabsPanel = ({
       <TabPanel value={value} sx={sx}>
         {children}
       </TabPanel>
+    </TabContext>
+  );
+};
+
+export const CustomTab = ({
+  label,
+  value,
+  onChange,
+  value1,
+  sx,
+}: CustomSelectProps) => {
+  return (
+    <TabContext value={value1}>
+      <Box>
+        <TabList
+          onChange={(event, newValue) => onChange(newValue)}
+          sx={{
+            "& span.MuiTabs-indicator": {
+              backgroundColor: themeColors["#0C345D"],
+            },
+            "& .MuiTabs-flexContainer": {
+              display: "flex",
+              gap: "10px !important",
+            },
+            alignItems: "center",
+          }}
+        >
+          <Tab label={label} value={value} sx={sx} />
+        </TabList>
+      </Box>
     </TabContext>
   );
 };

@@ -41,7 +41,7 @@ export const AboutMePage = () => {
               display: "flex",
               gap: "10px",
               alignItems: "center",
-              maxHeight: "17px",
+              maxHeight: "29px",
             }}
           >
             {AboutMeTabs.map((val) => (
