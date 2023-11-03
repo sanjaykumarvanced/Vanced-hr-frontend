@@ -126,7 +126,6 @@ export const LeaveRequestTable = () => {
           >
             <SingleInputDateRangePicker placeholder={"Jan 2023 - Dec 2023"} />
             <Button
-              variant="contained"
               sx={{
                 height: 39,
                 borderRadius: "6px",

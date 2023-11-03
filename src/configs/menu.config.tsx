@@ -1,15 +1,15 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 import {
   OrgIconSvg,
   TeamIconSvg,
-
   FinanceIconSvg,
   HomeIconSvg,
   InboxIconSvg,
   UserIcon,
-} from '../svgs';
-import { ROUTES } from '../components/consts/routes.consts';
-
+  ProfileTabIcon,
+  AccountSettingsTabIcon,
+} from "../svgs";
+import { ROUTES } from "../components/consts/routes.consts";
 
 export interface IMenuList {
   icon?: ReactNode;
@@ -20,64 +20,85 @@ export interface IMenuList {
 export const sidebarMenuConfig = [
   {
     icon: <HomeIconSvg />,
-    title: 'Home',
+    title: "Home",
     route: ROUTES.HOME,
   },
   {
     icon: <UserIcon />,
-    title: 'Me',
+    title: "Me",
     route: ROUTES.ME,
   },
   {
     icon: <InboxIconSvg />,
-    title: 'Inbox',
+    title: "Inbox",
     route: ROUTES.INBOX,
   },
   {
     icon: <TeamIconSvg />,
-    title: 'My Team',
+    title: "My Team",
     route: ROUTES.MY_TEAM,
   },
   {
     icon: <FinanceIconSvg />,
-    title: 'My Finances',
+    title: "My Finances",
     route: ROUTES.MY_FINANCES,
   },
   {
     icon: <OrgIconSvg />,
-    title: 'Org',
+    title: "Org",
     route: ROUTES.ORG,
-  }
+  },
+  {
+    icon: <ProfileTabIcon />,
+    title: "Profile",
+    route: ROUTES.PROFILE,
+  },
+  {
+    icon: <AccountSettingsTabIcon />,
+    title: "Account Settings",
+    route: ROUTES.ACCOUNTS_SETTING,
+  },
 ];
 export const sidebarMenuButtonConfig = [
   {
     icon: <HomeIconSvg />,
-    title: '',
+    title: "",
     route: ROUTES.HOME,
   },
   {
     icon: <UserIcon />,
-    title: '',
+    title: "",
     route: ROUTES.ME,
   },
   {
     icon: <InboxIconSvg />,
-    title: '',
+    title: "",
     route: ROUTES.INBOX,
   },
   {
     icon: <TeamIconSvg />,
-    title: '',
+    title: "",
     route: ROUTES.MY_TEAM,
   },
   {
     icon: <FinanceIconSvg />,
-    title: '',
+    title: "",
     route: ROUTES.MY_FINANCES,
   },
   {
     icon: <OrgIconSvg />,
-    title: '',
+    title: "",
     route: ROUTES.ORG,
+  },
+
+  {
+    icon: <ProfileTabIcon />,
+    title: "",
+    route: ROUTES.PROFILE,
+  },
+  {
+    icon: <AccountSettingsTabIcon />,
+    title: "",
+    route: ROUTES.ACCOUNTS_SETTING,
   },
 ];

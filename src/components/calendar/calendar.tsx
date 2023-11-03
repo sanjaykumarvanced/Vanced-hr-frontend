@@ -37,7 +37,7 @@ export const SingleInputDateRangePicker = ({
           textField: {
             InputProps: {
               endAdornment: <CalenderIcon1Svg />,
-              placeholder: `${placeholder}`,
+              placeholder: `${placeholder ? placeholder : " "}`,
             },
           },
         }}
@@ -47,7 +47,7 @@ export const SingleInputDateRangePicker = ({
             fontSize: "15px",
             fontFamily: themeFonts["Poppins-SemiBold"],
             height: "39px",
-            width: "196px",
+            width: "230px",
             color: themeColors["#0C345D"],
           },
           "& input": {

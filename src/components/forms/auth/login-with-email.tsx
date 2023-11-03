@@ -199,7 +199,6 @@ export const LoginForm = forwardRef(
             <Button
               type="submit"
               fullWidth
-              variant="contained"
               disabled={loading}
               sx={{
                 height: '46px',
@@ -272,7 +271,6 @@ export const LoginForm = forwardRef(
               <Grid item xs={6}>
                 <Button
                   fullWidth
-                  variant="contained"
                   disabled={loading}
                   sx={{
                     height: '47px',
@@ -304,7 +302,6 @@ export const LoginForm = forwardRef(
               <Grid item xs={6}>
                 <Button
                   fullWidth
-                  variant="contained"
                   disabled={loading}
                   sx={{
                     height: '47px',
@@ -349,7 +346,6 @@ export const LoginForm = forwardRef(
               <Grid item xs={6}>
                 <Button
                   fullWidth
-                  variant="contained"
                   disabled={loading}
                   sx={{
                     height: '47px',
@@ -381,7 +377,6 @@ export const LoginForm = forwardRef(
               <Grid item xs={6}>
                 <Button
                   fullWidth
-                  variant="contained"
                   disabled={loading}
                   sx={{
                     height: '47px',

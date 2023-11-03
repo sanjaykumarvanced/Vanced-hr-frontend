@@ -43,7 +43,6 @@ export const Salary = () => {
               Current Compensation
             </Typography>
             <Button
-              variant="contained"
               sx={{
                 height: 29,
                 borderRadius: "3px",
@@ -52,9 +51,6 @@ export const Salary = () => {
                 fontSize: "10px",
                 color: themeColors["#0C345D"],
                 paddingX: "13px",
-                "&:hover": {
-                  backgroundColor: "rgb(21 94 158)",
-                },
               }}
             >
               Monthly PayCycle

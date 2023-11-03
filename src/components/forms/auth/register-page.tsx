@@ -51,7 +51,6 @@ export const RegisterForm = ({ toggleForm }: { toggleForm?: any }) => {
             <Button
               type="submit"
               fullWidth
-              variant="contained"
               disabled={loading}
               sx={{
                 height: '45px',
@@ -79,7 +78,6 @@ export const RegisterForm = ({ toggleForm }: { toggleForm?: any }) => {
             <Button
               type="submit"
               fullWidth
-              variant="contained"
               disabled={loading}
               sx={{
                 height: '45px',
@@ -139,7 +137,6 @@ export const RegisterForm = ({ toggleForm }: { toggleForm?: any }) => {
           <Button
             type="submit"
             fullWidth
-            variant="contained"
             disabled={loading}
             sx={{
               height: '45px',

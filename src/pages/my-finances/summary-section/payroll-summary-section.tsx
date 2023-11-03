@@ -94,7 +94,6 @@ export const PayrollSummarySection = () => {
             Loss of Pay : 0
           </Typography>
           <Button
-            variant="contained"
             sx={{
               height: 39,
               borderRadius: "6px",

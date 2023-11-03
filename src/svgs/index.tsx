@@ -46,3 +46,5 @@ export { ReactComponent as EmployeesSvg } from "../assets/images/svg/employees-s
 export { ReactComponent as ArrivalClock } from "../assets/images/svg/arrival-clock.svg";
 export { ReactComponent as PayrollSummarySvg } from "../assets/images/svg/payroll-summary-svg.svg";
 export { ReactComponent as FlagIconSvg } from "../assets/images/svg/flag-icon-svg.svg";
+export { ReactComponent as ProfileTabIcon } from "../assets/images/svg/Profile-Tab-Icon.svg";
+export { ReactComponent as AccountSettingsTabIcon } from "../assets/images/svg/Account-settings-tab-icon.svg";

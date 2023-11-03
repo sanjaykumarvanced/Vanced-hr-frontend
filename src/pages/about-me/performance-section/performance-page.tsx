@@ -32,7 +32,6 @@ export const PerformancePage = () => {
             }}
           >
             <Button
-              variant="contained"
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
                 fontSize: "10px",

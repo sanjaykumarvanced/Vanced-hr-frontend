@@ -137,6 +137,7 @@ export const LeaveHistory = () => {
                           color: themeColors["#0C345D"],
                           minWidth: "20px",
                           margin: 0,
+                          paddingX: "4px",
                         }}
                       >
                         {leaveDate}

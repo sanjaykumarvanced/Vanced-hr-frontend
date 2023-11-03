@@ -70,7 +70,7 @@ export const CustomDatePicker = ({
         }}
         showDaysOutsideCurrentMonth={true}
         dayOfWeekFormatter={customDayOfWeekFormatter}
-        format={"DD/MM/YY"}
+        format={"MM/YY"}
       />
     </LocalizationProvider>
   );

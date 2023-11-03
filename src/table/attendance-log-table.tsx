@@ -121,7 +121,6 @@ export const AttendanceLogTable = () => {
             }}
           >
             <Button
-              variant="contained"
               sx={{
                 height: 39,
                 borderRadius: "6px",
@@ -129,9 +128,6 @@ export const AttendanceLogTable = () => {
                 fontFamily: themeFonts["Poppins-SemiBold"],
                 fontSize: "15px",
                 color: themeColors["#0C345D"],
-                "&:hover": {
-                  backgroundColor: "rgb(21 94 158)",
-                },
               }}
             >
               Shift Schedule

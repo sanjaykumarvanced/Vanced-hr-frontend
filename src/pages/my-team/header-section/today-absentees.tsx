@@ -83,6 +83,7 @@ export const TodayAbsentees = () => {
             fontFamily: themeFonts["Poppins-SemiBold"],
             color: themeColors["#0C345D"],
             minWidth: "40px",
+            paddingX: "4px",
           }}
         >
           {today}

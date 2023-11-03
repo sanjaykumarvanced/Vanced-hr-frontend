@@ -22,7 +22,7 @@ export const getStyles = (TodaysLeavesDetails?: any) => {
       paddingY: 0,
       borderRadius: "3px",
       fontFamily: themeFonts["Poppins-SemiBold"],
-      fontSize: "10px",
+      fontSize: "12px",
       color: themeColors["#0C345D"],
       background: themeColors["#E1E1E1"],
       lineHeight: "15px",
@@ -30,6 +30,7 @@ export const getStyles = (TodaysLeavesDetails?: any) => {
         background: themeColors["#0C345D"],
         color: themeColors["#FFFFFF"],
       },
+      textTransform: "none",
     },
     tabPanel: {
       padding: 0,
@@ -148,6 +149,7 @@ export const TodaysLeavesDetails = () => {
                 fontFamily: themeFonts["Poppins-SemiBold"],
                 color: themeColors["#0C345D"],
                 minWidth: "40px",
+                paddingX: "4px",
               }}
             >
               {today}

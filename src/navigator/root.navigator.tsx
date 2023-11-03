@@ -36,6 +36,8 @@ export const RootNavigator = () => {
           <Route path={ROUTES.MY_TEAM} element={<MyTeamPage />} />
           <Route path={ROUTES.MY_FINANCES} element={<MyFinancesPage />} />
           <Route path={ROUTES.ORG} element={<OrgPage />} />
+          <Route path={ROUTES.PROFILE} element={<>PROFILE</>} />
+          <Route path={ROUTES.ACCOUNTS_SETTING} element={<>cccc</>} />
           <Route
             path={ROUTES.LOGIN_PAGE}
             element={

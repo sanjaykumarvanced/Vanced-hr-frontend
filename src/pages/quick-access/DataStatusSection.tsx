@@ -188,7 +188,6 @@ export const DataStatusSection = () => {
             }}
           >
             <Button
-              variant="contained"
               sx={{
                 height: 39,
                 borderRadius: "6px",

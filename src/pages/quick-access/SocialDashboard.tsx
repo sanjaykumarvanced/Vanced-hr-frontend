@@ -10,14 +10,15 @@ import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
 export const getStyles = () => {
   return {
     socialButtons: {
-      minHeight: "17px",
+      minHeight: "20px",
       minWidth: "0px",
       paddingY: 0,
       paddingX: "9px",
-      borderRadius: "9px",
+      borderRadius: "10px",
       fontFamily: themeFonts["Poppins-SemiBold"],
-      fontSize: "10px",
-     lineHeight: "15px",
+      fontSize: "12px",
+      lineHeight: "15px",
+      textTransform: "none",
       color: "rgb(0 0 0 / 60%)",
       "&.Mui-selected": {
         background: themeColors["#0C345D"],

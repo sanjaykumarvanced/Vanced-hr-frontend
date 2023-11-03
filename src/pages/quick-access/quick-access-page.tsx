@@ -51,7 +51,6 @@ export const QuickAccessPage = () => {
             Quick Access
           </Typography>
           {/* <Button
-            variant="contained"
             sx={{
               fontFamily: themeFonts["Poppins-Regular"],
               fontSize: "15px",

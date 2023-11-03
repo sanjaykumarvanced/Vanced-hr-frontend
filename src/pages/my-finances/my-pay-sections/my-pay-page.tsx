@@ -1,9 +1,8 @@
-import { Grid, Box, Tab } from "@mui/material";
+import { Grid, Box} from "@mui/material";
 import { useState } from "react";
-import { FinanceTabs, MyPayTabs } from "../../../components/consts/consts";
+import {  MyPayTabs } from "../../../components/consts/consts";
 import {
   CustomTab,
-  CustomTabs,
   CustomTabsPanel,
 } from "../../../components/tabs/custom-tabs";
 import { themeColors, themeFonts } from "../../../configs";
