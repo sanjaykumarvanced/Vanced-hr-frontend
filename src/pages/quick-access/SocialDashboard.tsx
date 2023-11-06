@@ -2,7 +2,7 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
 import { HolidaysBackground, Inbox } from "../../pngs";
 import { useGetHolidaysDetailsQuery } from "../../components/apis/holidaysDetailsApi";
-import { AddNewStudentDialog } from "../../components/modals/view-all-modal";
+import { ViewAllHolidaysDialog } from "../../components/modals/view-all-modal";
 import { useState } from "react";
 import { SocialTabs } from "../../components/consts/consts";
 import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
@@ -211,7 +211,7 @@ const SocialDashboard = () => {
               fontFamily: themeFonts["Poppins-Regular"],
               fontSize: "12px",
               color: themeColors["#FFFFFF"],
-              height: 13,
+              height: 15,
               padding: 0,
             }}
             onClick={handleOpen}
@@ -271,7 +271,7 @@ const SocialDashboard = () => {
         </Box>
       </Grid>
       {isOpen && (
-        <AddNewStudentDialog open={isOpen} onClose={handleClose} data={data} />
+        <ViewAllHolidaysDialog open={isOpen} onClose={handleClose} data={data} />
       )}
     </>
   );

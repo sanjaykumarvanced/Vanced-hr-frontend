@@ -23,8 +23,8 @@ interface CustomSelectProps {
   value?: string;
   onChange?: (value: string) => void;
   errorStatus?: string;
-  dark?: boolean;
   defaultValue?: any;
+  name?: any;
 }
 
 export const CustomSelect = ({
@@ -34,7 +34,7 @@ export const CustomSelect = ({
   value,
   onChange,
   errorStatus,
-  dark,
+  name,
   defaultValue,
 }: CustomSelectProps) => {
   const [selectValue, setSelectValue] = useState(value ?? "");
@@ -53,6 +53,7 @@ export const CustomSelect = ({
         onChange={handleChange}
         IconComponent={() => <DownArrowIcon2 />}
         defaultValue={defaultValue ? defaultValue : ""}
+        name={name}
         sx={{
           height: 39,
           borderRadius: 2,

@@ -1,19 +1,25 @@
-import { Box, InputBase, InputProps, TextFieldProps, Typography } from '@mui/material';
+import {
+  Box,
+  InputBase,
+  InputProps,
+  TextFieldProps,
+  Typography,
+} from "@mui/material";
 
-import { ReactNode } from 'react';
-import { themeColors, themeFonts } from '../../configs';
-import { ErrorStatusMessage } from './error-status-message';
+import { ReactNode } from "react";
+import { themeColors, themeFonts } from "../../configs";
+import { ErrorStatusMessage } from "./error-status-message";
 
 interface CustomFilledInputProps extends InputProps {
   label?: string;
   placeholder?: string;
-  value?: string;
+  value?: any;
   errorStatus?: string;
   disableValue?: boolean;
   disabled?: boolean;
   titleComponent?: ReactNode;
   formatValue?: (value: string) => string;
-  onChangeValue?: (value: string) => void;
+  onChangeValue?: (e: string) => void;
   textFieldProps?: TextFieldProps;
   direction?: string;
   height?: string;
@@ -27,11 +33,12 @@ interface CustomFilledInputProps extends InputProps {
   Color?: any;
   alignItems?: any;
   marginTop?: any;
+  onBlur?: any;
 }
 export const CustomFilledInput = ({
   label,
   placeholder = label,
-  value = '',
+  value = "",
   onChangeValue,
   errorStatus,
   disableValue,
@@ -50,23 +57,24 @@ export const CustomFilledInput = ({
   borderRadius,
   alignItems,
   marginTop,
-  direction = 'ltr',
+  onBlur,
+  direction = "ltr",
   ...rest
 }: CustomFilledInputProps) => {
   return (
-    <Box sx={{ width: '100%', paddingTop: paddingTop ? { paddingTop } : '' }}>
+    <Box sx={{ width: "100%", paddingTop: paddingTop ? { paddingTop } : "" }}>
       {label && (
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
+            display: "flex",
+            justifyContent: "space-between",
           }}
         >
           <Typography
             sx={{
-              fontFamily: themeFonts['Poppins-SemiBold'],
-              fontWeight: fontWeight ? { fontWeight } : '600',
-              color:  themeColors['#000000'],
+              fontFamily: themeFonts["Poppins-SemiBold"],
+              fontWeight: fontWeight ? { fontWeight } : "600",
+              color: themeColors["#000000"],
               fontSize: fontSize ? { fontSize } : 16,
             }}
           >
@@ -78,18 +86,20 @@ export const CustomFilledInput = ({
 
       <Box
         sx={{
-          display: 'flex',
-          alignItems: alignItems ? { alignItems } : 'center',
-          fontFamily: themeFonts['Poppins-Regular'],
-          backgroundColor: backgroundColor ? { backgroundColor } : '',
-          color: themeColors['#323B4B'],
-          border: border ? { border } : '1px solid #1C223E6E',
+          display: "flex",
+          alignItems: alignItems ? { alignItems } : "center",
+          fontFamily: themeFonts["Poppins-Regular"],
+          backgroundColor: backgroundColor ? { backgroundColor } : "",
+          color: themeColors["#323B4B"],
+          border: border ? { border } : "1px solid #1C223E6E",
           fontSize: 14,
-          borderRadius: borderRadius ? { borderRadius } : '5px',
+          borderRadius: borderRadius ? { borderRadius } : "5px",
           paddingX: 1.5,
           height: height ? { height } : 45,
           marginTop: 1,
-          boxShadow: `${!!errorStatus && '0 0 0 2px ' + themeColors['#E11900']}`,
+          boxShadow: `${
+            !!errorStatus && "0 0 0 2px " + themeColors["#E11900"]
+          }`,
         }}
       >
         <InputBase
@@ -97,25 +107,25 @@ export const CustomFilledInput = ({
           placeholder={placeholder}
           disabled={disabled}
           sx={{
-            fontFamily: themeFonts['Poppins-Regular'],
-            color: color ? { color } : `${themeColors['rgb(0 0 0 / 50%)']} `,
+            fontFamily: themeFonts["Poppins-Regular"],
+            color: color ? { color } : `${themeColors["rgb(0 0 0 / 50%)"]} `,
             fontSize: 12,
             marginLeft: 0.5,
-            marginTop: marginTop ? { marginTop } : '',
+            marginTop: marginTop ? { marginTop } : "",
             flex: 1,
             direction: direction,
-            '& .MuiInputBase-input': {
-              fontFamily: themeFonts['Poppins-Regular'],
-              color: color ? { color } : `${themeColors['rgb(0 0 0 / 50%)']}`,
+            "& .MuiInputBase-input": {
+              fontFamily: themeFonts["Poppins-Regular"],
+              color: color ? { color } : `${themeColors["rgb(0 0 0 / 50%)"]}`,
               fontSize: 13,
             },
           }}
+          // onBlur={(e) => {
+          //   if (onBlur) onBlur(e);
+          // }}
           value={!disableValue ? formatValue(value) : undefined}
-          onChange={(e) => {
-            if (onChangeValue) onChangeValue(e.target.value);
-          }}
-          onBlur={() => {
-            if (onChangeValue) onChangeValue(value.trim());
+          onChange={(e: any) => {
+            if (onChangeValue) onChangeValue(e);
           }}
           error={!!errorStatus}
           inputProps={{

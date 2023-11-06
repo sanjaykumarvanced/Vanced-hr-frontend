@@ -5,6 +5,7 @@ import "../../assets/components/styles.css";
 import { DatePicker } from "@mui/x-date-pickers";
 import { CustomLabel } from "../label";
 import { themeColors, themeFonts } from "../../configs";
+import { useState } from "react";
 
 export const CustomDatePicker = ({
   label,
@@ -13,6 +14,10 @@ export const CustomDatePicker = ({
   fontFamily,
   color,
   fontSize,
+  format,
+  value = "",
+  onChange,
+  name,
 }: {
   label?: any;
   width?: any;
@@ -20,6 +25,10 @@ export const CustomDatePicker = ({
   fontFamily?: keyof typeof themeFonts;
   color?: any;
   fontSize?: any;
+  format?: any;
+  value?: any;
+  onChange?: any;
+  name?: any;
 }) => {
   const customDayOfWeekFormatter = (dayAbbreviation: string) => {
     debugger;
@@ -32,6 +41,15 @@ export const CustomDatePicker = ({
     }
 
     return dayAbbreviation;
+  };
+
+  const [selectValue, setSelectValue] = useState(value ?? "");
+  const handleDateChange = (date: any) => {
+    // Update the selectValue state
+    setSelectValue(date);
+
+    // Call the provided onChange function if it exists
+    if (onChange) onChange(date);
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -47,6 +65,8 @@ export const CustomDatePicker = ({
             },
           },
         }}
+        onChange={handleDateChange} // Update Formik state
+        value={selectValue}
         sx={{
           "& .MuiInputBase-root.MuiOutlinedInput-root": {
             borderRadius: "5px",
@@ -70,7 +90,8 @@ export const CustomDatePicker = ({
         }}
         showDaysOutsideCurrentMonth={true}
         dayOfWeekFormatter={customDayOfWeekFormatter}
-        format={"MM/YY"}
+        format={`${format ? format : "MM/YY"}`}
+        // name={name}
       />
     </LocalizationProvider>
   );

@@ -1,8 +1,10 @@
-import { Box, Button, Divider, Grid, Typography} from "@mui/material";
+import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
 import Chart from "react-google-charts";
 import { useGetLeaveBalanceByIdQuery } from "../../components/apis/leaveBalanceApi";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { RequestLeavesDialog } from "../../components/modals/request-leaves-modal";
 
 export const pieLeaveOptions = {
   legend: "none",
@@ -37,7 +39,13 @@ export const pieData1 = [
 export const DataStatusSection = () => {
   const Id = useSelector((state: any) => state.authentication.user);
   const { data }: any = useGetLeaveBalanceByIdQuery({ id: Id });
-  console.log(data, Id);
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  const handleOpen = (data: any) => {
+    setIsOpen(true);
+  };
 
   return (
     <>
@@ -88,7 +96,7 @@ export const DataStatusSection = () => {
                 fontFamily: themeFonts["Poppins-Regular"],
                 fontSize: "12px",
                 color: themeColors["#000000"],
-                height: 13,
+                height: 20,
                 padding: 0,
               }}
             >
@@ -199,6 +207,7 @@ export const DataStatusSection = () => {
                   backgroundColor: "rgb(21 94 158)",
                 },
               }}
+              onClick={handleOpen}
             >
               Request Leaves
             </Button>
@@ -239,7 +248,7 @@ export const DataStatusSection = () => {
                 fontFamily: themeFonts["Poppins-Regular"],
                 fontSize: "12px",
                 color: themeColors["#000000"],
-                height: 13,
+                height: 20,
                 padding: 0,
               }}
             >
@@ -387,6 +396,9 @@ export const DataStatusSection = () => {
           </Box>
         </Grid>
       </Grid>
+      {isOpen && (
+        <RequestLeavesDialog open={isOpen} onClose={handleClose} data={data} />
+      )}
     </>
   );
 };

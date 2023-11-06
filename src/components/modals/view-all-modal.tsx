@@ -2,14 +2,16 @@ import {
   Box,
   Dialog,
   Divider,
+  IconButton,
   List,
   ListItem,
   ListItemText,
   Typography,
 } from "@mui/material";
 import { themeFonts, themeColors } from "../../configs";
+import { CloseIconSvg1 } from "../../svgs";
 
-export const AddNewStudentDialog = (props: any) => {
+export const ViewAllHolidaysDialog = (props: any) => {
   const { onClose, open, data } = props;
   console.log(data);
   const handleClose = () => {
@@ -28,6 +30,17 @@ export const AddNewStudentDialog = (props: any) => {
         },
       }}
     >
+      <IconButton
+        aria-label="close"
+        onClick={handleClose}
+        sx={{
+          position: "absolute",
+          right: 20,
+          top: 13,
+        }}
+      >
+        <CloseIconSvg1 />
+      </IconButton>
       <Typography
         sx={{
           fontFamily: themeFonts["Poppins-SemiBold"],

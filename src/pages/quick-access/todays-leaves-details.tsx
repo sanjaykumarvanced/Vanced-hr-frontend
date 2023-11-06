@@ -122,7 +122,6 @@ export const TodaysLeavesDetails = () => {
       <Divider sx={{ width: "100%" }} />
       {filteredLeaves && filteredLeaves.length > 0 ? (
         <>
-          {" "}
           <Box
             sx={{
               display: "flex",
@@ -299,10 +298,9 @@ export const TodaysLeavesDetails = () => {
         <Box
           sx={{
             display: "flex",
-            height: "100%",
+            height: "362px",
             alignItems: "center",
             justifyContent: "center",
-            paddingTop: "13px",
           }}
         >
           <Typography

@@ -8,16 +8,16 @@ import {
   InputAdornment,
   Link as MuiLink,
   Typography,
-} from '@mui/material';
-import { forwardRef, useImperativeHandle, useState } from 'react';
-import { themeColors, themeFonts } from '../../../configs';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '../../consts/routes.consts';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { CustomInputField } from '../../input/custom-input-field';
-import { CustomRadioButton } from '../../radioButton';
-import { ErrorStatusMessage } from '../../input/error-status-message';
+} from "@mui/material";
+import { forwardRef, useImperativeHandle, useState } from "react";
+import { themeColors, themeFonts } from "../../../configs";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../consts/routes.consts";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { CustomInputField } from "../../input/custom-input-field";
+import { CustomRadioButton } from "../../radioButton";
+import { ErrorStatusMessage } from "../../input/error-status-message";
 import {
   FacebookIconSvg,
   GoogleIconSvg,
@@ -25,10 +25,10 @@ import {
   LockIcon,
   TwitterIcon,
   UserIcon1,
-} from '../../../svgs';
-import { useSelector } from 'react-redux';
-import { selectAuthState } from '../../selectors';
-import { useLoginWithEmailHook } from './login-with-email.hook';
+} from "../../../svgs";
+import { useSelector } from "react-redux";
+import { selectAuthState } from "../../selectors";
+import { useLoginWithEmailHook } from "./login-with-email.hook";
 interface LoginWithEmailFormProps {
   next?: () => void;
   toggleForm?: any;
@@ -49,7 +49,7 @@ export const LoginForm = forwardRef(
           formManager.handleSubmit();
         },
       }),
-      [formManager],
+      [formManager]
     );
 
     return (
@@ -58,24 +58,28 @@ export const LoginForm = forwardRef(
           container
           spacing={3}
           sx={{
-            paddingY: '20px',
-            margin: '0px',
-            marginX: { xl: '76px', md: '12px', sm: '12px', xs: '12px' },
+            paddingY: "20px",
+            margin: "0px",
+            marginX: { xl: "76px", md: "12px", sm: "12px", xs: "12px" },
             width: {
-              xl: 'calc(100% - 151px)',
-              md: 'calc(100% - 25px)',
-              sm: 'calc(100% - 25px)',
-              xs: 'calc(100% - 25px)',
+              xl: "calc(100% - 151px)",
+              md: "calc(100% - 25px)",
+              sm: "calc(100% - 25px)",
+              xs: "calc(100% - 25px)",
             },
           }}
         >
-          <Grid item xs={12} sx={{ padding: '0 !important', marginBottom: '46px' }}>
+          <Grid
+            item
+            xs={12}
+            sx={{ padding: "0 !important", marginBottom: "46px" }}
+          >
             <Typography
               sx={{
-                fontFamily: themeFonts['Poppins-SemiBold'],
-                color: themeColors['#000000'],
+                fontFamily: themeFonts["Poppins-SemiBold"],
+                color: themeColors["#000000"],
                 fontSize: 30,
-                textAlign: 'center',
+                textAlign: "center",
               }}
             >
               Welcome back!
@@ -85,47 +89,48 @@ export const LoginForm = forwardRef(
             item
             xs={12}
             sx={{
-              padding: '0 !important',
-              display: 'flex',
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              marginBottom: '9px',
+              padding: "0 !important",
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              marginBottom: "9px",
             }}
           >
             <Typography
               sx={{
-                fontFamily: themeFonts['Poppins-SemiBold'],
-                color: themeColors['#007CFF'],
-                fontSize: '18px',
+                fontFamily: themeFonts["Poppins-SemiBold"],
+                color: themeColors["#007CFF"],
+                fontSize: "18px",
               }}
             >
               ADMIN SIGNIN
             </Typography>
             <Box
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <Typography
                 sx={{
-                  color: themeColors['#BFBFBF'],
-                  fontSize: '12px',
-                  fontFamily: themeFonts['Poppins-Regular'],
+                  color: themeColors["#BFBFBF"],
+                  fontSize: "12px",
+                  fontFamily: themeFonts["Poppins-Regular"],
                 }}
               >
                 OR Need an Account ?
                 <MuiLink
-                  component={Link}
-                  to={ROUTES.REGISTER}
-                  onClick={toggleForm}
+                  // component={Link}
+                  // to={ROUTES.REGISTER}
+                  // onClick={toggleForm}
                   sx={{
-                    textDecoration: 'none',
-                    fontFamily: themeFonts['Poppins-Regular'],
+                    textDecoration: "none",
+                    fontFamily: themeFonts["Poppins-Regular"],
                     fontSize: 12,
-                    marginLeft: '5px',
-                    color: themeColors['#007CFF'],
+                    marginLeft: "5px",
+                    color: themeColors["#007CFF"],
+                    cursor:'pointer'
                   }}
                 >
                   Sign Up
@@ -134,24 +139,31 @@ export const LoginForm = forwardRef(
             </Box>
           </Grid>
           <Grid item xs={12}>
-            <ErrorStatusMessage error={formManager.status?.incorrectCredentials} highlight />
+            <ErrorStatusMessage
+              error={formManager.status?.incorrectCredentials}
+              highlight
+            />
           </Grid>
-          <Grid item xs={12} sx={{ paddingLeft: '0px !Important' }}>
+          <Grid item xs={12} sx={{ paddingLeft: "0px !Important" }}>
             <CustomInputField
               autoFocus={true}
               type="email"
               placeholder="Username*"
               name="email"
               value={formManager.values.email}
-              onChangeValue={(value) => formManager.setFieldValue('email', value)}
-              error={formManager.touched.email && Boolean(formManager.errors.email)}
+              onChangeValue={(value) =>
+                formManager.setFieldValue("email", value)
+              }
+              error={
+                formManager.touched.email && Boolean(formManager.errors.email)
+              }
               helperText={formManager.touched.email && formManager.errors.email}
               titleComponent={<UserIcon1 />}
             />
           </Grid>
-          <Grid item xs={12} sx={{ paddingLeft: '0px !Important' }}>
+          <Grid item xs={12} sx={{ paddingLeft: "0px !Important" }}>
             <CustomInputField
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               titleComponent={<LockIcon />}
               endAdornment={
                 <InputAdornment position="end">
@@ -159,17 +171,17 @@ export const LoginForm = forwardRef(
                     {showPassword ? (
                       <VisibilityIcon
                         sx={{
-                          fill: 'rgb(0 0 0 / 26%)',
-                          height: '16px',
-                          width: '20px',
+                          fill: "rgb(0 0 0 / 26%)",
+                          height: "16px",
+                          width: "20px",
                         }}
                       />
                     ) : (
                       <VisibilityOffIcon
                         sx={{
-                          fill: 'rgb(0 0 0 / 26%)',
-                          height: '16px',
-                          width: '20px',
+                          fill: "rgb(0 0 0 / 26%)",
+                          height: "16px",
+                          width: "20px",
                         }}
                       />
                     )}
@@ -179,79 +191,107 @@ export const LoginForm = forwardRef(
               placeholder="Password*"
               name="password"
               value={formManager.values.password}
-              onChangeValue={(value) => formManager.setFieldValue('password', value)}
-              error={formManager.touched.password && Boolean(formManager.errors.password)}
-              helperText={formManager.touched.password && formManager.errors.password}
+              onChangeValue={(value) =>
+                formManager.setFieldValue("password", value)
+              }
+              error={
+                formManager.touched.password &&
+                Boolean(formManager.errors.password)
+              }
+              helperText={
+                formManager.touched.password && formManager.errors.password
+              }
             />
           </Grid>
-          <Grid item xs={12} sx={{ paddingTop: '15px !important', paddingLeft: '0px !Important' }}>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              paddingTop: "15px !important",
+              paddingLeft: "0px !Important",
+            }}
+          >
             <Box
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
               }}
             >
-              <CustomRadioButton label="Remember me" fontFamily="Poppins-SemiBold" />
+              <CustomRadioButton
+                label="Remember me"
+                fontFamily="Poppins-SemiBold"
+              />
             </Box>
           </Grid>
-          <Grid item xs={12} sx={{ paddingLeft: '0px !Important' }}>
+          <Grid item xs={12} sx={{ paddingLeft: "0px !Important" }}>
             <Button
               type="submit"
               fullWidth
               disabled={loading}
               sx={{
-                height: '46px',
-                background: themeColors['#007CFF'],
-                color: themeColors['#FFFFFF'],
-                fontSize: '18px',
-                fontFamily: themeFonts['Poppins-SemiBold'],
-                borderRadius: '5px',
-                boxShadow: '3px 3px 6px 0px rgb(0 0 0 / 36%)',
+                height: "46px",
+                background: themeColors["#007CFF"],
+                color: themeColors["#FFFFFF"],
+                fontSize: "18px",
+                fontFamily: themeFonts["Poppins-SemiBold"],
+                borderRadius: "5px",
+                boxShadow: "3px 3px 6px 0px rgb(0 0 0 / 36%)",
+                "&:hover": {
+                  background: "#0259d4d9",
+                  color: themeColors["#FFFFFF"],
+                },
               }}
             >
               {loading ? (
                 <CircularProgress
                   size={17}
                   sx={{
-                    color: 'inherit',
-                    fontWeight: '900',
+                    color: "inherit",
+                    fontWeight: "900",
                   }}
                 />
               ) : (
-                'LOGIN'
+                "LOGIN"
               )}
             </Button>
           </Grid>
-          <Grid item xs={12} sx={{ paddingTop: '16px !important', paddingLeft: '0px !Important' }}>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              paddingTop: "16px !important",
+              paddingLeft: "0px !Important",
+            }}
+          >
             <Box
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <MuiLink
                 component={Link}
-                to={''}
+                to={""}
                 sx={{
-                  textDecoration: 'none',
-                  fontFamily: themeFonts['Poppins-Regular'],
+                  textDecoration: "none",
+                  fontFamily: themeFonts["Poppins-Regular"],
                   fontSize: 12,
-                  color: themeColors['#FF0000'],
+                  color: themeColors["#FF0000"],
                 }}
               >
                 Forgot Password?
               </MuiLink>
             </Box>
           </Grid>
-          <Grid item xs={12} sx={{ paddingLeft: '0px !Important' }}>
-            <Divider sx={{ width: 147, paddingBottom: '16px' }}>
+          <Grid item xs={12} sx={{ paddingLeft: "0px !Important" }}>
+            <Divider sx={{ width: 147, paddingBottom: "16px" }}>
               <Typography
                 sx={{
-                  fontFamily: themeFonts['Poppins-Regular'],
-                  fontSize: '12px',
-                  color: themeColors['#000000'],
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "12px",
+                  color: themeColors["#000000"],
                 }}
               >
                 Or Login With
@@ -261,11 +301,11 @@ export const LoginForm = forwardRef(
               item
               xs={12}
               sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '16px',
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "16px",
               }}
             >
               <Grid item xs={6}>
@@ -273,16 +313,16 @@ export const LoginForm = forwardRef(
                   fullWidth
                   disabled={loading}
                   sx={{
-                    height: '47px',
-                    background: themeColors['rgb(54 96 160 / 14%)'],
-                    color: themeColors['#3660A0'],
-                    fontSize: '18px',
-                    fontFamily: themeFonts['Poppins-Regular'],
-                    '&:hover': {
-                      background: 'rgb(54 96 160 / 64%)',
-                      color: themeColors['#3660A0'],
+                    height: "47px",
+                    background: themeColors["rgb(54 96 160 / 14%)"],
+                    color: themeColors["#3660A0"],
+                    fontSize: "18px",
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    "&:hover": {
+                      background: "rgb(54 96 160 / 64%)",
+                      color: themeColors["#3660A0"],
                     },
-                    borderRadius: '5px',
+                    borderRadius: "5px",
                   }}
                   startIcon={<FacebookIconSvg />}
                 >
@@ -290,12 +330,12 @@ export const LoginForm = forwardRef(
                     <CircularProgress
                       size={17}
                       sx={{
-                        color: '#A8A8A8',
-                        fontWeight: '900',
+                        color: "#A8A8A8",
+                        fontWeight: "900",
                       }}
                     />
                   ) : (
-                    'Facebook'
+                    "Facebook"
                   )}
                 </Button>
               </Grid>
@@ -304,16 +344,16 @@ export const LoginForm = forwardRef(
                   fullWidth
                   disabled={loading}
                   sx={{
-                    height: '47px',
-                    background: themeColors['rgb(222 85 68 / 14%)'],
-                    color: themeColors['#DE5544'],
-                    fontSize: '18px',
-                    fontFamily: themeFonts['Poppins-Regular'],
-                    '&:hover': {
-                      background: 'rgb(222 85 68 / 64%)',
-                      color: themeColors['#DE5544'],
+                    height: "47px",
+                    background: themeColors["rgb(222 85 68 / 14%)"],
+                    color: themeColors["#DE5544"],
+                    fontSize: "18px",
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    "&:hover": {
+                      background: "rgb(222 85 68 / 64%)",
+                      color: themeColors["#DE5544"],
                     },
-                    borderRadius: '5px',
+                    borderRadius: "5px",
                   }}
                   startIcon={<GoogleIconSvg />}
                 >
@@ -321,12 +361,12 @@ export const LoginForm = forwardRef(
                     <CircularProgress
                       size={17}
                       sx={{
-                        color: 'inherit',
-                        fontWeight: '900',
+                        color: "inherit",
+                        fontWeight: "900",
                       }}
                     />
                   ) : (
-                    'Google'
+                    "Google"
                   )}
                 </Button>
               </Grid>
@@ -335,12 +375,12 @@ export const LoginForm = forwardRef(
               item
               xs={12}
               sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '16px',
-                paddingTop: '16px !important',
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "16px",
+                paddingTop: "16px !important",
               }}
             >
               <Grid item xs={6}>
@@ -348,16 +388,16 @@ export const LoginForm = forwardRef(
                   fullWidth
                   disabled={loading}
                   sx={{
-                    height: '47px',
-                    background: themeColors['rgb(2 109 157 / 14%)'],
-                    color: themeColors['#026D9D'],
-                    fontSize: '18px',
-                    fontFamily: themeFonts['Poppins-Regular'],
-                    '&:hover': {
-                      background: 'rgb(2 109 157 / 64%)',
-                      color: themeColors['#026D9D'],
+                    height: "47px",
+                    background: themeColors["rgb(2 109 157 / 14%)"],
+                    color: themeColors["#026D9D"],
+                    fontSize: "18px",
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    "&:hover": {
+                      background: "rgb(2 109 157 / 64%)",
+                      color: themeColors["#026D9D"],
                     },
-                    borderRadius: '5px',
+                    borderRadius: "5px",
                   }}
                   startIcon={<LinkedInIcon />}
                 >
@@ -365,12 +405,12 @@ export const LoginForm = forwardRef(
                     <CircularProgress
                       size={17}
                       sx={{
-                        color: '#A8A8A8',
-                        fontWeight: '900',
+                        color: "#A8A8A8",
+                        fontWeight: "900",
                       }}
                     />
                   ) : (
-                    'LinkedIn'
+                    "LinkedIn"
                   )}
                 </Button>
               </Grid>
@@ -379,16 +419,16 @@ export const LoginForm = forwardRef(
                   fullWidth
                   disabled={loading}
                   sx={{
-                    height: '47px',
-                    background: themeColors['rgb(40 170 225 / 14%)'],
-                    color: themeColors['#28AAE1'],
-                    fontSize: '18px',
-                    fontFamily: themeFonts['Poppins-Regular'],
-                    '&:hover': {
-                      background: 'rgb(40 170 225 / 64%)',
-                      color: themeColors['#28AAE1'],
+                    height: "47px",
+                    background: themeColors["rgb(40 170 225 / 14%)"],
+                    color: themeColors["#28AAE1"],
+                    fontSize: "18px",
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    "&:hover": {
+                      background: "rgb(40 170 225 / 64%)",
+                      color: themeColors["#28AAE1"],
                     },
-                    borderRadius: '5px',
+                    borderRadius: "5px",
                   }}
                   startIcon={<TwitterIcon />}
                 >
@@ -396,12 +436,12 @@ export const LoginForm = forwardRef(
                     <CircularProgress
                       size={17}
                       sx={{
-                        color: 'inherit',
-                        fontWeight: '900',
+                        color: "inherit",
+                        fontWeight: "900",
                       }}
                     />
                   ) : (
-                    'Twitter'
+                    "Twitter"
                   )}
                 </Button>
               </Grid>
@@ -410,5 +450,5 @@ export const LoginForm = forwardRef(
         </Grid>
       </form>
     );
-  },
+  }
 );
