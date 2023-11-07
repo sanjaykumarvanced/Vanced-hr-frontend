@@ -16,7 +16,9 @@ export const MyLeaveStats = () => {
   const handleChange = (event: any) => {
     setValue(event);
   };
-  const Id = useSelector((state: any) => state.authentication.user);
+
+  const user = useSelector((state: any) => state.authentication.user);
+  const Id = user.map((val: any) => val.id);
   const { data }: any = useGetLeaveStatsByIdQuery({ id: Id });
   console.log(data, Id);
   return (

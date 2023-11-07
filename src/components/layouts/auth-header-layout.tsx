@@ -10,6 +10,7 @@ import {
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { useState } from "react";
 import { ProfileMenu } from "../dropdown/profile-menu";
+import { useSelector } from "react-redux";
 
 export const AuthHeaderLayout = ({
   handleDrawerClose,
@@ -28,6 +29,7 @@ export const AuthHeaderLayout = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const user = useSelector((state: any) => state.authentication.user);
   return (
     <>
       <AppBar
@@ -108,16 +110,18 @@ export const AuthHeaderLayout = ({
                   paddingRight: "7px",
                 }}
               >
-                <Typography
-                  sx={{
-                    fontFamily: themeFonts["Poppins-Regular"],
-                    color: themeColors["#000000"],
-                    fontSize: "15px",
-                    textAlign: "center",
-                  }}
-                >
-                  Udyam Kumar
-                </Typography>
+                {user.map((val: any) => (
+                  <Typography
+                    sx={{
+                      fontFamily: themeFonts["Poppins-Regular"],
+                      color: themeColors["#000000"],
+                      fontSize: "15px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {val.firstName} {val.lastName}
+                  </Typography>
+                ))}
               </Box>
 
               <IconButton

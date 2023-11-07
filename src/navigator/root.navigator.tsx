@@ -15,6 +15,7 @@ import { selectAuthMe, selectIsLoggedIn } from "../components/selectors";
 import { useEffect } from "react";
 import UnauthLayout from "../components/layouts/unauth.layouts";
 import { QuickAccessPage } from "../pages/quick-access/quick-access-page";
+import { ApprovedLeaves } from "../table/approved-leaves";
 
 export const RootNavigator = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -38,6 +39,7 @@ export const RootNavigator = () => {
           <Route path={ROUTES.ORG} element={<OrgPage />} />
           <Route path={ROUTES.PROFILE} element={<>PROFILE</>} />
           <Route path={ROUTES.ACCOUNTS_SETTING} element={<>cccc</>} />
+          <Route path={ROUTES.APPROVED_LEAVES} element={<ApprovedLeaves />} />
           <Route
             path={ROUTES.LOGIN_PAGE}
             element={

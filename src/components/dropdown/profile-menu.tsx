@@ -18,6 +18,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useMyStore } from "../../store/reducer";
 import { authenticationSlice } from "../../store/slices/auth.slice";
+import { useSelector } from "react-redux";
 
 export const ProfileMenu = ({
   open,
@@ -35,6 +36,10 @@ export const ProfileMenu = ({
     store.dispatch(authenticationSlice.actions.logout());
     navigate("/auth");
   };
+
+  const user = useSelector((state: any) => state.authentication.user);
+  console.log(user);
+
   return (
     <>
       <Box>
@@ -94,18 +99,19 @@ export const ProfileMenu = ({
                   >
                     <ProfilePicture />
                   </Box>
-
-                  <Typography
-                    sx={{
-                      fontFamily: themeFonts["Poppins-Regular"],
-                      color: themeColors["#000000"],
-                      fontSize: "15px",
-                      textAlign: "center",
-                      paddingLeft: "14px",
-                    }}
-                  >
-                    Udyam Kumar
-                  </Typography>
+                  {user.map((val: any) => (
+                    <Typography
+                      sx={{
+                        fontFamily: themeFonts["Poppins-Regular"],
+                        color: themeColors["#000000"],
+                        fontSize: "15px",
+                        textAlign: "center",
+                        paddingLeft: "14px",
+                      }}
+                    >
+                      {val.firstName} {val.lastName}
+                    </Typography>
+                  ))}
                 </Box>
                 <Divider sx={{ width: "100%", paddingTop: "8px" }} />
                 <Box

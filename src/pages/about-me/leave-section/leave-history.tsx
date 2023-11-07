@@ -13,7 +13,8 @@ import { useSelector } from "react-redux";
 import { useGetLeaveHistoryByIdQuery } from "../../../components/apis/leaveHistoryApi";
 
 export const LeaveHistory = () => {
-  const Id = useSelector((state: any) => state.authentication.user);
+  const user = useSelector((state: any) => state.authentication.user);
+  const Id = user.map((val: any) => val.id);
   const { data }: any = useGetLeaveHistoryByIdQuery({ id: Id });
   console.log(data, Id);
   return (

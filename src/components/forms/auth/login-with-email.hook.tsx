@@ -42,7 +42,13 @@ export const useLoginWithEmailHook = ({ next }: { next: () => void }) => {
           authenticationSlice.actions.setCredentials({
             accessToken: response.token,
             user: values.email,
-            id: response.user._id,
+            admin: [
+              {
+                id: response.user._id,
+                firstName: response.user.firstName,
+                lastName: response.user.lastName,
+              },
+            ],
           })
         );
         console.log("Login successful:", response);

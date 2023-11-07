@@ -87,6 +87,9 @@ export const CustomDatePicker = ({
             marginTop: "0px",
             width: width ? { width } : "100%",
           },
+          "& fieldset.MuiOutlinedInput-notchedOutline": {
+            borderColor: "rgba(0, 0, 0, 0.23) !important",
+          },
         }}
         showDaysOutsideCurrentMonth={true}
         dayOfWeekFormatter={customDayOfWeekFormatter}

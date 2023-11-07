@@ -1,15 +1,14 @@
-
 export interface IAuthState {
   token: string;
   loading: boolean;
   me?: IAuthMe;
-  user?:IAuthMe
+  user?: any;
 }
 
 export interface IAuthMe {
   id: string;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   username: string;
   system_user_type: string;

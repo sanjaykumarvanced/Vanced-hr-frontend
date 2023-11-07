@@ -13,4 +13,5 @@ export const ROUTES = {
   PROFILE: "/profile",
   ACCOUNTS_SETTING: "/profile/accounts-settings",
   NEED_HELP: "/profile/my-profile",
+  APPROVED_LEAVES: "/approved-leaves",
 };

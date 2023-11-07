@@ -26,6 +26,14 @@ export type AuthLoginApiResponse = {
     dateOfJoining: any;
     designation: any;
     _id: any;
+    firstName: any;
+    gender: any;
+    lastName: any;
+    userName: any;
+    emergencyContact: any;
+    employeeId: any;
+    experience: any;
+    personalInformation: any;
   };
 };
 

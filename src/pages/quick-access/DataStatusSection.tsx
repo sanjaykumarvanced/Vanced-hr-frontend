@@ -19,7 +19,7 @@ export const pieLeaveOptions = {
   },
 };
 
-export const pieOptions1 = {
+export const pieOptions = {
   legend: "none",
   pieSliceText: "label",
   slices: {
@@ -30,14 +30,15 @@ export const pieOptions1 = {
   pieSliceBorderColor: "none",
 };
 
-export const pieData1 = [
+export const pieData = [
   ["Lang", "Speakers"],
   ["", 12],
   ["", 12],
   ["", 12],
 ];
 export const DataStatusSection = () => {
-  const Id = useSelector((state: any) => state.authentication.user);
+  const user = useSelector((state: any) => state.authentication.user);
+  const Id = user.map((val: any) => val.id);
   const { data }: any = useGetLeaveBalanceByIdQuery({ id: Id });
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
@@ -46,6 +47,7 @@ export const DataStatusSection = () => {
   const handleOpen = (data: any) => {
     setIsOpen(true);
   };
+  console.log(data);
 
   return (
     <>
@@ -107,29 +109,26 @@ export const DataStatusSection = () => {
           <Divider sx={{ width: "100%" }} />
 
           <Box>
-            {data &&
-              data.map((val: any) => (
-                <Chart
-                  chartType="PieChart"
-                  data={[
-                    ["label", "leaves"],
-                    ["7", 7],
-                    [`${val.totalLeave}`, val.totalLeave],
-                  ]}
-                  options={pieLeaveOptions}
-                  width={"100%"}
-                  height={"360px"}
-                  legend_toggle
-                  chartEvents={[
-                    {
-                      eventName: "error",
-                      callback: (chart) => {
-                        console.error("Chart error:", chart);
-                      },
-                    },
-                  ]}
-                />
-              ))}
+            <Chart
+              chartType="PieChart"
+              data={[
+                ["label", "leaves"],
+                [`${data && data.remainingLeave}`, data && data.remainingLeave],
+                [`${data && data.totalLeave}`, data && data.totalLeave],
+              ]}
+              options={pieLeaveOptions}
+              width={"100%"}
+              height={"300px"}
+              legend_toggle
+              chartEvents={[
+                {
+                  eventName: "error",
+                  callback: (chart) => {
+                    console.error("Chart error:", chart);
+                  },
+                },
+              ]}
+            />
           </Box>
           <Box
             sx={{
@@ -147,20 +146,33 @@ export const DataStatusSection = () => {
                 display: "flex",
                 position: "relative",
                 lineHeight: "23px",
-                width: "max-content",
                 alignItems: "center",
-                "&::after": {
-                  content: '""',
-                  width: "11px",
-                  height: "11px",
-                  right: "-27px",
-                  borderRadius: "100%",
-                  position: "absolute",
-                  background: themeColors["#F6C863"],
-                },
               }}
             >
               Total Leaves
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "16px",
+                  color: themeColors["#000000"],
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                  width: "calc(100% - 29.5%)",
+                  "&::before": {
+                    content: '""',
+                    width: "11px",
+                    height: "11px",
+                    left: "10px",
+                    borderRadius: "100%",
+                    position: "absolute",
+                    background: themeColors["#F6C863"],
+                  },
+                }}
+              >
+                {data && data.totalLeave}
+              </Typography>
             </Typography>
             <Typography
               sx={{
@@ -170,20 +182,105 @@ export const DataStatusSection = () => {
                 display: "flex",
                 position: "relative",
                 lineHeight: "23px",
-                width: "max-content",
                 alignItems: "center",
-                "&::after": {
-                  content: '""',
-                  width: "11px",
-                  height: "11px",
-                  right: "-27px",
-                  borderRadius: "100%",
-                  position: "absolute",
-                  background: themeColors["#EF5261"],
-                },
               }}
             >
               Remaining Leaves
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "16px",
+                  color: themeColors["#000000"],
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                  width: "calc(100% - 44%)",
+                  "&::before": {
+                    content: '""',
+                    width: "11px",
+                    height: "11px",
+                    left: "10px",
+                    borderRadius: "100%",
+                    position: "absolute",
+                    background: themeColors["#EF5261"],
+                  },
+                }}
+              >
+                {data && data.remainingLeave}
+              </Typography>
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: themeFonts["Poppins-Regular"],
+                fontSize: "16px",
+                color: themeColors["#000000"],
+                display: "flex",
+                position: "relative",
+                lineHeight: "23px",
+                alignItems: "center",
+              }}
+            >
+              Paid Leaves
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "16px",
+                  color: themeColors["#000000"],
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                  width: "calc(100% - 28.2%)",
+                  "&::before": {
+                    content: '""',
+                    width: "11px",
+                    height: "11px",
+                    left: "10px",
+                    borderRadius: "100%",
+                    position: "absolute",
+                    background: themeColors["#2980BA"],
+                  },
+                }}
+              >
+                {data && data.paidLeave}
+              </Typography>
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: themeFonts["Poppins-Regular"],
+                fontSize: "16px",
+                color: themeColors["#000000"],
+                display: "flex",
+                position: "relative",
+                lineHeight: "23px",
+                alignItems: "center",
+              }}
+            >
+              UnPaid Leaves
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "16px",
+                  color: themeColors["#000000"],
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                  width: "calc(100% - 34.5%)",
+                  "&::before": {
+                    content: '""',
+                    width: "11px",
+                    height: "11px",
+                    left: "10px",
+                    borderRadius: "100%",
+                    position: "absolute",
+                    background: themeColors["#8BC34A"],
+                  },
+                }}
+              >
+                {data && data.unPaidLeave}
+              </Typography>
             </Typography>
           </Box>
           <Box
@@ -261,10 +358,10 @@ export const DataStatusSection = () => {
           <Box>
             <Chart
               chartType="PieChart"
-              data={pieData1}
-              options={pieOptions1}
+              data={pieData}
+              options={pieOptions}
               width={"100%"}
-              height={"360px"}
+              height={"300px"}
               legend_toggle
               chartEvents={[
                 {

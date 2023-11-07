@@ -58,6 +58,11 @@ export const sidebarMenuConfig = [
     title: "Account Settings",
     route: ROUTES.ACCOUNTS_SETTING,
   },
+  {
+    icon: <AccountSettingsTabIcon />,
+    title: "Approved Leaves",
+    route: ROUTES.APPROVED_LEAVES,
+  },
 ];
 export const sidebarMenuButtonConfig = [
   {
@@ -100,5 +105,11 @@ export const sidebarMenuButtonConfig = [
     icon: <AccountSettingsTabIcon />,
     title: "",
     route: ROUTES.ACCOUNTS_SETTING,
+  },
+
+  {
+    icon: <AccountSettingsTabIcon />,
+    title: "",
+    route: ROUTES.APPROVED_LEAVES,
   },
 ];

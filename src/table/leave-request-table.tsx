@@ -43,8 +43,10 @@ const columns: GridColDef[] = [
 ];
 
 export const LeaveRequestTable = () => {
-  const Id = useSelector((state: any) => state.authentication.user);
-  const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
+  const user = useSelector((state: any) => state.authentication.user);
+  const Id = user.map((val: any) => val.id);
+  const { data, refetch }: any = useGetLeaveRequestByIdQuery({ id: Id });
+
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);
@@ -66,12 +68,12 @@ export const LeaveRequestTable = () => {
     to: format(new Date(item.endDate), "dd/MM/yyyy"),
     noOfDays: item.noOfDays,
     reason: item.reason,
-    approvedBy: item.approvedBy,
+    approvedBy: item?.approvedBy,
     status: item.status,
-    employerImage: item.approvedBy.employerImage.path,
-    employerFirstName: item.approvedBy.employer.firstName,
-    employerLastName: item.approvedBy.employer.lastName,
+    employerImage: item?.approvedBy?.employer?.employerImage?.path,
+    employerName: item?.approvedBy?.employer?.userName,
   }));
+  console.log(rows, "rows");
 
   return (
     <>
@@ -208,40 +210,56 @@ export const LeaveRequestTable = () => {
                     {params.value}
                   </Typography>
                 ) : col.field === "approvedBy" ? (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: "7px",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        height: "30px",
-                        width: "30px",
-                        borderRadius: "5px",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <img
-                        src={apiBaseUrl + "/" + params.row.employerImage}
-                        alt="Employer"
-                        height={30}
-                        width={30}
-                      />
-                    </Box>
-                    <Typography
-                      component="span"
-                      sx={{
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        fontSize: "14px",
-                        color: themeColors["#000000"],
-                      }}
-                    >
-                      {params.row.employerFirstName} {params.row.employerLastName}
-                    </Typography>
-                  </Box>
+                  <>
+                    {params.row.approvedBy ? (
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          gap: "7px",
+                        }}
+                      >
+                        {params.row.employerImage && (
+                          <Box
+                            sx={{
+                              height: "30px",
+                              width: "30px",
+                              borderRadius: "5px",
+                              overflow: "hidden",
+                            }}
+                          >
+                            <img
+                              src={apiBaseUrl + "/" + params.row.employerImage}
+                              alt="Employer"
+                              height={30}
+                              width={30}
+                            />
+                          </Box>
+                        )}
+                        <Typography
+                          component="span"
+                          sx={{
+                            fontFamily: themeFonts["Poppins-Regular"],
+                            fontSize: "14px",
+                            color: themeColors["#000000"],
+                          }}
+                        >
+                          {params.row.employerName}
+                        </Typography>
+                      </Box>
+                    ) : (
+                      <Typography
+                        sx={{
+                          width: "50%",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        -
+                      </Typography>
+                    )}
+                  </>
                 ) : (
                   params.value
                 ),
@@ -262,7 +280,11 @@ export const LeaveRequestTable = () => {
         </Box>
       </Grid>
       {isOpen && (
-        <RequestLeavesDialog open={isOpen} onClose={handleClose} data={data} />
+        <RequestLeavesDialog
+          open={isOpen}
+          onClose={handleClose}
+          refetch={refetch}
+        />
       )}
     </>
   );

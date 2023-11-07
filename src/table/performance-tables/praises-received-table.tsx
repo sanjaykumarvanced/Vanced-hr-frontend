@@ -3,11 +3,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CustomDatePicker } from "../../components/calendar/custom-date-picker";
 import { apiBaseUrl } from "../../components/consts/api-url.const";
 import { themeColors, themeFonts } from "../../configs";
-import {
-  EditIconSvg,
-  DeleteIconSvg,
-  DownArrowIcon4,
-} from "../../svgs";
+import { EditIconSvg, DeleteIconSvg, DownArrowIcon4 } from "../../svgs";
 import { useState } from "react";
 
 const columns: GridColDef[] = [
@@ -37,7 +33,8 @@ const columns: GridColDef[] = [
 ];
 
 export const PraisesReceivedTable = () => {
-  //   const Id = useSelector((state: any) => state.authentication.user);
+  // const user = useSelector((state: any) => state.authentication.user);
+  // const Id = user.map((val: any) => val.id);
   //   const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
   //   const [isOpen, setIsOpen] = useState(false);
   //   const handleClose = () => {
@@ -278,12 +275,12 @@ export const PraisesReceivedTable = () => {
                         overflow: "hidden",
                       }}
                     >
-                      <img
+                      {/* <img
                         src={apiBaseUrl + "/" + params.row.employerImage}
                         alt="Employer"
                         height={30}
                         width={30}
-                      />
+                      /> */}
                     </Box>
                     <Typography
                       component="span"
@@ -293,7 +290,7 @@ export const PraisesReceivedTable = () => {
                         color: themeColors["#000000"],
                       }}
                     >
-                      {params.row.employerName}
+                      {/* //   {params.row.employerName} */}
                     </Typography>
                   </Box>
                 ) : (

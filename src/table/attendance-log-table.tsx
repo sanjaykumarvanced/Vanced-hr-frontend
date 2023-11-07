@@ -42,7 +42,9 @@ const columns: GridColDef[] = [
 ];
 
 export const AttendanceLogTable = () => {
-  //   const Id = useSelector((state: any) => state.authentication.user);
+
+  // const user = useSelector((state: any) => state.authentication.user);
+  // const Id = user.map((val: any) => val.id);
   //   const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
   //   const [isOpen, setIsOpen] = useState(false);
   //   const handleClose = () => {
@@ -222,12 +224,12 @@ export const AttendanceLogTable = () => {
                         overflow: "hidden",
                       }}
                     >
-                      <img
+                      {/* <img
                         src={apiBaseUrl + "/" + params.row.employerImage}
                         alt="Employer"
                         height={30}
                         width={30}
-                      />
+                      /> */}
                     </Box>
                     <Typography
                       component="span"
@@ -237,7 +239,7 @@ export const AttendanceLogTable = () => {
                         color: themeColors["#000000"],
                       }}
                     >
-                      {params.row.employerName}
+                      {/* {params.row.employerName} */}
                     </Typography>
                   </Box>
                 ) : (

@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Box,
   Button,
   Dialog,
@@ -20,6 +21,8 @@ import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 import { useCreateApplyLeaveRequestMutation } from "../apis/applyLeaveApi";
+import { useGetEmployeeListQuery } from "../apis/employeeListApi";
+import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
 
 const validationSchema = Yup.object({
   leaveType: Yup.string().required("Leave Type is required"),
@@ -31,12 +34,19 @@ const validationSchema = Yup.object({
 });
 
 export const RequestLeavesDialog = (props: any) => {
-  const { onClose, open } = props;
+  const { onClose, open, refetch } = props;
   const handleClose = () => {
     onClose();
   };
   const [createApplyLeaveRequest] = useCreateApplyLeaveRequestMutation();
-  const Id = useSelector((state: any) => state.authentication.user);
+  const { data } = useGetEmployeeListQuery();
+  const searchEmployee: any = data && data.map((val: any) => val._id);
+  const user = useSelector((state: any) => state.authentication.user);
+  const Id = user.map((val: any) => val.id);
+  const id = "652d31fc3d93ae86647ec0fe";
+  const { refetch: leaveStatusRefetch }: any = useGetRequestedLeavesByIdQuery({
+    employerId: id,
+  });
   const handleSubmit = async () => {
     try {
       // Make an API request to apply for leave
@@ -59,11 +69,13 @@ export const RequestLeavesDialog = (props: any) => {
       // Handle error - Display an error message or log the error
       console.error("Error applying for leave:", error);
     }
+    refetch();
+    leaveStatusRefetch();
   };
   const formik = useFormik({
     initialValues: {
       leaveType: "",
-      notify: "",
+      notify: [],
       startDate: "",
       endDate: "",
       noOfDays: parseInt(""),
@@ -72,6 +84,16 @@ export const RequestLeavesDialog = (props: any) => {
     validationSchema,
     onSubmit: handleSubmit,
   });
+
+  function calculateNumberOfDays(startDate: any, endDate: any) {
+    if (startDate && endDate) {
+      const start = dayjs(startDate);
+      const end = dayjs(endDate);
+      const days = end.diff(start, "days");
+      return days;
+    }
+    return 0; // Return 0 if either date is not selected
+  }
   return (
     <Dialog
       onClose={handleClose}
@@ -134,7 +156,7 @@ export const RequestLeavesDialog = (props: any) => {
                 label="Select Type of leave you want to apply"
                 options={[
                   {
-                    label: "Casual leave : 10 days available",
+                    label: "Casual leave",
                     value: "Casual",
                   },
                   { label: "Full Day Leave", value: "FullDay" },
@@ -147,8 +169,17 @@ export const RequestLeavesDialog = (props: any) => {
                 name="leaveType"
               />
             </Grid>
-            <Grid item xs={6}>
-              <CustomFilledInput
+            <Grid
+              item
+              xs={6}
+              sx={{
+                paddingRight: "0px !important",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              {/* <CustomFilledInput
                 label="Notify"
                 placeholder="Search Employee"
                 height="39px"
@@ -158,6 +189,42 @@ export const RequestLeavesDialog = (props: any) => {
                 value={formik.values.notify}
                 name="notify"
                 error={formik.touched.notify && Boolean(formik.errors.notify)}
+              /> */}
+              <CustomLabel label={"Notify"} fontSize="12px" />
+              <Autocomplete
+                multiple
+                freeSolo
+                id="combo-box-demo"
+                options={searchEmployee}
+                sx={{
+                  width: "100%",
+                  "& .MuiInputBase-root.MuiOutlinedInput-root": {
+                    minHeight: "39px",
+                  },
+                  "& .MuiOutlinedInput-root .MuiAutocomplete-input": {
+                    padding: 0,
+                  },
+                  "& .MuiButtonBase-root.MuiChip-root.MuiChip-filled": {
+                    height: "max-content",
+                    margin: 0,
+                  },
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    sx={{
+                      "&.MuiFormControl-root.MuiTextField-root": {
+                        width: "100%",
+                        fontSize: "12px",
+                        minHeight: "39px",
+                      },
+                    }}
+                  />
+                )}
+                onChange={(event, selectedValues) => {
+                  formik.setFieldValue("notify", selectedValues); // Update the "notify" field in the formik state
+                }}
+                value={formik.values.notify}
               />
             </Grid>
           </Grid>
@@ -180,7 +247,13 @@ export const RequestLeavesDialog = (props: any) => {
                   formik.setFieldValue(
                     "startDate",
                     selectedValue.format("YYYY-MM-DD")
-                  ); // Use setFieldValue
+                  );
+                  const days =
+                    calculateNumberOfDays(
+                      selectedValue.format("YYYY-MM-DD"),
+                      formik.values.endDate
+                    ) + 1;
+                  formik.setFieldValue("noOfDays", days);
                 }}
                 value={dayjs(formik.values.startDate)}
                 name="startDate"
@@ -194,7 +267,13 @@ export const RequestLeavesDialog = (props: any) => {
                   formik.setFieldValue(
                     "endDate",
                     selectedValue.format("YYYY-MM-DD")
-                  ); // Use setFieldValue
+                  );
+                  const days =
+                    calculateNumberOfDays(
+                      formik.values.startDate,
+                      selectedValue.format("YYYY-MM-DD")
+                    ) + 1;
+                  formik.setFieldValue("noOfDays", days);
                 }}
                 value={dayjs(formik.values.endDate)}
                 name="endDate"
@@ -208,12 +287,8 @@ export const RequestLeavesDialog = (props: any) => {
                 height="39px"
                 fontSize="12px"
                 border="1px solid rgb(0 0 0 / 30%)"
-                onChangeValue={formik.handleChange}
                 value={formik.values.noOfDays}
-                name="noOfDays"
-                error={
-                  formik.touched.noOfDays && Boolean(formik.errors.noOfDays)
-                }
+                readOnly
               />
             </Grid>
           </Grid>
@@ -275,6 +350,7 @@ export const RequestLeavesDialog = (props: any) => {
                   color: themeColors["#FFFFFF"],
                 },
               }}
+              onClick={handleClose}
             >
               Cancel
             </Button>
