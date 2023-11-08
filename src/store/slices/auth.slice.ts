@@ -15,6 +15,7 @@ export const authenticationSlice = createSlice({
       state.token = "";
       state.loading = false;
       state.me = undefined;
+      state.user = undefined;
       window.localStorage.removeItem("persist:authentication");
     },
     removeMe: (state) => {
