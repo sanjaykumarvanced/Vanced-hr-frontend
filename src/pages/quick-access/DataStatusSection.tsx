@@ -10,13 +10,11 @@ export const pieLeaveOptions = {
   legend: "none",
   slices: {
     0: { offset: 0.1, color: "#EF5261" },
-    1: { color: "#F6C863" },
+    1: { offset: 0.1, color: "#F6C863" },
+    2: { offset: 0.1, color: "#2980BA" },
+    3: { offset: 0.1, color: "#8BC34A" },
   },
   pieSliceText: "label",
-  pieSliceTextStyle: {
-    color: "#FFFFFF",
-    fontSize: 37,
-  },
 };
 
 export const pieOptions = {
@@ -113,8 +111,10 @@ export const DataStatusSection = () => {
               chartType="PieChart"
               data={[
                 ["label", "leaves"],
-                [`${data && data.remainingLeave}`, data && data.remainingLeave],
-                [`${data && data.totalLeave}`, data && data.totalLeave],
+                ["", data && data.remainingLeave],
+                ["", data && data.totalLeave],
+                ["", data && data.paidLeave],
+                ["", data && data.unPaidLeave],
               ]}
               options={pieLeaveOptions}
               width={"100%"}

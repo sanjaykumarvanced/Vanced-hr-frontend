@@ -11,6 +11,7 @@ import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { useState } from "react";
 import { ProfileMenu } from "../dropdown/profile-menu";
 import { useSelector } from "react-redux";
+import { SearchBarDialog } from "../modals/search-bar";
 
 export const AuthHeaderLayout = ({
   handleDrawerClose,
@@ -30,6 +31,13 @@ export const AuthHeaderLayout = ({
     setAnchorEl(null);
   };
   const user = useSelector((state: any) => state.authentication.user);
+  const [openSearchBar, setOpenSearchBar] = useState(false);
+  const handleSearchBarClose = () => {
+    setOpenSearchBar(false);
+  };
+  const handleSearchBarOpen = (data: any) => {
+    setOpenSearchBar(true);
+  };
   return (
     <>
       <AppBar
@@ -73,7 +81,7 @@ export const AuthHeaderLayout = ({
               </IconButton>
             )}
 
-            <IconButton>
+            <IconButton onClick={handleSearchBarOpen}>
               <SearchIcon />
             </IconButton>
           </Box>
@@ -148,6 +156,9 @@ export const AuthHeaderLayout = ({
           anchorEl={anchorEl}
           open={isOpen}
         />
+      )}
+      {openSearchBar && (
+        <SearchBarDialog open={openSearchBar} onClose={handleSearchBarClose} />
       )}
     </>
   );

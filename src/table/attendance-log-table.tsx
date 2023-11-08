@@ -85,7 +85,6 @@ export const AttendanceLogTable = () => {
           flexDirection: "column",
           paddingLeft: "0px !important",
           paddingTop: "13px",
-          marginTop: "20px",
           background: themeColors["#FFFFFF"],
         }}
       >

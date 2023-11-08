@@ -48,3 +48,8 @@ export { ReactComponent as PayrollSummarySvg } from "../assets/images/svg/payrol
 export { ReactComponent as FlagIconSvg } from "../assets/images/svg/flag-icon-svg.svg";
 export { ReactComponent as ProfileTabIcon } from "../assets/images/svg/Profile-Tab-Icon.svg";
 export { ReactComponent as AccountSettingsTabIcon } from "../assets/images/svg/Account-settings-tab-icon.svg";
+export { ReactComponent as SearchIcon2 } from "../assets/images/svg/search-icon-2.svg";
+export { ReactComponent as MicIconSvg } from "../assets/images/svg/mic-icon.svg";
+export { ReactComponent as EllipsisIconSvg1 } from "../assets/images/svg/ellipsis-icon-1.svg";
+export { ReactComponent as LineIconSvg } from "../assets/images/svg/line-icon.svg";
+export { ReactComponent as CrossMarkIcon } from "../assets/images/svg/cross-mark-icon.svg";
