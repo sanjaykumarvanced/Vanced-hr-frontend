@@ -105,14 +105,17 @@ export const SearchBarDialog = (props: any) => {
                 lineHeight: "17px",
                 background: themeColors["#DBEAF1"],
                 paddingX: "16px",
-                paddingY: "7px",
+                paddingY: "4px",
                 width: "max-content",
                 fontFamily: themeFonts["Poppins-Regular"],
                 fontSize: "12px",
                 color: themeColors["#28AAE1"],
               }}
             >
-              Employee <CrossMarkIcon />
+              Employee
+              <IconButton>
+                <CrossMarkIcon />
+              </IconButton>
             </Typography>
             <Typography
               sx={{
@@ -122,14 +125,17 @@ export const SearchBarDialog = (props: any) => {
                 lineHeight: "17px",
                 background: themeColors["#DBEAF1"],
                 paddingX: "16px",
-                paddingY: "7px",
+                paddingY: "4px",
                 width: "max-content",
                 fontFamily: themeFonts["Poppins-Regular"],
                 fontSize: "12px",
                 color: themeColors["#28AAE1"],
               }}
             >
-              Apply Leaves <CrossMarkIcon />
+              Apply Leaves
+              <IconButton>
+                <CrossMarkIcon />
+              </IconButton>
             </Typography>
             <Typography
               sx={{
@@ -139,14 +145,17 @@ export const SearchBarDialog = (props: any) => {
                 background: themeColors["#DBEAF1"],
                 lineHeight: "17px",
                 paddingX: "16px",
-                paddingY: "7px",
+                paddingY: "4px",
                 width: "max-content",
                 fontFamily: themeFonts["Poppins-Regular"],
                 fontSize: "12px",
                 color: themeColors["#28AAE1"],
               }}
             >
-              Attendance Approval <CrossMarkIcon />
+              Attendance Approval
+              <IconButton>
+                <CrossMarkIcon />
+              </IconButton>
             </Typography>
           </Box>
           <Box

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { themeColors, themeFonts } from "../../configs";
-import { Box, InputBase } from "@mui/material";
+import { Box, IconButton, InputBase } from "@mui/material";
 import { EllipsisIconSvg1, MicIconSvg, SearchIcon2 } from "../../svgs";
 
 interface SearchInputProps {
@@ -58,12 +58,25 @@ export const SearchInput = ({
       <Box
         sx={{
           display: "flex",
-          gap: "12px",
           alignItems: "center",
         }}
       >
-        <MicIconSvg />
-        <EllipsisIconSvg1 />
+        <IconButton
+          sx={{
+            height: "30px",
+            width: "30px",
+          }}
+        >
+          <MicIconSvg />
+        </IconButton>
+        <IconButton
+          sx={{
+            height: "30px",
+            width: "30px",
+          }}
+        >
+          <EllipsisIconSvg1 />
+        </IconButton>
       </Box>
     </Box>
   );
