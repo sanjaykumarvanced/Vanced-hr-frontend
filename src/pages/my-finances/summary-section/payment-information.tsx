@@ -103,7 +103,7 @@ export const PaymentInformation = () => {
           </Box>
           <Box
             sx={{
-              paddingLeft: "36px",
+              paddingLeft: "36px !important",
               padding: "26px",
               display: "flex",
               flexDirection: "column",

@@ -189,7 +189,7 @@ export const Salary = () => {
             <Box
               sx={{
                 width: 811,
-                // borderLeft: "0.5px solid rgb(0 0 0 / 12%)",
+              borderLeft: "0.5px solid rgb(0 0 0 / 12%)",
               }}
             >
               <Box
@@ -366,20 +366,6 @@ export const Salary = () => {
                 </Box>
               </Box>
             </Box>
-            <Divider
-              orientation="vertical"
-              variant="middle"
-              flexItem
-              sx={{
-                marginX: "33px",
-                marginY: "0px",
-                position: "absolute",
-                zIndex: 1,
-                top: 0,
-                left: "19.5%",
-                height: "-webkit-fill-available",
-              }}
-            />
           </Box>
         </Grid>
       </Grid>

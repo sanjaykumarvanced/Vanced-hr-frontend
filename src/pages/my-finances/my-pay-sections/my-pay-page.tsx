@@ -1,6 +1,6 @@
-import { Grid, Box} from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import { useState } from "react";
-import {  MyPayTabs } from "../../../components/consts/consts";
+import { MyPayTabs } from "../../../components/consts/consts";
 import {
   CustomTab,
   CustomTabsPanel,
@@ -11,6 +11,7 @@ import { PerformancePage } from "../../about-me/performance-section/performance-
 import { SummarySection } from "../summary-section/summary-section";
 import TabList from "@mui/lab/TabList";
 import { Salary } from "./salary";
+import { IncomeTax } from "./income-tax";
 
 export const getStyles = (TodaysLeavesDetails?: any) => {
   return {
@@ -103,8 +104,8 @@ export const MyPayPage = () => {
             value1={value}
           >
             {value === "My Salary" && <Salary />}
-            {value === "My Pay" && <AttendancePage />}
-            {value === "Performance" && <PerformancePage />}
+            {value === "Pay Slips" && <></>}
+            {value === "Income Tax" && <IncomeTax />}
           </CustomTabsPanel>
         ))}
       </Box>

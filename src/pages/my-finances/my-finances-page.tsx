@@ -68,7 +68,7 @@ export const MyFinancesPage = () => {
             >
               {value === "Summary" && <SummarySection />}
               {value === "My Pay" && <MyPayPage />}
-              {value === "Performance" && <PerformancePage />}
+              {value === "Manage Tax" && <></>}
             </CustomTabsPanel>
           ))}
         </Box>

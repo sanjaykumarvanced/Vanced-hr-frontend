@@ -195,7 +195,7 @@ export const DataStatusSection = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "flex-end",
-                  width: "calc(100% - 44%)",
+                  width: "calc(100% - 43.5%)",
                   "&::before": {
                     content: '""',
                     width: "11px",

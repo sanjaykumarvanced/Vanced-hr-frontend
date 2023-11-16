@@ -53,3 +53,4 @@ export { ReactComponent as MicIconSvg } from "../assets/images/svg/mic-icon.svg"
 export { ReactComponent as EllipsisIconSvg1 } from "../assets/images/svg/ellipsis-icon-1.svg";
 export { ReactComponent as LineIconSvg } from "../assets/images/svg/line-icon.svg";
 export { ReactComponent as CrossMarkIcon } from "../assets/images/svg/cross-mark-icon.svg";
+export { ReactComponent as GrossEarningSvg } from "../assets/images/svg/gross-earning.svg";

@@ -114,7 +114,7 @@ export const IdentityInformation = () => {
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "row",
-                paddingLeft: "36px",
+                paddingLeft: "36px !important",
                 padding: "20px",
                 gap: "25px",
               }}
