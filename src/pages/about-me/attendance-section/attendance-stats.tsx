@@ -92,7 +92,7 @@ export const AttendanceStats = () => {
           <Select
             sx={{
               fontFamily: themeFonts["Poppins-SemiBold"],
-              fontSize: "10px",
+              fontSize: "12px",
               color: themeColors["#0C345D"],
               height: 28,
               background: themeColors["#E1E1E1"],
@@ -103,7 +103,7 @@ export const AttendanceStats = () => {
                 {
                   position: "relative",
                   padding: 0,
-                  width: "67px",
+                  width: "80px",
                   overflow: "overlay",
                   zIndex: 1,
                 },
@@ -135,7 +135,7 @@ export const AttendanceStats = () => {
                   },
                   "& li": {
                     fontFamily: themeFonts["Poppins-SemiBold"],
-                    fontSize: "10px",
+                    fontSize: "12px",
                     color: themeColors["#0C345D"],
                   },
                 },

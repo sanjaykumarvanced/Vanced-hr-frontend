@@ -162,7 +162,7 @@ export const PraisesReceivedTable = () => {
               placeholder={"Oct 2023"}
               fontFamily={"Poppins-SemiBold"}
               color={"#0C345D"}
-              fontSize={"14px"}
+              fontSize={"14Last Weekpx"}
             />
           </Box>
         </Box>
