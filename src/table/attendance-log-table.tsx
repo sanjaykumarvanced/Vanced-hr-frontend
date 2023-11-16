@@ -106,7 +106,7 @@ export const AttendanceLogTable = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "15px",
+                fontSize: "16px",
                 color: themeColors["#0C345D"],
               }}
             >
@@ -128,7 +128,7 @@ export const AttendanceLogTable = () => {
                 borderRadius: "6px",
                 backgroundColor: themeColors["#D7D9DB"],
                 fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "15px",
+                fontSize: "14px",
                 color: themeColors["#0C345D"],
               }}
             >
@@ -139,7 +139,7 @@ export const AttendanceLogTable = () => {
               placeholder={"Oct 2023"}
               fontFamily={"Poppins-SemiBold"}
               color={"#0C345D"}
-              fontSize={"15px"}
+              fontSize={"14px"}
             />
           </Box>
         </Box>

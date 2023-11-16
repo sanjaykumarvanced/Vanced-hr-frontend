@@ -68,7 +68,7 @@ export const Timing = () => {
           <Typography
             sx={{
               fontFamily: themeFonts["Poppins-SemiBold"],
-              fontSize: "15px",
+              fontSize: "16px",
               color: themeColors["#0C345D"],
             }}
           >
@@ -101,7 +101,7 @@ export const Timing = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "15px",
+                  fontSize: "14px",
                   color: themeColors["#000000"],
                 }}
               >
@@ -116,7 +116,7 @@ export const Timing = () => {
                 paddingX: "17px",
                 paddingY: "7px",
                 fontFamily: themeFonts["Poppins-Medium"],
-                fontSize: "10px",
+                fontSize: "12px",
                 color: themeColors["#0C345D"],
               }}
             >
