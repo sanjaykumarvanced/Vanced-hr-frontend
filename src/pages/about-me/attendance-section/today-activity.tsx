@@ -41,7 +41,7 @@ export const TodayActivity = () => {
         <Typography
           sx={{
             fontFamily: themeFonts["Poppins-SemiBold"],
-            fontSize: "15px",
+            fontSize: "16px",
             color: themeColors["#0C345D"],
           }}
         >
@@ -151,7 +151,7 @@ export const TodayActivity = () => {
                   Punch In at
                   <Typography
                     sx={{
-                      fontSize: "9px",
+                      fontSize: "10px",
                       fontFamily: themeFonts["Poppins-Regular"],
                       color: themeColors["#2980BA"],
                       display: "flex",
@@ -200,7 +200,7 @@ export const TodayActivity = () => {
                   Punch out at
                   <Typography
                     sx={{
-                      fontSize: "9px",
+                      fontSize: "10px",
                       fontFamily: themeFonts["Poppins-Regular"],
                       color: themeColors["#C28111"],
                       display: "flex",
@@ -249,7 +249,7 @@ export const TodayActivity = () => {
                   Punch In at
                   <Typography
                     sx={{
-                      fontSize: "9px",
+                      fontSize: "10px",
                       fontFamily: themeFonts["Poppins-Regular"],
                       color: themeColors["#2980BA"],
                       display: "flex",
@@ -298,7 +298,7 @@ export const TodayActivity = () => {
                   Punch out at
                   <Typography
                     sx={{
-                      fontSize: "9px",
+                      fontSize: "10px",
                       fontFamily: themeFonts["Poppins-Regular"],
                       color: themeColors["#C28111"],
                       display: "flex",
@@ -347,7 +347,7 @@ export const TodayActivity = () => {
                   Punch In at
                   <Typography
                     sx={{
-                      fontSize: "9px",
+                      fontSize: "10px",
                       fontFamily: themeFonts["Poppins-Regular"],
                       color: themeColors["#2980BA"],
                       display: "flex",
@@ -396,7 +396,7 @@ export const TodayActivity = () => {
                   Punch out at
                   <Typography
                     sx={{
-                      fontSize: "9px",
+                      fontSize: "10px",
                       fontFamily: themeFonts["Poppins-Regular"],
                       color: themeColors["#C28111"],
                       display: "flex",
