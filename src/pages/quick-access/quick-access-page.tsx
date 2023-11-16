@@ -1,10 +1,4 @@
-import {
-  Box,
-  Grid,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, MenuItem, Select, Typography } from "@mui/material";
 import { themeFonts, themeColors } from "../../configs";
 import { DownArrowIcon1 } from "../../svgs";
 import SocialDashboard from "./SocialDashboard";
@@ -14,7 +8,7 @@ import { DataStatusSection } from "./DataStatusSection";
 import { useState } from "react";
 
 export const QuickAccessPage = () => {
-  const [selectedValue, setSelectedValue] = useState(); 
+  const [selectedValue, setSelectedValue] = useState();
 
   const handleChange = (event: any) => {
     setSelectedValue(event.target.value);
@@ -67,7 +61,7 @@ export const QuickAccessPage = () => {
           <Select
             sx={{
               fontFamily: themeFonts["Poppins-Regular"],
-              fontSize: "15px",
+              fontSize: "14px",
               color: themeColors["#FFFFFF"],
               height: 39,
               background: themeColors["#0C345D"],
@@ -87,7 +81,7 @@ export const QuickAccessPage = () => {
               },
             }}
             IconComponent={() => <DownArrowIcon1 />}
-            defaultValue={'Organization'}
+            defaultValue={"Organization"}
             onChange={handleChange}
             value={selectedValue}
             MenuProps={{

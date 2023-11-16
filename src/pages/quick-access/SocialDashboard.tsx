@@ -101,7 +101,7 @@ const SocialDashboard = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-SemiBold"],
-                  fontSize: "15px",
+                  fontSize: "16px",
                   color: themeColors["#0C345D"],
                 }}
               >
@@ -110,7 +110,7 @@ const SocialDashboard = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-SemiBold"],
-                  fontSize: "15px",
+                  fontSize: "14px",
                   color: themeColors["#0C345D"],
                   display: "flex",
                   flexDirection: "column",
@@ -154,7 +154,7 @@ const SocialDashboard = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-SemiBold"],
-                  fontSize: "15px",
+                  fontSize: "16px",
                   color: themeColors["#FFFFFF"],
                 }}
               >
@@ -165,7 +165,7 @@ const SocialDashboard = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-SemiBold"],
-                  fontSize: "15px",
+                  fontSize: "16px",
                   color: themeColors["#FFFFFF"],
                   display: "flex",
                   flexDirection: "column",

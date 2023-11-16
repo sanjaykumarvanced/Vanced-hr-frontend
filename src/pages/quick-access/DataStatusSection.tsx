@@ -84,13 +84,13 @@ export const DataStatusSection = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "15px",
+                fontSize: "16px",
                 color: themeColors["#0C345D"],
               }}
             >
               Leave Balances
             </Typography>
-            <Button
+            {/* <Button
               variant="text"
               sx={{
                 fontFamily: themeFonts["Poppins-Regular"],
@@ -101,7 +101,7 @@ export const DataStatusSection = () => {
               }}
             >
               View All
-            </Button>
+            </Button> */}
           </Box>
 
           <Divider sx={{ width: "100%" }} />
@@ -141,7 +141,7 @@ export const DataStatusSection = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "16px",
+                fontSize: "14px",
                 color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
@@ -153,7 +153,7 @@ export const DataStatusSection = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "16px",
+                  fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
                   display: "flex",
@@ -177,7 +177,7 @@ export const DataStatusSection = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "16px",
+                fontSize: "14px",
                 color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
@@ -189,7 +189,7 @@ export const DataStatusSection = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "16px",
+                  fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
                   display: "flex",
@@ -213,7 +213,7 @@ export const DataStatusSection = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "16px",
+                fontSize: "14px",
                 color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
@@ -225,7 +225,7 @@ export const DataStatusSection = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "16px",
+                  fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
                   display: "flex",
@@ -249,7 +249,7 @@ export const DataStatusSection = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "16px",
+                fontSize: "14px",
                 color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
@@ -261,7 +261,7 @@ export const DataStatusSection = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "16px",
+                  fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
                   display: "flex",
@@ -298,7 +298,7 @@ export const DataStatusSection = () => {
                 borderRadius: "6px",
                 backgroundColor: themeColors["#0C345D"],
                 fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "15px",
+                fontSize: "16px",
                 color: themeColors["#FFFFFF"],
                 "&:hover": {
                   backgroundColor: "rgb(21 94 158)",
@@ -333,13 +333,13 @@ export const DataStatusSection = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "15px",
+                fontSize: "16px",
                 color: themeColors["#0C345D"],
               }}
             >
               Projects
             </Typography>
-            <Button
+            {/* <Button
               variant="text"
               sx={{
                 fontFamily: themeFonts["Poppins-Regular"],
@@ -350,7 +350,7 @@ export const DataStatusSection = () => {
               }}
             >
               View All
-            </Button>
+            </Button> */}
           </Box>
 
           <Divider sx={{ width: "100%" }} />
@@ -384,7 +384,7 @@ export const DataStatusSection = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "16px",
+                fontSize: "14px",
                 color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
@@ -396,7 +396,7 @@ export const DataStatusSection = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "16px",
+                  fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
                   display: "flex",
@@ -421,7 +421,7 @@ export const DataStatusSection = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "16px",
+                fontSize: "14px",
                 color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
@@ -433,7 +433,7 @@ export const DataStatusSection = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "16px",
+                  fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
                   display: "flex",
@@ -457,7 +457,7 @@ export const DataStatusSection = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "16px",
+                fontSize: "14px",
                 color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
@@ -469,7 +469,7 @@ export const DataStatusSection = () => {
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "16px",
+                  fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
                   display: "flex",

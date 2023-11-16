@@ -36,7 +36,9 @@ export const ViewAllHolidaysDialog = (props: any) => {
         sx={{
           position: "absolute",
           right: 20,
-          top: 13,
+          top: 19,
+          height: "25px",
+          width: "25px",
         }}
       >
         <CloseIconSvg1 />
@@ -44,7 +46,7 @@ export const ViewAllHolidaysDialog = (props: any) => {
       <Typography
         sx={{
           fontFamily: themeFonts["Poppins-SemiBold"],
-          fontSize: "15px",
+          fontSize: "16px",
           color: themeColors["#0C345D"],
           padding: "20px",
         }}
@@ -64,7 +66,7 @@ export const ViewAllHolidaysDialog = (props: any) => {
         <Typography
           sx={{
             fontFamily: themeFonts["Poppins-SemiBold"],
-            fontSize: "15px",
+            fontSize: "16px",
             color: themeColors["#0C345D"],
             width: "50%",
             paddingLeft: "25px",
@@ -75,7 +77,7 @@ export const ViewAllHolidaysDialog = (props: any) => {
         <Typography
           sx={{
             fontFamily: themeFonts["Poppins-SemiBold"],
-            fontSize: "15px",
+            fontSize: "16px",
             color: themeColors["#0C345D"],
             width: "50%",
             paddingLeft: "25px",
@@ -106,7 +108,16 @@ export const ViewAllHolidaysDialog = (props: any) => {
                   border: "1px solid #EDEDED",
                 }}
               >
-                <ListItemText sx={{ width: "50%" }}>
+                <ListItemText
+                  sx={{
+                    width: "50%",
+                    "& .MuiListItemText-primary": {
+                      fontFamily: themeFonts["Poppins-SemiBold"],
+                      fontSize: "14px !important",
+                      color: themeColors["#0C345D"],
+                    },
+                  }}
+                >
                   {val.holidayName}
                 </ListItemText>
                 <Divider
@@ -117,7 +128,16 @@ export const ViewAllHolidaysDialog = (props: any) => {
                     marginX: "20px",
                   }}
                 />
-                <ListItemText sx={{ width: "50%" }}>
+                <ListItemText
+                  sx={{
+                    width: "50%",
+                    "& .MuiListItemText-primary": {
+                      fontFamily: themeFonts["Poppins-SemiBold"],
+                      fontSize: "14px !important",
+                      color: themeColors["#0C345D"],
+                    },
+                  }}
+                >
                   {new Date(val.startDate).toLocaleString("en-us", {
                     month: "short",
                     year: "numeric",

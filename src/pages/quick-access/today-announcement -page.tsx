@@ -1,11 +1,4 @@
-import {
-  Box,
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, Grid, List, ListItem, Typography } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
 import { useState } from "react";
 import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
@@ -46,7 +39,7 @@ export const TodaysAnnouncement = () => {
         <Typography
           sx={{
             fontFamily: themeFonts["Poppins-SemiBold"],
-            fontSize: "15px",
+            fontSize: "16px",
             color: themeColors["#0C345D"],
           }}
         >
@@ -55,7 +48,7 @@ export const TodaysAnnouncement = () => {
             component="span"
             sx={{
               fontFamily: themeFonts["Poppins-SemiBold"],
-              fontSize: "15px",
+              fontSize: "16px",
               color: themeColors["#CF30CA"],
               paddingLeft: "3px",
             }}
@@ -116,8 +109,8 @@ export const TodaysAnnouncement = () => {
                 <Box>
                   <Typography
                     sx={{
-                      fontFamily: themeFonts["Poppins-Regular"],
-                      fontSize: "15px",
+                      fontFamily: themeFonts["Poppins-SemiBold"],
+                      fontSize: "14px",
                       color: themeColors["#000000"],
                     }}
                   >
@@ -137,7 +130,7 @@ export const TodaysAnnouncement = () => {
                   <Typography
                     sx={{
                       fontFamily: themeFonts["Poppins-Regular"],
-                      fontSize: "10px",
+                      fontSize: "12px",
                       color: themeColors["#55A232"],
                     }}
                   >
@@ -162,7 +155,7 @@ export const TodaysAnnouncement = () => {
                     counterIncrement: "list-item",
                     paddingX: 0,
                     fontFamily: themeFonts["Poppins-Regular"],
-                    fontSize: "16px",
+                    fontSize: "14px",
                     color: themeColors["#000000"],
                   }}
                 >
@@ -172,7 +165,7 @@ export const TodaysAnnouncement = () => {
                     component="span"
                     sx={{
                       fontFamily: themeFonts["Poppins-Regular"],
-                      fontSize: "16px",
+                      fontSize: "14px",
                       color: themeColors["#2D87C2"],
                       paddingLeft: "3px",
                     }}
