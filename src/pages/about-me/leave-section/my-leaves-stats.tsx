@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { useGetLeaveStatsByIdQuery } from "../../../components/apis/leaveStatsApi";
 
 export const MyLeaveStats = () => {
-  const [value, setValue] = useState("Weekly");
+  const [value, setValue] = useState("Yearly");
   const styles = getStyles();
   const handleChange = (event: any) => {
     setValue(event);
@@ -47,7 +47,7 @@ export const MyLeaveStats = () => {
           <Typography
             sx={{
               fontFamily: themeFonts["Poppins-SemiBold"],
-              fontSize: "15px",
+              fontSize: "16px",
               color: themeColors["#0C345D"],
             }}
           >

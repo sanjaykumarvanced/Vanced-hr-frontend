@@ -44,10 +44,10 @@ export const SingleInputDateRangePicker = ({
         sx={{
           "& .MuiInputBase-root.MuiOutlinedInput-root": {
             borderRadius: "5px",
-            fontSize: "15px",
+            fontSize: "12px",
             fontFamily: themeFonts["Poppins-SemiBold"],
             height: "39px",
-            width: "230px",
+            width: "195px",
             color: themeColors["#0C345D"],
           },
           "& input": {

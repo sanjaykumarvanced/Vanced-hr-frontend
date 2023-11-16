@@ -264,6 +264,11 @@ const SocialDashboard = () => {
                 placeholder="Write Your Post Here"
                 sx={{
                   "&.MuiFormControl-root.MuiTextField-root": { width: "100%" },
+                  "& .MuiInputBase-root.MuiOutlinedInput-root": {
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    fontSize: "14px",
+                    color: themeColors["rgb(0 0 0 / 50%)"],
+                  },
                 }}
               />
             </CustomTabsPanel>
@@ -271,7 +276,11 @@ const SocialDashboard = () => {
         </Box>
       </Grid>
       {isOpen && (
-        <ViewAllHolidaysDialog open={isOpen} onClose={handleClose} data={data} />
+        <ViewAllHolidaysDialog
+          open={isOpen}
+          onClose={handleClose}
+          data={data}
+        />
       )}
     </>
   );

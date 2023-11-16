@@ -37,7 +37,7 @@ export const pieData = [
 export const DataStatusSection = () => {
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user.map((val: any) => val.id);
-  const { data }: any = useGetLeaveBalanceByIdQuery({ id: Id });
+  const { data, refetch }: any = useGetLeaveBalanceByIdQuery({ id: Id });
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);
@@ -138,150 +138,166 @@ export const DataStatusSection = () => {
               gap: "8px",
             }}
           >
-            <Typography
+            <Box
               sx={{
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "14px",
-                color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
-                lineHeight: "23px",
                 alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              Total Leaves
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
                   fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
+                  lineHeight: "23px",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "flex-end",
-                  width: "calc(100% - 29.5%)",
-                  "&::before": {
+                  "&::after": {
                     content: '""',
                     width: "11px",
                     height: "11px",
-                    left: "10px",
+                    right: "-20px",
                     borderRadius: "100%",
                     position: "absolute",
                     background: themeColors["#F6C863"],
                   },
                 }}
               >
+                Total Leaves
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "14px",
+                  color: themeColors["#000000"],
+                }}
+              >
                 {data && data.totalLeave}
               </Typography>
-            </Typography>
-            <Typography
+            </Box>
+            <Box
               sx={{
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "14px",
-                color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
-                lineHeight: "23px",
                 alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              Remaining Leaves
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
                   fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
+                  lineHeight: "23px",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "flex-end",
-                  width: "calc(100% - 43.5%)",
-                  "&::before": {
+                  "&::after": {
                     content: '""',
                     width: "11px",
                     height: "11px",
-                    left: "10px",
+                    right: "-20px",
                     borderRadius: "100%",
                     position: "absolute",
                     background: themeColors["#EF5261"],
                   },
                 }}
               >
+                Remaining Leaves
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "14px",
+                  color: themeColors["#000000"],
+                }}
+              >
                 {data && data.remainingLeave}
               </Typography>
-            </Typography>
-            <Typography
+            </Box>
+            <Box
               sx={{
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "14px",
-                color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
-                lineHeight: "23px",
                 alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              Paid Leaves
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
                   fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
+                  lineHeight: "23px",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "flex-end",
-                  width: "calc(100% - 28.2%)",
-                  "&::before": {
+                  "&::after": {
                     content: '""',
                     width: "11px",
                     height: "11px",
-                    left: "10px",
+                    right: "-20px",
                     borderRadius: "100%",
                     position: "absolute",
                     background: themeColors["#2980BA"],
                   },
                 }}
               >
+                Paid Leaves
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "14px",
+                  color: themeColors["#000000"],
+                }}
+              >
                 {data && data.paidLeave}
               </Typography>
-            </Typography>
-            <Typography
+            </Box>
+            <Box
               sx={{
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "14px",
-                color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
-                lineHeight: "23px",
                 alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              UnPaid Leaves
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
                   fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
+                  lineHeight: "23px",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "flex-end",
-                  width: "calc(100% - 34.5%)",
-                  "&::before": {
+                  "&::after": {
                     content: '""',
                     width: "11px",
                     height: "11px",
-                    left: "10px",
+                    right: "-20px",
                     borderRadius: "100%",
                     position: "absolute",
                     background: themeColors["#8BC34A"],
                   },
                 }}
               >
+                UnPaid Leaves
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "14px",
+                  color: themeColors["#000000"],
+                }}
+              >
                 {data && data.unPaidLeave}
               </Typography>
-            </Typography>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -381,120 +397,135 @@ export const DataStatusSection = () => {
               gap: "10px",
             }}
           >
-            <Typography
+           
+            <Box
               sx={{
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "14px",
-                color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
-                lineHeight: "23px",
                 alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              Total Projects
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
                   fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
+                  lineHeight: "23px",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "flex-end",
-                  width: "calc(100% - 33%)",
-                  "&::before": {
+                  "&::after": {
                     content: '""',
                     width: "11px",
                     height: "11px",
-                    left: "10px",
+                    right: "-20px",
                     borderRadius: "100%",
                     position: "absolute",
                     background: themeColors["#F6C863"],
                   },
                 }}
               >
+                Total Projects
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "14px",
+                  color: themeColors["#000000"],
+                }}
+              >
                 02
               </Typography>
-            </Typography>
-
-            <Typography
+            </Box>
+            <Box
               sx={{
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "14px",
-                color: themeColors["#000000"],
                 display: "flex",
                 position: "relative",
-                lineHeight: "23px",
                 alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              Completed Task
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
                   fontSize: "14px",
                   color: themeColors["#000000"],
                   position: "relative",
+                  lineHeight: "23px",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "flex-end",
-                  width: "calc(100% - 40%)",
-                  "&::before": {
+                  "&::after": {
                     content: '""',
                     width: "11px",
                     height: "11px",
-                    left: "10px",
+                    right: "-20px",
                     borderRadius: "100%",
                     position: "absolute",
                     background: themeColors["#FF3C38"],
                   },
                 }}
               >
-                12
+                Completed Task
               </Typography>
-            </Typography>
-            <Typography
-              sx={{
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "14px",
-                color: themeColors["#000000"],
-                display: "flex",
-                position: "relative",
-                lineHeight: "23px",
-                alignItems: "center",
-              }}
-            >
-              Pending Task
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
                   fontSize: "14px",
                   color: themeColors["#000000"],
-                  position: "relative",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-end",
-                  width: "calc(100% - 32%)",
-                  "&::before": {
-                    content: '""',
-                    width: "11px",
-                    height: "11px",
-                    left: "10px",
-                    borderRadius: "100%",
-                    position: "absolute",
-                    background: themeColors["#8BC34A"],
-                  },
+                }}
+              >
+                12
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                position: "relative",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+            <Typography
+               sx={{
+                fontFamily: themeFonts["Poppins-Regular"],
+                fontSize: "14px",
+                color: themeColors["#000000"],
+                position: "relative",
+                lineHeight: "23px",
+                display: "flex",
+                alignItems: "center",
+                "&::after": {
+                  content: '""',
+                  width: "11px",
+                  height: "11px",
+                  right: "-20px",
+                  borderRadius: "100%",
+                  position: "absolute",
+                  background: themeColors["#8BC34A"],
+                },
+              }}
+            >
+              Pending Task
+            </Typography>
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "14px",
+                  color: themeColors["#000000"],                 
                 }}
               >
                 09
-              </Typography>
-            </Typography>
+              </Typography></Box>
           </Box>
         </Grid>
       </Grid>
       {isOpen && (
-        <RequestLeavesDialog open={isOpen} onClose={handleClose} data={data} />
+        <RequestLeavesDialog
+          open={isOpen}
+          onClose={handleClose}
+          refetch={refetch}
+        />
       )}
     </>
   );

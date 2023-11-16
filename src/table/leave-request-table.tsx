@@ -110,7 +110,7 @@ export const LeaveRequestTable = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "15px",
+                fontSize: "16px",
                 color: themeColors["#0C345D"],
               }}
             >

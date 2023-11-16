@@ -39,11 +39,14 @@ export const RequestLeavesDialog = (props: any) => {
     onClose();
   };
   const [createApplyLeaveRequest] = useCreateApplyLeaveRequestMutation();
-  const { data } = useGetEmployeeListQuery();
-  const searchEmployee: any = data && data.map((val: any) => val._id);
+  const { data } = useGetEmployeeListQuery<any>();
+  const searchEmployee: any =
+    data && data.map((val: any) => `${val.firstName} ${val.lastName}`);
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user.map((val: any) => val.id);
   const id = "652d31fc3d93ae86647ec0fe";
+  console.log(data, "data", searchEmployee);
+
   const { refetch: leaveStatusRefetch }: any = useGetRequestedLeavesByIdQuery({
     employerId: id,
   });
@@ -156,11 +159,11 @@ export const RequestLeavesDialog = (props: any) => {
                 label="Select Type of leave you want to apply"
                 options={[
                   {
-                    label: "Casual leave",
-                    value: "Casual",
+                    label: "Short Leave",
+                    value: "Short Leave",
                   },
-                  { label: "Full Day Leave", value: "FullDay" },
-                  { label: "Half Day Leave", value: "HalfDay" },
+                  { label: "Full Day Leave", value: "Full Day Leave" },
+                  { label: "Half Day Leave", value: "Half Day Leave" },
                 ]}
                 onChange={(selectedValue: any) => {
                   formik.handleChange("leaveType")(selectedValue);
@@ -222,9 +225,27 @@ export const RequestLeavesDialog = (props: any) => {
                   />
                 )}
                 onChange={(event, selectedValues) => {
-                  formik.setFieldValue("notify", selectedValues); // Update the "notify" field in the formik state
+                  // Map the selected employee names to their corresponding IDs
+                  const selectedEmployeeIDs = selectedValues.map((name) => {
+                    const employee = data.find(
+                      (val: any) => `${val.firstName} ${val.lastName}` === name
+                    );
+                    return employee ? employee._id : null;
+                  });
+                  // Remove null values (IDs not found for some reason)
+                  const filteredEmployeeIDs = selectedEmployeeIDs.filter(
+                    (id) => id !== null
+                  );
+                  formik.setFieldValue("notify", filteredEmployeeIDs); // Update the "notify" field in the formik state
                 }}
-                value={formik.values.notify}
+                value={formik.values.notify.map((employeeID) => {
+                  const employee = data.find(
+                    (val: any) => val._id === employeeID
+                  );
+                  return employee
+                    ? `${employee.firstName} ${employee.lastName}`
+                    : null;
+                })}
               />
             </Grid>
           </Grid>

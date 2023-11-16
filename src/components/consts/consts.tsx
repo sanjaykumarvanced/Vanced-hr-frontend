@@ -1,8 +1,8 @@
 export const TodaysLeavesTabs = [
   { label: "All", value: "All" },
-  { label: "Short leave", value: "ShortLeave" },
-  { label: "Half day Leave ", value: "HalfDay" },
-  { label: "Full day Leave ", value: "FullDay" },
+  { label: "Short leave", value: "Short Leave" },
+  { label: "Half day Leave ", value: "Half Day Leave" },
+  { label: "Full day Leave ", value: "Full Day Leave" },
 ];
 
 export const SocialTabs = [
@@ -23,8 +23,8 @@ export const AboutMeTabs = [
   { label: "Performance ", value: "Performance" },
 ];
 export const MyLeaveTabs = [
-  { label: "Weekly Pattern ", value: "Weekly" },
-  { label: "Monthly Pattern ", value: "Monthly" },
+  // { label: "Weekly Pattern ", value: "Weekly" },
+  { label: "Yearly Pattern ", value: "Yearly" },
 ];
 
 export const FinanceTabs = [

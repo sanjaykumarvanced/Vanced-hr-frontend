@@ -43,13 +43,13 @@ export const LeaveHistory = () => {
         <Typography
           sx={{
             fontFamily: themeFonts["Poppins-SemiBold"],
-            fontSize: "15px",
+            fontSize: "16px",
             color: themeColors["#0C345D"],
           }}
         >
           Leave History
         </Typography>
-        <Button
+        {/* <Button
           variant="text"
           sx={{
             fontFamily: themeFonts["Poppins-Regular"],
@@ -61,7 +61,7 @@ export const LeaveHistory = () => {
           }}
         >
           Clear History
-        </Button>
+        </Button> */}
       </Box>
 
       <Divider sx={{ width: "100%" }} />
@@ -89,7 +89,7 @@ export const LeaveHistory = () => {
                 display: "block",
                 position: "absolute",
                 zIndex: 1,
-                left: "54px",
+                left: "80px",
                 height: "-webkit-fill-available",
                 top: "0px",
                 width: "1px",
@@ -108,84 +108,92 @@ export const LeaveHistory = () => {
                     day: "numeric",
                   }
                 );
+                const today = new Date().toISOString();
+
                 return (
-                  <ListItem
-                    sx={{
-                      padding: "0px",
-                      paddingLeft: "13px",
-                      marginBottom: "19px",
-                    }}
-                  >
-                    <ListItemText
-                      sx={{
-                        maxWidth: "max-content",
-                        marginRight: "40px",
-                        marginY: 0,
-                      }}
-                    >
-                      <Typography
+                  <>
+                    {val.leaveDate < today ? (
+                      <ListItem
                         sx={{
-                          height: "20px",
-                          width: "20px",
-                          background: themeColors["#BEDEFF"],
-                          textAlign: "center",
-                          borderRadius: "5px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          fontSize: "7px",
-                          fontFamily: themeFonts["Poppins-SemiBold"],
-                          color: themeColors["#0C345D"],
-                          minWidth: "20px",
-                          margin: 0,
-                          paddingX: "4px",
+                          padding: "0px",
+                          paddingLeft: "13px",
+                          marginBottom: "19px",
                         }}
                       >
-                        {leaveDate}
-                      </Typography>
-                    </ListItemText>
-                    <ListItemText
-                      sx={{
-                        "& .MuiListItemText-primary": {
-                          display: "flex",
-                          gap: "10px",
-                          fontSize: "14px",
-                          fontFamily: themeFonts["Poppins-Regular"],
-                          color: themeColors["#000000"],
-                          alignItems: "center",
-                          "&:after": {
-                            content: '" "',
-                            display: "block",
-                            position: "absolute",
-                            zIndex: 5,
-                            left: "-26px",
-                            height: "14px",
-                            width: "14px",
-                            borderRadius: "10px",
-                            opacity: 1,
-                            border: " 1px solid #B9B9B9",
-                            background: themeColors["#FFFFFF"],
-                          },
-                        },
-                        position: "relative",
-                      }}
-                    >
-                      {val.leaveType}
-                    </ListItemText>
+                        <ListItemText
+                          sx={{
+                            maxWidth: "max-content",
+                            marginRight: "50px",
+                            marginY: 0,
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              height: "40px",
+                              width: "40px",
+                              background: themeColors["#BEDEFF"],
+                              textAlign: "center",
+                              borderRadius: "5px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              fontSize: "14px",
+                              fontFamily: themeFonts["Poppins-SemiBold"],
+                              color: themeColors["#0C345D"],
+                              minWidth: "40px",
+                              margin: 0,
+                              padding: "4px",
+                            }}
+                          >
+                            {leaveDate}
+                          </Typography>
+                        </ListItemText>
+                        <ListItemText
+                          sx={{
+                            "& .MuiListItemText-primary": {
+                              display: "flex",
+                              gap: "10px",
+                              fontSize: "14px",
+                              fontFamily: themeFonts["Poppins-Regular"],
+                              color: themeColors["#000000"],
+                              alignItems: "center",
+                              "&:after": {
+                                content: '" "',
+                                display: "block",
+                                position: "absolute",
+                                zIndex: 5,
+                                left: "-30px",
+                                height: "14px",
+                                width: "14px",
+                                borderRadius: "10px",
+                                opacity: 1,
+                                border: " 1px solid #B9B9B9",
+                                background: themeColors["#FFFFFF"],
+                              },
+                            },
+                            position: "relative",
+                          }}
+                        >
+                          {val.leaveType}
+                        </ListItemText>
 
-                    <ListItemText
-                      sx={{
-                        "& .MuiListItemText-primary": {
-                          fontSize: "14px",
-                          fontFamily: themeFonts["Poppins-Regular"],
-                          color: themeColors["#000000"],
-                        },
-                        width: "40%",
-                      }}
-                    >
-                      {val.reason}
-                    </ListItemText>
-                  </ListItem>
+                        <ListItemText
+                          sx={{
+                            "& .MuiListItemText-primary": {
+                              fontSize: "14px",
+                              fontFamily: themeFonts["Poppins-Regular"],
+                              color: themeColors["#000000"],
+                            },
+                            width: "35%",
+                          }}
+                        >
+                          {val.reason}
+                        </ListItemText>
+                      </ListItem>
+                    ) : (
+                      ""
+                    )}
+                  </>
                 );
               })}
           </List>
@@ -199,7 +207,7 @@ export const LeaveHistory = () => {
               position: "absolute",
               zIndex: 1,
               top: 0,
-              left: "27%",
+              left: "35%",
               height: "-webkit-fill-available",
             }}
           />

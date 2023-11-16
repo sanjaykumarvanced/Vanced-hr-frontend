@@ -253,10 +253,10 @@ export const TodaysLeavesDetails = () => {
                               fontFamily: themeFonts["Poppins-Regular"],
                               color: themeColors["#8BC34A"],
                             },
-                            width: "50%",
+                            width: "40%",
                           }}
                         >
-                          {val.leaveType}
+                          {`On ${val.leaveType}`}
                         </ListItemText>
                       </ListItem>
                     ))}
@@ -271,7 +271,7 @@ export const TodaysLeavesDetails = () => {
                       position: "absolute",
                       zIndex: 1,
                       top: 0,
-                      left: "27%",
+                      left: "28%",
                       height: "-webkit-fill-available",
                     }}
                   />
@@ -285,7 +285,7 @@ export const TodaysLeavesDetails = () => {
                       position: "absolute",
                       zIndex: 1,
                       top: 0,
-                      left: "60%",
+                      left: "62%",
                       height: "-webkit-fill-available",
                     }}
                   />
