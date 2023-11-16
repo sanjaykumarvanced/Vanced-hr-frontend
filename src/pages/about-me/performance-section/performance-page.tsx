@@ -18,7 +18,7 @@ export const PerformancePage = () => {
           <Typography
             sx={{
               fontFamily: themeFonts["Poppins-SemiBold"],
-              fontSize: "15px",
+              fontSize: "16px",
               color: themeColors["#0C345D"],
             }}
           >
@@ -32,9 +32,10 @@ export const PerformancePage = () => {
             }}
           >
             <Button
+            variant="contained"
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "10px",
+                fontSize: "12px",
                 color: themeColors["#FFFFFF"],
                 height: 29,
                 background: themeColors["#0C345D"],
@@ -47,7 +48,7 @@ export const PerformancePage = () => {
             <Button
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "10px",
+                fontSize: "12px",
                 color: themeColors["#224C78"],
                 height: 29,
                 background: themeColors["#E1E1E1"],

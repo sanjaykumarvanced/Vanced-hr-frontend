@@ -33,34 +33,6 @@ const columns: GridColDef[] = [
 ];
 
 export const PraisesReceivedTable = () => {
-  // const user = useSelector((state: any) => state.authentication.user);
-  // const Id = user.map((val: any) => val.id);
-  //   const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
-  //   const [isOpen, setIsOpen] = useState(false);
-  //   const handleClose = () => {
-  //     setIsOpen(false);
-  //   };
-  //   const handleOpen = (data: any) => {
-  //     setIsOpen(true);
-  //   };
-
-  //   console.log(data, Id);
-
-  //   if (!data) {
-  //     return null;
-  //   }
-
-  //   const rows = data.map((item: any) => ({
-  //     id: item._id,
-  //     leaveType: item.leaveType,
-  //     from: format(new Date(item.startDate), "dd/MM/yyyy"),
-  //     to: format(new Date(item.endDate), "dd/MM/yyyy"),
-  //     noOfDays: item.noOfDays,
-  //     reason: item.reason,
-  //     approvedBy: item.approvedBy,
-  //     status: item.status,
-  //     employerImage: item.approvedBy.employerImage.path,
-  //   }));
   const [selectedValue, setSelectedValue] = useState();
 
   const handleChange = (event: any) => {
@@ -101,7 +73,7 @@ export const PraisesReceivedTable = () => {
             <Typography
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "15px",
+                fontSize: "16px",
                 color: themeColors["#0C345D"],
               }}
             >
@@ -110,7 +82,7 @@ export const PraisesReceivedTable = () => {
                 component={"span"}
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "15px",
+                  fontSize: "16px",
                   color: themeColors["#808080"],
                   paddingLeft: "3px",
                 }}
@@ -131,7 +103,7 @@ export const PraisesReceivedTable = () => {
             <Select
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "15px",
+                fontSize: "14px",
                 color: themeColors["#0C345D"],
                 height: 39,
                 background: themeColors["#E1E1E1"],
@@ -175,7 +147,7 @@ export const PraisesReceivedTable = () => {
                     },
                     "& li": {
                       fontFamily: themeFonts["Poppins-SemiBold"],
-                      fontSize: "10px",
+                      fontSize: "14px",
                       color: themeColors["#0C345D"],
                     },
                   },
@@ -190,7 +162,7 @@ export const PraisesReceivedTable = () => {
               placeholder={"Oct 2023"}
               fontFamily={"Poppins-SemiBold"}
               color={"#0C345D"}
-              fontSize={"15px"}
+              fontSize={"14px"}
             />
           </Box>
         </Box>
