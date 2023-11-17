@@ -162,7 +162,7 @@ export const AuthHeaderLayout = ({
                 aria-expanded={isOpen ? "true" : undefined}
                 onClick={handleClick}
               >
-                <DownArrowIcon />
+                <DownArrowIcon height={10} />
               </IconButton>
             </Box>
           </Box>

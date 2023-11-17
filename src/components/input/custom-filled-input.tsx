@@ -1,5 +1,6 @@
 import {
   Box,
+  FormHelperText,
   InputBase,
   InputProps,
   TextFieldProps,
@@ -34,6 +35,8 @@ interface CustomFilledInputProps extends InputProps {
   alignItems?: any;
   marginTop?: any;
   onBlur?: any;
+  helperText?: any;
+  helperTextProps?: any;
 }
 export const CustomFilledInput = ({
   label,
@@ -58,6 +61,8 @@ export const CustomFilledInput = ({
   alignItems,
   marginTop,
   onBlur,
+  helperText,
+  helperTextProps,
   direction = "ltr",
   ...rest
 }: CustomFilledInputProps) => {
@@ -117,7 +122,7 @@ export const CustomFilledInput = ({
             "& .MuiInputBase-input": {
               fontFamily: themeFonts["Poppins-Regular"],
               color: color ? { color } : `${themeColors["rgb(0 0 0 / 50%)"]}`,
-              fontSize: 13,
+              fontSize: 14,
             },
           }}
           // onBlur={(e) => {
@@ -133,6 +138,20 @@ export const CustomFilledInput = ({
           }}
         />
       </Box>
+
+      {!!helperText && (
+        <FormHelperText
+          sx={{
+            fontFamily: themeFonts["Poppins-Bold"],
+            color: themeColors["#FF3939"],
+            fontSize: 14,
+            marginLeft: 0,
+          }}
+          {...helperTextProps}
+        >
+          {helperText}
+        </FormHelperText>
+      )}
       <ErrorStatusMessage error={errorStatus} />
     </Box>
   );

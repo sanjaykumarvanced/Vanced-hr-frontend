@@ -175,6 +175,7 @@ export const RequestLeavesDialog = (props: any) => {
                 }}
                 value={formik.values.leaveType}
                 name="leaveType"
+                helperText={formik.touched.reason && formik.errors.reason}
               />
             </Grid>
             <Grid
@@ -226,7 +227,14 @@ export const RequestLeavesDialog = (props: any) => {
                         fontSize: "14px",
                         minHeight: "39px",
                       },
+                      "& .MuiFormHelperText-root": {
+                        fontFamily: themeFonts["Poppins-Bold"],
+                        color: themeColors["#FF3939"],
+                        fontSize: 14,
+                        marginLeft: 0,
+                      },
                     }}
+                    helperText={formik.touched.reason && formik.errors.reason}
                   />
                 )}
                 onChange={(event, selectedValues) => {
@@ -306,6 +314,7 @@ export const RequestLeavesDialog = (props: any) => {
                 border="1px solid rgb(0 0 0 / 30%)"
                 value={formik.values.noOfDays}
                 readOnly
+                helperText={formik.touched.reason && formik.errors.reason}
               />
             </Grid>
           </Grid>
@@ -327,13 +336,38 @@ export const RequestLeavesDialog = (props: any) => {
               sx={{
                 "&.MuiFormControl-root.MuiTextField-root": {
                   width: "100%",
-                  fontSize: "12px",
+                },
+                "& .MuiInputBase-colorPrimary.Mui-error": {
+                  color: themeColors["#323B4B"],
+                  border: "1px solid #1C223E6E",
+                  fontSize: 14,
+                },
+                "& .Mui-error": {
+                  fontFamily: themeFonts["Poppins-Bold"],
+                  color: themeColors["#FF3939"],
+                  fontSize: 14,
+                  marginLeft: 0,
+                },
+                "& .MuiOutlinedInput-root.MuiInputBase-colorPrimary": {
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  color: themeColors["#323B4B"],
+                  fontSize: 14,
+                },
+                "& .Mui-error .MuiOutlinedInput-notchedOutline": {
+                  border: 0,
+                },
+                "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  border: "1px solid #1C223E6E",
+                },
+                "& :hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#1C223E6E",
                 },
               }}
               onChange={formik.handleChange}
               value={formik.values.reason}
               name="reason"
               error={formik.touched.reason && Boolean(formik.errors.reason)}
+              helperText={formik.touched.reason && formik.errors.reason}
             />
           </Grid>
         </DialogContent>
@@ -373,7 +407,7 @@ export const RequestLeavesDialog = (props: any) => {
             </Button>
             <Button
               type="submit"
-              onClick={handleSubmit}
+              // onClick={handleSubmit}
               sx={{
                 width: 117,
                 height: 39,

@@ -80,7 +80,7 @@ export const QuickAccessPage = () => {
                 right: "13px",
               },
             }}
-            IconComponent={() => <DownArrowIcon1 />}
+            IconComponent={() => <DownArrowIcon1 height={10} />}
             defaultValue={"Organization"}
             onChange={handleChange}
             value={selectedValue}

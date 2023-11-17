@@ -19,7 +19,7 @@ export type CustomSelectOption = {
 interface CustomSelectProps {
   label?: string;
   options: Array<CustomSelectOption>;
-  helperText?: string;
+  helperText?: any;
   value?: string;
   onChange?: (value: string) => void;
   errorStatus?: string;
@@ -51,7 +51,7 @@ export const CustomSelect = ({
       <Select
         value={selectValue.toString()}
         onChange={handleChange}
-        IconComponent={() => <DownArrowIcon2 />}
+        IconComponent={() => <DownArrowIcon2 height={10}/>}
         defaultValue={defaultValue ? defaultValue : ""}
         name={name}
         sx={{
@@ -89,7 +89,13 @@ export const CustomSelect = ({
         }}
       >
         {options.map((item, index) => (
-          <MenuItem key={`custom-select-option-${index}`} value={item.value}>
+          <MenuItem
+            key={`custom-select-option-${index}`}
+            value={item.value}
+            sx={{
+              fontSize: "14px",
+            }}
+          >
             {item.label}
           </MenuItem>
         ))}
@@ -98,10 +104,10 @@ export const CustomSelect = ({
       {helperText && (
         <FormHelperText
           sx={{
-            fontFamily: themeFonts["Poppins-SemiBold"],
-            color: themeColors["#8A94A6"],
-            fontSize: 14,
-            marginLeft: 0,
+            fontFamily: themeFonts["Poppins-Bold"],
+                  color: themeColors["#FF3939"],
+                  fontSize: 14,
+                  marginLeft: 0,
           }}
         >
           {helperText}

@@ -116,7 +116,7 @@ export const AttendanceStats = () => {
                   border: "none",
                 },
             }}
-            IconComponent={() => <DownArrowIcon3 />}
+            IconComponent={() => <DownArrowIcon3 height={10} />}
             defaultValue={"Last Week"}
             onChange={handleChange}
             value={selectedValue}
