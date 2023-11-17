@@ -78,6 +78,7 @@ export const TodayActivity = () => {
             color: themeColors["#0C345D"],
             minWidth: "40px",
             paddingX: "4px",
+            lineHeight: "14px",
           }}
         >
           {today}

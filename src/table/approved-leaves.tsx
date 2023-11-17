@@ -202,7 +202,7 @@ export const ApprovedLeaves = () => {
             disableDensitySelector
             disableColumnFilter
             disableColumnMenu
-            hideFooterSelectedRowCount
+            hideFooter
             pageSizeOptions={[]}
             sx={{
               border: 0,

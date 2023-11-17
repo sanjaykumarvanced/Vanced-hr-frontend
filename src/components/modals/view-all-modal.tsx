@@ -36,7 +36,7 @@ export const ViewAllHolidaysDialog = (props: any) => {
         sx={{
           position: "absolute",
           right: 20,
-          top: 19,
+          top: 20,
           height: "25px",
           width: "25px",
         }}

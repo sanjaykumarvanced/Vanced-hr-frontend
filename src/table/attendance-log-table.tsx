@@ -252,7 +252,7 @@ export const AttendanceLogTable = () => {
             disableDensitySelector
             disableColumnFilter
             disableColumnMenu
-            hideFooterSelectedRowCount
+            hideFooter
             pageSizeOptions={[]}
             sx={{
               border: 0,

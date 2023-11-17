@@ -46,7 +46,7 @@ export const CustomSelect = ({
 
   return (
     <FormControl fullWidth>
-      {label && <CustomLabel label={label} fontSize="12px" />}
+      {label && <CustomLabel label={label} fontSize="14px" />}
 
       <Select
         value={selectValue.toString()}
@@ -58,7 +58,7 @@ export const CustomSelect = ({
           height: 39,
           borderRadius: 2,
           color: "rgb(0 0 0 / 50%)",
-          fontSize: "12px",
+          fontSize: "14px",
           fontFamily: themeFonts["Poppins-Regular"],
           border: "1px solid rgb(0 0 0 / 30%)",
           padding: "11px",

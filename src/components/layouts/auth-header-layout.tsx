@@ -7,7 +7,7 @@ import {
   ProfilePicture,
   SearchIcon,
 } from "../../svgs";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { useState } from "react";
 import { ProfileMenu } from "../dropdown/profile-menu";
 import { useSelector } from "react-redux";
@@ -72,16 +72,34 @@ export const AuthHeaderLayout = ({
             }}
           >
             {!open ? (
-              <IconButton onClick={handleDrawerOpen}>
+              <IconButton
+                onClick={handleDrawerOpen}
+                sx={{
+                  height: "40px",
+                  width: "40px",
+                }}
+              >
                 <BarIconSvg />
               </IconButton>
             ) : (
-              <IconButton onClick={handleDrawerClose}>
-                <ArrowLeftIcon />
+              <IconButton
+                onClick={handleDrawerClose}
+                sx={{
+                  height: "40px",
+                  width: "40px",
+                }}
+              >
+                <ArrowRightIcon />
               </IconButton>
             )}
 
-            <IconButton onClick={handleSearchBarOpen}>
+            <IconButton
+              onClick={handleSearchBarOpen}
+              sx={{
+                height: "40px",
+                width: "40px",
+              }}
+            >
               <SearchIcon />
             </IconButton>
           </Box>
@@ -123,7 +141,7 @@ export const AuthHeaderLayout = ({
                     sx={{
                       fontFamily: themeFonts["Poppins-Regular"],
                       color: themeColors["#000000"],
-                      fontSize: "15px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                   >

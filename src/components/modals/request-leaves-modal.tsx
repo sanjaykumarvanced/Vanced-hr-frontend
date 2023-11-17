@@ -40,15 +40,18 @@ export const RequestLeavesDialog = (props: any) => {
   };
   const [createApplyLeaveRequest] = useCreateApplyLeaveRequestMutation();
   const { data } = useGetEmployeeListQuery<any>();
-  const searchEmployee: any =
-    data && data.map((val: any) => `${val.firstName} ${val.lastName}`);
+  const employeeOptions =
+    data &&
+    data.map((option: any) => ({
+      id: option._id,
+      label: `${option.firstName} ${option.lastName}`,
+    }));
+
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user.map((val: any) => val.id);
-  const id = "652d31fc3d93ae86647ec0fe";
-  console.log(data, "data", searchEmployee);
-
+  const adminId = "652d31fc3d93ae86647ec0fe";
   const { refetch: leaveStatusRefetch }: any = useGetRequestedLeavesByIdQuery({
-    employerId: id,
+    employerId: adminId,
   });
   const handleSubmit = async () => {
     try {
@@ -112,7 +115,7 @@ export const RequestLeavesDialog = (props: any) => {
       <DialogTitle
         sx={{
           fontFamily: themeFonts["Poppins-SemiBold"],
-          fontSize: "15px",
+          fontSize: "16px",
           color: themeColors["#0A2A4A"],
           m: 0,
           paddingY: "17px",
@@ -127,7 +130,9 @@ export const RequestLeavesDialog = (props: any) => {
         sx={{
           position: "absolute",
           right: 20,
-          top: 13,
+          top: 16,
+          height: "25px",
+          width: "25px",
         }}
       >
         <CloseIconSvg1 />
@@ -193,12 +198,12 @@ export const RequestLeavesDialog = (props: any) => {
                 name="notify"
                 error={formik.touched.notify && Boolean(formik.errors.notify)}
               /> */}
-              <CustomLabel label={"Notify"} fontSize="12px" />
+              <CustomLabel label={"Notify"} fontSize="14px" />
               <Autocomplete
                 multiple
                 freeSolo
                 id="combo-box-demo"
-                options={searchEmployee}
+                options={employeeOptions}
                 sx={{
                   width: "100%",
                   "& .MuiInputBase-root.MuiOutlinedInput-root": {
@@ -218,33 +223,24 @@ export const RequestLeavesDialog = (props: any) => {
                     sx={{
                       "&.MuiFormControl-root.MuiTextField-root": {
                         width: "100%",
-                        fontSize: "12px",
+                        fontSize: "14px",
                         minHeight: "39px",
                       },
                     }}
                   />
                 )}
                 onChange={(event, selectedValues) => {
-                  // Map the selected employee names to their corresponding IDs
-                  const selectedEmployeeIDs = selectedValues.map((name) => {
-                    const employee = data.find(
-                      (val: any) => `${val.firstName} ${val.lastName}` === name
-                    );
-                    return employee ? employee._id : null;
-                  });
-                  // Remove null values (IDs not found for some reason)
-                  const filteredEmployeeIDs = selectedEmployeeIDs.filter(
-                    (id) => id !== null
+                  debugger;
+                  const filteredEmployeeIDs = selectedValues.map(
+                    (val) => val.id
                   );
-                  formik.setFieldValue("notify", filteredEmployeeIDs); // Update the "notify" field in the formik state
+                  formik.setFieldValue("notify", filteredEmployeeIDs);
                 }}
                 value={formik.values.notify.map((employeeID) => {
-                  const employee = data.find(
-                    (val: any) => val._id === employeeID
+                  const employee = employeeOptions.find(
+                    (val: any) => val.id === employeeID
                   );
-                  return employee
-                    ? `${employee.firstName} ${employee.lastName}`
-                    : null;
+                  return employee;
                 })}
               />
             </Grid>
@@ -323,7 +319,7 @@ export const RequestLeavesDialog = (props: any) => {
               alignItems: "flex-start",
             }}
           >
-            <CustomLabel label={"Reason"} fontSize="12px" />
+            <CustomLabel label={"Reason"} fontSize="14px" />
             <TextField
               multiline
               rows={3.4}

@@ -143,6 +143,7 @@ export const LeaveHistory = () => {
                               minWidth: "40px",
                               margin: 0,
                               padding: "4px",
+                              lineHeight: "14px",
                             }}
                           >
                             {leaveDate}

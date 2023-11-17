@@ -220,7 +220,7 @@ const SocialDashboard = () => {
           </Button>
         </Grid>
       </Grid>
-      <Grid
+      {/* <Grid
         item
         xs={12}
         sx={{
@@ -274,7 +274,7 @@ const SocialDashboard = () => {
             </CustomTabsPanel>
           ))}
         </Box>
-      </Grid>
+      </Grid> */}
       {isOpen && (
         <ViewAllHolidaysDialog
           open={isOpen}

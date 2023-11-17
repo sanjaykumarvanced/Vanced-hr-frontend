@@ -37,7 +37,9 @@ export const SearchBarDialog = (props: any) => {
             sx={{
               position: "absolute",
               right: 20,
-              top: 13,
+              top: 15,
+              height: "25px",
+              width: "25px",
             }}
           >
             <CloseIconSvg1 />
@@ -45,7 +47,7 @@ export const SearchBarDialog = (props: any) => {
           <Typography
             sx={{
               fontFamily: themeFonts["Poppins-SemiBold"],
-              fontSize: "15px",
+              fontSize: "16px",
               color: themeColors["#0C345D"],
               padding: "16px",
             }}

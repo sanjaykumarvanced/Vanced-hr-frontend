@@ -128,7 +128,7 @@ export const PraisesReceivedTable = () => {
                     border: "none",
                   },
               }}
-              IconComponent={() => <DownArrowIcon4 />}
+              IconComponent={() => <DownArrowIcon4 height={10} />}
               defaultValue={"Monthly Report"}
               onChange={handleChange}
               value={selectedValue}
@@ -162,7 +162,7 @@ export const PraisesReceivedTable = () => {
               placeholder={"Oct 2023"}
               fontFamily={"Poppins-SemiBold"}
               color={"#0C345D"}
-              fontSize={"14Last Weekpx"}
+              fontSize={"14px"}
             />
           </Box>
         </Box>
@@ -275,7 +275,7 @@ export const PraisesReceivedTable = () => {
             disableDensitySelector
             disableColumnFilter
             disableColumnMenu
-            hideFooterSelectedRowCount
+            hideFooter
             pageSizeOptions={[]}
             sx={{
               border: 0,

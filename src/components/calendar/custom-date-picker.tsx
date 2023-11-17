@@ -53,7 +53,7 @@ export const CustomDatePicker = ({
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      {label && <CustomLabel label={label} fontSize="12px" />}
+      {label && <CustomLabel label={label} fontSize="14px" />}
       <DatePicker
         slots={{
           openPickerIcon: CalenderIcon1Svg,

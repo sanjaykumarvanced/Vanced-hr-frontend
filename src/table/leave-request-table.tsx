@@ -270,7 +270,7 @@ export const LeaveRequestTable = () => {
             disableDensitySelector
             disableColumnFilter
             disableColumnMenu
-            hideFooterSelectedRowCount
+            hideFooter
             pageSizeOptions={[]}
             sx={{
               border: 0,
