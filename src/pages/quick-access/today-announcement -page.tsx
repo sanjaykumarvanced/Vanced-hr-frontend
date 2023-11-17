@@ -8,8 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
-import { useState } from "react";
-import { getStyles } from "./todays-leaves-details";
+import { useState } from "react"
 import { Profile } from "../../pngs";
 import { BirthdayWishSvg } from "../../svgs";
 import { AddNewPostDialog } from "../../components/modals/add-new-post";

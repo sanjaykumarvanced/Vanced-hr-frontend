@@ -256,7 +256,7 @@ export const AddNewPostDialog = (props: any) => {
         </DialogContent>
         <DialogActions
           sx={{
-            justifyContent: "center",
+            justifyContent: "end",
             paddingTop: "20px",
             paddingBottom: "26px",
           }}
