@@ -6,7 +6,7 @@ const injectedRtkApi = api.injectEndpoints({
         return {
           url: `api/image/upload/${queryArg.id}`,
           method: "POST",
-          body: queryArg.UploadImageApi,
+          body: queryArg.uploadImageApi
         };
       },
     }),
@@ -16,7 +16,7 @@ export { injectedRtkApi as enhancedApi };
 
 export type UploadImageApiArg = {
   id?: number;
-  UploadImageApi?: UploadImageApi;
+  uploadImageApi?: UploadImageApi;
 };
 export type UploadImageApi = {
   image?: Blob;

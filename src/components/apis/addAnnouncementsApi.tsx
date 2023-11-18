@@ -17,9 +17,6 @@ export { injectedRtkApi as enhancedApi };
 export type AnnouncementApiArg = {
   id?: number;
 };
-export type BodyUploadAdLogoApiAdsAdIdLogoPost = {
-  logo: Blob;
-};
 export const {
   useCreateAnnouncementMutation,
 } = injectedRtkApi;
