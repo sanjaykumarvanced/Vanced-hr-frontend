@@ -51,7 +51,6 @@ export const TodaysLeavesDetails = () => {
     month: "short",
     day: "numeric",
   });
-  console.log(today);
   const { data } = useGetLeavesDetailsQuery();
   const [filteredLeaves, setFilteredLeaves] = useState([]);
 

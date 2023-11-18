@@ -59,7 +59,6 @@ export const ApprovedLeaves = () => {
   if (!data) {
     return null;
   }
-  console.log(data);
 
   const rows = data.map((item: any) => ({
     id: item._id,

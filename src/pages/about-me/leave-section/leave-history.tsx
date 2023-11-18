@@ -16,7 +16,6 @@ export const LeaveHistory = () => {
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user[0].id;
   const { data }: any = useGetLeaveHistoryByIdQuery({ id: Id });
-  console.log(data, Id);
   return (
     <Grid
       item

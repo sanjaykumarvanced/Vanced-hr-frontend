@@ -11,7 +11,6 @@ export const AuthLayout = () => {
 
   const handleDrawerOpen = () => {
     setOpen(true);
-    console.log('jkjkj');
   };
 
   const handleDrawerClose = () => {

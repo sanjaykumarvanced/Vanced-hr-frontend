@@ -55,8 +55,6 @@ export const LeaveRequestTable = () => {
     setIsOpen(true);
   };
 
-  console.log(data, Id, "leave-request");
-
   if (!data) {
     return null;
   }
@@ -73,7 +71,6 @@ export const LeaveRequestTable = () => {
     employerImage: item?.approvedBy?.employer?.employerImage?.path,
     employerName: item?.approvedBy?.employer?.userName,
   }));
-  console.log(rows, "rows");
 
   return (
     <>

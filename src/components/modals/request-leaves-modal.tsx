@@ -55,8 +55,7 @@ export const RequestLeavesDialog = (props: any) => {
   });
   const handleSubmit = async () => {
     try {
-      // Make an API request to apply for leave
-      const response = await createApplyLeaveRequest({
+      await createApplyLeaveRequest({
         employee: Id,
         leaveType: formik.values.leaveType,
         notify: formik.values.notify,
@@ -65,11 +64,6 @@ export const RequestLeavesDialog = (props: any) => {
         noOfDays: formik.values.noOfDays,
         reason: formik.values.reason,
       });
-
-      // Handle success - You can close the dialog and show a success message
-      console.log("Leave request submitted successfully", response);
-
-      // Close the dialog
       onClose();
     } catch (error) {
       // Handle error - Display an error message or log the error

@@ -184,3 +184,7 @@ min-height: 150px;
 .public-DraftStyleDefault-block{
   margin: 0;
 }
+
+.announcement-description p {
+margin: 0;
+}

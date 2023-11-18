@@ -13,7 +13,6 @@ import { CloseIconSvg1 } from "../../svgs";
 
 export const ViewAllHolidaysDialog = (props: any) => {
   const { onClose, open, data } = props;
-  console.log(data);
   const handleClose = () => {
     onClose();
   };

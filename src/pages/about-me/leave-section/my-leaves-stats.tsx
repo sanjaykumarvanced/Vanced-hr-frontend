@@ -20,7 +20,6 @@ export const MyLeaveStats = () => {
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user[0].id;
   const { data }: any = useGetLeaveStatsByIdQuery({ id: Id });
-  console.log(data, Id);
   return (
     <>
       <Grid
@@ -105,7 +104,6 @@ export const MyLeaveStats = () => {
                     const abbreviatedMonth = date.toLocaleString("default", {
                       month: "short",
                     });
-                    console.log(date);
                     return (
                       <Box
                         sx={{

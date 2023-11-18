@@ -5,6 +5,7 @@ import {
   Grid,
   List,
   ListItem,
+  ListItemText,
   Typography,
 } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
@@ -13,10 +14,10 @@ import { Profile } from "../../pngs";
 import { BirthdayWishSvg } from "../../svgs";
 import { AddNewPostDialog } from "../../components/modals/add-new-post";
 import { useGetAnnouncementListQuery } from "../../components/apis/addAnnouncementsApi";
+import { apiBaseUrl } from "../../components/consts/api-url.const";
 
 export const TodaysAnnouncement = () => {
   const { data } = useGetAnnouncementListQuery<any>();
-  console.log(data);
 
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
@@ -95,135 +96,168 @@ export const TodaysAnnouncement = () => {
             width: "100%",
             gap: "20px",
             overflow: "auto",
-            maxHeight: "600px",
+            maxHeight: "800px",
           }}
         >
           <Box sx={{ width: "100%" }}>
-            <Box
+            <List
               sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                paddingTop: "26px",
+                listStyle: "none",
+                paddingLeft: 0,
+                paddingTop: "18px",
               }}
             >
-              <img src={Profile} alt="pic" />
-              <Box>
-                <Typography
-                  sx={{
-                    fontFamily: themeFonts["Poppins-SemiBold"],
-                    fontSize: "14px",
-                    color: themeColors["#000000"],
-                  }}
-                >
-                  Sakshi Rana
-                  <Typography
-                    component="span"
-                    sx={{
-                      fontFamily: themeFonts["Poppins-Regular"],
-                      fontSize: "10px",
-                      color: "rgb(0 0 0 / 50%)",
-                      paddingLeft: "3px",
-                    }}
-                  >
-                    ( Created a Post )
-                  </Typography>
-                </Typography>
-                <Typography
-                  sx={{
-                    fontFamily: themeFonts["Poppins-Regular"],
-                    fontSize: "12px",
-                    color: themeColors["#55A232"],
-                  }}
-                >
-                  (10 min ago)
-                </Typography>
-              </Box>
-            </Box>
+              {data &&
+                data.map((val: any, idx: any) => {
+                  let html = val.description;
+                  return (
+                    <>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                          paddingTop: "26px",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            height: 38,
+                            width: 38,
+                            borderRadius: "5px",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <img
+                            src={apiBaseUrl + "/" + val.image.path}
+                            height={38}
+                            width={38}
+                            alt="pic"
+                          />
+                        </Box>
+                        <Box>
+                          <Typography
+                            sx={{
+                              fontFamily: themeFonts["Poppins-SemiBold"],
+                              fontSize: "14px",
+                              color: themeColors["#000000"],
+                            }}
+                          >
+                            {val.employee.firstName} {val.employee.lastName}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontFamily: themeFonts["Poppins-Regular"],
+                              fontSize: "12px",
+                              color: themeColors["#55A232"],
+                            }}
+                          >
+                            (10 min ago)
+                          </Typography>
+                        </Box>
+                      </Box>
+                      <ListItem
+                        sx={{
+                          // display: "list-item",
+                          // "&::before": {
+                          //   content: "'(' counter(list-item) ') '",
+                          //   fontFamily: themeFonts["Poppins-SemiBold"],
+                          //   fontSize: "16px",
+                          //   color: themeColors["#0C345D"],
+                          //   paddingRight: "15px",
+                          // },
+                          // counterIncrement: "list-item",
+                          fontFamily: themeFonts["Poppins-SemiBold"],
+                          fontSize: "14px",
+                          color: themeColors["#0C345D"],
+                          paddingTop: "24px",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "start",
+                          gap: "8px",
+                        }}
+                      >
+                        {val.title}
 
-            <List
-              sx={{ listStyle: "none", paddingLeft: 0, paddingTop: "18px" }}
-            >
-              <ListItem
-                sx={{
-                  display: "list-item",
-                  "&::before": {
-                    content: "'(' counter(list-item) ') '",
-                    fontFamily: themeFonts["Poppins-SemiBold"],
-                    fontSize: "16px",
-                    color: themeColors["#0C345D"],
-                    paddingRight: "15px",
-                  },
-                  counterIncrement: "list-item",
-                  paddingX: 0,
-                  fontFamily: themeFonts["Poppins-Regular"],
-                  fontSize: "14px",
-                  color: themeColors["#000000"],
-                }}
-              >
-                Wishing You a Happy Birthday , a wonderful year and success in
-                all you do
-                <Typography
-                  component="span"
-                  sx={{
-                    fontFamily: themeFonts["Poppins-Regular"],
-                    fontSize: "14px",
-                    color: themeColors["#2D87C2"],
-                    paddingLeft: "3px",
-                  }}
-                >
-                  @ Mamta Verma.
-                </Typography>
-                <Box
-                  sx={{
-                    padding: "26px",
-                    marginLeft: "11px",
-                  }}
-                >
-                  <BirthdayWishSvg />
-                </Box>
-              </ListItem>
-              <Divider sx={{ width: "100%" }} />
-              <ListItem
-                sx={{
-                  display: "list-item",
-                  "&::before": {
-                    content: "'(' counter(list-item) ') '",
-                    fontFamily: themeFonts["Poppins-SemiBold"],
-                    fontSize: "16px",
-                    color: themeColors["#0C345D"],
-                    paddingRight: "15px",
-                  },
-                  counterIncrement: "list-item",
-                  paddingX: 0,
-                  fontFamily: themeFonts["Poppins-SemiBold"],
-                  fontSize: "14px",
-                  color: themeColors["#0C345D"],
-                  paddingTop: "24px",
-                }}
-              >
-                Welcome Shikha Sen ( New Hr ),
-                <Box
-                  sx={{
-                    marginLeft: "40px",
-                  }}
-                >
-                  <Typography
-                    component="span"
+                        <Typography
+                          component="span"
+                          sx={{
+                            fontFamily: themeFonts["Poppins-Regular"],
+                            fontSize: "14px",
+                            color: themeColors["#000000"],
+                          }}
+                        >
+                          <div
+                            className="announcement-description"
+                            dangerouslySetInnerHTML={{ __html: html }}
+                          />
+                        </Typography>
+                        {val.announcementImage && (
+                          <Box
+                            sx={{
+                              paddingY: "18px",
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                height: 252,
+                                width: 384,
+                                borderRadius: "6px",
+                                overflow: "hidden",
+                              }}
+                            >
+                              <img
+                                src={apiBaseUrl + "/" + val.announcementImage}
+                                height={252}
+                                width={384}
+                                alt="img"
+                              />
+                            </Box>
+                          </Box>
+                        )}
+                      </ListItem>
+                      <Divider sx={{ width: "100%" }} />
+                    </>
+                  );
+                })}
+              {/* <ListItem
                     sx={{
-                      fontFamily: themeFonts["Poppins-Regular"],
+                      // display: "list-item",
+                      // "&::before": {
+                      //   content: "'(' counter(list-item) ') '",
+                      //   fontFamily: themeFonts["Poppins-SemiBold"],
+                      //   fontSize: "16px",
+                      //   color: themeColors["#0C345D"],
+                      //   paddingRight: "15px",
+                      // },
+                      // counterIncrement: "list-item",
+                      paddingX: 0,
+                      fontFamily: themeFonts["Poppins-SemiBold"],
                       fontSize: "14px",
-                      color: "rgb(0 0 0 / 50%)",
-                      paddingLeft: "3px",
-                      paddingTop: "8px",
+                      color: themeColors["#0C345D"],
+                      paddingTop: "24px",
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                  </Typography>
-                </Box>
-              </ListItem>
+                    Welcome Shikha Sen ( New Hr ),
+                    <Box
+                      sx={{
+                        marginLeft: "40px",
+                      }}
+                    >
+                      <Typography
+                        component="span"
+                        sx={{
+                          fontFamily: themeFonts["Poppins-Regular"],
+                          fontSize: "14px",
+                          color: "rgb(0 0 0 / 50%)",
+                          paddingLeft: "3px",
+                          paddingTop: "8px",
+                        }}
+                      >
+                       <div dangerouslySetInnerHTML={{ __html: html }} />
+                      </Typography>
+                    </Box>
+                  </ListItem> */}
             </List>
           </Box>
         </Box>

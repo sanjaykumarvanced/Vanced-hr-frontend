@@ -32,7 +32,6 @@ export const CustomDatePickerCalendar = ({
   
   const [selectValue, setSelectValue] = React.useState(value ?? '');
   const today = dayjs()
-  console.log(today, 'today');
 
   const handleDateChange = (date: any) => {
     setSelectValue(date);

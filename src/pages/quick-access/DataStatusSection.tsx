@@ -45,7 +45,6 @@ export const DataStatusSection = () => {
   const handleOpen = (data: any) => {
     setIsOpen(true);
   };
-  console.log(data);
 
   return (
     <>

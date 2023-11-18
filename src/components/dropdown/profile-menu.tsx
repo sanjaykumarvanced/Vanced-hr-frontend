@@ -38,7 +38,6 @@ export const ProfileMenu = ({
   };
 
   const user = useSelector((state: any) => state.authentication.user);
-  console.log(user);
 
   return (
     <>

@@ -51,7 +51,6 @@ export const useLoginWithEmailHook = ({ next }: { next: () => void }) => {
             ],
           })
         );
-        console.log("Login successful:", response);
       }
       next();
     },

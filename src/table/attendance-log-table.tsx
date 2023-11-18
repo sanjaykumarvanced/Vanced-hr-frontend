@@ -54,8 +54,6 @@ export const AttendanceLogTable = () => {
   //     setIsOpen(true);
   //   };
 
-  //   console.log(data, Id);
-
   //   if (!data) {
   //     return null;
   //   }
