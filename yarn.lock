@@ -4556,6 +4556,21 @@
   dependencies:
     "@types/node" "*"
 
+"@types/draft-js@*", "@types/draft-js@^0.11.15":
+  "integrity" "sha512-2alZTv5TimhxH1gTNWyEa9nq0Kf29hNFhIgiWXBx/VYz51DaYhNgBQxXG3uHY7wyeo+vdPZZ1pGpVFfMENBhfQ=="
+  "resolved" "https://registry.npmjs.org/@types/draft-js/-/draft-js-0.11.15.tgz"
+  "version" "0.11.15"
+  dependencies:
+    "@types/react" "*"
+    "immutable" "~3.7.4"
+
+"@types/draftjs-to-html@^0.8.4":
+  "integrity" "sha512-5FZcjFoJL57N/IttLCTCNI0krX+181oCl5hf76u3TqPkqBAphHrJAO9ReYesx9138kcObaYmpnWC2Yrqxoqd2Q=="
+  "resolved" "https://registry.npmjs.org/@types/draftjs-to-html/-/draftjs-to-html-0.8.4.tgz"
+  "version" "0.8.4"
+  dependencies:
+    "@types/draft-js" "*"
+
 "@types/eslint-scope@^3.7.3":
   "integrity" "sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA=="
   "resolved" "https://registry.npmjs.org/@types/eslint-scope/-/eslint-scope-3.7.4.tgz"
@@ -4751,6 +4766,14 @@
   "resolved" "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.2.7.tgz"
   "version" "18.2.7"
   dependencies:
+    "@types/react" "*"
+
+"@types/react-draft-wysiwyg@^1.13.7":
+  "integrity" "sha512-jG2YmbaesrCv7GakLb0fVxaQMAg+bjGvaMwaImrXaYMVEoZzzaoFbTFXTBJmogkxEDrfvtmdUVn5e4koB/gn8A=="
+  "resolved" "https://registry.npmjs.org/@types/react-draft-wysiwyg/-/react-draft-wysiwyg-1.13.7.tgz"
+  "version" "1.13.7"
+  dependencies:
+    "@types/draft-js" "*"
     "@types/react" "*"
 
 "@types/react-router-dom@^5.3.3":

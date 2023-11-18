@@ -238,7 +238,6 @@ export const RequestLeavesDialog = (props: any) => {
                   />
                 )}
                 onChange={(event, selectedValues) => {
-                  debugger;
                   const filteredEmployeeIDs = selectedValues.map(
                     (val) => val.id
                   );

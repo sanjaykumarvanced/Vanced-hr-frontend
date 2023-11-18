@@ -31,7 +31,6 @@ export const CustomDatePicker = ({
   name?: any;
 }) => {
   const customDayOfWeekFormatter = (dayAbbreviation: string) => {
-    debugger;
     const daysAbbreviations = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
     const dayIndex = daysAbbreviations.indexOf(dayAbbreviation);
 

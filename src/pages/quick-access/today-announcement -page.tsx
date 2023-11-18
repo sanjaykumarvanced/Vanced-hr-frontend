@@ -52,8 +52,8 @@ export const TodaysAnnouncement = () => {
               color: themeColors["#0C345D"],
             }}
           >
-            Today Announcement
-            <Typography
+            Announcement
+            {/* <Typography
               component="span"
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
@@ -63,7 +63,7 @@ export const TodaysAnnouncement = () => {
               }}
             >
               (10)
-            </Typography>
+            </Typography> */}
           </Typography>
           <Button
             sx={{

@@ -158,3 +158,15 @@ button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today{
   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
   margin-top: 10px;
 }
+.wrapper-class {
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.editor-class {
+  background-color: lightgray;
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+.toolbar-class {
+  border: 1px solid #ccc;
+}

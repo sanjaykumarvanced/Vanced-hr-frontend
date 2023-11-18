@@ -6,7 +6,7 @@ const injectedRtkApi = api.injectEndpoints({
         return {
           url: `api/image/upload/${queryArg.id}`,
           method: "POST",
-          body: queryArg.uploadImageApi
+          body: queryArg?.image,
         };
       },
     }),
@@ -16,12 +16,7 @@ export { injectedRtkApi as enhancedApi };
 
 export type UploadImageApiArg = {
   id?: number;
-  uploadImageApi?: UploadImageApi;
+  image?: FormData;
 };
-export type UploadImageApi = {
-  image?: Blob;
-};
-export const {
-  // useGetAnnouncementDetailsQuery,
-  useUploadImageMutation,
-} = injectedRtkApi;
+
+export const { useUploadImageMutation } = injectedRtkApi;
