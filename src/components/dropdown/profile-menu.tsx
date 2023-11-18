@@ -99,19 +99,18 @@ export const ProfileMenu = ({
                   >
                     <ProfilePicture />
                   </Box>
-                  {user.map((val: any) => (
-                    <Typography
-                      sx={{
-                        fontFamily: themeFonts["Poppins-Regular"],
-                        color: themeColors["#000000"],
-                        fontSize: "15px",
-                        textAlign: "center",
-                        paddingLeft: "14px",
-                      }}
-                    >
-                      {val.firstName} {val.lastName}
-                    </Typography>
-                  ))}
+
+                  <Typography
+                    sx={{
+                      fontFamily: themeFonts["Poppins-Regular"],
+                      color: themeColors["#000000"],
+                      fontSize: "15px",
+                      textAlign: "center",
+                      paddingLeft: "14px",
+                    }}
+                  >
+                    {user[0].firstName} {user[0].lastName}
+                  </Typography>
                 </Box>
                 <Divider sx={{ width: "100%", paddingTop: "8px" }} />
                 <Box

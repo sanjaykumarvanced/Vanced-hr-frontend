@@ -136,18 +136,16 @@ export const AuthHeaderLayout = ({
                   paddingRight: "7px",
                 }}
               >
-                {user.map((val: any) => (
-                  <Typography
-                    sx={{
-                      fontFamily: themeFonts["Poppins-Regular"],
-                      color: themeColors["#000000"],
-                      fontSize: "16px",
-                      textAlign: "center",
-                    }}
-                  >
-                    {val.firstName} {val.lastName}
-                  </Typography>
-                ))}
+                <Typography
+                  sx={{
+                    fontFamily: themeFonts["Poppins-Regular"],
+                    color: themeColors["#000000"],
+                    fontSize: "16px",
+                    textAlign: "center",
+                  }}
+                >
+                  {user[0].firstName} {user[0].lastName}
+                </Typography>
               </Box>
 
               <IconButton

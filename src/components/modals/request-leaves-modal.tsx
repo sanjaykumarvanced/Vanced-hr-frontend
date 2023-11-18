@@ -48,7 +48,7 @@ export const RequestLeavesDialog = (props: any) => {
     }));
 
   const user = useSelector((state: any) => state.authentication.user);
-  const Id = user.map((val: any) => val.id);
+  const Id = user[0].id;
   const adminId = "652d31fc3d93ae86647ec0fe";
   const { refetch: leaveStatusRefetch }: any = useGetRequestedLeavesByIdQuery({
     employerId: adminId,
@@ -167,8 +167,8 @@ export const RequestLeavesDialog = (props: any) => {
                     label: "Short Leave",
                     value: "Short Leave",
                   },
-                  { label: "Full Day Leave", value: "Full Day Leave" },
                   { label: "Half Day Leave", value: "Half Day Leave" },
+                  { label: "Full Day Leave", value: "Full Day Leave" },
                 ]}
                 onChange={(selectedValue: any) => {
                   formik.handleChange("leaveType")(selectedValue);
@@ -406,8 +406,7 @@ export const RequestLeavesDialog = (props: any) => {
               Cancel
             </Button>
             <Button
-              type="submit"
-              // onClick={handleSubmit}
+              onClick={handleSubmit}
               sx={{
                 width: 117,
                 height: 39,

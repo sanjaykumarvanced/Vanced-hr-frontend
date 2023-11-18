@@ -44,7 +44,7 @@ const columns: GridColDef[] = [
 export const AttendanceLogTable = () => {
 
   // const user = useSelector((state: any) => state.authentication.user);
-  // const Id = user.map((val: any) => val.id);
+  // const Id = user[0].id;;
   //   const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
   //   const [isOpen, setIsOpen] = useState(false);
   //   const handleClose = () => {

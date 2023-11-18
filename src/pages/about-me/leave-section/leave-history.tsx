@@ -14,7 +14,7 @@ import { useGetLeaveHistoryByIdQuery } from "../../../components/apis/leaveHisto
 
 export const LeaveHistory = () => {
   const user = useSelector((state: any) => state.authentication.user);
-  const Id = user.map((val: any) => val.id);
+  const Id = user[0].id;
   const { data }: any = useGetLeaveHistoryByIdQuery({ id: Id });
   console.log(data, Id);
   return (

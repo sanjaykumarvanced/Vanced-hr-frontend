@@ -44,7 +44,7 @@ const columns: GridColDef[] = [
 
 export const LeaveRequestTable = () => {
   const user = useSelector((state: any) => state.authentication.user);
-  const Id = user.map((val: any) => val.id);
+  const Id = user[0].id;
   const { data, refetch }: any = useGetLeaveRequestByIdQuery({ id: Id });
 
   const [isOpen, setIsOpen] = useState(false);

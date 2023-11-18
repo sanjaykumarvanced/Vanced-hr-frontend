@@ -36,7 +36,7 @@ export const pieData = [
 ];
 export const DataStatusSection = () => {
   const user = useSelector((state: any) => state.authentication.user);
-  const Id = user.map((val: any) => val.id);
+  const Id = user[0].id;
   const { data, refetch }: any = useGetLeaveBalanceByIdQuery({ id: Id });
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
