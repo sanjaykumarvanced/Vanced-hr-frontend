@@ -8,12 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
-import { useState } from "react"
+import { useState } from "react";
 import { Profile } from "../../pngs";
 import { BirthdayWishSvg } from "../../svgs";
 import { AddNewPostDialog } from "../../components/modals/add-new-post";
+import { useGetAnnouncementListQuery } from "../../components/apis/addAnnouncementsApi";
 
 export const TodaysAnnouncement = () => {
+  const { data } = useGetAnnouncementListQuery<any>();
+  console.log(data);
+
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);

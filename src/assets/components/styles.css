@@ -53,22 +53,23 @@
   width: 312px !important;
   border-radius: 8px;
 }
-.MuiSvgIcon-fontSizeMedium.MuiPickersCalendarHeader-switchViewIcon{
+
+.MuiSvgIcon-fontSizeMedium.MuiPickersCalendarHeader-switchViewIcon {
   display: none;
 }
 
 button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd.MuiPickersArrowSwitcher-button {
   position: absolute !important;
-  left:52px !important;
-  color:rgb(255 255 255 / 40%)
+  left: 52px !important;
+  color: rgb(255 255 255 / 40%)
 }
 
 button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiPickersArrowSwitcher-button {
   right: 46px !important;
-  color:rgb(255 255 255 / 40%)
+  color: rgb(255 255 255 / 40%)
 }
 
-.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPickersPopper-paper{
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPickersPopper-paper {
   border-radius: 8px;
   background-color: transparent;
 }
@@ -80,38 +81,40 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiPickersA
 }
 
 .MuiPickersCalendarHeader-label {
-  color:  #FFFFFF;
+  color: #FFFFFF;
   font-size: 14px;
   margin: 0 !important;
   font-family: 'Poppins-Regular';
 }
 
-.MuiPickersDay-root.MuiPickersDay-dayWithMargin{
+.MuiPickersDay-root.MuiPickersDay-dayWithMargin {
   color: #FFFFFF;
   font-family: 'Poppins-Regular';
   font-size: 12px;
 }
-.MuiPickersDay-dayWithMargin.MuiPickersDay-dayOutsideMonth{
+
+.MuiPickersDay-dayWithMargin.MuiPickersDay-dayOutsideMonth {
   color: rgb(255 255 255 / 12%);
   font-family: 'Poppins-Regular';
   font-size: 12px;
 }
-.MuiPickersDay-root.MuiPickersDay-dayWithMargin.MuiPickersDay-today{
+
+.MuiPickersDay-root.MuiPickersDay-dayWithMargin.MuiPickersDay-today {
   color: #FF8800;
   font-family: 'Poppins-Regular';
   font-size: 12px;
-  border:0
+  border: 0
 }
 
-button.MuiButtonBase-root.MuiPickersDay-root.Mui-selected{
+button.MuiButtonBase-root.MuiPickersDay-root.Mui-selected {
   color: #FF8800;
   font-family: 'Poppins-Regular';
   font-size: 12px;
-  border:0;
+  border: 0;
   background-color: rgba(204, 117, 18, 0.485)
 }
 
-button.MuiButtonBase-root.MuiPickersDay-root.MuiDateRangePickerDay-day.MuiDateRangePickerDay-notSelectedDate.MuiDateRangePickerDay-dayInsideRangeInterval{
+button.MuiButtonBase-root.MuiPickersDay-root.MuiDateRangePickerDay-day.MuiDateRangePickerDay-notSelectedDate.MuiDateRangePickerDay-dayInsideRangeInterval {
   color: white;
 }
 
@@ -127,46 +130,57 @@ button.MuiButtonBase-root.MuiPickersDay-root.MuiDateRangePickerDay-day.MuiDateRa
   font-family: 'Poppins-Regular';
   font-size: 12px;
 }
-.MuiPickersDay-dayOutsideMonth.MuiDateRangePickerDay-dayOutsideRangeInterval{
+
+.MuiPickersDay-dayOutsideMonth.MuiDateRangePickerDay-dayOutsideRangeInterval {
   color: rgb(255 255 255 / 12%);
   font-family: 'Poppins-Regular';
   font-size: 12px
 }
 
 
-button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today{
+button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today {
   color: #FF8800;
   font-family: 'Poppins-Regular';
   font-size: 12px;
-  border:0
+  border: 0
 }
 
-.MuiPickersCalendarHeader-root{
+.MuiPickersCalendarHeader-root {
   margin-top: 10px !important;
   margin-bottom: 10px !important;
 }
-.MuiPickersPopper-paper{
+
+.MuiPickersPopper-paper {
   margin-top: 5px;
 }
 
-.MuiDataGrid-footerContainer.MuiDataGrid-withBorderColor{
+.MuiDataGrid-footerContainer.MuiDataGrid-withBorderColor {
   border: none;
 }
 
-.MuiAutocomplete-paper.css-16tpyay-MuiPaper-root-MuiAutocomplete-paper{
+.MuiAutocomplete-paper.css-16tpyay-MuiPaper-root-MuiAutocomplete-paper {
   font-size: 14px;
-  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
   margin-top: 10px;
 }
+
 .wrapper-class {
-  padding: 1rem;
-  border: 1px solid #ccc;
+  box-sizing: border-box !important;
+  width: 100%;
+  min-height: 194px;
+  padding: 13px;
+  border: 1px solid rgb(0 0 0 / 29%);
+  border-radius: 6px;
 }
+
 .editor-class {
-  background-color: lightgray;
-  padding: 1rem;
-  border: 1px solid #ccc;
+height: 100%;
+min-height: 150px;
 }
-.toolbar-class {
-  border: 1px solid #ccc;
+.rdw-suggestion-dropdown{
+  min-height: 100px;
+  max-height: 109px;
+}
+.public-DraftStyleDefault-block{
+  margin: 0;
 }

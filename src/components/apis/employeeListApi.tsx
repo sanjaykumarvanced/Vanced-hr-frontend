@@ -2,7 +2,7 @@ import { emptySplitApi as api } from "./emptyApi";
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getEmployeeList: builder.query<[], void>({
-      query: (queryArg) => {
+      query: () => {
         return {
           url: `/api/employee/list`,
         };

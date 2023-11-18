@@ -104,42 +104,7 @@ export const AddNewPostDialog = (props: any) => {
 
     handleClose();
   };
-  // const { data } = useGetEmployeeListQuery<any>();
-  // const searchEmployee: any =
-  //   data && data.map((val: any) => `${val.firstName} ${val.lastName}`);
-  // const user = useSelector((state: any) => state.authentication.user);
-  // const Id = user.map((val: any) => val.id);
-  // const id = "652d31fc3d93ae86647ec0fe";
-  // console.log(data, "data", searchEmployee);
 
-  // const { refetch: leaveStatusRefetch }: any = useGetRequestedLeavesByIdQuery({
-  //   employerId: id,
-  // });
-  // const handleSubmit = async () => {
-  //   try {
-  //     // Make an API request to apply for leave
-  //     const response = await createApplyLeaveRequest({
-  //       employee: Id,
-  //       leaveType: formik.values.leaveType,
-  //       notify: formik.values.notify,
-  //       startDate: formik.values.startDate,
-  //       endDate: formik.values.endDate,
-  //       noOfDays: formik.values.noOfDays,
-  //       reason: formik.values.reason,
-  //     });
-
-  //     // Handle success - You can close the dialog and show a success message
-  //     console.log("Leave request submitted successfully", response);
-
-  //     // Close the dialog
-  //     onClose();
-  //   } catch (error) {
-  //     // Handle error - Display an error message or log the error
-  //     console.error("Error applying for leave:", error);
-  //   }
-  //   refetch();
-  //   leaveStatusRefetch();
-  // };
   const formik = useFormik({
     initialValues: {
       leaveType: "",
