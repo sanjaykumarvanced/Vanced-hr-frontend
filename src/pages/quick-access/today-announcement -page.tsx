@@ -18,7 +18,7 @@ import { apiBaseUrl } from "../../components/consts/api-url.const";
 import moment from "moment";
 
 export const TodaysAnnouncement = () => {
-  const { data } = useGetAnnouncementListQuery<any>();
+  const { data, refetch } = useGetAnnouncementListQuery<any>();
 
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
@@ -153,12 +153,13 @@ export const TodaysAnnouncement = () => {
                               color: themeColors["#55A232"],
                             }}
                           >
-                            ({moment
+                            (
+                            {moment
                               .utc(val.date)
                               .local()
                               .startOf("seconds")
-                              .fromNow()})
-                            {/* (10 min ago) */}
+                              .fromNow()}
+                            ){/* (10 min ago) */}
                           </Typography>
                         </Box>
                       </Box>
@@ -226,7 +227,6 @@ export const TodaysAnnouncement = () => {
                     </>
                   );
                 })}
-               
             </List>
           </Box>
         </Box>
@@ -235,7 +235,7 @@ export const TodaysAnnouncement = () => {
         <AddNewPostDialog
           open={isOpen}
           onClose={handleClose}
-          // refetch={refetch}
+          refetch={refetch}
         />
       )}
     </>

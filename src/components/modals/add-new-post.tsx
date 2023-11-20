@@ -74,6 +74,7 @@ export const AddNewPostDialog = (props: any) => {
         await mutate(uploadImg).unwrap();
       }
     }
+    refetch();
     handleClose();
   };
   const array =
@@ -94,7 +95,7 @@ export const AddNewPostDialog = (props: any) => {
 
   const hashtags = {};
 
-  const { onClose, open } = props;
+  const { onClose, open, refetch } = props;
   const handleClose = () => {
     onClose();
   };
@@ -340,13 +341,12 @@ export const AddNewPostDialog = (props: any) => {
                   color: themeColors["#FFFFFF"],
                 },
               }}
-              onClick={handleUpload}
+              onClick={handleClose}
             >
               Cancel
             </Button>
             <Button
-              type="submit"
-              //onClick={handleSubmit}
+              onClick={handleSubmit}
               sx={{
                 width: 117,
                 height: 39,
