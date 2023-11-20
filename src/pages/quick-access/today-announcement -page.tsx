@@ -153,11 +153,11 @@ export const TodaysAnnouncement = () => {
                               color: themeColors["#55A232"],
                             }}
                           >
-                            {moment
+                            ({moment
                               .utc(val.date)
                               .local()
                               .startOf("seconds")
-                              .fromNow()}
+                              .fromNow()})
                             {/* (10 min ago) */}
                           </Typography>
                         </Box>
@@ -226,44 +226,7 @@ export const TodaysAnnouncement = () => {
                     </>
                   );
                 })}
-              {/* <ListItem
-                    sx={{
-                      // display: "list-item",
-                      // "&::before": {
-                      //   content: "'(' counter(list-item) ') '",
-                      //   fontFamily: themeFonts["Poppins-SemiBold"],
-                      //   fontSize: "16px",
-                      //   color: themeColors["#0C345D"],
-                      //   paddingRight: "15px",
-                      // },
-                      // counterIncrement: "list-item",
-                      paddingX: 0,
-                      fontFamily: themeFonts["Poppins-SemiBold"],
-                      fontSize: "14px",
-                      color: themeColors["#0C345D"],
-                      paddingTop: "24px",
-                    }}
-                  >
-                    Welcome Shikha Sen ( New Hr ),
-                    <Box
-                      sx={{
-                        marginLeft: "40px",
-                      }}
-                    >
-                      <Typography
-                        component="span"
-                        sx={{
-                          fontFamily: themeFonts["Poppins-Regular"],
-                          fontSize: "14px",
-                          color: "rgb(0 0 0 / 50%)",
-                          paddingLeft: "3px",
-                          paddingTop: "8px",
-                        }}
-                      >
-                       <div dangerouslySetInnerHTML={{ __html: html }} />
-                      </Typography>
-                    </Box>
-                  </ListItem> */}
+               
             </List>
           </Box>
         </Box>
