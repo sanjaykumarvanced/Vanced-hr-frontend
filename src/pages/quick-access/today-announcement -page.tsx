@@ -15,6 +15,7 @@ import { BirthdayWishSvg } from "../../svgs";
 import { AddNewPostDialog } from "../../components/modals/add-new-post";
 import { useGetAnnouncementListQuery } from "../../components/apis/addAnnouncementsApi";
 import { apiBaseUrl } from "../../components/consts/api-url.const";
+import moment from "moment";
 
 export const TodaysAnnouncement = () => {
   const { data } = useGetAnnouncementListQuery<any>();
@@ -139,7 +140,7 @@ export const TodaysAnnouncement = () => {
                           <Typography
                             sx={{
                               fontFamily: themeFonts["Poppins-SemiBold"],
-                              fontSize: "14px",
+                              fontSize: "16px",
                               color: themeColors["#000000"],
                             }}
                           >
@@ -148,11 +149,16 @@ export const TodaysAnnouncement = () => {
                           <Typography
                             sx={{
                               fontFamily: themeFonts["Poppins-Regular"],
-                              fontSize: "12px",
+                              fontSize: "14px",
                               color: themeColors["#55A232"],
                             }}
                           >
-                            (10 min ago)
+                            {moment
+                              .utc(val.date)
+                              .local()
+                              .startOf("seconds")
+                              .fromNow()}
+                            {/* (10 min ago) */}
                           </Typography>
                         </Box>
                       </Box>
