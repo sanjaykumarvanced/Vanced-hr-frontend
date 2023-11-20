@@ -24,6 +24,7 @@ import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useCreateAnnouncementMutation } from "../apis/addAnnouncementsApi";
 import { useSelector } from "react-redux";
 import { useUploadImageMutation } from "../apis/uploadImageApi";
+import { useGetEmployeeListQuery } from "../apis/employeeListApi";
 
 const validationSchema = Yup.object({
   leaveType: Yup.string().required("Leave Type is required"),
@@ -33,9 +34,11 @@ const validationSchema = Yup.object({
 export const AddNewPostDialog = (props: any) => {
   const [postAd] = useCreateAnnouncementMutation();
   const [mutate] = useUploadImageMutation();
+  const { data } = useGetEmployeeListQuery();
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState<any>("");
   const [image, setImage] = useState<any>("");
+  console.log(data, "data");
 
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user[0].id;
@@ -74,20 +77,20 @@ export const AddNewPostDialog = (props: any) => {
     }
     handleClose();
   };
+  const array =
+    data &&
+    data.map((val: any) => {
+      const firstName = val.firstName;
+      const lastName = val.lastName;
+      const userName = val.userName;
+      const name = `${firstName || ""} ${lastName || ""}`;
+      return { text: name, value: userName, url: userName };
+    });
 
   const mentions = {
     separator: " ",
     trigger: "@",
-    suggestions: [
-      { text: "APPLE", value: "apple", url: "apple" },
-      { text: "BANANA", value: "banana", url: "banana" },
-      { text: "CHERRY", value: "cherry", url: "cherry" },
-      { text: "DURIAN", value: "durian", url: "durian" },
-      { text: "EGGFRUIT", value: "eggfruit", url: "eggfruit" },
-      { text: "FIG", value: "fig", url: "fig" },
-      { text: "GRAPEFRUIT", value: "grapefruit", url: "grapefruit" },
-      { text: "HONEYDEW", value: "honeydew", url: "honeydew" },
-    ],
+    suggestions: array ? [...array] : [],
   };
 
   const hashtags = {};
