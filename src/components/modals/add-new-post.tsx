@@ -7,7 +7,6 @@ import {
   DialogTitle,
   Grid,
   IconButton,
-  TextField,
   Typography,
 } from "@mui/material";
 import { themeFonts, themeColors } from "../../configs";
@@ -23,8 +22,8 @@ import draftToHtml from "draftjs-to-html";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useCreateAnnouncementMutation } from "../apis/addAnnouncementsApi";
 import { useSelector } from "react-redux";
-import { useUploadImageMutation } from "../apis/uploadImageApi";
 import { useGetEmployeeListQuery } from "../apis/employeeListApi";
+import { useUploadImageMutation } from "../apis/imageApi";
 
 const validationSchema = Yup.object({
   leaveType: Yup.string().required("Leave Type is required"),

@@ -1,9 +1,17 @@
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Badge,
+  Box,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { LEFT_SIDEBAR_WIDTH } from "../consts/layout.const";
 import { themeColors, themeFonts } from "../../configs";
 import {
   BarIconSvg,
   DownArrowIcon,
+  NotificationIconSvg,
   ProfilePicture,
   SearchIcon,
 } from "../../svgs";
@@ -12,6 +20,8 @@ import { useState } from "react";
 import { ProfileMenu } from "../dropdown/profile-menu";
 import { useSelector } from "react-redux";
 import { SearchBarDialog } from "../modals/search-bar";
+import { useGetImageQuery } from "../apis/imageApi";
+import { apiBaseUrl } from "../consts/api-url.const";
 
 export const AuthHeaderLayout = ({
   handleDrawerClose,
@@ -31,11 +41,14 @@ export const AuthHeaderLayout = ({
     setAnchorEl(null);
   };
   const user = useSelector((state: any) => state.authentication.user);
+  const UserId = user[0].id;
+  const { data: image } = useGetImageQuery({ id: UserId });
+  console.log(image);
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const handleSearchBarClose = () => {
     setOpenSearchBar(false);
   };
-  const handleSearchBarOpen = (data: any) => {
+  const handleSearchBarOpen = () => {
     setOpenSearchBar(true);
   };
   return (
@@ -117,6 +130,20 @@ export const AuthHeaderLayout = ({
                 alignItems: "center",
               }}
             >
+              <IconButton
+                onClick={handleSearchBarOpen}
+                sx={{
+                  height: "40px",
+                  width: "40px",
+                  background: "rgb(80 156 238 / 15%)",
+                  borderRadius: "5px",
+                  marginRight: "12px",
+                }}
+              >
+                <Badge color="primary" variant="dot">
+                  <NotificationIconSvg />
+                </Badge>
+              </IconButton>
               <Box
                 sx={{
                   minWidth: "40px",
@@ -128,7 +155,13 @@ export const AuthHeaderLayout = ({
                   justifyContent: "center",
                 }}
               >
-                <ProfilePicture />
+                <img
+                  src={apiBaseUrl + "/" + image}
+                  height={40}
+                  width={40}
+                  alt="ProfilePicture"
+                />
+                {/* <ProfilePicture /> */}
               </Box>
               <Box
                 sx={{

@@ -54,3 +54,4 @@ export { ReactComponent as EllipsisIconSvg1 } from "../assets/images/svg/ellipsi
 export { ReactComponent as LineIconSvg } from "../assets/images/svg/line-icon.svg";
 export { ReactComponent as CrossMarkIcon } from "../assets/images/svg/cross-mark-icon.svg";
 export { ReactComponent as GrossEarningSvg } from "../assets/images/svg/gross-earning.svg";
+export { ReactComponent as NotificationIconSvg } from "../assets/images/svg/notification-icon.svg";
