@@ -5,13 +5,10 @@ import {
   Grid,
   List,
   ListItem,
-  ListItemText,
   Typography,
 } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
 import { useState } from "react";
-import { Profile } from "../../pngs";
-import { BirthdayWishSvg } from "../../svgs";
 import { AddNewPostDialog } from "../../components/modals/add-new-post";
 import { useGetAnnouncementListQuery } from "../../components/apis/addAnnouncementsApi";
 import { apiBaseUrl } from "../../components/consts/api-url.const";
@@ -24,10 +21,9 @@ export const TodaysAnnouncement = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
-  const handleOpen = (data: any) => {
+  const handleOpen = () => {
     setIsOpen(true);
   };
-
   return (
     <>
       <Grid
@@ -59,17 +55,6 @@ export const TodaysAnnouncement = () => {
             }}
           >
             Announcement
-            {/* <Typography
-              component="span"
-              sx={{
-                fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "16px",
-                color: themeColors["#CF30CA"],
-                paddingLeft: "3px",
-              }}
-            >
-              (10)
-            </Typography> */}
           </Typography>
           <Button
             sx={{
@@ -108,125 +93,125 @@ export const TodaysAnnouncement = () => {
                 paddingTop: "18px",
               }}
             >
-              {data &&
-                data.map((val: any, idx: any) => {
-                  let html = val.description;
-                  return (
-                    <>
+              {data && data?.slice().reverse().map((val: any, idx: any) => {
+                let html = val.description;
+                return (
+                  <>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        paddingTop: "26px",
+                      }}
+                    >
                       <Box
                         sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                          paddingTop: "26px",
+                          height: 38,
+                          width: 38,
+                          borderRadius: "5px",
+                          overflow: "hidden",
                         }}
                       >
-                        <Box
-                          sx={{
-                            height: 38,
-                            width: 38,
-                            borderRadius: "5px",
-                            overflow: "hidden",
-                          }}
-                        >
-                          <img
-                            src={apiBaseUrl + "/" + val.image.path}
-                            height={38}
-                            width={38}
-                            alt="pic"
-                          />
-                        </Box>
-                        <Box>
-                          <Typography
-                            sx={{
-                              fontFamily: themeFonts["Poppins-SemiBold"],
-                              fontSize: "16px",
-                              color: themeColors["#000000"],
-                            }}
-                          >
-                            {val.employee.firstName} {val.employee.lastName}
-                          </Typography>
-                          <Typography
-                            sx={{
-                              fontFamily: themeFonts["Poppins-Regular"],
-                              fontSize: "14px",
-                              color: themeColors["#55A232"],
-                            }}
-                          >
-                            (
-                            {moment
-                              .utc(val.date)
-                              .local()
-                              .startOf("seconds")
-                              .fromNow()}
-                            ){/* (10 min ago) */}
-                          </Typography>
-                        </Box>
+                        <img
+                          src={apiBaseUrl + "/" + val.image.path}
+                          height={38}
+                          width={38}
+                          alt="pic"
+                        />
                       </Box>
-                      <ListItem
-                        sx={{
-                          // display: "list-item",
-                          // "&::before": {
-                          //   content: "'(' counter(list-item) ') '",
-                          //   fontFamily: themeFonts["Poppins-SemiBold"],
-                          //   fontSize: "16px",
-                          //   color: themeColors["#0C345D"],
-                          //   paddingRight: "15px",
-                          // },
-                          // counterIncrement: "list-item",
-                          fontFamily: themeFonts["Poppins-SemiBold"],
-                          fontSize: "14px",
-                          color: themeColors["#0C345D"],
-                          paddingTop: "24px",
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "start",
-                          gap: "8px",
-                        }}
-                      >
-                        {val.title}
-
+                      <Box>
                         <Typography
-                          component="span"
                           sx={{
-                            fontFamily: themeFonts["Poppins-Regular"],
-                            fontSize: "14px",
+                            fontFamily: themeFonts["Poppins-SemiBold"],
+                            fontSize: "16px",
                             color: themeColors["#000000"],
                           }}
                         >
-                          <div
-                            className="announcement-description"
-                            dangerouslySetInnerHTML={{ __html: html }}
-                          />
+                          {val.employee.firstName} {val.employee.lastName}
                         </Typography>
-                        {val.announcementImage && (
+                        <Typography
+                          sx={{
+                            fontFamily: themeFonts["Poppins-Regular"],
+                            fontSize: "14px",
+                            color: themeColors["#55A232"],
+                          }}
+                        >
+                          (
+                          {moment
+                            .utc(val.date)
+                            .local()
+                            .startOf("seconds")
+                            .fromNow()}
+                          )
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <ListItem
+                      sx={{
+                        // display: "list-item",
+                        // "&::before": {
+                        //   content: "'(' counter(list-item) ') '",
+                        //   fontFamily: themeFonts["Poppins-SemiBold"],
+                        //   fontSize: "16px",
+                        //   color: themeColors["#0C345D"],
+                        //   paddingRight: "15px",
+                        // },
+                        // counterIncrement: "list-item",
+                        fontFamily: themeFonts["Poppins-SemiBold"],
+                        fontSize: "14px",
+                        color: themeColors["#0C345D"],
+                        paddingTop: "24px",
+                        paddingBottom: "26px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "start",
+                        gap: "8px",
+                      }}
+                    >
+                      {val.title}
+
+                      <Typography
+                        component="span"
+                        sx={{
+                          fontFamily: themeFonts["Poppins-Regular"],
+                          fontSize: "14px",
+                          color: themeColors["#000000"],
+                        }}
+                      >
+                        <div
+                          className="announcement-description"
+                          dangerouslySetInnerHTML={{ __html: html }}
+                        />
+                      </Typography>
+                      {val.announcementImage && (
+                        <Box
+                          sx={{
+                            paddingTop: "18px",
+                          }}
+                        >
                           <Box
                             sx={{
-                              paddingY: "18px",
+                              height: 300,
+                              width: 500,
+                              borderRadius: "6px",
+                              overflow: "hidden",
                             }}
                           >
-                            <Box
-                              sx={{
-                                height: 252,
-                                width: 384,
-                                borderRadius: "6px",
-                                overflow: "hidden",
-                              }}
-                            >
-                              <img
-                                src={apiBaseUrl + "/" + val.announcementImage}
-                                height={252}
-                                width={384}
-                                alt="img"
-                              />
-                            </Box>
+                            <img
+                              src={apiBaseUrl + "/" + val.announcementImage}
+                              height={300}
+                              width={500}
+                              alt="img"
+                            />
                           </Box>
-                        )}
-                      </ListItem>
-                      <Divider sx={{ width: "100%" }} />
-                    </>
-                  );
-                })}
+                        </Box>
+                      )}
+                    </ListItem>
+                    <Divider sx={{ width: "100%" }} />
+                  </>
+                );
+              })}
             </List>
           </Box>
         </Box>

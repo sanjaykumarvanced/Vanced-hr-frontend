@@ -89,18 +89,20 @@ export const DataStatusSection = () => {
             >
               Leave Balances
             </Typography>
-            {/* <Button
+            <Button
               variant="text"
               sx={{
                 fontFamily: themeFonts["Poppins-Regular"],
                 fontSize: "12px",
                 color: themeColors["#000000"],
                 height: 20,
-                padding: 0,
+                paddingX: "10px",
+                borderRadius: "14px",
               }}
+              onClick={handleOpen}
             >
-              View All
-            </Button> */}
+              Request Leaves
+            </Button>
           </Box>
 
           <Divider sx={{ width: "100%" }} />
@@ -298,7 +300,7 @@ export const DataStatusSection = () => {
               </Typography>
             </Box>
           </Box>
-          <Box
+          {/*<Box
             sx={{
               display: "flex",
               justifyContent: "flex-end",
@@ -323,7 +325,7 @@ export const DataStatusSection = () => {
             >
               Request Leaves
             </Button>
-          </Box>
+          </Box> */}
         </Grid>
         <Grid
           item
@@ -396,7 +398,6 @@ export const DataStatusSection = () => {
               gap: "10px",
             }}
           >
-           
             <Box
               sx={{
                 display: "flex",
@@ -485,37 +486,38 @@ export const DataStatusSection = () => {
                 justifyContent: "space-between",
               }}
             >
-            <Typography
-               sx={{
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "14px",
-                color: themeColors["#000000"],
-                position: "relative",
-                lineHeight: "23px",
-                display: "flex",
-                alignItems: "center",
-                "&::after": {
-                  content: '""',
-                  width: "11px",
-                  height: "11px",
-                  right: "-20px",
-                  borderRadius: "100%",
-                  position: "absolute",
-                  background: themeColors["#8BC34A"],
-                },
-              }}
-            >
-              Pending Task
-            </Typography>
               <Typography
                 sx={{
                   fontFamily: themeFonts["Poppins-Regular"],
                   fontSize: "14px",
-                  color: themeColors["#000000"],                 
+                  color: themeColors["#000000"],
+                  position: "relative",
+                  lineHeight: "23px",
+                  display: "flex",
+                  alignItems: "center",
+                  "&::after": {
+                    content: '""',
+                    width: "11px",
+                    height: "11px",
+                    right: "-20px",
+                    borderRadius: "100%",
+                    position: "absolute",
+                    background: themeColors["#8BC34A"],
+                  },
+                }}
+              >
+                Pending Task
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "14px",
+                  color: themeColors["#000000"],
                 }}
               >
                 09
-              </Typography></Box>
+              </Typography>
+            </Box>
           </Box>
         </Grid>
       </Grid>

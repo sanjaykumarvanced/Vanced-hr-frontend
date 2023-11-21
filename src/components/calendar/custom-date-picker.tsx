@@ -44,10 +44,8 @@ export const CustomDatePicker = ({
 
   const [selectValue, setSelectValue] = useState(value ?? "");
   const handleDateChange = (date: any) => {
-    // Update the selectValue state
     setSelectValue(date);
 
-    // Call the provided onChange function if it exists
     if (onChange) onChange(date);
   };
   return (
@@ -64,7 +62,7 @@ export const CustomDatePicker = ({
             },
           },
         }}
-        onChange={handleDateChange} // Update Formik state
+        onChange={handleDateChange} 
         value={selectValue}
         sx={{
           "& .MuiInputBase-root.MuiOutlinedInput-root": {
@@ -93,7 +91,6 @@ export const CustomDatePicker = ({
         showDaysOutsideCurrentMonth={true}
         dayOfWeekFormatter={customDayOfWeekFormatter}
         format={`${format ? format : "MM/YY"}`}
-        // name={name}
       />
     </LocalizationProvider>
   );

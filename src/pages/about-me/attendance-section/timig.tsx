@@ -25,7 +25,7 @@ ChartJS.register(
 export const data = [
   ["Task", "Hours per Day"],
   ["", 70],
-  ["", 3], // Add a data point with value 0 for padding
+  ["", 3],
   ["", 30],
   ["", 3],
 ];

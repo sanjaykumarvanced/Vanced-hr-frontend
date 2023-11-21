@@ -184,17 +184,21 @@ button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today {
 }
 
 .public-DraftStyleDefault-block {
-  margin: 0;
+  margin: 0 !important;
+  font-size: 14px;
+  font-family: 'Poppins-Regular';
 }
 
 .announcement-description p {
   margin: 0;
+  font-family: 'Poppins-Regular';
+  font-size: 14px;
 }
 
 .announcement-description a {
   color: #2D87C2;
   font-family: 'Poppins-Regular';
-  font-size: 16px;
+  font-size: 14px;
   text-decoration: none;
   pointer-events: none;
 }

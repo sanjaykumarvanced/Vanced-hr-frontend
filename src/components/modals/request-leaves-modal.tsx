@@ -44,7 +44,7 @@ export const RequestLeavesDialog = (props: any) => {
     data &&
     data.map((option: any) => ({
       id: option._id,
-      label: `${option.firstName} ${option.lastName}`,
+      label: `${option.firstName || ""} ${option.lastName || ""}`,
     }));
 
   const user = useSelector((state: any) => state.authentication.user);
@@ -66,7 +66,6 @@ export const RequestLeavesDialog = (props: any) => {
       });
       onClose();
     } catch (error) {
-      // Handle error - Display an error message or log the error
       console.error("Error applying for leave:", error);
     }
     refetch();
@@ -92,7 +91,7 @@ export const RequestLeavesDialog = (props: any) => {
       const days = end.diff(start, "days");
       return days;
     }
-    return 0; // Return 0 if either date is not selected
+    return 0;
   }
   return (
     <Dialog
@@ -169,6 +168,7 @@ export const RequestLeavesDialog = (props: any) => {
                 }}
                 value={formik.values.leaveType}
                 name="leaveType"
+                color="#2F353B"
                 helperText={formik.touched.reason && formik.errors.reason}
               />
             </Grid>
@@ -182,17 +182,6 @@ export const RequestLeavesDialog = (props: any) => {
                 alignItems: "flex-start",
               }}
             >
-              {/* <CustomFilledInput
-                label="Notify"
-                placeholder="Search Employee"
-                height="39px"
-                fontSize="12px"
-                border="1px solid rgb(0 0 0 / 30%)"
-                onChangeValue={formik.handleChange}
-                value={formik.values.notify}
-                name="notify"
-                error={formik.touched.notify && Boolean(formik.errors.notify)}
-              /> */}
               <CustomLabel label={"Notify"} fontSize="14px" />
               <Autocomplete
                 multiple
@@ -211,6 +200,9 @@ export const RequestLeavesDialog = (props: any) => {
                     height: "max-content",
                     margin: 0,
                   },
+                  "& .MuiInputBase-root": {
+                    gap: "5px",
+                  },
                 }}
                 renderInput={(params) => (
                   <TextField
@@ -226,6 +218,13 @@ export const RequestLeavesDialog = (props: any) => {
                         color: themeColors["#FF3939"],
                         fontSize: 14,
                         marginLeft: 0,
+                      },
+                      "& span.MuiChip-label.MuiChip-labelMedium": {
+                        paddingZLeft: "9px",
+                      },
+                      "& svg.MuiSvgIcon-root": {
+                        fontSize: "16px",
+                        margin: "0 5px 0 -9px",
                       },
                     }}
                     helperText={formik.touched.reason && formik.errors.reason}
@@ -275,6 +274,8 @@ export const RequestLeavesDialog = (props: any) => {
                 }}
                 value={dayjs(formik.values.startDate)}
                 name="startDate"
+                fontFamily="Poppins-Regular"
+                fontSize={"14px"}
               />
             </Grid>
             <Grid item xs={4}>
@@ -295,6 +296,8 @@ export const RequestLeavesDialog = (props: any) => {
                 }}
                 value={dayjs(formik.values.endDate)}
                 name="endDate"
+                fontFamily="Poppins-Regular"
+                fontSize={"14px"}
               />
             </Grid>
             <Grid item xs={4}>
@@ -343,7 +346,7 @@ export const RequestLeavesDialog = (props: any) => {
                 },
                 "& .MuiOutlinedInput-root.MuiInputBase-colorPrimary": {
                   fontFamily: themeFonts["Poppins-Regular"],
-                  color: themeColors["#323B4B"],
+                  color: themeColors["2F353B"],
                   fontSize: 14,
                 },
                 "& .Mui-error .MuiOutlinedInput-notchedOutline": {

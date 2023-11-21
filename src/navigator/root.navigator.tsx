@@ -21,7 +21,6 @@ export const RootNavigator = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const authMe = useSelector(selectAuthMe);
   const navigate = useNavigate();
-  console.log(isLoggedIn, "isLoggedIn", authMe, "authMe");
   useEffect(() => {
     if (isLoggedIn && !authMe) {
       navigate(ROUTES.HOME, { replace: true });

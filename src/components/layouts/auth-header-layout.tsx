@@ -2,6 +2,7 @@ import {
   AppBar,
   Badge,
   Box,
+  Button,
   IconButton,
   Toolbar,
   Typography,
@@ -12,7 +13,6 @@ import {
   BarIconSvg,
   DownArrowIcon,
   NotificationIconSvg,
-  ProfilePicture,
   SearchIcon,
 } from "../../svgs";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -43,7 +43,6 @@ export const AuthHeaderLayout = ({
   const user = useSelector((state: any) => state.authentication.user);
   const UserId = user[0].id;
   const { data: image } = useGetImageQuery({ id: UserId });
-  console.log(image);
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const handleSearchBarClose = () => {
     setOpenSearchBar(false);
@@ -130,20 +129,20 @@ export const AuthHeaderLayout = ({
                 alignItems: "center",
               }}
             >
-              <IconButton
-                onClick={handleSearchBarOpen}
+              <Button
                 sx={{
                   height: "40px",
-                  width: "40px",
+                  minWidth: "40px",
                   background: "rgb(80 156 238 / 15%)",
                   borderRadius: "5px",
                   marginRight: "12px",
+                  padding: "0px",
                 }}
               >
                 <Badge color="primary" variant="dot">
                   <NotificationIconSvg />
                 </Badge>
-              </IconButton>
+              </Button>
               <Box
                 sx={{
                   minWidth: "40px",
@@ -161,7 +160,6 @@ export const AuthHeaderLayout = ({
                   width={40}
                   alt="ProfilePicture"
                 />
-                {/* <ProfilePicture /> */}
               </Box>
               <Box
                 sx={{

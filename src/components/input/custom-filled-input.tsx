@@ -125,9 +125,6 @@ export const CustomFilledInput = ({
               fontSize: 14,
             },
           }}
-          // onBlur={(e) => {
-          //   if (onBlur) onBlur(e);
-          // }}
           value={!disableValue ? formatValue(value) : undefined}
           onChange={(e: any) => {
             if (onChangeValue) onChangeValue(e);

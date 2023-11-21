@@ -43,32 +43,7 @@ const columns: GridColDef[] = [
 
 export const AttendanceLogTable = () => {
 
-  // const user = useSelector((state: any) => state.authentication.user);
-  // const Id = user[0].id;;
-  //   const { data }: any = useGetLeaveRequestByIdQuery({ id: Id });
-  //   const [isOpen, setIsOpen] = useState(false);
-  //   const handleClose = () => {
-  //     setIsOpen(false);
-  //   };
-  //   const handleOpen = (data: any) => {
-  //     setIsOpen(true);
-  //   };
-
-  //   if (!data) {
-  //     return null;
-  //   }
-
-  //   const rows = data.map((item: any) => ({
-  //     id: item._id,
-  //     leaveType: item.leaveType,
-  //     from: format(new Date(item.startDate), "dd/MM/yyyy"),
-  //     to: format(new Date(item.endDate), "dd/MM/yyyy"),
-  //     noOfDays: item.noOfDays,
-  //     reason: item.reason,
-  //     approvedBy: item.approvedBy,
-  //     status: item.status,
-  //     employerImage: item.approvedBy.employerImage.path,
-  //   }));
+ 
   return (
     <>
       <Grid

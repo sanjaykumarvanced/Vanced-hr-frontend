@@ -427,7 +427,6 @@ export const IncomeTax = () => {
                   display: "flex",
                   flexDirection: "row",
                   gap: "15px",
-                  // height: 98,
                   position: "relative",
                 }}
               >
@@ -439,7 +438,6 @@ export const IncomeTax = () => {
                     paddingX: "16px",
                     paddingTop: "12px",
                     gap: "51px",
-                    //  justifyContent: "space-between",
                   }}
                 >
                   <Box

@@ -25,11 +25,6 @@ import { useSelector } from "react-redux";
 import { useGetEmployeeListQuery } from "../apis/employeeListApi";
 import { useUploadImageMutation } from "../apis/imageApi";
 
-const validationSchema = Yup.object({
-  leaveType: Yup.string().required("Leave Type is required"),
-  reason: Yup.string().required("Reason is required"),
-});
-
 export const AddNewPostDialog = (props: any) => {
   const [postAd] = useCreateAnnouncementMutation();
   const [mutate] = useUploadImageMutation();
@@ -37,8 +32,6 @@ export const AddNewPostDialog = (props: any) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [title, setTitle] = useState<any>("");
   const [image, setImage] = useState<any>("");
-  console.log(data, "data");
-
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user[0].id;
   const onEditorStateChange = (newEditorState: any) => {
@@ -99,23 +92,6 @@ export const AddNewPostDialog = (props: any) => {
   const handleClose = () => {
     onClose();
   };
-  const handleUpload = () => {
-    if (image) {
-      const formData = new FormData();
-      formData.append("image", image);
-    }
-
-    handleClose();
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      leaveType: "",
-      reason: "",
-    },
-    validationSchema,
-    onSubmit: handleClose,
-  });
 
   return (
     <Dialog
@@ -172,10 +148,10 @@ export const AddNewPostDialog = (props: any) => {
               height="50px"
               fontSize="14px"
               border="1px solid rgb(0 0 0 / 30%)"
+              color="#2F353B"
               disableValue
               value={title}
               onChangeValue={handleChange}
-              //helperText={formik.touched.reason && formik.errors.reason}
             />
           </Grid>
           <Grid
@@ -189,46 +165,7 @@ export const AddNewPostDialog = (props: any) => {
             }}
           >
             <CustomLabel label={"Description"} fontSize="14px" />
-            {/* <TextField
-              multiline
-              rows={7}
-              placeholder="Write Your Post Here"
-              sx={{
-                "&.MuiFormControl-root.MuiTextField-root": {
-                  width: "100%",
-                },
-                "& .MuiInputBase-colorPrimary.Mui-error": {
-                  color: themeColors["#323B4B"],
-                  border: "1px solid #1C223E6E",
-                  fontSize: 14,
-                },
-                "& .Mui-error": {
-                  fontFamily: themeFonts["Poppins-Bold"],
-                  color: themeColors["#FF3939"],
-                  fontSize: 14,
-                  marginLeft: 0,
-                },
-                "& .MuiOutlinedInput-root.MuiInputBase-colorPrimary": {
-                  fontFamily: themeFonts["Poppins-Regular"],
-                  color: themeColors["#323B4B"],
-                  fontSize: 14,
-                },
-                "& .Mui-error .MuiOutlinedInput-notchedOutline": {
-                  border: 0,
-                },
-                "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  border: "1px solid #1C223E6E",
-                },
-                "& :hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#1C223E6E",
-                },
-              }}
-              onChange={formik.handleChange}
-              value={formik.values.reason}
-              name="reason"
-              error={formik.touched.reason && Boolean(formik.errors.reason)}
-              helperText={formik.touched.reason && formik.errors.reason}
-            /> */}
+           
             <Editor
               toolbarHidden
               editorState={editorState}
@@ -293,12 +230,11 @@ export const AddNewPostDialog = (props: any) => {
                   borderRadius: 0,
                   backgroundColor: themeColors["#D4D4D4"],
                 }}
-                // onClick={handleUpdateImage}
               >
                 Reset
               </Button>
             </Box>
-            <Box>
+            {/* <Box>
               <Typography
                 sx={{
                   fontSize: "12px",
@@ -308,7 +244,7 @@ export const AddNewPostDialog = (props: any) => {
               >
                 ( Allowed PNG , JPG , JPEG ) ( Size : 1.0 MB )
               </Typography>
-            </Box>
+            </Box> */}
           </Grid>
         </DialogContent>
         <DialogActions
@@ -362,7 +298,7 @@ export const AddNewPostDialog = (props: any) => {
                 },
               }}
             >
-              post
+              Post
             </Button>
           </Box>
         </DialogActions>

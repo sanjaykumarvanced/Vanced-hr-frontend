@@ -25,6 +25,7 @@ interface CustomSelectProps {
   errorStatus?: string;
   defaultValue?: any;
   name?: any;
+  color?: any;
 }
 
 export const CustomSelect = ({
@@ -36,6 +37,7 @@ export const CustomSelect = ({
   errorStatus,
   name,
   defaultValue,
+  color,
 }: CustomSelectProps) => {
   const [selectValue, setSelectValue] = useState(value ?? "");
 
@@ -51,13 +53,13 @@ export const CustomSelect = ({
       <Select
         value={selectValue.toString()}
         onChange={handleChange}
-        IconComponent={() => <DownArrowIcon2 height={10}/>}
+        IconComponent={() => <DownArrowIcon2 height={10} />}
         defaultValue={defaultValue ? defaultValue : ""}
         name={name}
         sx={{
           height: 39,
           borderRadius: 2,
-          color: "rgb(0 0 0 / 50%)",
+          color: color ? color : "rgb(0 0 0 / 50%)",
           fontSize: "14px",
           fontFamily: themeFonts["Poppins-Regular"],
           border: "1px solid rgb(0 0 0 / 30%)",
@@ -105,9 +107,9 @@ export const CustomSelect = ({
         <FormHelperText
           sx={{
             fontFamily: themeFonts["Poppins-Bold"],
-                  color: themeColors["#FF3939"],
-                  fontSize: 14,
-                  marginLeft: 0,
+            color: themeColors["#FF3939"],
+            fontSize: 14,
+            marginLeft: 0,
           }}
         >
           {helperText}

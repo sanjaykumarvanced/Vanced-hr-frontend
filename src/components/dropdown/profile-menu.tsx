@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import { useMyStore } from "../../store/reducer";
 import { authenticationSlice } from "../../store/slices/auth.slice";
 import { useSelector } from "react-redux";
+import { useGetImageQuery } from "../apis/imageApi";
+import { apiBaseUrl } from "../consts/api-url.const";
 
 export const ProfileMenu = ({
   open,
@@ -38,7 +40,8 @@ export const ProfileMenu = ({
   };
 
   const user = useSelector((state: any) => state.authentication.user);
-
+  const UserId = user[0].id;
+  const { data: image } = useGetImageQuery({ id: UserId });
   return (
     <>
       <Box>
@@ -96,7 +99,12 @@ export const ProfileMenu = ({
                       justifyContent: "center",
                     }}
                   >
-                    <ProfilePicture />
+                    <img
+                      src={apiBaseUrl + "/" + image}
+                      height={40}
+                      width={40}
+                      alt="ProfilePicture"
+                    />
                   </Box>
 
                   <Typography

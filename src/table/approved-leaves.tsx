@@ -158,7 +158,6 @@ export const ApprovedLeaves = () => {
                         padding: "0px ",
                         color: themeColors["#971B1B"],
                       }}
-                      // onClick={() => handleDelete(params.row.id)}
                     >
                       <ClearIcon />
                     </Button>
