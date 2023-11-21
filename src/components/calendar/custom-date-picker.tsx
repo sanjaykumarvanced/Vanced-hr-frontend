@@ -4,7 +4,7 @@ import { CalenderIcon1Svg } from "../../svgs";
 import "../../assets/components/styles.css";
 import { DatePicker } from "@mui/x-date-pickers";
 import { CustomLabel } from "../label";
-import { themeColors, themeFonts } from "../../configs";
+import { themeFonts } from "../../configs";
 import { useState } from "react";
 
 export const CustomDatePicker = ({

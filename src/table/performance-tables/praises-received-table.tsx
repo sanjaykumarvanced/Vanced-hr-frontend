@@ -1,7 +1,6 @@
 import { Grid, Box, Typography, Button, Select, MenuItem } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CustomDatePicker } from "../../components/calendar/custom-date-picker";
-import { apiBaseUrl } from "../../components/consts/api-url.const";
 import { themeColors, themeFonts } from "../../configs";
 import { EditIconSvg, DeleteIconSvg, DownArrowIcon4 } from "../../svgs";
 import { useState } from "react";

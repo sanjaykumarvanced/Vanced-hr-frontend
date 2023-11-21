@@ -2,8 +2,6 @@ import { Grid, Box } from "@mui/material";
 import { FinanceTabs } from "../../components/consts/consts";
 import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
 import { themeColors } from "../../configs";
-import { AttendancePage } from "../about-me/attendance-section/attendance-page";
-import { PerformancePage } from "../about-me/performance-section/performance-page";
 import { useState } from "react";
 import { getStyles } from "../quick-access/todays-leaves-details";
 import { SummarySection } from "./summary-section/summary-section";

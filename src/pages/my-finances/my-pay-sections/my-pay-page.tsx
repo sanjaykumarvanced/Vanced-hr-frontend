@@ -6,10 +6,6 @@ import {
   CustomTabsPanel,
 } from "../../../components/tabs/custom-tabs";
 import { themeColors, themeFonts } from "../../../configs";
-import { AttendancePage } from "../../about-me/attendance-section/attendance-page";
-import { PerformancePage } from "../../about-me/performance-section/performance-page";
-import { SummarySection } from "../summary-section/summary-section";
-import TabList from "@mui/lab/TabList";
 import { Salary } from "./salary";
 import { IncomeTax } from "./income-tax";
 

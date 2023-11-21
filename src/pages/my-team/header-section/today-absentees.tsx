@@ -10,10 +10,7 @@ import {
 
 import { themeColors, themeFonts } from "../../../configs";
 import {
-  ProfileIconSvg,
   ProfilePicture,
-  PunchInIcon,
-  PunchOutIcon,
 } from "../../../svgs";
 
 export const TodayAbsentees = () => {

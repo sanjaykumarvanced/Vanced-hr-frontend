@@ -1,11 +1,9 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
 import { HolidaysBackground, Inbox } from "../../pngs";
 import { useGetHolidaysDetailsQuery } from "../../components/apis/holidaysDetailsApi";
 import { ViewAllHolidaysDialog } from "../../components/modals/view-all-modal";
 import { useState } from "react";
-import { SocialTabs } from "../../components/consts/consts";
-import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
 
 export const getStyles = () => {
   return {
@@ -50,15 +48,10 @@ const SocialDashboard = () => {
       );
 
   const upcomingHoliday = upcomingHolidays && upcomingHolidays[0];
-  const [value, setValue] = useState("Post");
-  const styles = getStyles();
-  const handleChange = (event: any) => {
-    setValue(event);
-  };
   const handleClose = () => {
     setIsOpen(false);
   };
-  const handleOpen = (data: any) => {
+  const handleOpen = () => {
     setIsOpen(true);
   };
 

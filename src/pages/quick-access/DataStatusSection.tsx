@@ -10,9 +10,7 @@ export const pieLeaveOptions = {
   legend: "none",
   slices: {
     0: { offset: 0.1, color: "#EF5261" },
-    1: { offset: 0.1, color: "#F6C863" },
-    2: { offset: 0.1, color: "#2980BA" },
-    3: { offset: 0.1, color: "#8BC34A" },
+    1: { offset: 0.1, color: "#2980BA" },
   },
   pieSliceText: "label",
 };
@@ -42,7 +40,7 @@ export const DataStatusSection = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
-  const handleOpen = (data: any) => {
+  const handleOpen = () => {
     setIsOpen(true);
   };
 
@@ -113,9 +111,7 @@ export const DataStatusSection = () => {
               data={[
                 ["label", "leaves"],
                 ["", data && data.remainingLeave],
-                ["", data && data.totalLeave],
                 ["", data && data.paidLeave],
-                ["", data && data.unPaidLeave],
               ]}
               options={pieLeaveOptions}
               width={"100%"}
@@ -300,32 +296,6 @@ export const DataStatusSection = () => {
               </Typography>
             </Box>
           </Box>
-          {/*<Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              paddingX: "13px",
-              paddingY: "34px",
-            }}
-          >
-            <Button
-              sx={{
-                height: 39,
-                borderRadius: "6px",
-                backgroundColor: themeColors["#0C345D"],
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "16px",
-                color: themeColors["#FFFFFF"],
-                "&:hover": {
-                  backgroundColor: "rgb(21 94 158)",
-                },
-              }}
-              onClick={handleOpen}
-            >
-              Request Leaves
-            </Button>
-          </Box> */}
         </Grid>
         <Grid
           item

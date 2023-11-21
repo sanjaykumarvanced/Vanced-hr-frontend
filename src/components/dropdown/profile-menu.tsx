@@ -12,7 +12,6 @@ import {
   AccountSettingsIcon,
   NeedHepIcon,
   ProfileIconSvg,
-  ProfilePicture,
   SignOutIcon,
 } from "../../svgs";
 import { useNavigate } from "react-router-dom";

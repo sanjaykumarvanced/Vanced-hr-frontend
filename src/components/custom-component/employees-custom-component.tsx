@@ -1,6 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
-import { EmployeesSvg } from "../../svgs";
 
 interface CustomEmployeesProps {
   Title?: any;

@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate} from "react-router-dom";
 import { ROUTES } from "../consts/routes.consts";
 import { LoginPage } from "../forms/auth/login-page";
 

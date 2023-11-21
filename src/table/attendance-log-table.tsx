@@ -3,10 +3,6 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { themeFonts, themeColors } from "../configs";
 
 import { DeleteIconSvg, EditIconSvg } from "../svgs";
-import { apiBaseUrl } from "../components/consts/api-url.const";
-
-import { SingleInputDateRangePicker } from "../components/calendar/calendar";
-import { CustomDatePickerCalendar } from "../components/calendar/custom-calendar";
 import { CustomDatePicker } from "../components/calendar/custom-date-picker";
 
 const columns: GridColDef[] = [

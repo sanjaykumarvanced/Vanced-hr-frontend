@@ -1,6 +1,5 @@
-import { Grid, Box, Typography, Divider, Button } from "@mui/material";
+import { Grid, Box, Typography, Divider} from "@mui/material";
 import { themeColors, themeFonts } from "../../../configs";
-import { CompensationImg } from "../../../pngs";
 import { GrossEarningSvg } from "../../../svgs";
 
 export const IncomeTax = () => {

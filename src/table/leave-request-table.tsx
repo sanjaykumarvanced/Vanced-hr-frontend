@@ -51,7 +51,7 @@ export const LeaveRequestTable = () => {
   const handleClose = () => {
     setIsOpen(false);
   };
-  const handleOpen = (data: any) => {
+  const handleOpen = () => {
     setIsOpen(true);
   };
 

@@ -23,13 +23,6 @@ export const Sidebar = ({ open }: { open: any }) => {
   return (
     <>
       <SidebarMenuHeader open={open} />
-      {/* <Divider
-        sx={{
-          borderColor: themeColors['#F2F2F2'],
-          marginBottom: '30px',
-          opacity: '13%',
-        }}
-      /> */}
       <Box sx={styles.root}>
         <NavListItems menu={menus} navigate={navigate} pathname={pathname} />
       </Box>

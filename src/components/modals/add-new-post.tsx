@@ -7,14 +7,11 @@ import {
   DialogTitle,
   Grid,
   IconButton,
-  Typography,
 } from "@mui/material";
 import { themeFonts, themeColors } from "../../configs";
 import { CloseIconSvg1 } from "../../svgs";
 import { CustomFilledInput } from "../input";
 import { CustomLabel } from "../label";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import React, { useState } from "react";
 import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
