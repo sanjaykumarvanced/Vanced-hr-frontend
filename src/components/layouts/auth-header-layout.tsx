@@ -139,7 +139,19 @@ export const AuthHeaderLayout = ({
                   padding: "0px",
                 }}
               >
-                <Badge color="primary" variant="dot">
+                <Badge
+                  color="error"
+                  sx={{
+                    "& span.MuiBadge-badge": {
+                      backgroundColor: "#FF8282",
+                      top: "4px",
+                      right: "3px",
+                      height: 5,
+                      minWidth: 5,
+                    },
+                  }}
+                  variant="dot"
+                >
                   <NotificationIconSvg />
                 </Badge>
               </Button>
