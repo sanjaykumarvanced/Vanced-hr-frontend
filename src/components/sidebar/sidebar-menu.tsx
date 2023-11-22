@@ -23,6 +23,7 @@ import {
 } from "../../configs";
 import { ListItems } from "../list";
 import { useSelector } from "react-redux";
+import { useGetEmployeeListQuery } from "../apis/employeeListApi";
 
 export const SidebarMenu = () => {
   const navigate = useNavigate();
@@ -30,8 +31,11 @@ export const SidebarMenu = () => {
   const styles = getStyles();
   const pathname = "/" + location.pathname.split("/")[1];
   const user = useSelector((state: any) => state.authentication.user);
-  const UserRole = user[0].role;
-
+  const userRole = user[0].role === "employee";
+  const users = user[0].id;
+  const { data } = useGetEmployeeListQuery(undefined, { skip: userRole });
+  const employee: any = data && data?.find((elm: any) => elm._id === users);
+  const role = employee ? employee.role : user[0].role;
   return (
     <>
       <SidebarMenuHeader />
@@ -43,7 +47,7 @@ export const SidebarMenu = () => {
         }}
       />
       <Box sx={styles.root}>
-        {UserRole === "employee" ? (
+        {role === "employee" ? (
           <ListItems menu={menus} navigate={navigate} pathname={pathname} />
         ) : (
           <ListItems

@@ -14,7 +14,7 @@ export const ROUTES = {
   ACCOUNTS_SETTING: "/profile/accounts-settings",
   NEED_HELP: "/profile/my-profile",
   APPROVED_LEAVES: "/approved-leaves",
-  //Admin Routes
+  //Admin Route
   ALL_EMPLOYEE: "/all-employee",
   ATTACHMENT: "/attendance",
   LEAVES: "/leaves",
