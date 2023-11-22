@@ -20,9 +20,6 @@ import { DeleteIconSvg } from "../../svgs";
 
 export const TodaysAnnouncement = () => {
   const { data, refetch } = useGetAnnouncementListQuery<any>();
-  const id = data?.map((val: any) => val._id);
-  console.log(id);
-
   const [deleteItem] = useDeleteAnnouncementMutation();
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
@@ -100,17 +97,18 @@ export const TodaysAnnouncement = () => {
             gap: "20px",
             overflow: "auto",
             maxHeight: "693px",
+            height: "100%",
           }}
         >
-          <Box sx={{ width: "100%" }}>
-            <List
-              sx={{
-                listStyle: "none",
-                padding: 0,
-              }}
-            >
-              {data &&
-                data
+          {data && data.length !== 0 ? (
+            <Box sx={{ width: "100%" }}>
+              <List
+                sx={{
+                  listStyle: "none",
+                  padding: 0,
+                }}
+              >
+                {data
                   ?.slice()
                   .reverse()
                   .map((val: any, idx: any) => {
@@ -250,8 +248,24 @@ export const TodaysAnnouncement = () => {
                       </>
                     );
                   })}
-            </List>
-          </Box>
+              </List>
+            </Box>
+          ) : (
+            <Typography
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                fontSize: "24px",
+                fontFamily: themeFonts["Poppins-SemiBold"],
+                color: themeColors["#224C78"],
+                textTransform: "capitalize",
+              }}
+            >
+              No Announcements Yet
+            </Typography>
+          )}
         </Box>
       </Grid>
       {isOpen && (
