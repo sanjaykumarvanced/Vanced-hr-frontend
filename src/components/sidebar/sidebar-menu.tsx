@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   ListItemButton as MuiListItemButton,
@@ -11,38 +11,47 @@ import {
   listItemTextClasses,
   ListItemTextProps,
   Divider,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
 
-import { SidebarMenuHeader } from './sidebar-menu-header';
-import { sidebarMenuConfig as menus, themeColors, themeFonts } from '../../configs';
-import { ListItems } from '../list';
+import { SidebarMenuHeader } from "./sidebar-menu-header";
+import {
+  sidebarMenuConfig as menus,
+  sidebarAdminMenuConfig as adminMenus,
+  themeColors,
+  themeFonts,
+} from "../../configs";
+import { ListItems } from "../list";
+import { useSelector } from "react-redux";
 
 export const SidebarMenu = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const styles = getStyles();
-  const pathname = '/' + location.pathname.split('/')[1];
+  const pathname = "/" + location.pathname.split("/")[1];
+  const user = useSelector((state: any) => state.authentication.user);
+  const UserRole = user[0].role;
 
   return (
     <>
       <SidebarMenuHeader />
       <Divider
         sx={{
-          borderColor: themeColors['#F2F2F2'],
-          marginBottom: '30px',
-          opacity: '13%',
+          borderColor: themeColors["#F2F2F2"],
+          marginBottom: "30px",
+          opacity: "13%",
         }}
       />
       <Box sx={styles.root}>
-        <ListItems menu={menus} navigate={navigate} pathname={pathname} />
-
-        {/* {isAdmin(authMe) && (
-          <Box>
-            <ITypography sx={styles.title}>SUPER ADMIN</ITypography>
-            <ListItems menu={adminMenus} navigate={navigate} pathname={pathname} />
-          </Box>
-        )} */}
+        {UserRole === "employee" ? (
+          <ListItems menu={menus} navigate={navigate} pathname={pathname} />
+        ) : (
+          <ListItems
+            menu={adminMenus}
+            navigate={navigate}
+            pathname={pathname}
+          />
+        )}
       </Box>
     </>
   );
@@ -54,14 +63,14 @@ export const getStyles = () => {
       paddingX: 2.75,
     },
     title: {
-      fontFamily: themeFonts['Poppins-Regular'],
-      color: 'rgb(255 255 255 / 60%)',
+      fontFamily: themeFonts["Poppins-Regular"],
+      color: "rgb(255 255 255 / 60%)",
       fontSize: 15,
-      marginBottom: '4px',
-      marginTop: '18px',
+      marginBottom: "4px",
+      marginTop: "18px",
     },
     margin: {
-      marginTop: 'auto',
+      marginTop: "auto",
     },
   };
 };
@@ -72,24 +81,24 @@ export const ListItemButton = styled(({ ...props }: ListItemButtonProps) => (
   [`&.${listItemButtonClasses.root}`]: {
     paddingLeft: 14,
     paddingRight: 12,
-    color: 'rgb(255 255 255 / 60%)',
-    height: '40',
-    width: '206px',
+    color: "rgb(255 255 255 / 60%)",
+    height: "40",
+    width: "206px",
     marginBottom: 10,
-    borderRadius: '5px',
-    ':hover': {
-      backgroundColor: themeColors['#224C78'],
-      color: themeColors['#FFFFFF'],
-      '& svg path ': {
-        stroke: themeColors['#FFFFFF'],
+    borderRadius: "5px",
+    ":hover": {
+      backgroundColor: themeColors["#224C78"],
+      color: themeColors["#FFFFFF"],
+      "& svg path ": {
+        stroke: themeColors["#FFFFFF"],
       },
     },
   },
   [`&.${listItemButtonClasses.selected}`]: {
-    backgroundColor: `${themeColors['#224C78']}`,
-    color: themeColors['#FFFFFF'],
-    '& svg path': {
-      stroke: themeColors['#FFFFFF'],
+    backgroundColor: `${themeColors["#224C78"]}`,
+    color: themeColors["#FFFFFF"],
+    "& svg path": {
+      stroke: themeColors["#FFFFFF"],
     },
   },
 }));
@@ -108,7 +117,7 @@ export const ListItemText = styled(({ ...props }: ListItemTextProps) => (
   [`&.${listItemTextClasses.root}`]: {
     [`& .${listItemTextClasses.primary}`]: {
       fontSize: 15,
-      fontWeight: '400',
+      fontWeight: "400",
     },
   },
 }));

@@ -1,5 +1,5 @@
 export const ROUTES = {
-  MAIN: "",
+  //employee  Routes
   HOME: "/",
   ME: "/me",
   INBOX: "/inbox",
@@ -14,4 +14,19 @@ export const ROUTES = {
   ACCOUNTS_SETTING: "/profile/accounts-settings",
   NEED_HELP: "/profile/my-profile",
   APPROVED_LEAVES: "/approved-leaves",
+  //Admin Routes
+  ALL_EMPLOYEE: "/all-employee",
+  ATTACHMENT: "/attendance",
+  LEAVES: "/leaves",
+  LEAVES_SETTING: "/leaves-setting",
+  PERFORMANCE: "/performance",
+  TEAM_LEADERS: "/team-leaders",
+  SHIFT_SCHEDULE: "/shift-schedule",
+  Clients: "/clients",
+  PROJECTS: "/projects",
+  EMPLOYEE_SALARY: "/employee-salary",
+  NEW_EMPLOYEES: "/new-employees",
+  PROMOTION: "/promotion",
+  RESIGNATION: "/resignation",
+  TERMINATION: "/termination",
 };

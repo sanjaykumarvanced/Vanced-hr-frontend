@@ -34,6 +34,7 @@ export type AuthLoginApiResponse = {
     employeeId: any;
     experience: any;
     personalInformation: any;
+    role: any;
   };
 };
 

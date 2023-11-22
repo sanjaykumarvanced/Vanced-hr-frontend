@@ -12,5 +12,6 @@ export interface IAuthMe {
   email: string;
   username: string;
   system_user_type: string;
-  _id: any;
+  _id: any;  
+  user?: any;
 }

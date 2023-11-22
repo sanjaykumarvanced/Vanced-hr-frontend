@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Button, Dialog, Divider, Menu, MenuItem, Typography } from '@mui/material';
+import { Box, Button, Dialog, Menu, MenuItem,  } from '@mui/material';
 import { themeColors, themeFonts } from '../../configs';
-import { DeleteIcon1Svg, FilterIcon1Svg } from '../../svgs';
-import { CustomFilledInput } from '../input';
-import { IOSSwitch } from '../switch';
+import { FilterIcon1Svg } from '../../svgs';
 
 export const FilterDropDown = ({ label_1, label_2 }: { label_1?: any; label_2?: any }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

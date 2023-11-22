@@ -47,10 +47,12 @@ export const useLoginWithEmailHook = ({ next }: { next: () => void }) => {
                 id: response.user._id,
                 firstName: response.user.firstName,
                 lastName: response.user.lastName,
+                role: response.user.role,
               },
             ],
           })
         );
+        console.log(response);
       }
       next();
     },
