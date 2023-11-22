@@ -8,6 +8,14 @@ const injectedRtkApi = api.injectEndpoints({
         };
       },
     }),
+    deleteAnnouncement: builder.mutation<any, AnnouncementApiArg>({
+      query: (queryArg) => {
+        return {
+          url: `/api/announcement/delete/${queryArg.id}`,
+          method: "DELETE",
+        };
+      },
+    }),
     createAnnouncement: builder.mutation<any, Partial<[]>>({
       query: (item) => {
         return {
@@ -24,5 +32,8 @@ export { injectedRtkApi as enhancedApi };
 export type AnnouncementApiArg = {
   id?: number;
 };
-export const { useGetAnnouncementListQuery, useCreateAnnouncementMutation } =
-  injectedRtkApi;
+export const {
+  useGetAnnouncementListQuery,
+  useDeleteAnnouncementMutation,
+  useCreateAnnouncementMutation,
+} = injectedRtkApi;

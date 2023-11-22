@@ -10,19 +10,36 @@ import {
 import { themeColors, themeFonts } from "../../configs";
 import { useState } from "react";
 import { AddNewPostDialog } from "../../components/modals/add-new-post";
-import { useGetAnnouncementListQuery } from "../../components/apis/addAnnouncementsApi";
+import {
+  useDeleteAnnouncementMutation,
+  useGetAnnouncementListQuery,
+} from "../../components/apis/addAnnouncementsApi";
 import { apiBaseUrl } from "../../components/consts/api-url.const";
 import moment from "moment";
+import { DeleteIconSvg } from "../../svgs";
 
 export const TodaysAnnouncement = () => {
   const { data, refetch } = useGetAnnouncementListQuery<any>();
+  const id = data?.map((val: any) => val._id);
+  console.log(id);
 
+  const [deleteItem] = useDeleteAnnouncementMutation();
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);
   };
   const handleOpen = () => {
     setIsOpen(true);
+  };
+  const handleDelete = async (id: number) => {
+    debugger;
+    try {
+      await deleteItem({ id });
+      console.log("Item successfully deleted.");
+    } catch (error) {
+      console.log("Error deleting item:", error);
+    }
+    refetch();
   };
   return (
     <>
@@ -103,53 +120,71 @@ export const TodaysAnnouncement = () => {
                         <Box
                           sx={{
                             display: "flex",
-                            alignItems: "center",
-                            gap: "10px",
                             paddingTop: "26px",
+                            justifyContent: "space-between",
                           }}
                         >
                           <Box
                             sx={{
-                              height: 38,
-                              width: 38,
-                              borderRadius: "5px",
-                              overflow: "hidden",
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "10px",
                             }}
                           >
-                            <img
-                              src={apiBaseUrl + "/" + val.image.path}
-                              height={38}
-                              width={38}
-                              alt="pic"
-                            />
-                          </Box>
-                          <Box>
-                            <Typography
+                            <Box
                               sx={{
-                                fontFamily: themeFonts["Poppins-SemiBold"],
-                                fontSize: "16px",
-                                color: themeColors["#000000"],
+                                height: 38,
+                                width: 38,
+                                borderRadius: "5px",
+                                overflow: "hidden",
                               }}
                             >
-                              {val.employee.firstName} {val.employee.lastName}
-                            </Typography>
-                            <Typography
-                              sx={{
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                fontSize: "14px",
-                                color: themeColors["#55A232"],
-                              }}
-                            >
-                              (
-                              {moment
-                                .utc(val.date)
-                                .local()
-                                .startOf("seconds")
-                                .fromNow()}
-                              )
-                            </Typography>
+                              <img
+                                src={apiBaseUrl + "/" + val.image.path}
+                                height={40}
+                                width={40}
+                                alt="pic"
+                              />
+                            </Box>
+                            <Box>
+                              <Typography
+                                sx={{
+                                  fontFamily: themeFonts["Poppins-SemiBold"],
+                                  fontSize: "16px",
+                                  color: themeColors["#000000"],
+                                }}
+                              >
+                                {val.employee.firstName} {val.employee.lastName}
+                              </Typography>
+                              <Typography
+                                sx={{
+                                  fontFamily: themeFonts["Poppins-Regular"],
+                                  fontSize: "14px",
+                                  color: themeColors["#55A232"],
+                                }}
+                              >
+                                (
+                                {moment
+                                  .utc(val.date)
+                                  .local()
+                                  .startOf("seconds")
+                                  .fromNow()}
+                                )
+                              </Typography>
+                            </Box>
                           </Box>
+                          <Button
+                            sx={{
+                              height: "20px",
+                              minWidth: "20px",
+                              padding: "0px ",
+                            }}
+                            onClick={() => handleDelete(val._id)}
+                          >
+                            <DeleteIconSvg />
+                          </Button>
                         </Box>
+
                         <ListItem
                           sx={{
                             // display: "list-item",
