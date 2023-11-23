@@ -30,12 +30,12 @@ export const SidebarMenu = () => {
   const location = useLocation();
   const styles = getStyles();
   const pathname = "/" + location.pathname.split("/")[1];
-  const user = useSelector((state: any) => state.authentication.user);
-  const userRole = user[0].role === "employee";
-  const users = user[0].id;
+  const userInfo = useSelector((state: any) => state.authentication.user);
+  const userRole = userInfo[0].role === "employee";
+  const loggedUserId = userInfo[0].id;
   const { data } = useGetEmployeeListQuery(undefined, { skip: userRole });
-  const employee: any = data && data?.find((elm: any) => elm._id === users);
-  const role = employee ? employee.role : user[0].role;
+  const employee: any = data && data?.find((elm: any) => elm._id === loggedUserId);
+  const loggedRole = employee ? employee.role : userInfo[0].role;
   return (
     <>
       <SidebarMenuHeader />
@@ -47,7 +47,7 @@ export const SidebarMenu = () => {
         }}
       />
       <Box sx={styles.root}>
-        {role === "employee" ? (
+        {loggedRole === "employee" ? (
           <ListItems menu={menus} navigate={navigate} pathname={pathname} />
         ) : (
           <ListItems

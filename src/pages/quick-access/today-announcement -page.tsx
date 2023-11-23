@@ -29,7 +29,6 @@ export const TodaysAnnouncement = () => {
     setIsOpen(true);
   };
   const handleDelete = async (id: number) => {
-    debugger;
     try {
       await deleteItem({ id });
       console.log("Item successfully deleted.");

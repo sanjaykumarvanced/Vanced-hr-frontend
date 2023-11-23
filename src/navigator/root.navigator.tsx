@@ -23,12 +23,12 @@ export const RootNavigator = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const authMe = useSelector(selectAuthMe);
   const navigate = useNavigate();
-  const user = useSelector((state: any) => state.authentication.user);
-  const userRole = isLoggedIn && (authMe && user[0].role === "employee");
-  const users = isLoggedIn && (authMe && user[0].id);
+  const userInfo = useSelector((state: any) => state.authentication.user);
+  const userRole = isLoggedIn && (authMe && userInfo[0].role === "employee");
+  const loggedUserId = isLoggedIn && (authMe && userInfo[0].id);
   const { data } = useGetEmployeeListQuery(undefined, { skip: userRole });
-  const employee: any = data && data?.find((elm: any) => elm._id === users);
-  const role = isLoggedIn && (authMe && employee ? employee.role : user[0].role)
+  const employee: any = data && data?.find((elm: any) => elm._id === loggedUserId);
+  const loggedRole = isLoggedIn && (authMe && employee ? employee.role : userInfo[0].role)
   useEffect(() => {
     if (isLoggedIn && !authMe) {
       navigate(ROUTES.HOME, { replace: true });
@@ -42,7 +42,7 @@ export const RootNavigator = () => {
             path={ROUTES.HOME}
             element={
               isLoggedIn &&
-              (authMe && role === "employee" ? (
+              (authMe && loggedRole === "employee" ? (
                 <QuickAccessPage />
               ) : (
                 <AdminDashboard />
