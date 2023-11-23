@@ -23,6 +23,7 @@ import dayjs from "dayjs";
 import { useCreateApplyLeaveRequestMutation } from "../apis/applyLeaveApi";
 import { useGetEmployeeListQuery } from "../apis/employeeListApi";
 import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
+import { Roles, leaveOptions } from "../consts/consts";
 
 const validationSchema = Yup.object({
   leaveType: Yup.string().required("Leave Type is required"),
@@ -34,16 +35,19 @@ const validationSchema = Yup.object({
 });
 
 export const RequestLeavesDialog = (props: any) => {
+  debugger
   const { onClose, open, refetch } = props;
   const handleClose = () => {
     onClose();
   };
   const [createApplyLeaveRequest] = useCreateApplyLeaveRequestMutation();
   const { data } = useGetEmployeeListQuery<any>();
+  const employeeRoles = Roles[2].key;
+
   const employeeOptions =
     data &&
     data
-      .filter((option: any) => option.role !== "employee")
+      .filter((option: any) => option.role !== employeeRoles)
       .map((option: any) => ({
         id: option._id,
         label: `${option.firstName || ""} ${option.lastName || ""}`,
@@ -157,14 +161,7 @@ export const RequestLeavesDialog = (props: any) => {
             <Grid item xs={6}>
               <CustomSelect
                 label="Select Type of leave you want to apply"
-                options={[
-                  {
-                    label: "Short Leave",
-                    value: "Short Leave",
-                  },
-                  { label: "Half Day Leave", value: "Half Day Leave" },
-                  { label: "Full Day Leave", value: "Full Day Leave" },
-                ]}
+                options={leaveOptions}
                 onChange={(selectedValue: any) => {
                   formik.handleChange("leaveType")(selectedValue);
                 }}

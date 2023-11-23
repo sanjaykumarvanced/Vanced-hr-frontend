@@ -39,3 +39,21 @@ export const MyPayTabs = [
   { label: "Pay Slips ", value: "Pay Slips" },
   { label: "Income Tax ", value: "Income Tax" },
 ];
+
+
+export const Roles = [
+  { key: "admin", label: "Admin" },
+  { key: "manager", label: "Manager" },
+  { key: "employee", label: "Employee" },
+  { key: "hr", label: "Human Resources" },
+];
+
+
+export const leaveOptions = [
+  { label: "Short Leave", value: "SHORT_LEAVE", },
+  { label: "Half Day Leave", value: "HALF_DAY_LEAVE" },
+  { label: "Full Day Leave", value: "FULL_DAY_LEAVE" },
+]
+
+
+

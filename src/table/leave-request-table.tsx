@@ -43,6 +43,7 @@ const columns: GridColDef[] = [
 ];
 
 export const LeaveRequestTable = () => {
+  debugger
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user[0].id;
   const { data, refetch }: any = useGetLeaveRequestByIdQuery({ id: Id });
@@ -61,6 +62,10 @@ export const LeaveRequestTable = () => {
 
   const rows = data.map((item: any) => ({
     id: item._id,
+    // leaveType: item.leaveType.toLowerCase()
+    // .split('_')
+    // .map((word:any, index:any) => index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word.charAt(0).toUpperCase() + word.slice(1))
+    // .join(' '),
     leaveType: item.leaveType,
     from: format(new Date(item.startDate), "dd/MM/yyyy"),
     to: format(new Date(item.endDate), "dd/MM/yyyy"),
