@@ -16,8 +16,7 @@ import { styled } from "@mui/material/styles";
 
 import { SidebarMenuHeader } from "./sidebar-menu-header";
 import {
-  sidebarMenuConfig as menus,
-  sidebarAdminMenuConfig as adminMenus,
+  sidebarMenuConfig,
   themeColors,
   themeFonts,
 } from "../../configs";
@@ -30,12 +29,15 @@ export const SidebarMenu = () => {
   const location = useLocation();
   const styles = getStyles();
   const pathname = "/" + location.pathname.split("/")[1];
-  const userInfo = useSelector((state: any) => state.authentication.user);
-  const userRole = userInfo[0].role === "employee";
-  const loggedUserId = userInfo[0].id;
+  const user = useSelector((state: any) => state.authentication.user);
+  const userRole = user[0].role === "employee";
+  const users = user[0].id;
   const { data } = useGetEmployeeListQuery(undefined, { skip: userRole });
-  const employee: any = data && data?.find((elm: any) => elm._id === loggedUserId);
-  const loggedRole = employee ? employee.role : userInfo[0].role;
+  const employee: any = data && data?.find((elm: any) => elm._id === users);
+  const role = employee ? employee.role : user[0].role;
+  const menus = sidebarMenuConfig.filter((elm) =>
+    elm.permissions.includes(role)
+  );
   return (
     <>
       <SidebarMenuHeader />
@@ -47,15 +49,11 @@ export const SidebarMenu = () => {
         }}
       />
       <Box sx={styles.root}>
-        {loggedRole === "employee" ? (
-          <ListItems menu={menus} navigate={navigate} pathname={pathname} />
-        ) : (
-          <ListItems
-            menu={adminMenus}
-            navigate={navigate}
-            pathname={pathname}
-          />
-        )}
+        <ListItems
+          menu={menus}
+          navigate={navigate}
+          pathname={pathname}
+        />
       </Box>
     </>
   );
