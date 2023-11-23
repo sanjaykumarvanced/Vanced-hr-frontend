@@ -16,19 +16,19 @@ import { useEffect } from "react";
 import UnauthLayout from "../components/layouts/unauth.layouts";
 import { QuickAccessPage } from "../pages/quick-access/quick-access-page";
 import { ApprovedLeaves } from "../table/approved-leaves";
+import { AdminDashboard } from "../pages/admin-dashboard/admin-dashboard";
 import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
-import { AdminDashboard } from "../pages/admin-dashboard/admin-dasshboard";
 
 export const RootNavigator = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const authMe = useSelector(selectAuthMe);
   const navigate = useNavigate();
   const user = useSelector((state: any) => state.authentication.user);
-  const userRole = user[0].role === "employee";
-  const users = user[0].id;
+  const userRole = isLoggedIn && (authMe && user[0].role === "employee");
+  const users = isLoggedIn && (authMe && user[0].id);
   const { data } = useGetEmployeeListQuery(undefined, { skip: userRole });
   const employee: any = data && data?.find((elm: any) => elm._id === users);
-  const role = employee ? employee.role : user[0].role;
+  const role = isLoggedIn && (authMe && employee ? employee.role : user[0].role)
   useEffect(() => {
     if (isLoggedIn && !authMe) {
       navigate(ROUTES.HOME, { replace: true });
@@ -40,8 +40,16 @@ export const RootNavigator = () => {
         <Route element={isLoggedIn ? <AuthLayout /> : <UnauthLayout />}>
           <Route
             path={ROUTES.HOME}
-            element={role === "employee" ? <QuickAccessPage /> : <AdminDashboard/>}
+            element={
+              isLoggedIn &&
+              (authMe && role === "employee" ? (
+                <QuickAccessPage />
+              ) : (
+                <AdminDashboard />
+              ))
+            }
           />
+
           <Route path={ROUTES.ME} element={<AboutMePage />} />
           <Route path={ROUTES.INBOX} element={<InboxPage />} />
           <Route path={ROUTES.MY_TEAM} element={<MyTeamPage />} />
