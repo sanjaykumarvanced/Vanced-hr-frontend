@@ -20,7 +20,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
-import { useCreateApplyLeaveRequestMutation } from "../apis/applyLeaveApi";
+import {
+  useCreateApplyLeaveRequestMutation,
+  useUpdateLeaveRequestMutation,
+} from "../apis/applyLeaveApi";
 import { useGetEmployeeListQuery } from "../apis/employeeListApi";
 import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
 import { Roles, leaveOptions } from "../consts/consts";
@@ -35,18 +38,17 @@ const validationSchema = Yup.object({
 });
 
 export const RequestLeavesDialog = (props: any) => {
-  debugger
-  const { onClose, open, refetch } = props;
+  debugger;
+  const { onClose, open, refetch, editedData, employeeList } = props;
   const handleClose = () => {
     onClose();
   };
   const [createApplyLeaveRequest] = useCreateApplyLeaveRequestMutation();
-  const { data } = useGetEmployeeListQuery<any>();
   const employeeRoles = Roles[2].key;
 
   const employeeOptions =
-    data &&
-    data
+    employeeList &&
+    employeeList
       .filter((option: any) => option.role !== employeeRoles)
       .map((option: any) => ({
         id: option._id,
@@ -59,17 +61,31 @@ export const RequestLeavesDialog = (props: any) => {
   const { refetch: leaveStatusRefetch }: any = useGetRequestedLeavesByIdQuery({
     employerId: adminId,
   });
+  const [updateApi] = useUpdateLeaveRequestMutation();
   const handleSubmit = async () => {
     try {
-      await createApplyLeaveRequest({
-        employee: Id,
-        leaveType: formik.values.leaveType,
-        notify: formik.values.notify,
-        startDate: formik.values.startDate,
-        endDate: formik.values.endDate,
-        noOfDays: formik.values.noOfDays,
-        reason: formik.values.reason,
-      });
+      if (editedData.action === "edit") {
+        await updateApi({
+          id: formik.values.id,
+          employee: Id,
+          leaveType: formik.values.leaveType,
+          notify: formik.values.notify,
+          startDate: formik.values.startDate,
+          endDate: formik.values.endDate,
+          noOfDays: formik.values.noOfDays,
+          reason: formik.values.reason,
+        });
+      } else {
+        await createApplyLeaveRequest({
+          employee: Id,
+          leaveType: formik.values.leaveType,
+          notify: formik.values.notify,
+          startDate: formik.values.startDate,
+          endDate: formik.values.endDate,
+          noOfDays: formik.values.noOfDays,
+          reason: formik.values.reason,
+        });
+      }
       onClose();
     } catch (error) {
       console.error("Error applying for leave:", error);
@@ -77,14 +93,15 @@ export const RequestLeavesDialog = (props: any) => {
     refetch();
     leaveStatusRefetch();
   };
-  const formik = useFormik({
+  const formik: any = useFormik({
     initialValues: {
-      leaveType: "",
-      notify: [],
-      startDate: "",
-      endDate: "",
-      noOfDays: parseInt(""),
-      reason: "",
+      id: editedData.id || "",
+      leaveType: editedData.leaveType || "",
+      notify: editedData.notify || [],
+      startDate: editedData.from || "",
+      endDate: editedData.to || "",
+      noOfDays: editedData.noOfDays || parseInt(""),
+      reason: editedData.reason || "",
     },
     validationSchema,
     onSubmit: handleSubmit,
@@ -235,8 +252,8 @@ export const RequestLeavesDialog = (props: any) => {
                   );
                   formik.setFieldValue("notify", filteredEmployeeIDs);
                 }}
-                value={formik.values.notify.map((employeeID) => {
-                  const employee = employeeOptions.find(
+                value={formik.values.notify?.map((employeeID: any) => {
+                  const employee = employeeOptions?.find(
                     (val: any) => val.id === employeeID
                   );
                   return employee;

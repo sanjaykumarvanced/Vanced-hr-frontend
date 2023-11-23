@@ -10,11 +10,21 @@ const injectedRtkApi = api.injectEndpoints({
         };
       },
     }),
+    updateLeaveRequest: builder.mutation<any, Partial<ApplyLeaveApiArg>>({
+      query: (queryArg) => {
+        return {
+          url: `/api/leave/update-leave`,
+          method: "PUT",
+          body: queryArg,
+        };
+      },
+    }),
   }),
 });
 export { injectedRtkApi as enhancedApi };
 
 export type ApplyLeaveApiArg = {
+  id?: any;
   employee?: string;
   leaveType?: any;
   notify?: any;
@@ -24,4 +34,7 @@ export type ApplyLeaveApiArg = {
   reason?: any;
 };
 
-export const { useCreateApplyLeaveRequestMutation } = injectedRtkApi;
+export const {
+  useCreateApplyLeaveRequestMutation,
+  useUpdateLeaveRequestMutation,
+} = injectedRtkApi;
