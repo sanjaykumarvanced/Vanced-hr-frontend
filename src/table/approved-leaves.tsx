@@ -45,13 +45,15 @@ const columns: GridColDef[] = [
 ];
 
 export const ApprovedLeaves = () => {
-  const Id = "652d31fc3d93ae86647ec0fe";
+  const user = useSelector((state: any) => state.authentication.user);
+  const Id = user[0].id;
   const { data, refetch }: any = useGetRequestedLeavesByIdQuery({
     employerId: Id,
   });
   const [updateLeaveStatus] = useUpdateRequestedLeavesMutation();
-  const user = useSelector((state: any) => state.authentication.user);
+
   const id = user[0].id;
+
   const { refetch: leaveRefetch }: any = useGetLeaveRequestByIdQuery({
     id: id,
   });

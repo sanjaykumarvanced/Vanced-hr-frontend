@@ -57,7 +57,7 @@ export const RootNavigator = () => {
           <Route path={ROUTES.ORG} element={<OrgPage />} />
           <Route path={ROUTES.PROFILE} element={<></>} />
           <Route path={ROUTES.ACCOUNTS_SETTING} element={<></>} />
-          <Route path={ROUTES.APPROVED_LEAVES} element={<ApprovedLeaves />} />
+          <Route path={ROUTES.REQUESTED_LEAVES} element={<ApprovedLeaves />} />
 
           <Route path={ROUTES.ALL_EMPLOYEE} element={<></>} />
           <Route path={ROUTES.ATTACHMENT} element={<></>} />

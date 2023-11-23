@@ -31,6 +31,12 @@ export const sidebarMenuConfig = [
     permissions: ["employee", "manager", "hr", "teamLeader"],
   },
   {
+    icon: <AccountSettingsTabIcon />,
+    title: "Requested Leaves",
+    route: ROUTES.REQUESTED_LEAVES,
+    permissions: ["manager", "hr", "teamLeader"],
+  },
+  {
     icon: <InboxIconSvg />,
     title: "Inbox",
     route: ROUTES.INBOX,
@@ -66,12 +72,7 @@ export const sidebarMenuConfig = [
     route: ROUTES.ACCOUNTS_SETTING,
     permissions: ["employee", "manager", "hr", "teamLeader"],
   },
-  {
-    icon: <AccountSettingsTabIcon />,
-    title: "Approved Leaves",
-    route: ROUTES.APPROVED_LEAVES,
-    permissions: ["manager", "hr", "teamLeader"],
-  },
+
   {
     icon: <HomeIconSvg />,
     title: "Admin Dashboard",
@@ -222,6 +223,6 @@ export const sidebarMenuButtonConfig = [
   {
     icon: <AccountSettingsTabIcon />,
     title: "",
-    route: ROUTES.APPROVED_LEAVES,
+    route: ROUTES.REQUESTED_LEAVES,
   },
 ];
