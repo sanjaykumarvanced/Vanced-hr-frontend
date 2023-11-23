@@ -42,10 +42,12 @@ export const RequestLeavesDialog = (props: any) => {
   const { data } = useGetEmployeeListQuery<any>();
   const employeeOptions =
     data &&
-    data.map((option: any) => ({
-      id: option._id,
-      label: `${option.firstName || ""} ${option.lastName || ""}`,
-    }));
+    data
+      .filter((option: any) => option.role !== "employee")
+      .map((option: any) => ({
+        id: option._id,
+        label: `${option.firstName || ""} ${option.lastName || ""}`,
+      }));
 
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user[0].id;
