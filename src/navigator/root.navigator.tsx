@@ -9,7 +9,7 @@ import { AboutMePage } from "../pages/about-me";
 import { InboxPage } from "../pages/inbox";
 import { MyTeamPage } from "../pages/my-team";
 import { MyFinancesPage } from "../pages/my-finances";
-import { OrgPage } from "../pages/Org";
+import { Projects } from "../pages/projects";
 import { useSelector } from "react-redux";
 import { selectAuthMe, selectIsLoggedIn } from "../components/selectors";
 import { useEffect } from "react";
@@ -54,7 +54,7 @@ export const RootNavigator = () => {
           <Route path={ROUTES.INBOX} element={<InboxPage />} />
           <Route path={ROUTES.MY_TEAM} element={<MyTeamPage />} />
           <Route path={ROUTES.MY_FINANCES} element={<MyFinancesPage />} />
-          <Route path={ROUTES.ORG} element={<OrgPage />} />
+          <Route path={ROUTES.PROJECTS} element={<Projects />} />
           <Route path={ROUTES.PROFILE} element={<></>} />
           <Route path={ROUTES.ACCOUNTS_SETTING} element={<></>} />
           <Route path={ROUTES.REQUESTED_LEAVES} element={<ApprovedLeaves />} />
@@ -67,7 +67,6 @@ export const RootNavigator = () => {
           <Route path={ROUTES.TEAM_LEADERS} element={<></>} />
           <Route path={ROUTES.SHIFT_SCHEDULE} element={<></>} />
           <Route path={ROUTES.Clients} element={<></>} />
-          <Route path={ROUTES.PROJECTS} element={<></>} />
           <Route path={ROUTES.EMPLOYEE_SALARY} element={<></>} />
           <Route path={ROUTES.NEW_EMPLOYEES} element={<></>} />
           <Route path={ROUTES.PROMOTION} element={<></>} />

@@ -5,7 +5,6 @@ export const ROUTES = {
   INBOX: "/inbox",
   MY_TEAM: "/my-team",
   MY_FINANCES: "/my-finances",
-  ORG: "/holidays",
   LOGIN: "/auth/login",
   LOGIN_PAGE: "/auth",
   REGISTER: "/auth/register",

@@ -91,13 +91,17 @@ export const RequestLeavesDialog = (props: any) => {
     refetch();
     leaveStatusRefetch();
   };
+  const parseDateString = (dateString:any) => {
+    const [day, month, year] = dateString.split('/');
+    return new Date(`${year}-${month}-${day}`);
+  };
   const formik: any = useFormik({
     initialValues: {
       id: editedData?.id || "",
       leaveType: editedData?.leaveType || "",
       notify: editedData?.notify || [],
-      startDate: editedData?.from || "",
-      endDate: editedData?.to || "",
+      startDate: editedData?.from ? parseDateString(editedData.from) : null,
+      endDate: editedData?.to ? parseDateString(editedData.to) : null,
       noOfDays: editedData?.noOfDays || parseInt(""),
       reason: editedData?.reason || "",
     },
@@ -275,21 +279,10 @@ export const RequestLeavesDialog = (props: any) => {
                 label={"From"}
                 format={"DD/MM/YYYY"}
                 onChange={(selectedValue: any) => {
-                  formik.setFieldValue(
-                    "startDate",
-                    selectedValue.format("YYYY-MM-DD")
-                  );
-                  const endDateValue =
-                    formik.values.leaveType === "SHORT_LEAVE" ||
-                    formik.values.leaveType === "HALF_DAY_LEAVE"
-                      ? selectedValue.format("YYYY-MM-DD")
-                      : "";
+                  formik.setFieldValue("startDate", selectedValue.format("YYYY-MM-DD"));
+                  const endDateValue = formik.values.leaveType === "SHORT_LEAVE" || formik.values.leaveType === "HALF_DAY_LEAVE" ? selectedValue.format("YYYY-MM-DD") : "";
                   formik.setFieldValue("endDate", endDateValue);
-                  const days =
-                    calculateNumberOfDays(
-                      selectedValue.format("YYYY-MM-DD"),
-                      formik.values.endDate
-                    ) + 1;
+                  const days = calculateNumberOfDays(selectedValue.format("YYYY-MM-DD"), formik.values.endDate) + 1;
                   formik.setFieldValue("noOfDays", days);
                 }}
                 minDate={dayjs().startOf("day")}
@@ -305,15 +298,8 @@ export const RequestLeavesDialog = (props: any) => {
                 label={"To"}
                 format={"DD/MM/YYYY"}
                 onChange={(selectedValue: any) => {
-                  formik.setFieldValue(
-                    "endDate",
-                    selectedValue.format("YYYY-MM-DD")
-                  );
-                  const days =
-                    calculateNumberOfDays(
-                      formik.values.startDate,
-                      selectedValue.format("YYYY-MM-DD")
-                    ) + 1;
+                  formik.setFieldValue("endDate", selectedValue.format("YYYY-MM-DD"));
+                  const days = calculateNumberOfDays(formik.values.startDate, selectedValue.format("YYYY-MM-DD")) + 1;
                   formik.setFieldValue("noOfDays", days);
                 }}
                 minDate={dayjs(formik.values.startDate).startOf("day")}
@@ -322,10 +308,7 @@ export const RequestLeavesDialog = (props: any) => {
                 fontFamily="Poppins-Regular"
                 fontSize={"14px"}
                 helperText={formik.touched.endDate && formik.errors.endDate}
-                disabled={
-                  selectedLeaveType === "SHORT_LEAVE" ||
-                  selectedLeaveType === "HALF_DAY_LEAVE"
-                }
+                disabled={selectedLeaveType === "SHORT_LEAVE" || selectedLeaveType === "HALF_DAY_LEAVE"}
               />
             </Grid>
             <Grid item xs={4}>
@@ -446,7 +429,7 @@ export const RequestLeavesDialog = (props: any) => {
                   border: "1px solid #0C345D",
                 },
               }}
-              // onClick={handleSubmit}
+            // onClick={handleSubmit}
             >
               Request
             </Button>

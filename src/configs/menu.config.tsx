@@ -55,12 +55,6 @@ export const sidebarMenuConfig = [
     permissions: ["employee", "manager", "hr", "teamLeader"],
   },
   {
-    icon: <OrgIconSvg />,
-    title: "Org",
-    route: ROUTES.ORG,
-    permissions: ["employee", "manager", "hr", "teamLeader"],
-  },
-  {
     icon: <ProfileTabIcon />,
     title: "Profile",
     route: ROUTES.PROFILE,
@@ -72,7 +66,6 @@ export const sidebarMenuConfig = [
     route: ROUTES.ACCOUNTS_SETTING,
     permissions: ["employee", "manager", "hr", "teamLeader"],
   },
-
   {
     icon: <HomeIconSvg />,
     title: "Admin Dashboard",
@@ -116,22 +109,15 @@ export const sidebarMenuConfig = [
     permissions: ["admin"],
   },
   {
-    icon: <AccountSettingsTabIcon />,
-    title: "Shift & Schedule",
-    route: ROUTES.SHIFT_SCHEDULE,
-    permissions: ["admin"],
+    icon: <OrgIconSvg />,
+    title: "Projects",
+    route: ROUTES.PROJECTS,
+    permissions: ["employee", "admin", "teamLeader"],
   },
-
   {
     icon: <AccountSettingsTabIcon />,
     title: "Clients",
     route: ROUTES.Clients,
-    permissions: ["admin"],
-  },
-  {
-    icon: <FinanceIconSvg />,
-    title: "Projects",
-    route: ROUTES.PROJECTS,
     permissions: ["admin"],
   },
   {
@@ -146,6 +132,13 @@ export const sidebarMenuConfig = [
     route: ROUTES.NEW_EMPLOYEES,
     permissions: ["admin"],
   },
+  {
+    icon: <AccountSettingsTabIcon />,
+    title: "Shift & Schedule",
+    route: ROUTES.SHIFT_SCHEDULE,
+    permissions: ["admin"],
+  },
+  
   {
     icon: <AccountSettingsTabIcon />,
     title: "Promotion",
@@ -206,7 +199,7 @@ export const sidebarMenuButtonConfig = [
   {
     icon: <OrgIconSvg />,
     title: "",
-    route: ROUTES.ORG,
+    route: ROUTES.PROJECTS,
   },
 
   {
