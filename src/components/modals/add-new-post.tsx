@@ -37,6 +37,11 @@ export const AddNewPostDialog = (props: any) => {
   const handleChange = (e: any) => {
     setTitle(e.target.value);
   };
+  const handleReset = () => {
+    setTitle("");
+    setEditorState(EditorState.createEmpty());
+    setImage("");
+  };
 
   const handleImageChange = (e: any) => {
     setImage(e.target.files?.[0]);
@@ -47,25 +52,29 @@ export const AddNewPostDialog = (props: any) => {
     const description = draftToHtml(
       convertToRaw(editorState.getCurrentContent())
     );
-    const announcement = {
-      employee: Id,
-      title: title,
-      description,
-    } as any;
-    const res = await postAd(announcement).unwrap();
-    if (res) {
-      if (image) {
-        const formData = new FormData();
-        formData.append("image", image);
-        const uploadImg = {
-          id: res.announcement._id,
-          image: formData,
-        } as any;
-        await mutate(uploadImg).unwrap();
+    if (description === "<p></p>\n") {
+      handleClose();
+    } else {
+      const announcement = {
+        employee: Id,
+        title: title,
+        description,
+      } as any;
+      const res = await postAd(announcement).unwrap();
+      if (res) {
+        if (image) {
+          const formData = new FormData();
+          formData.append("image", image);
+          const uploadImg = {
+            id: res.announcement._id,
+            image: formData,
+          } as any;
+          await mutate(uploadImg).unwrap();
+        }
       }
+      refetch();
+      handleClose();
     }
-    refetch();
-    handleClose();
   };
   const array =
     data &&
@@ -162,7 +171,7 @@ export const AddNewPostDialog = (props: any) => {
             }}
           >
             <CustomLabel label={"Description"} fontSize="14px" />
-           
+
             <Editor
               toolbarHidden
               editorState={editorState}
@@ -207,7 +216,7 @@ export const AddNewPostDialog = (props: any) => {
                 }}
                 // onClick={handleUpdateImage}
               >
-                Upload New Photo
+                {image === "" ? "Upload New Photo" : "Image Uploaded"}
                 <input
                   type="file"
                   accept="image/*"
@@ -227,6 +236,7 @@ export const AddNewPostDialog = (props: any) => {
                   borderRadius: 0,
                   backgroundColor: themeColors["#D4D4D4"],
                 }}
+                onClick={handleReset}
               >
                 Reset
               </Button>
