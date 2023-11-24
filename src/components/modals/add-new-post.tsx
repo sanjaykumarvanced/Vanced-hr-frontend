@@ -42,16 +42,16 @@ export const AddNewPostDialog = (props: any) => {
     setEditorState(EditorState.createEmpty());
     setImage("");
   };
-
+  const description = draftToHtml(
+    convertToRaw(editorState.getCurrentContent())
+  );
+  const disable = description !== "<p></p>\n" ? false : true;
   const handleImageChange = (e: any) => {
     setImage(e.target.files?.[0]);
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const description = draftToHtml(
-      convertToRaw(editorState.getCurrentContent())
-    );
     if (description === "<p></p>\n") {
       handleClose();
     } else {
@@ -155,7 +155,6 @@ export const AddNewPostDialog = (props: any) => {
               fontSize="14px"
               border="1px solid rgb(0 0 0 / 30%)"
               color="#2F353B"
-              disableValue
               value={title}
               onChangeValue={handleChange}
             />
@@ -290,6 +289,7 @@ export const AddNewPostDialog = (props: any) => {
             </Button>
             <Button
               onClick={handleSubmit}
+              disabled={disable}
               sx={{
                 width: 117,
                 height: 39,
