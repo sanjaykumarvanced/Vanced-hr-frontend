@@ -13,7 +13,7 @@ import { CustomTabs, CustomTabsPanel } from "../../components/tabs/custom-tabs";
 import { TodaysLeavesTabs } from "../../components/consts/consts";
 import { useGetLeavesDetailsQuery } from "../../components/apis/leavesApi";
 import { apiBaseUrl } from "../../components/consts/api-url.const";
-import { toCamelCaseFormat } from "../../components/consts/helpers";
+import { toCamelCaseFormat } from "../../utils/helpers";
 
 export const getStyles = (TodaysLeavesDetails?: any) => {
   return {

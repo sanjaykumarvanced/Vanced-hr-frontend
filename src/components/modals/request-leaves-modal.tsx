@@ -27,6 +27,7 @@ import {
 import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
 import { Roles, leaveOptions } from "../consts/consts";
 import { useState } from "react";
+import { convertSnakeToText } from "../../utils/helpers";
 
 const validationSchema = Yup.object({
   leaveType: Yup.string().required("Leave Type is required"),
@@ -37,6 +38,7 @@ const validationSchema = Yup.object({
 });
 
 export const RequestLeavesDialog = (props: any) => {
+  debugger
   const { onClose, open, refetch, editedData, employeeList } = props;
   const handleClose = () => {
     onClose();
@@ -91,14 +93,16 @@ export const RequestLeavesDialog = (props: any) => {
     refetch();
     leaveStatusRefetch();
   };
-  const parseDateString = (dateString:any) => {
+  const parseDateString = (dateString: any) => {
     const [day, month, year] = dateString.split('/');
     return new Date(`${year}-${month}-${day}`);
   };
+debugger
+  let ss  = convertSnakeToText("FULL_DAY_LEAVE")
   const formik: any = useFormik({
     initialValues: {
       id: editedData?.id || "",
-      leaveType: editedData?.leaveType || "",
+      leaveType: convertSnakeToText(editedData?.leaveType) || "",
       notify: editedData?.notify || [],
       startDate: editedData?.from ? parseDateString(editedData.from) : null,
       endDate: editedData?.to ? parseDateString(editedData.to) : null,

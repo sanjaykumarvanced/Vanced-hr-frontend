@@ -1,4 +1,5 @@
-import { IsLoggedRole } from "../../components/consts/helpers";
+
+import { IsLoggedRole } from "../../utils/helpers";
 import { AdminProjects } from "./admin-projects-page";
 import { UsersProjects } from "./users-projects-page";
 

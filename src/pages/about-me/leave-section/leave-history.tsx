@@ -10,7 +10,8 @@ import {
 import { themeColors, themeFonts } from "../../../configs";
 import { useSelector } from "react-redux";
 import { useGetLeaveHistoryByIdQuery } from "../../../components/apis/leaveHistoryApi";
-import { toCamelCaseFormat } from "../../../components/consts/helpers";
+import { toCamelCaseFormat } from "../../../utils/helpers";
+
 
 export const LeaveHistory = () => {
   const user = useSelector((state: any) => state.authentication.user);
