@@ -38,7 +38,6 @@ const validationSchema = Yup.object({
 });
 
 export const RequestLeavesDialog = (props: any) => {
-  debugger;
   const { onClose, open, refetch, editedData, employeeList } = props;
   const handleClose = () => {
     onClose();

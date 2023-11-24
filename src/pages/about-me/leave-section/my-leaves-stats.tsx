@@ -88,7 +88,7 @@ export const MyLeaveStats = () => {
                   borderRadius: "6px",
                   marginTop: "26px",
                   marginX: "13px",
-                  height: "130px",
+                  height: "142px",
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
