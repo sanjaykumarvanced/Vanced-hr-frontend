@@ -9,6 +9,8 @@ import { format } from "date-fns";
 import { useState } from "react";
 import { RequestLeavesDialog } from "../components/modals/request-leaves-modal";
 import { SingleInputDateRangePicker } from "../components/calendar/calendar";
+import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
+import { toCamelCaseFormat } from "../components/consts/helpers";
 
 const columns: GridColDef[] = [
   {
@@ -43,17 +45,20 @@ const columns: GridColDef[] = [
 ];
 
 export const LeaveRequestTable = () => {
-  debugger
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user[0].id;
   const { data, refetch }: any = useGetLeaveRequestByIdQuery({ id: Id });
 
+  const { data: employeeList } = useGetEmployeeListQuery<any>();
+  const [editedData, setEditedData] = useState<any>({});
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);
+    setEditedData({});
   };
   const handleOpen = () => {
     setIsOpen(true);
+    setEditedData({});
   };
 
   if (!data) {
@@ -62,11 +67,7 @@ export const LeaveRequestTable = () => {
 
   const rows = data.map((item: any) => ({
     id: item._id,
-    // leaveType: item.leaveType.toLowerCase()
-    // .split('_')
-    // .map((word:any, index:any) => index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word.charAt(0).toUpperCase() + word.slice(1))
-    // .join(' '),
-    leaveType: item.leaveType,
+    leaveType: toCamelCaseFormat(item.leaveType),
     from: format(new Date(item.startDate), "dd/MM/yyyy"),
     to: format(new Date(item.endDate), "dd/MM/yyyy"),
     noOfDays: item.noOfDays,
@@ -76,7 +77,10 @@ export const LeaveRequestTable = () => {
     employerImage: item?.approvedBy?.employer?.employerImage?.path,
     employerName: item?.approvedBy?.employer?.userName,
   }));
-
+  const handleClickEditOpen = (data: any, action: string) => {
+    setIsOpen(true);
+    setEditedData({ ...data, action });
+  };
   return (
     <>
       <Grid
@@ -168,11 +172,11 @@ export const LeaveRequestTable = () => {
                         minWidth: "20px",
                         padding: "0px ",
                       }}
-                      // onClick={() => handleClickEditOpen(params.row)}
+                      onClick={() => handleClickEditOpen(params.row, "edit")}
                     >
                       <EditIconSvg />
                     </Button>
-                    <Button
+                    {/* <Button
                       sx={{
                         height: "20px",
                         minWidth: "20px",
@@ -181,7 +185,7 @@ export const LeaveRequestTable = () => {
                       // onClick={() => handleDelete(params.row.id)}
                     >
                       <DeleteIconSvg />
-                    </Button>
+                    </Button> */}
                   </Box>
                 ) : col.field === "status" ? (
                   <Typography
@@ -286,6 +290,8 @@ export const LeaveRequestTable = () => {
           open={isOpen}
           onClose={handleClose}
           refetch={refetch}
+          editedData={editedData}
+          employeeList={employeeList}s
         />
       )}
     </>

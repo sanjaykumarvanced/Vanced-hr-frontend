@@ -10,6 +10,7 @@ import {
 import { themeColors, themeFonts } from "../../../configs";
 import { useSelector } from "react-redux";
 import { useGetLeaveHistoryByIdQuery } from "../../../components/apis/leaveHistoryApi";
+import { toCamelCaseFormat } from "../../../components/consts/helpers";
 
 export const LeaveHistory = () => {
   const user = useSelector((state: any) => state.authentication.user);
@@ -23,8 +24,8 @@ export const LeaveHistory = () => {
         background: themeColors["#FFFFFF"],
         boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
         borderRadius: "6px",
-        height: 234,
-        maxHeight: 234,
+        height: 250,
+        maxHeight: 250,
       }}
     >
       <Box
@@ -67,10 +68,11 @@ export const LeaveHistory = () => {
       <Box
         sx={{
           width: "100%",
-          maxHeight: "175px",
+          maxHeight: "170px",
           overflow: "auto",
-          paddingTop: "30px",
           paddingX: "13px",
+          marginTop:"15px",
+          marginBottom:"15px",
         }}
       >
         <Box
@@ -135,13 +137,13 @@ export const LeaveHistory = () => {
                               display: "flex",
                               justifyContent: "center",
                               alignItems: "center",
-                              fontSize: "14px",
+                              fontSize: "12px",
                               fontFamily: themeFonts["Poppins-SemiBold"],
                               color: themeColors["#0C345D"],
                               minWidth: "40px",
                               margin: 0,
                               padding: "4px",
-                              lineHeight: "14px",
+                              lineHeight: "12px",
                             }}
                           >
                             {leaveDate}
@@ -173,7 +175,7 @@ export const LeaveHistory = () => {
                             position: "relative",
                           }}
                         >
-                          {val.leaveType}
+                          {toCamelCaseFormat(val.leaveType)}
                         </ListItemText>
 
                         <ListItemText
