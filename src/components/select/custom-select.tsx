@@ -89,6 +89,7 @@ export const CustomSelect = ({
             },
           },
         }}
+        error={!!errorStatus}
       >
         {options.map((item, index) => (
           <MenuItem
@@ -115,7 +116,7 @@ export const CustomSelect = ({
           {helperText}
         </FormHelperText>
       )}
-      <ErrorStatusMessage error={errorStatus} />
+      {/* <ErrorStatusMessage error={errorStatus} /> */}
     </FormControl>
   );
 };

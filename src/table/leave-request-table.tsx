@@ -71,13 +71,14 @@ export const LeaveRequestTable = () => {
     from: format(new Date(item.startDate), "dd/MM/yyyy"),
     to: format(new Date(item.endDate), "dd/MM/yyyy"),
     noOfDays: item.noOfDays,
+    notify: item.notify,
     reason: item.reason,
     approvedBy: item?.approvedBy,
     status: item.status,
     employerImage: item?.approvedBy?.employer?.employerImage?.path,
     employerName: item?.approvedBy?.employer?.userName,
   }));
-  const handleClickEditOpen = (data: any, action: string) => {
+  const handleClickEditOpen = (data: any, action?: string) => {
     setIsOpen(true);
     setEditedData({ ...data, action });
   };
@@ -291,7 +292,7 @@ export const LeaveRequestTable = () => {
           onClose={handleClose}
           refetch={refetch}
           editedData={editedData}
-          employeeList={employeeList}s
+          employeeList={employeeList}
         />
       )}
     </>

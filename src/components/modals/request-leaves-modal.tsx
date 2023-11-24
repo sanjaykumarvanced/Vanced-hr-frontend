@@ -24,13 +24,12 @@ import {
   useCreateApplyLeaveRequestMutation,
   useUpdateLeaveRequestMutation,
 } from "../apis/applyLeaveApi";
-import { useGetEmployeeListQuery } from "../apis/employeeListApi";
 import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
 import { Roles, leaveOptions } from "../consts/consts";
+import { useState } from "react";
 
 const validationSchema = Yup.object({
   leaveType: Yup.string().required("Leave Type is required"),
-  notify: Yup.string().required("Notify is required"),
   startDate: Yup.string().required("From is required"),
   endDate: Yup.string().required("To is required"),
   noOfDays: Yup.number().required("Number of Days is required"),
@@ -44,7 +43,7 @@ export const RequestLeavesDialog = (props: any) => {
   };
   const [createApplyLeaveRequest] = useCreateApplyLeaveRequestMutation();
   const employeeRoles = Roles[2].key;
-
+  const [selectedLeaveType, setSelectedLeaveType] = useState("");
   const employeeOptions =
     employeeList &&
     employeeList
@@ -63,7 +62,7 @@ export const RequestLeavesDialog = (props: any) => {
   const [updateApi] = useUpdateLeaveRequestMutation();
   const handleSubmit = async () => {
     try {
-      if (editedData.action === "edit") {
+      if (editedData?.action === "edit") {
         await updateApi({
           id: formik.values.id,
           employee: Id,
@@ -94,13 +93,13 @@ export const RequestLeavesDialog = (props: any) => {
   };
   const formik: any = useFormik({
     initialValues: {
-      id: editedData.id || "",
-      leaveType: editedData.leaveType || "",
-      notify: editedData.notify || [],
-      startDate: editedData.from || "",
-      endDate: editedData.to || "",
-      noOfDays: editedData.noOfDays || parseInt(""),
-      reason: editedData.reason || "",
+      id: editedData?.id || "",
+      leaveType: editedData?.leaveType || "",
+      notify: editedData?.notify || [],
+      startDate: editedData?.from || "",
+      endDate: editedData?.to || "",
+      noOfDays: editedData?.noOfDays || parseInt(""),
+      reason: editedData?.reason || "",
     },
     validationSchema,
     onSubmit: handleSubmit,
@@ -180,11 +179,12 @@ export const RequestLeavesDialog = (props: any) => {
                 options={leaveOptions}
                 onChange={(selectedValue: any) => {
                   formik.handleChange("leaveType")(selectedValue);
+                  setSelectedLeaveType(selectedValue);
                 }}
                 value={formik.values.leaveType}
                 name="leaveType"
                 color="#2F353B"
-                helperText={formik.touched.reason && formik.errors.reason}
+                helperText={formik.touched.leaveType && formik.errors.leaveType}
               />
             </Grid>
             <Grid
@@ -242,7 +242,6 @@ export const RequestLeavesDialog = (props: any) => {
                         margin: "0 5px 0 -9px",
                       },
                     }}
-                    helperText={formik.touched.reason && formik.errors.reason}
                   />
                 )}
                 onChange={(event, selectedValues) => {
@@ -280,6 +279,12 @@ export const RequestLeavesDialog = (props: any) => {
                     "startDate",
                     selectedValue.format("YYYY-MM-DD")
                   );
+                  const endDateValue =
+                    formik.values.leaveType === "SHORT_LEAVE" ||
+                    formik.values.leaveType === "HALF_DAY_LEAVE"
+                      ? selectedValue.format("YYYY-MM-DD")
+                      : "";
+                  formik.setFieldValue("endDate", endDateValue);
                   const days =
                     calculateNumberOfDays(
                       selectedValue.format("YYYY-MM-DD"),
@@ -287,10 +292,12 @@ export const RequestLeavesDialog = (props: any) => {
                     ) + 1;
                   formik.setFieldValue("noOfDays", days);
                 }}
+                minDate={dayjs().startOf("day")}
                 value={dayjs(formik.values.startDate)}
                 name="startDate"
                 fontFamily="Poppins-Regular"
                 fontSize={"14px"}
+                helperText={formik.touched.startDate && formik.errors.startDate}
               />
             </Grid>
             <Grid item xs={4}>
@@ -309,10 +316,16 @@ export const RequestLeavesDialog = (props: any) => {
                     ) + 1;
                   formik.setFieldValue("noOfDays", days);
                 }}
+                minDate={dayjs(formik.values.startDate).startOf("day")}
                 value={dayjs(formik.values.endDate)}
                 name="endDate"
                 fontFamily="Poppins-Regular"
                 fontSize={"14px"}
+                helperText={formik.touched.endDate && formik.errors.endDate}
+                disabled={
+                  selectedLeaveType === "SHORT_LEAVE" ||
+                  selectedLeaveType === "HALF_DAY_LEAVE"
+                }
               />
             </Grid>
             <Grid item xs={4}>
@@ -325,7 +338,7 @@ export const RequestLeavesDialog = (props: any) => {
                 border="1px solid rgb(0 0 0 / 30%)"
                 value={formik.values.noOfDays}
                 readOnly
-                helperText={formik.touched.reason && formik.errors.reason}
+                helperText={formik.touched.noOfDays && formik.errors.noOfDays}
               />
             </Grid>
           </Grid>
@@ -417,7 +430,8 @@ export const RequestLeavesDialog = (props: any) => {
               Cancel
             </Button>
             <Button
-              onClick={handleSubmit}
+              type="submit"
+              disabled={formik.isValid === false}
               sx={{
                 width: 117,
                 height: 39,
@@ -432,6 +446,7 @@ export const RequestLeavesDialog = (props: any) => {
                   border: "1px solid #0C345D",
                 },
               }}
+              // onClick={handleSubmit}
             >
               Request
             </Button>

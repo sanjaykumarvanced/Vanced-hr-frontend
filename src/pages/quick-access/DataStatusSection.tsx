@@ -5,6 +5,7 @@ import { useGetLeaveBalanceByIdQuery } from "../../components/apis/leaveBalanceA
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { RequestLeavesDialog } from "../../components/modals/request-leaves-modal";
+import { useGetEmployeeListQuery } from "../../components/apis/employeeListApi";
 
 export const pieLeaveOptions = {
   legend: "none",
@@ -36,6 +37,7 @@ export const DataStatusSection = () => {
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user[0].id;
   const { data, refetch }: any = useGetLeaveBalanceByIdQuery({ id: Id });
+  const { data: employeeList } = useGetEmployeeListQuery<any>();
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);
@@ -496,6 +498,7 @@ export const DataStatusSection = () => {
           open={isOpen}
           onClose={handleClose}
           refetch={refetch}
+          employeeList={employeeList}
         />
       )}
     </>

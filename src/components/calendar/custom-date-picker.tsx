@@ -4,8 +4,9 @@ import { CalenderIcon1Svg } from "../../svgs";
 import "../../assets/components/styles.css";
 import { DatePicker } from "@mui/x-date-pickers";
 import { CustomLabel } from "../label";
-import { themeFonts } from "../../configs";
+import { themeColors, themeFonts } from "../../configs";
 import { useState } from "react";
+import { FormHelperText } from "@mui/material";
 
 export const CustomDatePicker = ({
   label,
@@ -18,6 +19,9 @@ export const CustomDatePicker = ({
   value = "",
   onChange,
   name,
+  helperText,
+  minDate,
+  disabled,
 }: {
   label?: any;
   width?: any;
@@ -29,6 +33,9 @@ export const CustomDatePicker = ({
   value?: any;
   onChange?: any;
   name?: any;
+  helperText?: any;
+  minDate?: any;
+  disabled?: any;
 }) => {
   const customDayOfWeekFormatter = (dayAbbreviation: string) => {
     const daysAbbreviations = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -62,7 +69,7 @@ export const CustomDatePicker = ({
             },
           },
         }}
-        onChange={handleDateChange} 
+        onChange={handleDateChange}
         value={selectValue}
         sx={{
           "& .MuiInputBase-root.MuiOutlinedInput-root": {
@@ -91,7 +98,22 @@ export const CustomDatePicker = ({
         showDaysOutsideCurrentMonth={true}
         dayOfWeekFormatter={customDayOfWeekFormatter}
         format={`${format ? format : "MM/YY"}`}
+        disablePast
+        minDate={minDate}
+        disabled={disabled}
       />
+      {helperText && (
+        <FormHelperText
+          sx={{
+            fontFamily: themeFonts["Poppins-Bold"],
+            color: themeColors["#FF3939"],
+            fontSize: 14,
+            marginLeft: 0,
+          }}
+        >
+          {helperText}
+        </FormHelperText>
+      )}
     </LocalizationProvider>
   );
 };
