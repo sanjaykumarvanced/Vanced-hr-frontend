@@ -18,17 +18,21 @@ import { QuickAccessPage } from "../pages/quick-access/quick-access-page";
 import { ApprovedLeaves } from "../table/approved-leaves";
 import { AdminDashboard } from "../pages/admin-dashboard/admin-dashboard";
 import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RootNavigator = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const authMe = useSelector(selectAuthMe);
   const navigate = useNavigate();
   const userInfo = useSelector((state: any) => state.authentication.user);
-  const userRole = isLoggedIn && (authMe && userInfo[0].role === "employee");
-  const loggedUserId = isLoggedIn && (authMe && userInfo[0].id);
+  const userRole = isLoggedIn && authMe && userInfo[0].role === "employee";
+  const loggedUserId = isLoggedIn && authMe && userInfo[0].id;
   const { data } = useGetEmployeeListQuery(undefined, { skip: userRole });
-  const employee: any = data && data?.find((elm: any) => elm._id === loggedUserId);
-  const loggedRole = isLoggedIn && (authMe && employee ? employee.role : userInfo[0].role)
+  const employee: any =
+    data && data?.find((elm: any) => elm._id === loggedUserId);
+  const loggedRole =
+    isLoggedIn && (authMe && employee ? employee.role : userInfo[0].role);
   useEffect(() => {
     if (isLoggedIn && !authMe) {
       navigate(ROUTES.HOME, { replace: true });
@@ -87,6 +91,7 @@ export const RootNavigator = () => {
           </Route>
         </Route>
       </Routes>
+      <ToastContainer position="bottom-right" theme="colored" />
     </>
   );
 };

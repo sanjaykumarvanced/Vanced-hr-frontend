@@ -5,6 +5,7 @@ import "./assets/styles/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./assets/components/styles.css";
+import "./assets/components/react-toastify.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

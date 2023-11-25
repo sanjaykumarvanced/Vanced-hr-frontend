@@ -27,6 +27,7 @@ import {
 import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
 import { Roles, leaveOptions } from "../consts/consts";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { convertSnakeToText } from "../../utils/helpers";
 
 const validationSchema = Yup.object({
@@ -38,7 +39,7 @@ const validationSchema = Yup.object({
 });
 
 export const RequestLeavesDialog = (props: any) => {
-  debugger
+  debugger;
   const { onClose, open, refetch, editedData, employeeList } = props;
   const handleClose = () => {
     onClose();
@@ -63,8 +64,8 @@ export const RequestLeavesDialog = (props: any) => {
   });
   const [updateApi] = useUpdateLeaveRequestMutation();
   const handleSubmit = async () => {
-    try {
-      if (editedData?.action === "edit") {
+    if (editedData?.action === "edit") {
+      try {
         await updateApi({
           id: formik.values.id,
           employee: Id,
@@ -75,7 +76,12 @@ export const RequestLeavesDialog = (props: any) => {
           noOfDays: formik.values.noOfDays,
           reason: formik.values.reason,
         });
-      } else {
+      } catch (error) {
+        console.error("Error applying for leave:", error);
+        toast.error("Something went wrong.");
+      }
+    } else {
+      try {
         await createApplyLeaveRequest({
           employee: Id,
           leaveType: formik.values.leaveType,
@@ -85,20 +91,21 @@ export const RequestLeavesDialog = (props: any) => {
           noOfDays: formik.values.noOfDays,
           reason: formik.values.reason,
         });
+      } catch (error) {
+        console.error("Error applying for leave:", error);
+        toast.error("Something went wrong.");
       }
       onClose();
-    } catch (error) {
-      console.error("Error applying for leave:", error);
     }
     refetch();
     leaveStatusRefetch();
   };
   const parseDateString = (dateString: any) => {
-    const [day, month, year] = dateString.split('/');
+    const [day, month, year] = dateString.split("/");
     return new Date(`${year}-${month}-${day}`);
   };
-debugger
-  let ss  = convertSnakeToText("FULL_DAY_LEAVE")
+  debugger;
+  let ss = convertSnakeToText("FULL_DAY_LEAVE");
   const formik: any = useFormik({
     initialValues: {
       id: editedData?.id || "",
@@ -283,10 +290,21 @@ debugger
                 label={"From"}
                 format={"DD/MM/YYYY"}
                 onChange={(selectedValue: any) => {
-                  formik.setFieldValue("startDate", selectedValue.format("YYYY-MM-DD"));
-                  const endDateValue = formik.values.leaveType === "SHORT_LEAVE" || formik.values.leaveType === "HALF_DAY_LEAVE" ? selectedValue.format("YYYY-MM-DD") : "";
+                  formik.setFieldValue(
+                    "startDate",
+                    selectedValue.format("YYYY-MM-DD")
+                  );
+                  const endDateValue =
+                    formik.values.leaveType === "SHORT_LEAVE" ||
+                    formik.values.leaveType === "HALF_DAY_LEAVE"
+                      ? selectedValue.format("YYYY-MM-DD")
+                      : "";
                   formik.setFieldValue("endDate", endDateValue);
-                  const days = calculateNumberOfDays(selectedValue.format("YYYY-MM-DD"), formik.values.endDate) + 1;
+                  const days =
+                    calculateNumberOfDays(
+                      selectedValue.format("YYYY-MM-DD"),
+                      formik.values.endDate
+                    ) + 1;
                   formik.setFieldValue("noOfDays", days);
                 }}
                 minDate={dayjs().startOf("day")}
@@ -302,8 +320,15 @@ debugger
                 label={"To"}
                 format={"DD/MM/YYYY"}
                 onChange={(selectedValue: any) => {
-                  formik.setFieldValue("endDate", selectedValue.format("YYYY-MM-DD"));
-                  const days = calculateNumberOfDays(formik.values.startDate, selectedValue.format("YYYY-MM-DD")) + 1;
+                  formik.setFieldValue(
+                    "endDate",
+                    selectedValue.format("YYYY-MM-DD")
+                  );
+                  const days =
+                    calculateNumberOfDays(
+                      formik.values.startDate,
+                      selectedValue.format("YYYY-MM-DD")
+                    ) + 1;
                   formik.setFieldValue("noOfDays", days);
                 }}
                 minDate={dayjs(formik.values.startDate).startOf("day")}
@@ -312,7 +337,10 @@ debugger
                 fontFamily="Poppins-Regular"
                 fontSize={"14px"}
                 helperText={formik.touched.endDate && formik.errors.endDate}
-                disabled={selectedLeaveType === "SHORT_LEAVE" || selectedLeaveType === "HALF_DAY_LEAVE"}
+                disabled={
+                  selectedLeaveType === "SHORT_LEAVE" ||
+                  selectedLeaveType === "HALF_DAY_LEAVE"
+                }
               />
             </Grid>
             <Grid item xs={4}>
@@ -433,7 +461,7 @@ debugger
                   border: "1px solid #0C345D",
                 },
               }}
-            // onClick={handleSubmit}
+              // onClick={handleSubmit}
             >
               Request
             </Button>

@@ -1,0 +1,25 @@
+.Toastify__toast {
+  font-family: 'Poppins-SemiBold';
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
+.css-1md30qv-MuiFormHelperText-root {
+  padding-left: 25px;
+  position: relative;
+  margin-top: 7px !important;
+  color: #4588c0 !important;
+}
+/* .css-1md30qv-MuiFormHelperText-root:before {
+  content: url('/src/assets/images/pngs/lock.png');
+  position: absolute;
+  left: 0;
+} */
+.css-h67psh {
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+}
+.Toastify__toast-container--bottom-right{
+  top:0rem !important
+}
