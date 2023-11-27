@@ -11,6 +11,7 @@ import { RequestLeavesDialog } from "../components/modals/request-leaves-modal";
 import { SingleInputDateRangePicker } from "../components/calendar/calendar";
 import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
 import { toCamelCaseFormat } from "../utils/helpers";
+import moment from "moment";
 
 
 const columns: GridColDef[] = [
@@ -52,6 +53,7 @@ export const LeaveRequestTable = () => {
 
   const { data: employeeList } = useGetEmployeeListQuery<any>();
   const [editedData, setEditedData] = useState<any>({});
+  const currentDate = moment();
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);
@@ -169,10 +171,20 @@ export const LeaveRequestTable = () => {
                     }}
                   >
                     <Button
+                       disabled={
+                        moment(params.row.from, "DD/MM/YYYY").isBefore(
+                          currentDate
+                        )
+                          ? true
+                          : false
+                      }
                       sx={{
                         height: "20px",
                         minWidth: "20px",
                         padding: "0px ",
+                        "&.Mui-disabled ": {
+                          "& svg path": { fill: "rgba(0, 0, 0, 0.26)" },
+                        },
                       }}
                       onClick={() => handleClickEditOpen(params.row, "edit")}
                     >
