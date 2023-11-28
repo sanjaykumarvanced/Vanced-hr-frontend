@@ -1,8 +1,8 @@
 export const TodaysLeavesTabs = [
-  { label: "All", value: "All" },
-  { label: "Short leave", value: "Short Leave" },
-  { label: "Half day Leave ", value: "Half Day Leave" },
-  { label: "Full day Leave ", value: "Full Day Leave" },
+  { label: "All", value: "ALL" },
+  { label: "Short Leave", value: "SHORT_LEAVE", },
+  { label: "Half Day Leave", value: "HALF_DAY_LEAVE" },
+  { label: "Full Day Leave", value: "FULL_DAY_LEAVE" },
 ];
 
 export const SocialTabs = [

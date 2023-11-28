@@ -42,10 +42,12 @@ export const getStyles = (TodaysLeavesDetails?: any) => {
 };
 
 export const TodaysLeavesDetails = () => {
+  debugger
   const [value, setValue] = useState("All");
   const TodaysLeavesDetails = "TodaysLeavesDetails";
   const styles = getStyles(TodaysLeavesDetails);
   const handleChange = (event: any) => {
+    debugger
     setValue(event);
   };
   const today = new Date().toLocaleString("en-in", {
@@ -57,7 +59,7 @@ export const TodaysLeavesDetails = () => {
 
   useEffect(() => {
     if (data) {
-      if (value === "All") {
+      if (value === "ALL") {
         setFilteredLeaves(data);
       } else {
         setFilteredLeaves(
