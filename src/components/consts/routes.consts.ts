@@ -10,7 +10,7 @@ export const ROUTES = {
   REGISTER: "/auth/register",
   //Profile routes
   PROFILE: "/profile",
-  ACCOUNTS_SETTING: "/profile/accounts-settings",
+  ACCOUNTS_SETTING: "/accounts-settings",
   NEED_HELP: "/profile/my-profile",
   REQUESTED_LEAVES: "/requested-leaves",
   //Admin Route

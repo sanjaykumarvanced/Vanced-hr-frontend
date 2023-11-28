@@ -105,7 +105,7 @@ export const RequestLeavesDialog = (props: any) => {
     return new Date(`${year}-${month}-${day}`);
   };
   debugger;
-  let ss = convertSnakeToText("FULL_DAY_LEAVE");
+  // let ss = convertSnakeToText("FULL_DAY_LEAVE");
   const formik: any = useFormik({
     initialValues: {
       id: editedData?.id || "",

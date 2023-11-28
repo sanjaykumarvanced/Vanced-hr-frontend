@@ -5,6 +5,10 @@ import Profile from "../assets/images/png/profile.png";
 import WorkingImg from "../assets/images/png/working-img.png";
 import RemoteClock from "../assets/images/png/remote-clock.png";
 import CompensationImg from "../assets/images/png/Compensation.png";
+import TotalEmployees from "../assets/images/png/total-employees.png";
+import TotalProjects from "../assets/images/png/total-projects.png";
+import TotalClients from "../assets/images/png/total-clients.png";
+import ActiveTasks from "../assets/images/png/Active-tasks.png";
 export {
   LogBackground,
   Inbox,
@@ -12,5 +16,9 @@ export {
   Profile,
   WorkingImg,
   RemoteClock,
-  CompensationImg
+  CompensationImg,
+  TotalEmployees,
+  TotalProjects,
+  TotalClients,
+  ActiveTasks,
 };

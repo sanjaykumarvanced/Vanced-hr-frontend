@@ -55,3 +55,5 @@ export { ReactComponent as LineIconSvg } from "../assets/images/svg/line-icon.sv
 export { ReactComponent as CrossMarkIcon } from "../assets/images/svg/cross-mark-icon.svg";
 export { ReactComponent as GrossEarningSvg } from "../assets/images/svg/gross-earning.svg";
 export { ReactComponent as NotificationIconSvg } from "../assets/images/svg/notification-icon.svg";
+export { ReactComponent as HolidaysPictureSvg } from "../assets/images/svg/holidays-picture.svg";
+export { ReactComponent as GraphSvg } from "../assets/images/svg/graph.svg";

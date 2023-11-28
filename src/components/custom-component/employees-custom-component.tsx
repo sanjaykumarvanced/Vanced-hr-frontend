@@ -5,23 +5,28 @@ interface CustomEmployeesProps {
   Title?: any;
   children?: any;
   value?: any;
+  from?: any;
+  xs?: any;
 }
 
 export const CustomEmployees = ({
   value,
   children,
   Title,
+  from,
+  xs,
 }: CustomEmployeesProps) => {
   return (
     <>
       <Grid
         item
-        xs={6}
+        xs={from === "admin-dashboard" ? xs : 6}
         sx={{
           background: themeColors["#FFFFFF"],
           boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
           borderRadius: "6px",
-          padding: "13px",
+          paddingX: "13px",
+          paddingY: from === "admin-dashboard" ? "20px" : "13px",
         }}
       >
         <Typography
@@ -35,7 +40,7 @@ export const CustomEmployees = ({
         </Typography>
         <Box
           sx={{
-            paddingTop: "13px",
+            paddingTop: from === "admin-dashboard" ? "0px" : "13px",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
@@ -43,15 +48,18 @@ export const CustomEmployees = ({
         >
           <Typography
             sx={{
-              fontSize: "15px",
+              fontSize: from === "admin-dashboard" ? "30px" : "15px",
               fontFamily: themeFonts["Poppins-SemiBold"],
-              color: "rgb(0 0 0 / 60%)",
-              border: "1px solid #707070",
-              width: "104px",
+              color:
+                from === "admin-dashboard"
+                  ? themeColors["#0C345D"]
+                  : "rgb(0 0 0 / 60%)",
+              border: from === "admin-dashboard" ? 0 : "1px solid #707070",
+              width: from === "admin-dashboard" ? "auto" : "104px",
               height: "36px",
-              padding: "8px",
-              borderStyle: "dashed",
-              paddingTop: "7px",
+              padding: from === "admin-dashboard" ? 0 : "8px",
+              borderStyle: from === "admin-dashboard" ? "none" : "dashed",
+              paddingTop: from === "admin-dashboard" ? "20px" : "7px",
             }}
           >
             {value}
