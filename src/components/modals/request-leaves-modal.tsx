@@ -39,7 +39,6 @@ const validationSchema = Yup.object({
 });
 
 export const RequestLeavesDialog = (props: any) => {
-  debugger;
   const { onClose, open, refetch, editedData, employeeList } = props;
   const handleClose = () => {
     onClose();
@@ -104,7 +103,6 @@ export const RequestLeavesDialog = (props: any) => {
     const [day, month, year] = dateString.split("/");
     return new Date(`${year}-${month}-${day}`);
   };
-  debugger;
   // let ss = convertSnakeToText("FULL_DAY_LEAVE");
   const formik: any = useFormik({
     initialValues: {
@@ -137,7 +135,7 @@ export const RequestLeavesDialog = (props: any) => {
         flexShrink: 0,
         "& .css-1rfs30z-MuiPaper-root-MuiDialog-paper": {
           width: "850px",
-          maxWidth: "850px",
+          maxWidth: "850px", 
         },
       }}
     >

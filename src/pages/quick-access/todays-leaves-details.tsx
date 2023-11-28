@@ -42,12 +42,10 @@ export const getStyles = (TodaysLeavesDetails?: any) => {
 };
 
 export const TodaysLeavesDetails = () => {
-  debugger
   const [value, setValue] = useState("ALL");
   const TodaysLeavesDetails = "TodaysLeavesDetails";
   const styles = getStyles(TodaysLeavesDetails);
   const handleChange = (event: any) => {
-    debugger
     setValue(event);
   };
   const today = new Date().toLocaleString("en-in", {
