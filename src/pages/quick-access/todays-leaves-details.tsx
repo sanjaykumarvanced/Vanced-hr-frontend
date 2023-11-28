@@ -43,7 +43,7 @@ export const getStyles = (TodaysLeavesDetails?: any) => {
 
 export const TodaysLeavesDetails = () => {
   debugger
-  const [value, setValue] = useState("All");
+  const [value, setValue] = useState("ALL");
   const TodaysLeavesDetails = "TodaysLeavesDetails";
   const styles = getStyles(TodaysLeavesDetails);
   const handleChange = (event: any) => {
