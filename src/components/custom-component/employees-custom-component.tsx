@@ -25,8 +25,7 @@ export const CustomEmployees = ({
           background: themeColors["#FFFFFF"],
           boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
           borderRadius: "6px",
-          paddingX: "13px",
-          paddingY: from === "admin-dashboard" ? "20px" : "13px",
+          padding: "13px",
         }}
       >
         <Typography

@@ -21,7 +21,7 @@ import { IsLoggedRole } from "../../utils/helpers";
 import { Roles } from "../../components/consts/consts";
 import { AnnouncementsItem } from "./announcement-items";
 
-export const TodaysAnnouncement = () => {
+export const TodaysAnnouncement = ({ minHeight }: { minHeight?: any }) => {
   const { data, refetch } = useGetAnnouncementListQuery<any>();
   const [deleteItem] = useDeleteAnnouncementMutation();
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +49,7 @@ export const TodaysAnnouncement = () => {
           background: themeColors["#FFFFFF"],
           boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
           borderRadius: "6px",
-          minHeight: 775,
+          minHeight: minHeight ? minHeight : 775,
         }}
       >
         <Box
@@ -73,7 +73,7 @@ export const TodaysAnnouncement = () => {
             Announcement
           </Typography>
 
-          {IsLoggedRole("admin") ?
+          {IsLoggedRole("admin") ? (
             <Button
               sx={{
                 fontFamily: themeFonts["Poppins-SemiBold"],
@@ -88,10 +88,12 @@ export const TodaysAnnouncement = () => {
             >
               Add New Post
             </Button>
-            : ""}
+          ) : (
+            ""
+          )}
         </Box>
         <Divider sx={{ width: "100%" }} />
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -102,9 +104,9 @@ export const TodaysAnnouncement = () => {
             maxHeight: "693px",
             height: "100%",
           }}
-        >
-          <AnnouncementsItem IsLoggedRole ={IsLoggedRole("admin")} />
-        </Box>
+        > */}
+        <AnnouncementsItem IsLoggedRole={IsLoggedRole("admin")} />
+        {/* </Box> */}
       </Grid>
       {isOpen && (
         <AddNewPostDialog
