@@ -109,7 +109,6 @@ export const QuickAccessPage = () => {
           xs={12}
           sx={{
             display: "flex",
-            justifyContent: "space-between",
             flexDirection: "row",
             paddingLeft: "0px !important",
             paddingTop: "0px !important",

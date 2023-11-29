@@ -62,11 +62,11 @@ const SocialDashboard = () => {
         xs={12}
         sx={{
           display: "flex",
-          justifyContent: "space-between",
           flexDirection: "row",
           paddingLeft: "0px !important",
           paddingTop: "0px !important",
           gap: "20px",
+          maxHeight: "145px !important",
         }}
       >
         <Grid
@@ -80,6 +80,7 @@ const SocialDashboard = () => {
             paddingTop: "18px",
             paddingLeft: "13px",
             paddingBottom: "22px",
+            height: "145px",
           }}
         >
           <Box
@@ -140,6 +141,7 @@ const SocialDashboard = () => {
             flexDirection: "row",
             justifyContent: "space-between",
             position: "relative",
+            height: "145px",
           }}
         >
           <Box sx={{ display: "flex", flexDirection: "column", gap: "40px" }}>
@@ -213,61 +215,7 @@ const SocialDashboard = () => {
           </Button>
         </Grid>
       </Grid>
-      {/* <Grid
-        item
-        xs={12}
-        sx={{
-          background: themeColors["#FFFFFF"],
-          boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
-          borderRadius: "6px",
-          padding: "13px",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            gap: "10px",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            maxHeight: "17px",
-          }}
-        >
-          {SocialTabs.map((val) => (
-            <>
-              <CustomTabs
-                sx={styles.socialButtons}
-                label={val.label}
-                onChange={handleChange}
-                value={val.value}
-                value1={value}
-              />
-            </>
-          ))}
-        </Box>
-        <Box sx={{ width: "100%", paddingTop: "13px" }}>
-          {SocialTabs.map((tabs, ind) => (
-            <CustomTabsPanel
-              sx={styles.tabPanel}
-              value={tabs.value}
-              value1={value}
-            >
-              <TextField
-                multiline
-                rows={7}
-                placeholder="Write Your Post Here"
-                sx={{
-                  "&.MuiFormControl-root.MuiTextField-root": { width: "100%" },
-                  "& .MuiInputBase-root.MuiOutlinedInput-root": {
-                    fontFamily: themeFonts["Poppins-Regular"],
-                    fontSize: "14px",
-                    color: themeColors["rgb(0 0 0 / 50%)"],
-                  },
-                }}
-              />
-            </CustomTabsPanel>
-          ))}
-        </Box>
-      </Grid> */}
+
       {isOpen && (
         <ViewAllHolidaysDialog
           open={isOpen}
