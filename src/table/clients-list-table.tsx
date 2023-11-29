@@ -48,7 +48,7 @@ const columns: GridColDef[] = [
   },
 ];
 
-export const ClientsListTable = ({ minHeight }: { minHeight?: any }) => {
+export const ClientsListTable = ({ maxHeight }: { maxHeight?: any }) => {
   const { data } = useGetEmployeeListQuery();
   console.log(data);
   if (!data) {
@@ -110,7 +110,7 @@ export const ClientsListTable = ({ minHeight }: { minHeight?: any }) => {
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ height: minHeight ? minHeight : 400, width: "100%" }}>
+        <Box sx={{ maxHeight: maxHeight ? maxHeight : 400, width: "100%" }}>
           <DataGrid
             rows={rows || []}
             columns={columns.map((col) => ({

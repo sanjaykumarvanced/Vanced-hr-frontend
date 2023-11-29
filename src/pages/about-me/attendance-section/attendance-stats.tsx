@@ -116,7 +116,7 @@ export const AttendanceStats = () => {
                 },
             }}
             IconComponent={() => <DownArrowIcon3 height={10} />}
-            defaultValue={"Last Week"}
+            defaultValue={"Week"}
             onChange={handleChange}
             value={selectedValue}
             MenuProps={{
@@ -142,7 +142,7 @@ export const AttendanceStats = () => {
             }}
           >
             <MenuItem value={"Today"}>Today</MenuItem>
-            <MenuItem value={"Last Week"}>Last Week</MenuItem>
+            <MenuItem value={"Week"}>Last Week</MenuItem>
             <MenuItem value={"Last Month"}>Last Month</MenuItem>
             <MenuItem value={"Last Year"}>Last Year</MenuItem>
           </Select>

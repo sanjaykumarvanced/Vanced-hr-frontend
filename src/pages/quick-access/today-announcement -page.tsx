@@ -21,7 +21,7 @@ import { IsLoggedRole } from "../../utils/helpers";
 import { Roles } from "../../components/consts/consts";
 import { AnnouncementsItem } from "./announcement-items";
 
-export const TodaysAnnouncement = ({ minHeight }: { minHeight?: any }) => {
+export const TodaysAnnouncement = ({ maxHeight }: { maxHeight?: any }) => {
   const { data, refetch } = useGetAnnouncementListQuery<any>();
   const [deleteItem] = useDeleteAnnouncementMutation();
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +49,7 @@ export const TodaysAnnouncement = ({ minHeight }: { minHeight?: any }) => {
           background: themeColors["#FFFFFF"],
           boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
           borderRadius: "6px",
-          minHeight: minHeight ? minHeight : 775,
+          maxHeight: maxHeight ? maxHeight : 775,
         }}
       >
         <Box

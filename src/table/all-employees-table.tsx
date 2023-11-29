@@ -48,7 +48,7 @@ const columns: GridColDef[] = [
   },
 ];
 
-export const AllEmployeeListTable = ({ minHeight }: { minHeight?: any }) => {
+export const AllEmployeeListTable = ({ maxHeight }: { maxHeight?: any }) => {
   const { data } = useGetEmployeeListQuery();
   console.log(data);
   if (!data) {
@@ -76,7 +76,6 @@ export const AllEmployeeListTable = ({ minHeight }: { minHeight?: any }) => {
           boxShadow: "0px 3px 6px 0px rgb(0 0 0 / 16%)",
           borderRadius: "10px",
           display: "flex",
-          justifyContent: "space-between",
           alignItems: "center",
           flexDirection: "column",
           paddingLeft: "0px !important",
@@ -110,7 +109,7 @@ export const AllEmployeeListTable = ({ minHeight }: { minHeight?: any }) => {
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ height: minHeight ? minHeight : 400, width: "100%" }}>
+        <Box sx={{ maxHeight: maxHeight ? maxHeight : 400, width: "100%" }}>
           <DataGrid
             rows={rows || []}
             columns={columns.map((col) => ({

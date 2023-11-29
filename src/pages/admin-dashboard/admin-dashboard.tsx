@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { themeFonts, themeColors } from "../../configs";
 
-import { CustomEmployees } from "../../components/custom-component/employees-custom-component";
 import { DownArrowIcon3, HolidaysPictureSvg, GraphSvg } from "../../svgs";
 import { useState } from "react";
 import {
@@ -25,9 +24,12 @@ import { OnTodayLeaveTable } from "../../table/today-leaves-table";
 import { TodaysAnnouncement } from "../quick-access/today-announcement -page";
 import { AllEmployeeListTable } from "../../table/all-employees-table";
 import { ClientsListTable } from "../../table/clients-list-table";
+import { AdminCustomComponent } from "../../components/custom-component/admin-custom-component";
+import { useSelector } from "react-redux";
 export const AdminDashboard = () => {
   const [selectedValue, setSelectedValue] = useState();
-
+  const user = useSelector((state: any) => state.authentication.user);
+  const userName = `${user[0].firstName} ${user[0].lastName}`;
   const handleChange = (event: any) => {
     setSelectedValue(event.target.value);
   };
@@ -59,7 +61,7 @@ export const AdminDashboard = () => {
               color: themeColors["#000000"],
             }}
           >
-            Welcome Rajeev Kumar !
+            Welcome {userName} !
           </Typography>
         </Box>
         <Grid
@@ -133,7 +135,7 @@ export const AdminDashboard = () => {
                       },
                   }}
                   IconComponent={() => <DownArrowIcon3 height={10} />}
-                  defaultValue={"Last Week"}
+                  defaultValue={"Week"}
                   onChange={handleChange}
                   value={selectedValue}
                   MenuProps={{
@@ -148,7 +150,7 @@ export const AdminDashboard = () => {
                         },
                         "&.MuiPaper-root.MuiPopover-paper.MuiMenu-paper": {
                           marginTop: "7px !important",
-                          borderRadius: "6px",
+                          borderRadius: "3px",
                         },
                         "& li": {
                           fontFamily: themeFonts["Poppins-SemiBold"],
@@ -160,9 +162,9 @@ export const AdminDashboard = () => {
                   }}
                 >
                   <MenuItem value={"Today"}>Today</MenuItem>
-                  <MenuItem value={"Last Week"}>Last Week</MenuItem>
-                  <MenuItem value={"Last Month"}>Last Month</MenuItem>
-                  <MenuItem value={"Last Year"}>Last Year</MenuItem>
+                  <MenuItem value={"Week"}>Last Week</MenuItem>
+                  <MenuItem value={"Month"}>Last Month</MenuItem>
+                  <MenuItem value={"Year"}>Last Year</MenuItem>
                 </Select>
               </Box>
               <Divider sx={{ width: "100%" }} />
@@ -179,7 +181,7 @@ export const AdminDashboard = () => {
             </Grid>
             <OnTodayLeaveTable minHeight={266} />
             <Grid item xs={12} sx={{ marginTop: "20px" }}>
-              <TodaysAnnouncement minHeight={888} />
+              <TodaysAnnouncement maxHeight={888} />
             </Grid>
           </Grid>
           <Grid
@@ -212,20 +214,16 @@ export const AdminDashboard = () => {
                   gap: "20px",
                 }}
               >
-                <CustomEmployees
+                <AdminCustomComponent
                   Title={"Total Employee"}
                   value={"255"}
                   children={<img src={TotalEmployees} alt="TotalEmployees" />}
-                  xs={12}
-                  from={"admin-dashboard"}
                 />
 
-                <CustomEmployees
+                <AdminCustomComponent
                   Title={"Total Clients"}
                   value={"40"}
                   children={<img src={TotalClients} alt="TotalClients" />}
-                  xs={12}
-                  from={"admin-dashboard"}
                 />
                 <Grid
                   item
@@ -294,7 +292,7 @@ export const AdminDashboard = () => {
                             },
                         }}
                         IconComponent={() => <DownArrowIcon3 height={10} />}
-                        defaultValue={"Last Week"}
+                        defaultValue={"Month"}
                         onChange={handleChange}
                         value={selectedValue}
                         MenuProps={{
@@ -311,7 +309,7 @@ export const AdminDashboard = () => {
                               "&.MuiPaper-root.MuiPopover-paper.MuiMenu-paper":
                                 {
                                   marginTop: "7px !important",
-                                  borderRadius: "6px",
+                                  borderRadius: "3px",
                                 },
                               "& li": {
                                 fontFamily: themeFonts["Poppins-SemiBold"],
@@ -323,9 +321,9 @@ export const AdminDashboard = () => {
                         }}
                       >
                         <MenuItem value={"Today"}>Today</MenuItem>
-                        <MenuItem value={"Last Week"}>This Week</MenuItem>
-                        <MenuItem value={"Last Month"}>This Month</MenuItem>
-                        <MenuItem value={"Last Year"}>This Year</MenuItem>
+                        <MenuItem value={"Week"}>This Week</MenuItem>
+                        <MenuItem value={"Month"}>This Month</MenuItem>
+                        <MenuItem value={"Year"}>This Year</MenuItem>
                       </Select>
                     </Typography>
                   </Box>
@@ -1034,19 +1032,15 @@ export const AdminDashboard = () => {
                   gap: "20px",
                 }}
               >
-                <CustomEmployees
+                <AdminCustomComponent
                   Title={"Total Projects"}
                   value={"255"}
                   children={<img src={TotalProjects} alt="projects" />}
-                  xs={12}
-                  from={"admin-dashboard"}
                 />
-                <CustomEmployees
+                <AdminCustomComponent
                   Title={"Active Task"}
                   value={"546"}
                   children={<img src={ActiveTasks} alt="ActiveTasks" />}
-                  xs={12}
-                  from={"admin-dashboard"}
                 />
                 <Grid
                   item
@@ -1091,18 +1085,36 @@ export const AdminDashboard = () => {
                       Tue , 24 Oct , 2023
                     </Typography>
                   </Box>
-                  <Box sx={{ height: 400, overflow: "hidden" }}>
+                  <Box
+                    sx={{
+                      height: 400,
+                      overflow: "hidden",
+                      position: "relative",
+                    }}
+                  >
                     <HolidaysPictureSvg />
+                    <Typography
+                      sx={{
+                        fontFamily: themeFonts["Poppins-SemiBold"],
+                        fontSize: "22px",
+                        color: themeColors["#2B468B"],
+                        position: "absolute",
+                        top: "65px",
+                        right: "13px",
+                      }}
+                    >
+                      Dussehra
+                    </Typography>
                   </Box>
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <AllEmployeeListTable minHeight={580} />
-            </Grid>
-            <Grid item xs={12}>
-              <ClientsListTable minHeight={266} />
-            </Grid>
+            {/* <Grid item xs={12}> */}
+            <AllEmployeeListTable maxHeight={580} />
+            {/* </Grid> */}
+            {/* <Grid item xs={12}> */}
+            <ClientsListTable maxHeight={266} />
+            {/* </Grid> */}
           </Grid>
         </Grid>
       </Grid>
