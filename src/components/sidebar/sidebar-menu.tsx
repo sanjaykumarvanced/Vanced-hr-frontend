@@ -35,9 +35,10 @@ export const SidebarMenu = () => {
   const { data } = useGetEmployeeListQuery(undefined, { skip: userRole });
   const employee: any = data && data?.find((elm: any) => elm._id === users);
   const role = employee ? employee.role : user[0].role;
-  const menus = sidebarMenuConfig.filter((elm) =>
-    elm.permissions.includes(role)
-  );
+  const filteredMenus = sidebarMenuConfig.filter((elm) =>
+  elm.permissions.includes(role) && elm.isActive
+);
+
   return (
     <>
       <SidebarMenuHeader />
@@ -50,7 +51,7 @@ export const SidebarMenu = () => {
       />
       <Box sx={styles.root}>
         <ListItems
-          menu={menus}
+          menu={filteredMenus}
           navigate={navigate}
           pathname={pathname}
         />

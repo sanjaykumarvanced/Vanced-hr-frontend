@@ -133,8 +133,8 @@ export const RequestLeavesDialog = (props: any) => {
       open={open}
       sx={{
         flexShrink: 0,
-        "& .css-1rfs30z-MuiPaper-root-MuiDialog-paper": {
-          width: "850px",
+        "& .MuiDialog-paper": {
+          width: "100%",
           maxWidth: "850px", 
         },
       }}

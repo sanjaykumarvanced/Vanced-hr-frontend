@@ -23,9 +23,10 @@ export const ViewAllHolidaysDialog = (props: any) => {
       open={open}
       sx={{
         flexShrink: 0,
-        "& .css-1rfs30z-MuiPaper-root-MuiDialog-paper": {
-          width: "calc(100% - 520px)",
+        "& .MuiDialog-paperScrollPaper": {
+          width: "100%",
           borderRadius: "20px",
+          maxWidth:"600px"
         },
       }}
     >
