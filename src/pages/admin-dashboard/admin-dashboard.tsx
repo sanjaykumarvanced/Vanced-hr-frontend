@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { themeFonts, themeColors } from "../../configs";
 
-import { DownArrowIcon3, HolidaysPictureSvg, GraphSvg } from "../../svgs";
+import { DownArrowIcon3, GraphSvg } from "../../svgs";
 import { useState } from "react";
 import {
   TotalEmployees,
@@ -19,6 +19,7 @@ import {
   TotalProjects,
   ActiveTasks,
   Profile,
+  HolidaysPicture,
 } from "../../pngs";
 import { OnTodayLeaveTable } from "../../table/today-leaves-table";
 import { TodaysAnnouncement } from "../quick-access/today-announcement -page";
@@ -26,6 +27,8 @@ import { AllEmployeeListTable } from "../../table/all-employees-table";
 import { ClientsListTable } from "../../table/clients-list-table";
 import { AdminCustomComponent } from "../../components/custom-component/admin-custom-component";
 import { useSelector } from "react-redux";
+import { useGetHolidaysDetailsQuery } from "../../components/apis/holidaysDetailsApi";
+import { useGetTotalCountsQuery } from "../../components/apis/totalCountsApi";
 export const AdminDashboard = () => {
   const [selectedValue, setSelectedValue] = useState();
   const user = useSelector((state: any) => state.authentication.user);
@@ -33,6 +36,24 @@ export const AdminDashboard = () => {
   const handleChange = (event: any) => {
     setSelectedValue(event.target.value);
   };
+  const year = new Date().getFullYear();
+  const { data: holidays }: any = useGetHolidaysDetailsQuery({ year });
+  const upcomingHolidays =
+    holidays &&
+    holidays
+      .filter(
+        (holiday: { startDate: string }) =>
+          new Date(holiday.startDate) >= new Date()
+      )
+      .sort(
+        (a: { startDate: string }, b: { startDate: string }) =>
+          new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+      );
+  const upcomingHoliday = upcomingHolidays && upcomingHolidays[0];
+  const { data: counts } = useGetTotalCountsQuery<any>();
+  const AdminDashboard = "AdminDashboards";
+  console.log(counts, "counts");
+
   return (
     <>
       <Grid
@@ -117,6 +138,7 @@ export const AdminDashboard = () => {
                     paddingX: "9px",
                     paddingY: "7px",
                     cursor: "pointer",
+                    borderRadius: "3px",
                     "& .MuiInputBase-input.MuiOutlinedInput-input.MuiSelect-outlined.MuiSelect-select":
                       {
                         position: "relative",
@@ -150,7 +172,7 @@ export const AdminDashboard = () => {
                         },
                         "&.MuiPaper-root.MuiPopover-paper.MuiMenu-paper": {
                           marginTop: "7px !important",
-                          borderRadius: "3px",
+                          borderRadius: "6px",
                         },
                         "& li": {
                           fontFamily: themeFonts["Poppins-SemiBold"],
@@ -181,7 +203,10 @@ export const AdminDashboard = () => {
             </Grid>
             <OnTodayLeaveTable minHeight={266} />
             <Grid item xs={12} sx={{ marginTop: "20px" }}>
-              <TodaysAnnouncement maxHeight={888} />
+              <TodaysAnnouncement
+                maxHeight={888}
+                AdminDashboard={AdminDashboard}
+              />
             </Grid>
           </Grid>
           <Grid
@@ -216,13 +241,13 @@ export const AdminDashboard = () => {
               >
                 <AdminCustomComponent
                   Title={"Total Employee"}
-                  value={"255"}
+                  value={counts?.totalEmployees}
                   children={<img src={TotalEmployees} alt="TotalEmployees" />}
                 />
 
                 <AdminCustomComponent
                   Title={"Total Clients"}
-                  value={"40"}
+                  value={counts?.totalClients}
                   children={<img src={TotalClients} alt="TotalClients" />}
                 />
                 <Grid
@@ -274,6 +299,7 @@ export const AdminDashboard = () => {
                           paddingX: "9px",
                           paddingY: "7px",
                           cursor: "pointer",
+                          borderRadius: "3px",
                           "& .MuiInputBase-input.MuiOutlinedInput-input.MuiSelect-outlined.MuiSelect-select":
                             {
                               position: "relative",
@@ -309,7 +335,7 @@ export const AdminDashboard = () => {
                               "&.MuiPaper-root.MuiPopover-paper.MuiMenu-paper":
                                 {
                                   marginTop: "7px !important",
-                                  borderRadius: "3px",
+                                  borderRadius: "6px",
                                 },
                               "& li": {
                                 fontFamily: themeFonts["Poppins-SemiBold"],
@@ -1034,12 +1060,12 @@ export const AdminDashboard = () => {
               >
                 <AdminCustomComponent
                   Title={"Total Projects"}
-                  value={"255"}
+                  value={counts?.totalProjects}
                   children={<img src={TotalProjects} alt="projects" />}
                 />
                 <AdminCustomComponent
                   Title={"Active Task"}
-                  value={"546"}
+                  value={counts?.activeTask}
                   children={<img src={ActiveTasks} alt="ActiveTasks" />}
                 />
                 <Grid
@@ -1082,17 +1108,32 @@ export const AdminDashboard = () => {
                         color: themeColors["rgb(255 255 255 / 60%)"],
                       }}
                     >
-                      Tue , 24 Oct , 2023
+                      {new Date(upcomingHoliday?.startDate).toLocaleString(
+                        "en-us",
+                        {
+                          weekday: "short",
+                        }
+                      )}{" "}
+                      ,{" "}
+                      {new Date(upcomingHoliday?.startDate).toLocaleString(
+                        "en-us",
+                        {
+                          month: "short",
+                          year: "numeric",
+                          day: "numeric",
+                        }
+                      )}
+                      {/* Tue , 24 Oct , 2023 */}
                     </Typography>
                   </Box>
                   <Box
                     sx={{
-                      height: 400,
+                      height: 395,
                       overflow: "hidden",
                       position: "relative",
                     }}
                   >
-                    <HolidaysPictureSvg />
+                    <img src={HolidaysPicture} alt="LogBackground" height={'100%'} width={'100%'} />
                     <Typography
                       sx={{
                         fontFamily: themeFonts["Poppins-SemiBold"],
@@ -1103,7 +1144,7 @@ export const AdminDashboard = () => {
                         right: "13px",
                       }}
                     >
-                      Dussehra
+                      {upcomingHoliday?.holidayName}
                     </Typography>
                   </Box>
                 </Grid>

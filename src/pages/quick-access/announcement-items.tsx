@@ -16,7 +16,13 @@ import { apiBaseUrl } from "../../components/consts/api-url.const";
 import moment from "moment";
 import { DeleteIconSvg } from "../../svgs";
 
-export const AnnouncementsItem = ({IsLoggedRole} : any) => {
+export const AnnouncementsItem = ({
+    IsLoggedRole,
+    AdminDashboard,
+}: {
+    IsLoggedRole?: any;
+    AdminDashboard?: any;
+}) => {
     const { data, refetch } = useGetAnnouncementListQuery<any>();
     const [deleteItem] = useDeleteAnnouncementMutation();
     const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +43,6 @@ export const AnnouncementsItem = ({IsLoggedRole} : any) => {
     };
     return (
         <>
-
             <Box
                 sx={{
                     display: "flex",
@@ -47,7 +52,7 @@ export const AnnouncementsItem = ({IsLoggedRole} : any) => {
                     width: "100%",
                     gap: "20px",
                     overflow: "auto",
-                    maxHeight: "693px",
+                    maxHeight: AdminDashboard ? "822px" : "693px",
                     height: "100%",
                 }}
             >
@@ -122,7 +127,7 @@ export const AnnouncementsItem = ({IsLoggedRole} : any) => {
                                                         </Typography>
                                                     </Box>
                                                 </Box>
-                                                {IsLoggedRole ?
+                                                {IsLoggedRole ? (
                                                     <Button
                                                         sx={{
                                                             height: "20px",
@@ -132,7 +137,10 @@ export const AnnouncementsItem = ({IsLoggedRole} : any) => {
                                                         onClick={() => handleDelete(val._id)}
                                                     >
                                                         <DeleteIconSvg />
-                                                    </Button> : ""}
+                                                    </Button>
+                                                ) : (
+                                                    ""
+                                                )}
                                             </Box>
 
                                             <ListItem
@@ -210,7 +218,6 @@ export const AnnouncementsItem = ({IsLoggedRole} : any) => {
                     </Typography>
                 )}
             </Box>
-
         </>
     );
 };

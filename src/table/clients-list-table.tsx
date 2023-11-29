@@ -1,55 +1,23 @@
 import { Grid, Box, Typography, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { themeFonts, themeColors } from "../configs";
-import { useSelector } from "react-redux";
-import { useGetLeaveRequestByIdQuery } from "../components/apis/leaveRequestApi";
 import { DeleteIconSvg, EditIconSvg } from "../svgs";
 import { apiBaseUrl } from "../components/consts/api-url.const";
 import { format } from "date-fns";
-import { useState } from "react";
-import { RequestLeavesDialog } from "../components/modals/request-leaves-modal";
-import { SingleInputDateRangePicker } from "../components/calendar/calendar";
-import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
-import { toCamelCaseFormat } from "../utils/helpers";
-import moment from "moment";
+import { useGetClientsListQuery } from "../components/apis/clientsListApi";
 
 const columns: GridColDef[] = [
-  {
-    field: "jj",
-    headerName: "",
-    width: 26,
-    minWidth: 10,
-  },
-  {
-    field: "employeeName",
-    headerName: "Employee Name",
-    flex: 1,
-  },
+  { field: "jj", headerName: "", width: 26, minWidth: 10 },
+  { field: "clientName", headerName: "Client", flex: 1 },
   { field: "mail", headerName: "Mail", flex: 1 },
-  { field: "department", headerName: "Department", flex: 1 },
-  //   {
-  //     field: "contactNo",
-  //     headerName: "Contact No.",
-  //     flex: 1,
-  //   },
-  { field: "joiningDate", headerName: "Joining Date", flex: 1 },
-  //   {
-  //     field: "gender",
-  //     headerName: "Gender",
-  //     flex: 1,
-  //   },{
-  //     field: "status",
-  //     headerName: "Status",
-  //     flex: 1,
-  //   },
-  {
-    field: "action",
-    headerName: "Action",
-  },
+  { field: "dueDate", headerName: "Due Date", flex: 1 },
+  { field: "amount", headerName: "Amount", flex: 1 },
+  { field: "status", headerName: "Status", flex: 1 },
+  { field: "action", headerName: "Action" },
 ];
 
 export const ClientsListTable = ({ maxHeight }: { maxHeight?: any }) => {
-  const { data } = useGetEmployeeListQuery();
+  const { data } = useGetClientsListQuery();
   console.log(data);
   if (!data) {
     return null;
@@ -57,12 +25,10 @@ export const ClientsListTable = ({ maxHeight }: { maxHeight?: any }) => {
 
   const rows = data.map((item: any) => ({
     id: item._id,
-    employeeName: `${item.firstName} ${item.lastName}`,
-    mail: item.email,
-    department: item.designation,
-    contactNo: item.telephones,
-    joiningDate: format(new Date(item.dateOfJoining), "dd/MM/yyyy"),
-    gender: item.gender,
+    clientName: `${item.firstName} ${item.lastName}`,
+    mail: item.mail,
+    dueDate: format(new Date(item.dueDate), "dd/MM/yyyy"),
+    amount: item.money,
     status: item.status,
     image: item.image.path,
   }));
@@ -83,6 +49,7 @@ export const ClientsListTable = ({ maxHeight }: { maxHeight?: any }) => {
           paddingTop: "13px",
           marginTop: "20px",
           background: themeColors["#FFFFFF"],
+          maxHeight: "303px",
         }}
       >
         <Box

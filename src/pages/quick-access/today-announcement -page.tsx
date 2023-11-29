@@ -21,7 +21,13 @@ import { IsLoggedRole } from "../../utils/helpers";
 import { Roles } from "../../components/consts/consts";
 import { AnnouncementsItem } from "./announcement-items";
 
-export const TodaysAnnouncement = ({ maxHeight }: { maxHeight?: any }) => {
+export const TodaysAnnouncement = ({
+  maxHeight,
+  AdminDashboard,
+}: {
+  maxHeight?: any;
+  AdminDashboard?: any;
+}) => {
   const { data, refetch } = useGetAnnouncementListQuery<any>();
   const [deleteItem] = useDeleteAnnouncementMutation();
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +55,7 @@ export const TodaysAnnouncement = ({ maxHeight }: { maxHeight?: any }) => {
           background: themeColors["#FFFFFF"],
           boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
           borderRadius: "6px",
-          maxHeight: maxHeight ? maxHeight : 888,
+          maxHeight: maxHeight ? maxHeight : 744,
         }}
       >
         <Box
@@ -105,7 +111,10 @@ export const TodaysAnnouncement = ({ maxHeight }: { maxHeight?: any }) => {
             height: "100%",
           }}
         > */}
-        <AnnouncementsItem IsLoggedRole={IsLoggedRole("admin")} />
+        <AnnouncementsItem
+          IsLoggedRole={IsLoggedRole("admin")}
+          AdminDashboard={AdminDashboard}
+        />
         {/* </Box> */}
       </Grid>
       {isOpen && (
