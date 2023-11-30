@@ -387,7 +387,7 @@ debugger
                 },
                 "& .MuiOutlinedInput-root.MuiInputBase-colorPrimary": {
                   fontFamily: themeFonts["Poppins-Regular"],
-                  color: themeColors["2F353B"],
+                  color: themeColors["#2F353B"],
                   fontSize: 14,
                 },
                 "& .Mui-error .MuiOutlinedInput-notchedOutline": {

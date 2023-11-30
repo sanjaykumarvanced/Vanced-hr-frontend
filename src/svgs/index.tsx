@@ -57,3 +57,6 @@ export { ReactComponent as GrossEarningSvg } from "../assets/images/svg/gross-ea
 export { ReactComponent as NotificationIconSvg } from "../assets/images/svg/notification-icon.svg";
 export { ReactComponent as HolidaysPictureSvg } from "../assets/images/svg/holidays-picture.svg";
 export { ReactComponent as GraphSvg } from "../assets/images/svg/graph.svg";
+export { ReactComponent as ThumbsUpIcon } from "../assets/images/svg/thumbs-up-icon.svg";
+export { ReactComponent as CommentsIcon } from "../assets/images/svg/comment-icon.svg";
+export { ReactComponent as Emojis } from "../assets/images/svg/emojis.svg";
