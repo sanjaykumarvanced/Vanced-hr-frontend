@@ -36,7 +36,7 @@ export const LoginPage = () => {
           lg={7}
           sx={{
             maxWidth: '1186px',
-            height: { xl: '724px' },
+            height:  '724px' ,
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'center',
@@ -71,7 +71,7 @@ export const LoginPage = () => {
               boxShadow: '0px 6px 6px 0px rgb(0 0 0 / 16%)',
               padding: '20px',
               height: '100%',
-              minWidth: 350,
+              // minWidth: 350,
             }}
           >
             {showLoginForm ? (

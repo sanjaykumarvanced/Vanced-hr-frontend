@@ -1076,6 +1076,7 @@ export const AdminDashboard = () => {
                     boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
                     borderRadius: "6px",
                     minHeight: 450,
+                    overflow: "hidden",
                   }}
                 >
                   <Box
@@ -1128,12 +1129,17 @@ export const AdminDashboard = () => {
                   </Box>
                   <Box
                     sx={{
-                      height: 395,
+                      height: 400,
                       overflow: "hidden",
                       position: "relative",
                     }}
                   >
-                    <img src={HolidaysPicture} alt="LogBackground" height={'100%'} width={'100%'} />
+                    <img
+                      src={HolidaysPicture}
+                      alt="LogBackground"
+                      height={"100%"}
+                      width={"100%"}
+                    />
                     <Typography
                       sx={{
                         fontFamily: themeFonts["Poppins-SemiBold"],
@@ -1151,10 +1157,10 @@ export const AdminDashboard = () => {
               </Grid>
             </Grid>
             {/* <Grid item xs={12}> */}
-            <AllEmployeeListTable maxHeight={580} />
+            <AllEmployeeListTable />
             {/* </Grid> */}
             {/* <Grid item xs={12}> */}
-            <ClientsListTable maxHeight={266} />
+            <ClientsListTable minHeight={266} />
             {/* </Grid> */}
           </Grid>
         </Grid>

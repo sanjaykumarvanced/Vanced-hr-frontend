@@ -58,8 +58,7 @@ export const ProfileMenu = ({
                 sx={{
                   "& .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiMenu-paper.MuiPopover-paper.MuiMenu-paper":
                     {
-                      top: "65px !important",
-                      left: "1675px !important",
+                      top: "65px !important", 
                       borderRadius: "6px !important",
                     },
                 }}

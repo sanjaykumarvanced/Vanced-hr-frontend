@@ -55,7 +55,6 @@ export const TodaysAnnouncement = ({
           background: themeColors["#FFFFFF"],
           boxShadow: "0px 5px 6px 0px rgb(0 0 0 / 10%)",
           borderRadius: "6px",
-          maxHeight: maxHeight ? maxHeight : 744,
         }}
       >
         <Box

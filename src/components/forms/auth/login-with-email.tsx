@@ -85,7 +85,7 @@ export const LoginForm = forwardRef(
               Welcome back!
             </Typography>
           </Grid>
-          <Grid
+          {/* <Grid
             item
             xs={12}
             sx={{
@@ -137,7 +137,7 @@ export const LoginForm = forwardRef(
                 </MuiLink>
               </Typography>
             </Box>
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
             <ErrorStatusMessage
               error={formManager.status?.incorrectCredentials}
@@ -256,7 +256,7 @@ export const LoginForm = forwardRef(
               )}
             </Button>
           </Grid>
-          <Grid
+          {/* <Grid
             item
             xs={12}
             sx={{
@@ -446,7 +446,7 @@ export const LoginForm = forwardRef(
                 </Button>
               </Grid>
             </Grid>
-          </Grid>
+          </Grid> */}
         </Grid>
       </form>
     );

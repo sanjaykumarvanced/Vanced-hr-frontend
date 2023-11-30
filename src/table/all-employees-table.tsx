@@ -192,57 +192,6 @@ export const AllEmployeeListTable = ({ maxHeight }: { maxHeight?: any }) => {
                   >
                     {params.value}
                   </Typography>
-                ) : col.field === "approvedBy" ? (
-                  <>
-                    {params.row.approvedBy ? (
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          alignItems: "center",
-                          gap: "7px",
-                        }}
-                      >
-                        {params.row.employerImage && (
-                          <Box
-                            sx={{
-                              height: "30px",
-                              width: "30px",
-                              borderRadius: "5px",
-                              overflow: "hidden",
-                            }}
-                          >
-                            <img
-                              src={apiBaseUrl + "/" + params.row.employerImage}
-                              alt="Employer"
-                              height={30}
-                              width={30}
-                            />
-                          </Box>
-                        )}
-                        <Typography
-                          component="span"
-                          sx={{
-                            fontFamily: themeFonts["Poppins-Regular"],
-                            fontSize: "14px",
-                            color: themeColors["#000000"],
-                          }}
-                        >
-                          {params.row.employerName}
-                        </Typography>
-                      </Box>
-                    ) : (
-                      <Typography
-                        sx={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
-                      >
-                        -
-                      </Typography>
-                    )}
-                  </>
                 ) : (
                   params.value
                 ),

@@ -16,7 +16,7 @@ const columns: GridColDef[] = [
   { field: "action", headerName: "Action" },
 ];
 
-export const ClientsListTable = ({ maxHeight }: { maxHeight?: any }) => {
+export const ClientsListTable = ({ minHeight }: { minHeight?: any }) => {
   const { data } = useGetClientsListQuery();
   console.log(data);
   if (!data) {
@@ -77,13 +77,13 @@ export const ClientsListTable = ({ maxHeight }: { maxHeight?: any }) => {
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ maxHeight: maxHeight ? maxHeight : 400, width: "100%" }}>
+        <Box sx={{ minHeight: minHeight ? minHeight : 400, width: "100%" }}>
           <DataGrid
             rows={rows || []}
             columns={columns.map((col) => ({
               ...col,
               renderCell: (params) =>
-                col.field === "employeeName" ? (
+                col.field === "clientName" ? (
                   <Typography
                     sx={{
                       fontFamily: themeFonts["Poppins-Regular"],
@@ -95,11 +95,7 @@ export const ClientsListTable = ({ maxHeight }: { maxHeight?: any }) => {
                     }}
                   >
                     <img
-                      src={
-                        params.row.image
-                          ? apiBaseUrl + "/" + params.row.image
-                          : ""
-                      }
+                      src={apiBaseUrl + "/" + params.row.image}
                       height={40}
                       width={40}
                       alt="ProfilePicture"
@@ -167,57 +163,6 @@ export const ClientsListTable = ({ maxHeight }: { maxHeight?: any }) => {
                   >
                     {params.value}
                   </Typography>
-                ) : col.field === "approvedBy" ? (
-                  <>
-                    {params.row.approvedBy ? (
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          alignItems: "center",
-                          gap: "7px",
-                        }}
-                      >
-                        {params.row.employerImage && (
-                          <Box
-                            sx={{
-                              height: "30px",
-                              width: "30px",
-                              borderRadius: "5px",
-                              overflow: "hidden",
-                            }}
-                          >
-                            <img
-                              src={apiBaseUrl + "/" + params.row.employerImage}
-                              alt="Employer"
-                              height={30}
-                              width={30}
-                            />
-                          </Box>
-                        )}
-                        <Typography
-                          component="span"
-                          sx={{
-                            fontFamily: themeFonts["Poppins-Regular"],
-                            fontSize: "14px",
-                            color: themeColors["#000000"],
-                          }}
-                        >
-                          {params.row.employerName}
-                        </Typography>
-                      </Box>
-                    ) : (
-                      <Typography
-                        sx={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
-                      >
-                        -
-                      </Typography>
-                    )}
-                  </>
                 ) : (
                   params.value
                 ),
