@@ -383,7 +383,7 @@ export const capitalizeFirstLetter = (str: string) =>
 export const capitalizeEachWord = (str: string) =>
   str.toLowerCase().split(" ").map(capitalizeFirstLetter).join(" ");
 export const convertSnakeToText = (snake: string) => snake?.replace(/_/g, " ");
-
+export const convertTextToUppercase = (snake: string) => snake?.replace(/ /g, "_").toUpperCase();
 export const IsLoggedRole = (value: any) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userInfo = useSelector((state: any) => state.authentication.user);

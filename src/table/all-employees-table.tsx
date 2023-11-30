@@ -44,7 +44,6 @@ const columns: GridColDef[] = [
 
 export const AllEmployeeListTable = ({ maxHeight }: { maxHeight?: any }) => {
   const { data } = useGetEmployeeListQuery();
-  console.log(data);
   if (!data) {
     return null;
   }

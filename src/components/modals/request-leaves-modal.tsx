@@ -28,7 +28,7 @@ import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
 import { Roles, leaveOptions } from "../consts/consts";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { convertSnakeToText } from "../../utils/helpers";
+import { convertSnakeToText, convertTextToUppercase, toCamelCaseFormat } from "../../utils/helpers";
 
 const validationSchema = Yup.object({
   leaveType: Yup.string().required("Leave Type is required"),
@@ -107,7 +107,7 @@ export const RequestLeavesDialog = (props: any) => {
   const formik: any = useFormik({
     initialValues: {
       id: editedData?.id || "",
-      leaveType: convertSnakeToText(editedData?.leaveType) || "",
+      leaveType: convertTextToUppercase(editedData?.leaveType) || "",
       notify: editedData?.notify || [],
       startDate: editedData?.from ? parseDateString(editedData.from) : null,
       endDate: editedData?.to ? parseDateString(editedData.to) : null,
@@ -117,7 +117,7 @@ export const RequestLeavesDialog = (props: any) => {
     validationSchema,
     onSubmit: handleSubmit,
   });
-
+debugger
   function calculateNumberOfDays(startDate: any, endDate: any) {
     if (startDate && endDate) {
       const start = dayjs(startDate);

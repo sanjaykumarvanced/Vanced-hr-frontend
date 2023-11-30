@@ -105,8 +105,8 @@ export const AddNewPostDialog = (props: any) => {
       open={open}
       sx={{
         flexShrink: 0,
-        "& .css-1rfs30z-MuiPaper-root-MuiDialog-paper": {
-          width: "850px",
+        "& .MuiDialog-paper": {
+          width: "100%",
           maxWidth: "850px",
         },
       }}
@@ -303,7 +303,12 @@ export const AddNewPostDialog = (props: any) => {
                   color: themeColors["#0C345D"],
                   border: "1px solid #0C345D",
                 },
+                "&.Mui-disabled": {
+                  color: themeColors["#FFFFFF"],
+                  opacity:0.8
+                },
               }}
+
             >
               Post
             </Button>

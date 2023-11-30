@@ -16,10 +16,12 @@ import { useEffect } from "react";
 import UnauthLayout from "../components/layouts/unauth.layouts";
 import { QuickAccessPage } from "../pages/quick-access/quick-access-page";
 import { ApprovedLeaves } from "../table/approved-leaves";
-import { AdminDashboard } from "../pages/admin-dashboard/admin-dashboard";
+import { AdminDashboard } from "../pages/admin/admin-dashboard/admin-dashboard";
 import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AllEmployeeListTable } from "../table/all-employees-table";
+import { AllEmployee } from "../pages/admin/all-employee";
 
 export const RootNavigator = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -63,7 +65,7 @@ export const RootNavigator = () => {
           <Route path={ROUTES.ACCOUNTS_SETTING} element={<></>} />
           <Route path={ROUTES.REQUESTED_LEAVES} element={<ApprovedLeaves />} />
 
-          <Route path={ROUTES.ALL_EMPLOYEE} element={<></>} />
+          <Route path={ROUTES.ALL_EMPLOYEE} element={<AllEmployee/>} />
           <Route path={ROUTES.ATTACHMENT} element={<></>} />
           <Route path={ROUTES.LEAVES} element={<></>} />
           <Route path={ROUTES.LEAVES_SETTING} element={<></>} />

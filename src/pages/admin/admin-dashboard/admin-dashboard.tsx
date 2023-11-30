@@ -9,9 +9,9 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { themeFonts, themeColors } from "../../configs";
+import { themeFonts, themeColors } from "../../../configs";
 
-import { DownArrowIcon3, GraphSvg } from "../../svgs";
+import { DownArrowIcon3, GraphSvg } from "../../../svgs";
 import { useState } from "react";
 import {
   TotalEmployees,
@@ -20,15 +20,15 @@ import {
   ActiveTasks,
   Profile,
   HolidaysPicture,
-} from "../../pngs";
-import { OnTodayLeaveTable } from "../../table/today-leaves-table";
-import { TodaysAnnouncement } from "../quick-access/today-announcement -page";
-import { AllEmployeeListTable } from "../../table/all-employees-table";
-import { ClientsListTable } from "../../table/clients-list-table";
-import { AdminCustomComponent } from "../../components/custom-component/admin-custom-component";
+} from "../../../pngs";
+import { OnTodayLeaveTable } from "../../../table/today-leaves-table";
+import { TodaysAnnouncement } from "../../quick-access/today-announcement -page";
+import { AllEmployeeListTable } from "../../../table/all-employees-table";
+import { ClientsListTable } from "../../../table/clients-list-table";
+import { AdminCustomComponent } from "../../../components/custom-component/admin-custom-component";
 import { useSelector } from "react-redux";
-import { useGetHolidaysDetailsQuery } from "../../components/apis/holidaysDetailsApi";
-import { useGetTotalCountsQuery } from "../../components/apis/totalCountsApi";
+import { useGetHolidaysDetailsQuery } from "../../../components/apis/holidaysDetailsApi";
+import { useGetTotalCountsQuery } from "../../../components/apis/totalCountsApi";
 export const AdminDashboard = () => {
   const [selectedValue, setSelectedValue] = useState();
   const user = useSelector((state: any) => state.authentication.user);
