@@ -49,7 +49,6 @@ export const OnTodayLeaveTable = ({ minHeight }: { minHeight?: any }) => {
     status: item.status,
     image: item.image.path,
   }));
-  console.log(data, "data");
 
   return (
     <>

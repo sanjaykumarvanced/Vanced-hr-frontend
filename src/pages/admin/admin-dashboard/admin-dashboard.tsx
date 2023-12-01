@@ -29,13 +29,28 @@ import { AdminCustomComponent } from "../../../components/custom-component/admin
 import { useSelector } from "react-redux";
 import { useGetHolidaysDetailsQuery } from "../../../components/apis/holidaysDetailsApi";
 import { useGetTotalCountsQuery } from "../../../components/apis/totalCountsApi";
+import { selectRange } from "../../../utils/dateRange";
+import { useGetNewEmployeeListQuery } from "../../../components/apis/newEmployeeApi";
+import { apiBaseUrl } from "../../../components/consts/api-url.const";
+import { format, startOfDay, endOfDay,parseISO } from "date-fns";
 export const AdminDashboard = () => {
-  const [selectedValue, setSelectedValue] = useState();
+  const [selectedValue, setSelectedValue] = useState<string>(
+    selectRange[2].value
+  );
+  const dates = JSON.parse(selectedValue);
+  const startDate = startOfDay(parseISO(dates.startDate));
+  const endDate = endOfDay(parseISO(dates.endDate));
+
+  const { data } = useGetNewEmployeeListQuery({
+    startDate: startDate,
+    endDate: endDate,
+  });
   const user = useSelector((state: any) => state.authentication.user);
   const userName = `${user[0].firstName} ${user[0].lastName}`;
   const handleChange = (event: any) => {
     setSelectedValue(event.target.value);
   };
+
   const year = new Date().getFullYear();
   const { data: holidays }: any = useGetHolidaysDetailsQuery({ year });
   const upcomingHolidays =
@@ -52,7 +67,6 @@ export const AdminDashboard = () => {
   const upcomingHoliday = upcomingHolidays && upcomingHolidays[0];
   const { data: counts } = useGetTotalCountsQuery<any>();
   const AdminDashboard = "AdminDashboards";
-  console.log(counts, "counts");
 
   return (
     <>
@@ -346,10 +360,9 @@ export const AdminDashboard = () => {
                           },
                         }}
                       >
-                        <MenuItem value={"Today"}>Today</MenuItem>
-                        <MenuItem value={"Week"}>This Week</MenuItem>
-                        <MenuItem value={"Month"}>This Month</MenuItem>
-                        <MenuItem value={"Year"}>This Year</MenuItem>
+                        {selectRange?.map((item, index) => (
+                          <MenuItem value={item.value}>{item.label}</MenuItem>
+                        ))}
                       </Select>
                     </Typography>
                   </Box>
@@ -385,662 +398,105 @@ export const AdminDashboard = () => {
                           position: "relative",
                         }}
                       >
-                        <ListItem
-                          sx={{
-                            padding: "0px",
-                            marginTop: "26px",
-                            paddingLeft: "27px",
-                            "&:after": {
-                              content: '" "',
-                              display: "block",
-                              position: "absolute",
-                              zIndex: 5,
-                              left: "0px",
-                              height: "14px",
-                              width: "14px",
-                              borderRadius: "10px",
-                              opacity: 1,
-                              border: " 1px solid #B9B9B9",
-                              background: themeColors["#FFFFFF"],
-                            },
-                            display: "flex",
-                          }}
-                        >
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                display: "flex",
-                                gap: "10px",
-                                fontSize: "12px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#000000"],
-                                alignItems: "center",
-                              },
-                              width: "50%",
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                width: "30px",
-                                height: "30px",
-                                borderRadius: "5px",
-                                overflow: "hidden",
-                                alignItems: "center",
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <img
-                                src={Profile}
-                                height={30}
-                                width={30}
-                                alt="USER"
-                              />
-                            </Box>
-                            Sahil Kumar
-                          </ListItemText>
+                        {data &&
+                          data.map((val: any, idx: number) => {
+                            const joiningDate = format(
+                              new Date(val.dateOfJoining),
+                              "dd/MM/yyyy"
+                            );
+                            const firstName = val.firstName;
+                            const lastName = val.lastName;
+                            const name = `${firstName || ""} ${lastName || ""}`;
+                            return (
+                              <>
+                                <ListItem
+                                  sx={{
+                                    padding: "0px",
+                                    marginTop: "26px",
+                                    paddingLeft: "27px",
+                                    "&:after": {
+                                      content: '" "',
+                                      display: "block",
+                                      position: "absolute",
+                                      zIndex: 5,
+                                      left: "0px",
+                                      height: "14px",
+                                      width: "14px",
+                                      borderRadius: "10px",
+                                      opacity: 1,
+                                      border: " 1px solid #B9B9B9",
+                                      background: themeColors["#FFFFFF"],
+                                    },
+                                    display: "flex",
+                                  }}
+                                >
+                                  <ListItemText
+                                    sx={{
+                                      "& .MuiListItemText-primary": {
+                                        display: "flex",
+                                        gap: "10px",
+                                        fontSize: "12px",
+                                        fontFamily:
+                                          themeFonts["Poppins-Regular"],
+                                        color: themeColors["#000000"],
+                                        alignItems: "center",
+                                      },
+                                      width: "50%",
+                                    }}
+                                  >
+                                    <Box
+                                      sx={{
+                                        width: "30px",
+                                        height: "30px",
+                                        borderRadius: "5px",
+                                        overflow: "hidden",
+                                        alignItems: "center",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                      }}
+                                    >
+                                      <img
+                                        src={apiBaseUrl + "/" + val.image.path}
+                                        height={30}
+                                        width={30}
+                                        alt="USER"
+                                      />
+                                    </Box>
+                                    {name}
+                                  </ListItemText>
 
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                fontSize: "10px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#2B468B"],
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "4px",
-                              },
-                              width: "50%",
-                              textAlign: "end",
-                            }}
-                          >
-                            (Angular Developer)
-                            <Typography
-                              component={"span"}
-                              sx={{
-                                fontSize: "8px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#8B2B5B"],
-                              }}
-                            >
-                              Joining date : 04/10/2023
-                            </Typography>
-                          </ListItemText>
-                        </ListItem>
-                        <ListItem
-                          sx={{
-                            padding: "0px",
-                            marginTop: "26px",
-                            paddingLeft: "27px",
-                            "&:after": {
-                              content: '" "',
-                              display: "block",
-                              position: "absolute",
-                              zIndex: 5,
-                              left: "0px",
-                              height: "14px",
-                              width: "14px",
-                              borderRadius: "10px",
-                              opacity: 1,
-                              border: " 1px solid #B9B9B9",
-                              background: themeColors["#FFFFFF"],
-                            },
-                            display: "flex",
-                          }}
-                        >
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                display: "flex",
-                                gap: "10px",
-                                fontSize: "12px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#000000"],
-                                alignItems: "center",
-                              },
-                              width: "50%",
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                width: "30px",
-                                height: "30px",
-                                borderRadius: "5px",
-                                overflow: "hidden",
-                                alignItems: "center",
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <img
-                                src={Profile}
-                                height={30}
-                                width={30}
-                                alt="USER"
-                              />
-                            </Box>
-                            Sahil Kumar
-                          </ListItemText>
-
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                fontSize: "10px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#2B468B"],
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "4px",
-                              },
-                              width: "50%",
-                              textAlign: "end",
-                            }}
-                          >
-                            (Angular Developer)
-                            <Typography
-                              component={"span"}
-                              sx={{
-                                fontSize: "8px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#8B2B5B"],
-                              }}
-                            >
-                              Joining date : 04/10/2023
-                            </Typography>
-                          </ListItemText>
-                        </ListItem>
-                        <ListItem
-                          sx={{
-                            padding: "0px",
-                            marginTop: "26px",
-                            paddingLeft: "27px",
-                            "&:after": {
-                              content: '" "',
-                              display: "block",
-                              position: "absolute",
-                              zIndex: 5,
-                              left: "0px",
-                              height: "14px",
-                              width: "14px",
-                              borderRadius: "10px",
-                              opacity: 1,
-                              border: " 1px solid #B9B9B9",
-                              background: themeColors["#FFFFFF"],
-                            },
-                            display: "flex",
-                          }}
-                        >
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                display: "flex",
-                                gap: "10px",
-                                fontSize: "12px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#000000"],
-                                alignItems: "center",
-                              },
-                              width: "50%",
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                width: "30px",
-                                height: "30px",
-                                borderRadius: "5px",
-                                overflow: "hidden",
-                                alignItems: "center",
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <img
-                                src={Profile}
-                                height={30}
-                                width={30}
-                                alt="USER"
-                              />
-                            </Box>
-                            Sahil Kumar
-                          </ListItemText>
-
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                fontSize: "10px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#2B468B"],
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "4px",
-                              },
-                              width: "50%",
-                              textAlign: "end",
-                            }}
-                          >
-                            (Angular Developer)
-                            <Typography
-                              component={"span"}
-                              sx={{
-                                fontSize: "8px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#8B2B5B"],
-                              }}
-                            >
-                              Joining date : 04/10/2023
-                            </Typography>
-                          </ListItemText>
-                        </ListItem>{" "}
-                        <ListItem
-                          sx={{
-                            padding: "0px",
-                            marginTop: "26px",
-                            paddingLeft: "27px",
-                            "&:after": {
-                              content: '" "',
-                              display: "block",
-                              position: "absolute",
-                              zIndex: 5,
-                              left: "0px",
-                              height: "14px",
-                              width: "14px",
-                              borderRadius: "10px",
-                              opacity: 1,
-                              border: " 1px solid #B9B9B9",
-                              background: themeColors["#FFFFFF"],
-                            },
-                            display: "flex",
-                          }}
-                        >
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                display: "flex",
-                                gap: "10px",
-                                fontSize: "12px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#000000"],
-                                alignItems: "center",
-                              },
-                              width: "50%",
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                width: "30px",
-                                height: "30px",
-                                borderRadius: "5px",
-                                overflow: "hidden",
-                                alignItems: "center",
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <img
-                                src={Profile}
-                                height={30}
-                                width={30}
-                                alt="USER"
-                              />
-                            </Box>
-                            Sahil Kumar
-                          </ListItemText>
-
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                fontSize: "10px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#2B468B"],
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "4px",
-                              },
-                              width: "50%",
-                              textAlign: "end",
-                            }}
-                          >
-                            (Angular Developer)
-                            <Typography
-                              component={"span"}
-                              sx={{
-                                fontSize: "8px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#8B2B5B"],
-                              }}
-                            >
-                              Joining date : 04/10/2023
-                            </Typography>
-                          </ListItemText>
-                        </ListItem>
-                        <ListItem
-                          sx={{
-                            padding: "0px",
-                            marginTop: "26px",
-                            paddingLeft: "27px",
-                            "&:after": {
-                              content: '" "',
-                              display: "block",
-                              position: "absolute",
-                              zIndex: 5,
-                              left: "0px",
-                              height: "14px",
-                              width: "14px",
-                              borderRadius: "10px",
-                              opacity: 1,
-                              border: " 1px solid #B9B9B9",
-                              background: themeColors["#FFFFFF"],
-                            },
-                            display: "flex",
-                          }}
-                        >
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                display: "flex",
-                                gap: "10px",
-                                fontSize: "12px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#000000"],
-                                alignItems: "center",
-                              },
-                              width: "50%",
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                width: "30px",
-                                height: "30px",
-                                borderRadius: "5px",
-                                overflow: "hidden",
-                                alignItems: "center",
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <img
-                                src={Profile}
-                                height={30}
-                                width={30}
-                                alt="USER"
-                              />
-                            </Box>
-                            Sahil Kumar
-                          </ListItemText>
-
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                fontSize: "10px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#2B468B"],
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "4px",
-                              },
-                              width: "50%",
-                              textAlign: "end",
-                            }}
-                          >
-                            (Angular Developer)
-                            <Typography
-                              component={"span"}
-                              sx={{
-                                fontSize: "8px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#8B2B5B"],
-                              }}
-                            >
-                              Joining date : 04/10/2023
-                            </Typography>
-                          </ListItemText>
-                        </ListItem>{" "}
-                        <ListItem
-                          sx={{
-                            padding: "0px",
-                            marginTop: "26px",
-                            paddingLeft: "27px",
-                            "&:after": {
-                              content: '" "',
-                              display: "block",
-                              position: "absolute",
-                              zIndex: 5,
-                              left: "0px",
-                              height: "14px",
-                              width: "14px",
-                              borderRadius: "10px",
-                              opacity: 1,
-                              border: " 1px solid #B9B9B9",
-                              background: themeColors["#FFFFFF"],
-                            },
-                            display: "flex",
-                          }}
-                        >
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                display: "flex",
-                                gap: "10px",
-                                fontSize: "12px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#000000"],
-                                alignItems: "center",
-                              },
-                              width: "50%",
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                width: "30px",
-                                height: "30px",
-                                borderRadius: "5px",
-                                overflow: "hidden",
-                                alignItems: "center",
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <img
-                                src={Profile}
-                                height={30}
-                                width={30}
-                                alt="USER"
-                              />
-                            </Box>
-                            Sahil Kumar
-                          </ListItemText>
-
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                fontSize: "10px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#2B468B"],
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "4px",
-                              },
-                              width: "50%",
-                              textAlign: "end",
-                            }}
-                          >
-                            (Angular Developer)
-                            <Typography
-                              component={"span"}
-                              sx={{
-                                fontSize: "8px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#8B2B5B"],
-                              }}
-                            >
-                              Joining date : 04/10/2023
-                            </Typography>
-                          </ListItemText>
-                        </ListItem>{" "}
-                        <ListItem
-                          sx={{
-                            padding: "0px",
-                            marginTop: "26px",
-                            paddingLeft: "27px",
-                            "&:after": {
-                              content: '" "',
-                              display: "block",
-                              position: "absolute",
-                              zIndex: 5,
-                              left: "0px",
-                              height: "14px",
-                              width: "14px",
-                              borderRadius: "10px",
-                              opacity: 1,
-                              border: " 1px solid #B9B9B9",
-                              background: themeColors["#FFFFFF"],
-                            },
-                            display: "flex",
-                          }}
-                        >
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                display: "flex",
-                                gap: "10px",
-                                fontSize: "12px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#000000"],
-                                alignItems: "center",
-                              },
-                              width: "50%",
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                width: "30px",
-                                height: "30px",
-                                borderRadius: "5px",
-                                overflow: "hidden",
-                                alignItems: "center",
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <img
-                                src={Profile}
-                                height={30}
-                                width={30}
-                                alt="USER"
-                              />
-                            </Box>
-                            Sahil Kumar
-                          </ListItemText>
-
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                fontSize: "10px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#2B468B"],
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "4px",
-                              },
-                              width: "50%",
-                              textAlign: "end",
-                            }}
-                          >
-                            (Angular Developer)
-                            <Typography
-                              component={"span"}
-                              sx={{
-                                fontSize: "8px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#8B2B5B"],
-                              }}
-                            >
-                              Joining date : 04/10/2023
-                            </Typography>
-                          </ListItemText>
-                        </ListItem>{" "}
-                        <ListItem
-                          sx={{
-                            padding: "0px",
-                            marginTop: "26px",
-                            paddingLeft: "27px",
-                            "&:after": {
-                              content: '" "',
-                              display: "block",
-                              position: "absolute",
-                              zIndex: 5,
-                              left: "0px",
-                              height: "14px",
-                              width: "14px",
-                              borderRadius: "10px",
-                              opacity: 1,
-                              border: " 1px solid #B9B9B9",
-                              background: themeColors["#FFFFFF"],
-                            },
-                            display: "flex",
-                          }}
-                        >
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                display: "flex",
-                                gap: "10px",
-                                fontSize: "12px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#000000"],
-                                alignItems: "center",
-                              },
-                              width: "50%",
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                width: "30px",
-                                height: "30px",
-                                borderRadius: "5px",
-                                overflow: "hidden",
-                                alignItems: "center",
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <img
-                                src={Profile}
-                                height={30}
-                                width={30}
-                                alt="USER"
-                              />
-                            </Box>
-                            Sahil Kumar
-                          </ListItemText>
-
-                          <ListItemText
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                fontSize: "10px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#2B468B"],
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: "4px",
-                              },
-                              width: "50%",
-                              textAlign: "end",
-                            }}
-                          >
-                            (Angular Developer)
-                            <Typography
-                              component={"span"}
-                              sx={{
-                                fontSize: "8px",
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                color: themeColors["#8B2B5B"],
-                              }}
-                            >
-                              Joining date : 04/10/2023
-                            </Typography>
-                          </ListItemText>
-                        </ListItem>
+                                  <ListItemText
+                                    sx={{
+                                      "& .MuiListItemText-primary": {
+                                        fontSize: "10px",
+                                        fontFamily:
+                                          themeFonts["Poppins-Regular"],
+                                        color: themeColors["#2B468B"],
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "4px",
+                                      },
+                                      width: "50%",
+                                      textAlign: "end",
+                                    }}
+                                  >
+                                    {val.designation}
+                                    <Typography
+                                      component={"span"}
+                                      sx={{
+                                        fontSize: "8px",
+                                        fontFamily:
+                                          themeFonts["Poppins-Regular"],
+                                        color: themeColors["#8B2B5B"],
+                                      }}
+                                    >
+                                      Joining date : {joiningDate}
+                                    </Typography>
+                                  </ListItemText>
+                                </ListItem>
+                              </>
+                            );
+                          })}
                       </List>
                     </Box>
                   </Box>

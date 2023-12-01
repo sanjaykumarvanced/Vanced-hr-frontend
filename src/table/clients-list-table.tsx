@@ -18,7 +18,6 @@ const columns: GridColDef[] = [
 
 export const ClientsListTable = ({ minHeight }: { minHeight?: any }) => {
   const { data } = useGetClientsListQuery();
-  console.log(data);
   if (!data) {
     return null;
   }

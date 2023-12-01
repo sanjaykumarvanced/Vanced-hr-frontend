@@ -117,7 +117,6 @@ export const RequestLeavesDialog = (props: any) => {
     validationSchema,
     onSubmit: handleSubmit,
   });
-debugger
   function calculateNumberOfDays(startDate: any, endDate: any) {
     if (startDate && endDate) {
       const start = dayjs(startDate);
