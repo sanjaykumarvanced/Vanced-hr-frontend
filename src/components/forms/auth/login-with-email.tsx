@@ -60,9 +60,8 @@ export const LoginForm = forwardRef(
           sx={{
             paddingY: "20px",
             margin: "0px",
-            marginX: { xl: "76px", md: "12px", sm: "12px", xs: "12px" },
+            marginX: { md: "12px", sm: "12px", xs: "12px" },
             width: {
-              xl: "calc(100% - 151px)",
               md: "calc(100% - 25px)",
               sm: "calc(100% - 25px)",
               xs: "calc(100% - 25px)",
