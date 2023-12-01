@@ -167,7 +167,7 @@ export const AuthHeaderLayout = ({
                 }}
               >
                 <img
-                  src={apiBaseUrl + "/" + image}
+                  src={apiBaseUrl + "/" + image?.path}
                   height={40}
                   width={40}
                   alt="ProfilePicture"

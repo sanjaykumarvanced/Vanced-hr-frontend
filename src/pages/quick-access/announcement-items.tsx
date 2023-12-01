@@ -17,6 +17,7 @@ import {
 import { apiBaseUrl } from "../../components/consts/api-url.const";
 import moment from "moment";
 import { CommentsIcon, DeleteIconSvg, Emojis, ThumbsUpIcon } from "../../svgs";
+import { CommentSection } from "../../components/comments-section/comments-section";
 
 export const AnnouncementsItem = ({
   IsLoggedRole,
@@ -27,13 +28,6 @@ export const AnnouncementsItem = ({
 }) => {
   const { data, refetch } = useGetAnnouncementListQuery<any>();
   const [deleteItem] = useDeleteAnnouncementMutation();
-  const [isOpen, setIsOpen] = useState(false);
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
   const handleDelete = async (id: number) => {
     try {
       await deleteItem({ id });
@@ -90,8 +84,8 @@ export const AnnouncementsItem = ({
                           >
                             <Box
                               sx={{
-                                height: 38,
-                                width: 38,
+                                height: 40,
+                                minWidth: 40,
                                 borderRadius: "5px",
                                 overflow: "hidden",
                               }}
@@ -183,7 +177,7 @@ export const AnnouncementsItem = ({
                               <Box
                                 sx={{
                                   height: 300,
-                                  width: 500,
+                                  MinWidth: 500,
                                   borderRadius: "6px",
                                   overflow: "hidden",
                                 }}
@@ -198,260 +192,7 @@ export const AnnouncementsItem = ({
                             </Box>
                           )}
                         </ListItem>
-                        <Box
-                          sx={{
-                            paddingX: "16px",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "20px",
-                            paddingBottom: "10px",
-                          }}
-                        >
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "5px",
-                            }}
-                          >
-                            <Button
-                              sx={{
-                                padding: "0px",
-                                height: 30,
-                                minWidth: 30,
-                              }}
-                            >
-                              <ThumbsUpIcon />
-                            </Button>
-                            <Typography
-                              sx={{
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                fontSize: "12px",
-                                color: themeColors["#7E7E7E"],
-                              }}
-                            >
-                              Likes
-                            </Typography>
-                          </Box>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "5px",
-                            }}
-                          >
-                            <Button
-                              sx={{
-                                padding: "0px",
-                                height: 30,
-                                minWidth: 30,
-                              }}
-                            >
-                              <CommentsIcon />
-                            </Button>
-                            <Typography
-                              sx={{
-                                fontFamily: themeFonts["Poppins-Regular"],
-                                fontSize: "12px",
-                                color: themeColors["#7E7E7E"],
-                              }}
-                            >
-                              Comments
-                            </Typography>
-                          </Box>
-                        </Box>
-                        <Box>
-                          <Divider sx={{ width: "100%" }} />
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "13px",
-                              paddingY: "17px",
-                            }}
-                          >
-                            <Box
-                              sx={{
-                                height: 40,
-                                width: 40,
-                                borderRadius: "5px",
-                                overflow: "hidden",
-                              }}
-                            >
-                              <img
-                                src={apiBaseUrl + "/" + val.image.path}
-                                height={40}
-                                width={40}
-                                alt="pic"
-                              />
-                            </Box>
-                            <TextField
-                              multiline
-                              placeholder="Add a comment...."
-                              InputProps={{
-                                endAdornment: (
-                                  <InputAdornment position="start">
-                                    <Button
-                                      sx={{
-                                        padding: "0px",
-                                        height: 30,
-                                        minWidth: 30,
-                                      }}
-                                    >
-                                      <Emojis />
-                                    </Button>
-                                  </InputAdornment>
-                                ),
-                              }}
-                              sx={{
-                                "&.MuiFormControl-root.MuiTextField-root": {
-                                  width: "100%",
-                                },
-                                "& .MuiInputBase-colorPrimary.Mui-error": {
-                                  color: themeColors["#323B4B"],
-                                  border: "1px solid #1C223E6E",
-                                  fontSize: 14,
-                                },
-                                "& .Mui-error": {
-                                  fontFamily: themeFonts["Poppins-Bold"],
-                                  color: themeColors["#FF3939"],
-                                  fontSize: 14,
-                                  marginLeft: 0,
-                                },
-                                "& .MuiOutlinedInput-root.MuiInputBase-colorPrimary":
-                                  {
-                                    fontFamily: themeFonts["Poppins-Regular"],
-                                    color: themeColors["#2F353B"],
-                                    fontSize: 14,
-                                    paddingY: "10px",
-                                  },
-                                "& .Mui-error .MuiOutlinedInput-notchedOutline":
-                                  {
-                                    border: 0,
-                                  },
-                                "& .Mui-focused .MuiOutlinedInput-notchedOutline":
-                                  {
-                                    border: "1px solid #1C223E6E",
-                                  },
-                                "& :hover .MuiOutlinedInput-notchedOutline": {
-                                  borderColor: "#1C223E6E",
-                                },
-                              }}
-                            />
-                            <Button
-                              sx={{
-                                height: 40,
-                                width: 40,
-                              }}
-                            >
-                              Send
-                            </Button>
-                          </Box>
-                          <List
-                            sx={{
-                              listStyle: "none",
-                              padding: 0,
-                            }}
-                          >
-                            <>
-                              <ListItem
-                                sx={{
-                                  fontFamily: themeFonts["Poppins-SemiBold"],
-                                  fontSize: "14px",
-                                  color: themeColors["#0C345D"],
-                                  paddingBottom: "10px",
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  alignItems: "start",
-                                  gap: "8px",
-                                }}
-                              >
-                                <Box
-                                  sx={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                  }}
-                                >
-                                  <Box
-                                    sx={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      gap: "10px",
-                                    }}
-                                  >
-                                    <Box
-                                      sx={{
-                                        height: 30,
-                                        width: 30,
-                                        borderRadius: "5px",
-                                        overflow: "hidden",
-                                      }}
-                                    >
-                                      <img
-                                        src={apiBaseUrl + "/" + val.image.path}
-                                        height={30}
-                                        width={30}
-                                        alt="pic"
-                                      />
-                                    </Box>
-                                    <Box
-                                      sx={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "7px",
-                                      }}
-                                    >
-                                      <Typography
-                                        sx={{
-                                          fontFamily:
-                                            themeFonts["Poppins-SemiBold"],
-                                          fontSize: "12px",
-                                          color: themeColors["#000000"],
-                                        }}
-                                      >
-                                        {val.employee.firstName}
-                                        {val.employee.lastName}
-                                      </Typography>
-                                      <Typography
-                                        sx={{
-                                          fontFamily:
-                                            themeFonts["Poppins-Regular"],
-                                          fontSize: "10px",
-                                          color: themeColors["#9E9E9E"],
-                                        }}
-                                      >
-                                        (
-                                        {moment
-                                          .utc(val.date)
-                                          .local()
-                                          .startOf("seconds")
-                                          .fromNow()}
-                                        )
-                                      </Typography>
-                                    </Box>
-                                  </Box>
-                                </Box>
-                                <Box>
-                                  <Typography
-                                    sx={{
-                                      fontFamily: themeFonts["Poppins-Regular"],
-                                      fontSize: "12px",
-                                      color: themeColors["#000000"],
-                                    }}
-                                  >
-                                    <div
-                                      className="announcement-description"
-                                      dangerouslySetInnerHTML={{
-                                        __html: html,
-                                      }}
-                                    />
-                                  </Typography>
-                                </Box>
-                              </ListItem>
-                              <Divider sx={{ width: "100%" }} />
-                            </>
-                          </List>
-                        </Box>
+                        <CommentSection data={val} />
                         <Divider sx={{ width: "100%" }} />
                       </>
                     );

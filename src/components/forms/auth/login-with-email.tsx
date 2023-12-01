@@ -23,7 +23,6 @@ import {
   GoogleIconSvg,
   LinkedInIcon,
   LockIcon,
-  TwitterIcon,
   UserIcon1,
 } from "../../../svgs";
 import { useSelector } from "react-redux";
@@ -82,6 +81,17 @@ export const LoginForm = forwardRef(
               }}
             >
               Welcome back!
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: themeFonts["Poppins-Regular"],
+                color: themeColors["#007CFF"],
+                fontSize: 20,
+                textAlign: "center",
+                fontStyle: "italic",
+              }}
+            >
+              Please login to your account .
             </Typography>
           </Grid>
           {/* <Grid

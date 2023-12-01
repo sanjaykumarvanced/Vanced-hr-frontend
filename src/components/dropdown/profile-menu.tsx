@@ -58,7 +58,7 @@ export const ProfileMenu = ({
                 sx={{
                   "& .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiMenu-paper.MuiPopover-paper.MuiMenu-paper":
                     {
-                      top: "65px !important", 
+                      top: "65px !important",
                       borderRadius: "6px !important",
                     },
                 }}
@@ -98,7 +98,7 @@ export const ProfileMenu = ({
                     }}
                   >
                     <img
-                      src={apiBaseUrl + "/" + image}
+                      src={apiBaseUrl + "/" + image?.path}
                       height={40}
                       width={40}
                       alt="ProfilePicture"
