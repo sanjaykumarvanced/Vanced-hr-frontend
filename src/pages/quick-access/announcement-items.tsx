@@ -192,7 +192,7 @@ export const AnnouncementsItem = ({
                             </Box>
                           )}
                         </ListItem>
-                        <CommentSection data={val} />
+                        <CommentSection data={val} refetch={refetch} />
                         <Divider sx={{ width: "100%" }} />
                       </>
                     );

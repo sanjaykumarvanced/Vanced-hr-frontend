@@ -7,6 +7,7 @@ import {
   InputAdornment,
   List,
   ListItem,
+  Grid,
 } from "@mui/material";
 import moment from "moment";
 import React, { useState } from "react";
@@ -17,8 +18,19 @@ import { useCreateCommentsMutation } from "../apis/addCommentsApi";
 import { useSelector } from "react-redux";
 import { useGetImageQuery } from "../apis/imageApi";
 import { toast } from "react-toastify";
+import { Editor } from "react-draft-wysiwyg";
+import { CustomLabel } from "../label";
+import { EditorState, convertToRaw } from "draft-js";
+import draftToHtml from "draftjs-to-html";
+import { useGetEmployeeListQuery } from "../apis/employeeListApi";
 
-export const CommentSection = ({ data }: { data?: any }) => {
+export const CommentSection = ({
+  data,
+  refetch,
+}: {
+  data?: any;
+  refetch?: any;
+}) => {
   debugger;
   console.log(data);
   const [isOpen, setIsOpen] = useState(false);
@@ -31,22 +43,56 @@ export const CommentSection = ({ data }: { data?: any }) => {
   };
   const id: string = data && data._id;
   const [addComments] = useCreateCommentsMutation();
+  const { data: employeeList } = useGetEmployeeListQuery();
   console.log(isOpen, "isOpen");
   const user = useSelector((state: any) => state.authentication.user);
   const UserId = user[0].id;
   const { data: image } = useGetImageQuery({ id: UserId });
-  console.log(image,"image");
+  console.log(image, "image");
 
+  const [editorState, setEditorState] = useState<any>(
+    EditorState.createEmpty()
+  );
+  const handleChange = (e: any) => {
+    setValue(e.target.value);
+  };
+  const onEditorStateChange = (newEditorState: any) => {
+    setEditorState(newEditorState);
+  };
+  const description = draftToHtml(
+    convertToRaw(editorState.getCurrentContent())
+  );
+  const array =
+    employeeList &&
+    employeeList.map((val: any) => {
+      const firstName = val.firstName;
+      const lastName = val.lastName;
+      const userName = val.userName;
+      const name = `${firstName || ""} ${lastName || ""}`;
+      return { text: name, value: userName, url: userName };
+    });
+
+  const mentions = {
+    separator: " ",
+    trigger: "@",
+    suggestions: array ? [...array] : [],
+  };
+
+  const hashtags = {};
   const handleAddComment = async () => {
     try {
-      await addComments({ id, employee: UserId, image: image._id , text: value });
+      await addComments({
+        id,
+        employee: UserId,
+        image: image._id,
+        text: description,
+      });
     } catch (error) {
       console.error("Error applying for leave:", error);
       toast.error("Something went wrong.");
     }
-  };
-  const handleChange = (e: any) => {
-    setValue(e.target.value);
+    refetch();
+    setEditorState(EditorState.createEmpty());
   };
   return (
     <>
@@ -115,7 +161,7 @@ export const CommentSection = ({ data }: { data?: any }) => {
       </Box>
       {isOpen === true && (
         <Box>
-          <Divider sx={{ width: "100%" }} />
+          {/* <Divider sx={{ width: "100%" }} /> */}
           <Box
             sx={{
               display: "flex",
@@ -133,13 +179,33 @@ export const CommentSection = ({ data }: { data?: any }) => {
               }}
             >
               <img
-                src={apiBaseUrl + "/" + data.image.path}
+                src={apiBaseUrl + "/" + image.path}
                 height={40}
                 width={40}
                 alt="pic"
               />
             </Box>
-            <TextField
+            <Grid
+              item
+              xs={12}
+              sx={{
+                paddingRight: "0px !important",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <Editor
+                toolbarHidden
+                editorState={editorState}
+                wrapperClassName="wrapper"
+                toolbarClassName="toolbar-class"
+                onEditorStateChange={onEditorStateChange}
+                mention={mentions}
+                hashtag={hashtags}
+              />
+            </Grid>
+            {/* <TextField
               multiline
               placeholder="Add a comment...."
               InputProps={{
@@ -189,7 +255,7 @@ export const CommentSection = ({ data }: { data?: any }) => {
                 },
               }}
               onChange={handleChange}
-            />
+            /> */}
             <Button
               sx={{
                 height: 40,
@@ -201,8 +267,7 @@ export const CommentSection = ({ data }: { data?: any }) => {
             </Button>
           </Box>
           {data.comment?.map((val: any, idx: any) => {
-            const comment = val;
-            console.log(comment, "comments");
+            let html = val.text;
             return (
               <List
                 sx={{
@@ -220,7 +285,6 @@ export const CommentSection = ({ data }: { data?: any }) => {
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "start",
-                      gap: "8px",
                     }}
                   >
                     <Box
@@ -287,15 +351,10 @@ export const CommentSection = ({ data }: { data?: any }) => {
                       </Box>
                     </Box>
                     <Box sx={{ paddingLeft: "40px" }}>
-                      <Typography
-                        sx={{
-                          fontFamily: themeFonts["Poppins-Regular"],
-                          fontSize: "12px",
-                          color: themeColors["#000000"],
-                        }}
-                      >
-                        {val.text}
-                      </Typography>
+                      <div
+                        className="comment"
+                        dangerouslySetInnerHTML={{ __html: html }}
+                      />
                     </Box>
                   </ListItem>
                 </>
