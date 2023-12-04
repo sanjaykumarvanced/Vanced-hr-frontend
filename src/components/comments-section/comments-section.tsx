@@ -79,7 +79,7 @@ export const CommentSection = ({
         image: image._id,
       });
     } catch (error) {
-      console.error("Error applying for leave:", error);
+      console.error("Error for add like on post:", error);
       toast.error("Something went wrong.");
     }
     refetch();
@@ -119,7 +119,7 @@ export const CommentSection = ({
         text: description,
       });
     } catch (error) {
-      console.error("Error applying for leave:", error);
+      console.error("Error for add comment on post:", error);
       toast.error("Something went wrong.");
     }
     refetch();

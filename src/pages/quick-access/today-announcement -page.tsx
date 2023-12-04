@@ -20,6 +20,7 @@ import { DeleteIconSvg } from "../../svgs";
 import { IsLoggedRole } from "../../utils/helpers";
 import { Roles } from "../../components/consts/consts";
 import { AnnouncementsItem } from "./announcement-items";
+import { toast } from "react-toastify";
 
 export const TodaysAnnouncement = ({
   maxHeight,
@@ -43,6 +44,7 @@ export const TodaysAnnouncement = ({
       console.log("Item successfully deleted.");
     } catch (error) {
       console.log("Error deleting item:", error);
+      toast.error("Something went wrong.");
     }
     refetch();
   };

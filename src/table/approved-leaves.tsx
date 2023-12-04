@@ -9,6 +9,7 @@ import {
 } from "../components/apis/requestedLeavesApi";
 import { useSelector } from "react-redux";
 import { useGetLeaveRequestByIdQuery } from "../components/apis/leaveRequestApi";
+import { toast } from "react-toastify";
 
 const columns: GridColDef[] = [
   {
@@ -76,7 +77,8 @@ export const ApprovedLeaves = () => {
         employerId: Id,
       });
     } catch (error) {
-      console.error("Error approving leave:", error);
+      console.error("Error approving for leave:", error);
+      toast.error("Something went wrong.");
     }
     refetch();
     leaveRefetch();

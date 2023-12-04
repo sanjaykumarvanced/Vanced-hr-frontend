@@ -18,6 +18,7 @@ import { apiBaseUrl } from "../../components/consts/api-url.const";
 import moment from "moment";
 import { CommentsIcon, DeleteIconSvg, Emojis, ThumbsUpIcon } from "../../svgs";
 import { CommentSection } from "../../components/comments-section/comments-section";
+import { toast } from "react-toastify";
 
 export const AnnouncementsItem = ({
   IsLoggedRole,
@@ -37,6 +38,7 @@ export const AnnouncementsItem = ({
       console.log("Item successfully deleted.");
     } catch (error) {
       console.log("Error deleting item:", error);
+      toast.error("Something went wrong.");
     }
     refetch();
   };
