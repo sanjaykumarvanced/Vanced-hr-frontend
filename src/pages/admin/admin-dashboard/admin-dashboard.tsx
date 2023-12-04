@@ -175,7 +175,7 @@ export const AdminDashboard = () => {
                       },
                   }}
                   IconComponent={() => <DownArrowIcon3 height={10} />}
-                  defaultValue={"Week"}
+                  defaultValue={"Month"}
                   onChange={handleOverView}
                   value={selectOverView}
                   MenuProps={{
@@ -201,9 +201,10 @@ export const AdminDashboard = () => {
                     },
                   }}
                 >
-                  {selectRange?.map((item, index) => (
-                    <MenuItem value={item.value}>{item.label}</MenuItem>
-                  ))}
+                  <MenuItem value={"Today"}>Today</MenuItem>
+                  <MenuItem value={"Week"}>Last Week</MenuItem>
+                  <MenuItem value={"Month"}>Last Month</MenuItem>
+                  <MenuItem value={"Year"}>Last Year</MenuItem>
                 </Select>
               </Box>
               <Divider sx={{ width: "100%" }} />

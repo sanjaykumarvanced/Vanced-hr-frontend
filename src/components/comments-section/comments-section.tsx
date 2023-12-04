@@ -19,10 +19,11 @@ import { useSelector } from "react-redux";
 import { useGetImageQuery } from "../apis/imageApi";
 import { toast } from "react-toastify";
 import { Editor } from "react-draft-wysiwyg";
-import { CustomLabel } from "../label";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import { useGetEmployeeListQuery } from "../apis/employeeListApi";
+import { useCreateLikeMutation } from "../apis/addLikesApi";
 
 export const CommentSection = ({
   data,
@@ -33,7 +34,6 @@ export const CommentSection = ({
 }) => {
   console.log(data);
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState(false);
   const handleClose = () => {
     setIsOpen(false);
   };
@@ -42,6 +42,7 @@ export const CommentSection = ({
   };
   const id: string = data && data._id;
   const [addComments] = useCreateCommentsMutation();
+  const [addLike] = useCreateLikeMutation();
   const { data: employeeList } = useGetEmployeeListQuery();
   console.log(isOpen, "isOpen");
   const user = useSelector((state: any) => state.authentication.user);
@@ -52,9 +53,40 @@ export const CommentSection = ({
   const [editorState, setEditorState] = useState<any>(
     EditorState.createEmpty()
   );
-  const handleChange = (e: any) => {
-    setValue(e.target.value);
+
+  const likeEmployeeID = data?.likes?.map((val: any) => val.employee._id);
+  console.log(likeEmployeeID);
+  const likeId = (likeEmployeeID: any) => {
+    return likeEmployeeID === UserId;
   };
+
+  const [value, setValue] = useState(
+    likeEmployeeID.find(likeId) ? true : false
+  );
+  const [totalLikes, setTotalLikes] = useState(data.likes.length);
+  const handleAddLike = async () => {
+    debugger;
+    setValue(!value);
+    if (!value === true) {
+      setTotalLikes(totalLikes + 1);
+    } else {
+      setTotalLikes(totalLikes - 1);
+    }
+    try {
+      await addLike({
+        id,
+        employee: UserId,
+        image: image._id,
+      });
+    } catch (error) {
+      console.error("Error applying for leave:", error);
+      toast.error("Something went wrong.");
+    }
+    refetch();
+
+  };
+  console.log(totalLikes, "totalLikes", value, "value");
+
   const onEditorStateChange = (newEditorState: any) => {
     setEditorState(newEditorState);
   };
@@ -117,8 +149,13 @@ export const CommentSection = ({
               height: 30,
               minWidth: 30,
             }}
+            onClick={handleAddLike}
           >
-            <ThumbsUpIcon />
+            {value === true ? (
+              <ThumbUpIcon fontSize="inherit" />
+            ) : (
+              <ThumbsUpIcon />
+            )}
           </Button>
           <Typography
             sx={{
@@ -127,7 +164,7 @@ export const CommentSection = ({
               color: themeColors["#7E7E7E"],
             }}
           >
-            {data.likes.length} Likes
+            {totalLikes} Likes
           </Typography>
         </Box>
         <Box
