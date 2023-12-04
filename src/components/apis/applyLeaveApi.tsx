@@ -32,6 +32,9 @@ export type ApplyLeaveApiArg = {
   endDate?: any;
   noOfDays?: any;
   reason?: any;
+  durations?: any;
+  startTime?: any;
+  endTime?: any;
 };
 
 export const {

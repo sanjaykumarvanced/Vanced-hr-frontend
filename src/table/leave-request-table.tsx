@@ -78,6 +78,9 @@ export const LeaveRequestTable = () => {
     reason: item.reason,
     approvedBy: item?.approvedBy,
     status: item.status,
+    durations: item.durations,
+    startTime: item.startTime,
+    endTime: item.endTime,
     employerImage: item?.approvedBy?.employer?.employerImage?.path,
     employerName: item?.approvedBy?.employer?.userName,
   }));

@@ -55,5 +55,11 @@ export const leaveOptions = [
   { label: "Full Day Leave", value: "FULL_DAY_LEAVE" },
 ]
 
+export const durationsOptions = [
+  { label: "First Half of Day", value: "FIRST_HALF_OF_DAY" },
+  { label: "Second Half of Day", value: "SECOND_HALF_OF_DAY" },
+]
+
+
 
 

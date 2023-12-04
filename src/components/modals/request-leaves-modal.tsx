@@ -25,10 +25,16 @@ import {
   useUpdateLeaveRequestMutation,
 } from "../apis/applyLeaveApi";
 import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
-import { Roles, leaveOptions } from "../consts/consts";
+import { Roles, durationsOptions, leaveOptions } from "../consts/consts";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { convertSnakeToText, convertTextToUppercase, toCamelCaseFormat } from "../../utils/helpers";
+
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+
 
 const validationSchema = Yup.object({
   leaveType: Yup.string().required("Leave Type is required"),
@@ -45,16 +51,8 @@ export const RequestLeavesDialog = (props: any) => {
   };
   const [createApplyLeaveRequest] = useCreateApplyLeaveRequestMutation();
   const employeeRoles = Roles[2].key;
-  const [selectedLeaveType, setSelectedLeaveType] = useState("");
-  const employeeOptions =
-    employeeList &&
-    employeeList
-      .filter((option: any) => option.role !== employeeRoles)
-      .map((option: any) => ({
-        id: option._id,
-        label: `${option.firstName || ""} ${option.lastName || ""}`,
-      }));
-
+  const [selectedLeaveType, setSelectedLeaveType] = useState(convertTextToUppercase(editedData?.leaveType) || "FULL_DAY_LEAVE");
+  const employeeOptions = employeeList && employeeList.filter((option: any) => option.role !== employeeRoles).map((option: any) => ({ id: option._id, label: `${option.firstName || ""} ${option.lastName || ""}`, }));
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user[0].id;
   const adminId = "652d31fc3d93ae86647ec0fe";
@@ -62,9 +60,14 @@ export const RequestLeavesDialog = (props: any) => {
     employerId: adminId,
   });
   const [updateApi] = useUpdateLeaveRequestMutation();
+
   const handleSubmit = async () => {
     if (editedData?.action === "edit") {
       try {
+
+        const formattedStartTime = dayjs(formik.values.startTime).format('YYYY-MM-DDTHH:mm');
+        const formattedEndTime = dayjs(formik.values.endTime).format('YYYY-MM-DDTHH:mm');
+
         await updateApi({
           id: formik.values.id,
           employee: Id,
@@ -74,13 +77,23 @@ export const RequestLeavesDialog = (props: any) => {
           endDate: formik.values.endDate,
           noOfDays: formik.values.noOfDays,
           reason: formik.values.reason,
+          durations: formik.values.durations,
+          startTime: formattedStartTime,
+          endTime: formattedEndTime,
         });
       } catch (error) {
         console.error("Error applying for leave:", error);
         toast.error("Something went wrong.");
       }
     } else {
-      try {
+      try {      
+        let formattedStartTime = ""
+        let formattedEndTime = ""
+
+        if (formik.values.leaveType == "SHORT_LEAVE") {
+          formattedStartTime = dayjs(formik.values.startTime).format('YYYY-MM-DDTHH:mm');
+          formattedEndTime = dayjs(formik.values.endTime).format('YYYY-MM-DDTHH:mm');
+        }
         await createApplyLeaveRequest({
           employee: Id,
           leaveType: formik.values.leaveType,
@@ -89,6 +102,9 @@ export const RequestLeavesDialog = (props: any) => {
           endDate: formik.values.endDate,
           noOfDays: formik.values.noOfDays,
           reason: formik.values.reason,
+          durations: formik.values.durations,
+          startTime: formattedStartTime,
+          endTime: formattedEndTime,
         });
       } catch (error) {
         console.error("Error applying for leave:", error);
@@ -103,7 +119,7 @@ export const RequestLeavesDialog = (props: any) => {
     const [day, month, year] = dateString.split("/");
     return new Date(`${year}-${month}-${day}`);
   };
-  // let ss = convertSnakeToText("FULL_DAY_LEAVE");
+
   const formik: any = useFormik({
     initialValues: {
       id: editedData?.id || "",
@@ -113,10 +129,14 @@ export const RequestLeavesDialog = (props: any) => {
       endDate: editedData?.to ? parseDateString(editedData.to) : null,
       noOfDays: editedData?.noOfDays || parseInt(""),
       reason: editedData?.reason || "",
+      durations: convertTextToUppercase(editedData?.durations) || "",
+      startTime: dayjs(editedData?.startTime) || "",
+      endTime: dayjs(editedData?.endTime) || "",
     },
     validationSchema,
     onSubmit: handleSubmit,
   });
+
   function calculateNumberOfDays(startDate: any, endDate: any) {
     if (startDate && endDate) {
       const start = dayjs(startDate);
@@ -126,6 +146,9 @@ export const RequestLeavesDialog = (props: any) => {
     }
     return 0;
   }
+
+
+  console.log(editedData?.leaveType, "editedData?.leaveType")
   return (
     <Dialog
       onClose={handleClose}
@@ -134,7 +157,7 @@ export const RequestLeavesDialog = (props: any) => {
         flexShrink: 0,
         "& .MuiDialog-paper": {
           width: "100%",
-          maxWidth: "850px", 
+          maxWidth: "850px",
         },
       }}
     >
@@ -192,6 +215,13 @@ export const RequestLeavesDialog = (props: any) => {
                 onChange={(selectedValue: any) => {
                   formik.handleChange("leaveType")(selectedValue);
                   setSelectedLeaveType(selectedValue);
+                  if (selectedValue == "SHORT_LEAVE") {
+                    formik.handleChange("durations")("");
+                  }
+                  if (selectedValue == "HALF_DAY_LEAVE") {
+                    formik.setFieldValue("startTime", "");
+                    formik.setFieldValue("endTime", "");
+                  }
                 }}
                 value={formik.values.leaveType}
                 name="leaveType"
@@ -282,26 +312,15 @@ export const RequestLeavesDialog = (props: any) => {
               gap: "20px",
             }}
           >
-            <Grid item xs={4}>
+            <Grid item xs={selectedLeaveType === "SHORT_LEAVE" || selectedLeaveType === "HALF_DAY_LEAVE" ? 6 : 4}>
               <CustomDatePicker
-                label={"From"}
+                label={selectedLeaveType === "SHORT_LEAVE" || selectedLeaveType === "HALF_DAY_LEAVE" ? "Date" : "From"}
                 format={"DD/MM/YYYY"}
                 onChange={(selectedValue: any) => {
-                  formik.setFieldValue(
-                    "startDate",
-                    selectedValue.format("YYYY-MM-DD")
-                  );
-                  const endDateValue =
-                    formik.values.leaveType === "SHORT_LEAVE" ||
-                    formik.values.leaveType === "HALF_DAY_LEAVE"
-                      ? selectedValue.format("YYYY-MM-DD")
-                      : "";
+                  formik.setFieldValue("startDate", selectedValue.format("YYYY-MM-DD"));
+                  const endDateValue = formik.values.leaveType === "SHORT_LEAVE" || formik.values.leaveType === "HALF_DAY_LEAVE" ? selectedValue.format("YYYY-MM-DD") : "";
                   formik.setFieldValue("endDate", endDateValue);
-                  const days =
-                    calculateNumberOfDays(
-                      selectedValue.format("YYYY-MM-DD"),
-                      formik.values.endDate
-                    ) + 1;
+                  const days = calculateNumberOfDays(selectedValue.format("YYYY-MM-DD"), formik.values.endDate) + 1;
                   formik.setFieldValue("noOfDays", days);
                 }}
                 minDate={dayjs().startOf("day")}
@@ -312,47 +331,101 @@ export const RequestLeavesDialog = (props: any) => {
                 helperText={formik.touched.startDate && formik.errors.startDate}
               />
             </Grid>
-            <Grid item xs={4}>
-              <CustomDatePicker
-                label={"To"}
-                format={"DD/MM/YYYY"}
-                onChange={(selectedValue: any) => {
-                  formik.setFieldValue(
-                    "endDate",
-                    selectedValue.format("YYYY-MM-DD")
-                  );
-                  const days =
-                    calculateNumberOfDays(
-                      formik.values.startDate,
-                      selectedValue.format("YYYY-MM-DD")
-                    ) + 1;
-                  formik.setFieldValue("noOfDays", days);
-                }}
-                minDate={dayjs(formik.values.startDate).startOf("day")}
-                value={dayjs(formik.values.endDate)}
-                name="endDate"
-                fontFamily="Poppins-Regular"
-                fontSize={"14px"}
-                helperText={formik.touched.endDate && formik.errors.endDate}
-                disabled={
-                  selectedLeaveType === "SHORT_LEAVE" ||
-                  selectedLeaveType === "HALF_DAY_LEAVE"
-                }
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <CustomFilledInput
-                label="Number of Days"
-                type="number"
-                placeholder="0 days"
-                height="39px"
-                fontSize="12px"
-                border="1px solid rgb(0 0 0 / 30%)"
-                value={formik.values.noOfDays}
-                readOnly
-                helperText={formik.touched.noOfDays && formik.errors.noOfDays}
-              />
-            </Grid>
+            {selectedLeaveType === "HALF_DAY_LEAVE" &&
+              <Grid item xs={6}>
+                <CustomSelect
+                  label="Durations"
+                  options={durationsOptions}
+                  onChange={(selectedValue: any) => {
+                    formik.handleChange("durations")(selectedValue);
+                  }}
+                  value={formik.values.durations}
+                  name="durations"
+                  color="#2F353B"
+                  helperText={formik.touched.durations && formik.errors.durations}
+                />
+              </Grid>
+            }
+            {selectedLeaveType === "SHORT_LEAVE" &&
+              <>
+                <Grid item xs={3}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <TimePicker
+                      label="Start Time"
+                      value={formik.values.startTime}
+                      onChange={(selectedValue: any) => {
+                        formik.setFieldValue("startTime", selectedValue);
+                      }}
+                      sx={{
+                        "& .MuiInputBase-root": {
+                          width: "100%",
+                          fontSize: "14px",
+                          height: "39px",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          height: "20px",
+                        },
+                      }}
+                    />
+                  </LocalizationProvider>
+                </Grid>
+                <Grid item xs={3}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <TimePicker
+                      label="End Time"
+                      value={formik.values.endTime}
+                      onChange={(selectedValue: any) => {
+                        formik.setFieldValue("endTime", selectedValue);
+                      }}
+                      sx={{
+                        "& .MuiInputBase-root": {
+                          width: "100%",
+                          fontSize: "14px",
+                          height: "39px",
+                        },
+                        "& .MuiSvgIcon-root": {
+                          height: "20px",
+                        },
+                      }}
+                    />
+                  </LocalizationProvider>
+                </Grid>
+              </>
+
+            }
+            {selectedLeaveType === "FULL_DAY_LEAVE" &&
+              <>
+                <Grid item xs={4}>
+                  <CustomDatePicker
+                    label={"To"}
+                    format={"DD/MM/YYYY"}
+                    onChange={(selectedValue: any) => {
+                      formik.setFieldValue("endDate", selectedValue.format("YYYY-MM-DD"));
+                      const days = calculateNumberOfDays(formik.values.startDate, selectedValue.format("YYYY-MM-DD")) + 1;
+                      formik.setFieldValue("noOfDays", days);
+                    }}
+                    minDate={dayjs(formik.values.startDate).startOf("day")}
+                    value={dayjs(formik.values.endDate)}
+                    name="endDate"
+                    fontFamily="Poppins-Regular"
+                    fontSize={"14px"}
+                    helperText={formik.touched.endDate && formik.errors.endDate}
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <CustomFilledInput
+                    label="Number of Days"
+                    type="number"
+                    placeholder="0 days"
+                    height="39px"
+                    fontSize="12px"
+                    border="1px solid rgb(0 0 0 / 30%)"
+                    value={formik.values.noOfDays}
+                    readOnly
+                    helperText={formik.touched.noOfDays && formik.errors.noOfDays}
+                  />
+                </Grid>
+              </>}
           </Grid>
           <Grid
             item
@@ -457,8 +530,12 @@ export const RequestLeavesDialog = (props: any) => {
                   color: themeColors["#0C345D"],
                   border: "1px solid #0C345D",
                 },
+                "&.Mui-disabled": {
+                  color: themeColors["#FFFFFF"],
+                  opacity: 0.8
+                },
               }}
-              // onClick={handleSubmit}
+            // onClick={handleSubmit}
             >
               Request
             </Button>

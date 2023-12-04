@@ -31,7 +31,6 @@ export const CommentSection = ({
   data?: any;
   refetch?: any;
 }) => {
-  debugger;
   console.log(data);
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState(false);
