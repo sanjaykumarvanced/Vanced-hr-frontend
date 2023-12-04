@@ -26,6 +26,9 @@ export const AnnouncementsItem = ({
   IsLoggedRole?: any;
   AdminDashboard?: any;
 }) => {
+  // const { data, refetch } = useGetAnnouncementListQuery<any>(undefined, {
+  //   pollingInterval: 60000,
+  // });
   const { data, refetch } = useGetAnnouncementListQuery<any>();
   const [deleteItem] = useDeleteAnnouncementMutation();
   const handleDelete = async (id: number) => {
