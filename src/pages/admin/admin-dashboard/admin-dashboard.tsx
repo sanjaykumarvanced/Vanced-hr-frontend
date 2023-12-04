@@ -32,11 +32,12 @@ import { useGetTotalCountsQuery } from "../../../components/apis/totalCountsApi"
 import { selectRange } from "../../../utils/dateRange";
 import { useGetNewEmployeeListQuery } from "../../../components/apis/newEmployeeApi";
 import { apiBaseUrl } from "../../../components/consts/api-url.const";
-import { format, startOfDay, endOfDay,parseISO } from "date-fns";
+import { format, startOfDay, endOfDay, parseISO } from "date-fns";
 export const AdminDashboard = () => {
   const [selectedValue, setSelectedValue] = useState<string>(
     selectRange[2].value
   );
+  const [selectOverView, setSelectOverView] = useState<string>("Week");
   const dates = JSON.parse(selectedValue);
   const startDate = startOfDay(parseISO(dates.startDate));
   const endDate = endOfDay(parseISO(dates.endDate));
@@ -49,6 +50,9 @@ export const AdminDashboard = () => {
   const userName = `${user[0].firstName} ${user[0].lastName}`;
   const handleChange = (event: any) => {
     setSelectedValue(event.target.value);
+  };
+  const handleOverView = (e: any) => {
+    setSelectOverView(e.target.value);
   };
 
   const year = new Date().getFullYear();
@@ -172,8 +176,8 @@ export const AdminDashboard = () => {
                   }}
                   IconComponent={() => <DownArrowIcon3 height={10} />}
                   defaultValue={"Week"}
-                  onChange={handleChange}
-                  value={selectedValue}
+                  onChange={handleOverView}
+                  value={selectOverView}
                   MenuProps={{
                     PaperProps: {
                       sx: {
