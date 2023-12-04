@@ -21,15 +21,15 @@ export const selectRange = [
     value: JSON.stringify({ startDate: today, endDate: today }),
   },
   {
-    label: "Week",
+    label: "This Week",
     value: JSON.stringify({ startDate: thisWeekStart, endDate: thisWeekEnd }),
   },
   {
-    label: "Month",
+    label: "This Month",
     value: JSON.stringify({ startDate: thisMonthStart, endDate: thisMonthEnd }),
   },
   {
-    label: "Year",
+    label: "This  Year",
     value: JSON.stringify({ startDate: thisYearStart, endDate: thisYearEnd }),
   },
 ];

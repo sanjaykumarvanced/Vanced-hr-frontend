@@ -70,8 +70,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiPickersA
 }
 
 .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPickersPopper-paper {
-  border-radius: 8px;
-  background-color: transparent;
+  border-radius: 12px;
 }
 
 .MuiDayCalendar-weekDayLabel.MuiTypography-caption.MuiTypography-root {
@@ -178,9 +177,9 @@ button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today {
   min-height: 150px;
 }
 
-.rdw-suggestion-dropdown {
+.wrapper-class.rdw-suggestion-dropdown {
   min-height: 100px;
-  max-height: 109px;
+  max-height: 109px !important;
 }
 
 .public-DraftStyleDefault-block {
@@ -203,11 +202,14 @@ button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today {
   pointer-events: none;
 }
 
+.rdw-editor-main{
+  overflow: visible !important;
+}
 .cover-img {
   object-fit: cover;
 }
 
-.wrapper {
+ .wrapper {
   box-sizing: border-box !important;
   width: 100%;
   min-height: 40px;
@@ -221,4 +223,19 @@ button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today {
   font-family: 'Poppins-Regular';
   font-size: 12px;
   color: #000000;
+}
+.comment a {
+  color: #2D87C2;
+  font-family: 'Poppins-Regular';
+  font-size: 14px;
+  text-decoration: none;
+  pointer-events: none;
+}
+.wrapper .rdw-suggestion-dropdown {
+  min-height: 100px;
+  max-height: 170px !important;
+}
+
+.time-picker .MuiPickersPopper-root.css-1anqmj6-MuiPopper-root-MuiPickersPopper-root.MuiPopper-root {
+  background: white !important
 }

@@ -28,13 +28,17 @@ import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
 import { Roles, durationsOptions, leaveOptions } from "../consts/consts";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { convertSnakeToText, convertTextToUppercase, toCamelCaseFormat } from "../../utils/helpers";
+import {
+  convertSnakeToText,
+  convertTextToUppercase,
+  toCamelCaseFormat,
+} from "../../utils/helpers";
 
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { CustomTimePicker } from "../calendar/cutom-time-picker";
 
 const validationSchema = Yup.object({
   leaveType: Yup.string().required("Leave Type is required"),
@@ -51,8 +55,17 @@ export const RequestLeavesDialog = (props: any) => {
   };
   const [createApplyLeaveRequest] = useCreateApplyLeaveRequestMutation();
   const employeeRoles = Roles[2].key;
-  const [selectedLeaveType, setSelectedLeaveType] = useState(convertTextToUppercase(editedData?.leaveType) || "FULL_DAY_LEAVE");
-  const employeeOptions = employeeList && employeeList.filter((option: any) => option.role !== employeeRoles).map((option: any) => ({ id: option._id, label: `${option.firstName || ""} ${option.lastName || ""}`, }));
+  const [selectedLeaveType, setSelectedLeaveType] = useState(
+    convertTextToUppercase(editedData?.leaveType) || "FULL_DAY_LEAVE"
+  );
+  const employeeOptions =
+    employeeList &&
+    employeeList
+      .filter((option: any) => option.role !== employeeRoles)
+      .map((option: any) => ({
+        id: option._id,
+        label: `${option.firstName || ""} ${option.lastName || ""}`,
+      }));
   const user = useSelector((state: any) => state.authentication.user);
   const Id = user[0].id;
   const adminId = "652d31fc3d93ae86647ec0fe";
@@ -64,9 +77,12 @@ export const RequestLeavesDialog = (props: any) => {
   const handleSubmit = async () => {
     if (editedData?.action === "edit") {
       try {
-
-        const formattedStartTime = dayjs(formik.values.startTime).format('YYYY-MM-DDTHH:mm');
-        const formattedEndTime = dayjs(formik.values.endTime).format('YYYY-MM-DDTHH:mm');
+        const formattedStartTime = dayjs(formik.values.startTime).format(
+          "YYYY-MM-DDTHH:mm"
+        );
+        const formattedEndTime = dayjs(formik.values.endTime).format(
+          "YYYY-MM-DDTHH:mm"
+        );
 
         await updateApi({
           id: formik.values.id,
@@ -86,13 +102,17 @@ export const RequestLeavesDialog = (props: any) => {
         toast.error("Something went wrong.");
       }
     } else {
-      try {      
-        let formattedStartTime = ""
-        let formattedEndTime = ""
+      try {
+        let formattedStartTime = "";
+        let formattedEndTime = "";
 
         if (formik.values.leaveType == "SHORT_LEAVE") {
-          formattedStartTime = dayjs(formik.values.startTime).format('YYYY-MM-DDTHH:mm');
-          formattedEndTime = dayjs(formik.values.endTime).format('YYYY-MM-DDTHH:mm');
+          formattedStartTime = dayjs(formik.values.startTime).format(
+            "YYYY-MM-DDTHH:mm"
+          );
+          formattedEndTime = dayjs(formik.values.endTime).format(
+            "YYYY-MM-DDTHH:mm"
+          );
         }
         await createApplyLeaveRequest({
           employee: Id,
@@ -147,8 +167,7 @@ export const RequestLeavesDialog = (props: any) => {
     return 0;
   }
 
-
-  console.log(editedData?.leaveType, "editedData?.leaveType")
+  console.log(editedData?.leaveType, "editedData?.leaveType");
   return (
     <Dialog
       onClose={handleClose}
@@ -312,15 +331,39 @@ export const RequestLeavesDialog = (props: any) => {
               gap: "20px",
             }}
           >
-            <Grid item xs={selectedLeaveType === "SHORT_LEAVE" || selectedLeaveType === "HALF_DAY_LEAVE" ? 6 : 4}>
+            <Grid
+              item
+              xs={
+                selectedLeaveType === "SHORT_LEAVE" ||
+                selectedLeaveType === "HALF_DAY_LEAVE"
+                  ? 6
+                  : 4
+              }
+            >
               <CustomDatePicker
-                label={selectedLeaveType === "SHORT_LEAVE" || selectedLeaveType === "HALF_DAY_LEAVE" ? "Date" : "From"}
+                label={
+                  selectedLeaveType === "SHORT_LEAVE" ||
+                  selectedLeaveType === "HALF_DAY_LEAVE"
+                    ? "Date"
+                    : "From"
+                }
                 format={"DD/MM/YYYY"}
                 onChange={(selectedValue: any) => {
-                  formik.setFieldValue("startDate", selectedValue.format("YYYY-MM-DD"));
-                  const endDateValue = formik.values.leaveType === "SHORT_LEAVE" || formik.values.leaveType === "HALF_DAY_LEAVE" ? selectedValue.format("YYYY-MM-DD") : "";
+                  formik.setFieldValue(
+                    "startDate",
+                    selectedValue.format("YYYY-MM-DD")
+                  );
+                  const endDateValue =
+                    formik.values.leaveType === "SHORT_LEAVE" ||
+                    formik.values.leaveType === "HALF_DAY_LEAVE"
+                      ? selectedValue.format("YYYY-MM-DD")
+                      : "";
                   formik.setFieldValue("endDate", endDateValue);
-                  const days = calculateNumberOfDays(selectedValue.format("YYYY-MM-DD"), formik.values.endDate) + 1;
+                  const days =
+                    calculateNumberOfDays(
+                      selectedValue.format("YYYY-MM-DD"),
+                      formik.values.endDate
+                    ) + 1;
                   formik.setFieldValue("noOfDays", days);
                 }}
                 minDate={dayjs().startOf("day")}
@@ -331,7 +374,7 @@ export const RequestLeavesDialog = (props: any) => {
                 helperText={formik.touched.startDate && formik.errors.startDate}
               />
             </Grid>
-            {selectedLeaveType === "HALF_DAY_LEAVE" &&
+            {selectedLeaveType === "HALF_DAY_LEAVE" && (
               <Grid item xs={6}>
                 <CustomSelect
                   label="Durations"
@@ -342,66 +385,72 @@ export const RequestLeavesDialog = (props: any) => {
                   value={formik.values.durations}
                   name="durations"
                   color="#2F353B"
-                  helperText={formik.touched.durations && formik.errors.durations}
+                  helperText={
+                    formik.touched.durations && formik.errors.durations
+                  }
                 />
               </Grid>
-            }
-            {selectedLeaveType === "SHORT_LEAVE" &&
+            )}
+            {selectedLeaveType === "SHORT_LEAVE" && (
               <>
-                <Grid item xs={3}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <TimePicker
+                <Grid
+                  item
+                  xs={6}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "10px",
+                  }}
+                >
+                  <Grid item xs={6}>
+                    <CustomTimePicker
                       label="Start Time"
                       value={formik.values.startTime}
                       onChange={(selectedValue: any) => {
                         formik.setFieldValue("startTime", selectedValue);
                       }}
-                      sx={{
-                        "& .MuiInputBase-root": {
-                          width: "100%",
-                          fontSize: "14px",
-                          height: "39px",
-                        },
-                        "& .MuiSvgIcon-root": {
-                          height: "20px",
-                        },
-                      }}
+                      // sx={{
+                      //   "& .MuiInputBase-root": {
+                      //     width: "100%",
+                      //     fontSize: "14px",
+                      //     height: "39px",
+                      //   },
+                      //   "& .MuiSvgIcon-root": {
+                      //     height: "20px",
+                      //   },
+                      // }}
                     />
-                  </LocalizationProvider>
-                </Grid>
-                <Grid item xs={3}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <TimePicker
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomTimePicker
                       label="End Time"
                       value={formik.values.endTime}
                       onChange={(selectedValue: any) => {
                         formik.setFieldValue("endTime", selectedValue);
                       }}
-                      sx={{
-                        "& .MuiInputBase-root": {
-                          width: "100%",
-                          fontSize: "14px",
-                          height: "39px",
-                        },
-                        "& .MuiSvgIcon-root": {
-                          height: "20px",
-                        },
-                      }}
                     />
-                  </LocalizationProvider>
+                  </Grid>
                 </Grid>
               </>
-
-            }
-            {selectedLeaveType === "FULL_DAY_LEAVE" &&
+            )}
+            {selectedLeaveType === "FULL_DAY_LEAVE" && (
               <>
                 <Grid item xs={4}>
                   <CustomDatePicker
                     label={"To"}
                     format={"DD/MM/YYYY"}
                     onChange={(selectedValue: any) => {
-                      formik.setFieldValue("endDate", selectedValue.format("YYYY-MM-DD"));
-                      const days = calculateNumberOfDays(formik.values.startDate, selectedValue.format("YYYY-MM-DD")) + 1;
+                      formik.setFieldValue(
+                        "endDate",
+                        selectedValue.format("YYYY-MM-DD")
+                      );
+                      const days =
+                        calculateNumberOfDays(
+                          formik.values.startDate,
+                          selectedValue.format("YYYY-MM-DD")
+                        ) + 1;
                       formik.setFieldValue("noOfDays", days);
                     }}
                     minDate={dayjs(formik.values.startDate).startOf("day")}
@@ -422,10 +471,13 @@ export const RequestLeavesDialog = (props: any) => {
                     border="1px solid rgb(0 0 0 / 30%)"
                     value={formik.values.noOfDays}
                     readOnly
-                    helperText={formik.touched.noOfDays && formik.errors.noOfDays}
+                    helperText={
+                      formik.touched.noOfDays && formik.errors.noOfDays
+                    }
                   />
                 </Grid>
-              </>}
+              </>
+            )}
           </Grid>
           <Grid
             item
@@ -532,10 +584,10 @@ export const RequestLeavesDialog = (props: any) => {
                 },
                 "&.Mui-disabled": {
                   color: themeColors["#FFFFFF"],
-                  opacity: 0.8
+                  opacity: 0.8,
                 },
               }}
-            // onClick={handleSubmit}
+              // onClick={handleSubmit}
             >
               Request
             </Button>
