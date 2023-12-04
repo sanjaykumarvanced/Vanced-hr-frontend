@@ -142,6 +142,7 @@ export const ApprovedLeaves = () => {
                     }}
                   >
                     <Button
+                      disabled={params.row.status === "Approved"}
                       sx={{
                         height: "29px",
                         minWidth: "29px",
