@@ -21,6 +21,7 @@ import { useCreateAnnouncementMutation } from "../apis/addAnnouncementsApi";
 import { useSelector } from "react-redux";
 import { useGetEmployeeListQuery } from "../apis/employeeListApi";
 import { useUploadImageMutation } from "../apis/imageApi";
+import { toast } from "react-toastify";
 
 export const AddNewPostDialog = (props: any) => {
   const [postAd] = useCreateAnnouncementMutation();
@@ -55,25 +56,31 @@ export const AddNewPostDialog = (props: any) => {
     if (description === "<p></p>\n") {
       handleClose();
     } else {
-      const announcement = {
-        employee: Id,
-        title: title,
-        description,
-      } as any;
-      const res = await postAd(announcement).unwrap();
-      if (res) {
-        if (image) {
-          const formData = new FormData();
-          formData.append("image", image);
-          const uploadImg = {
-            id: res.announcement._id,
-            image: formData,
-          } as any;
-          await mutate(uploadImg).unwrap();
+      try {
+        const announcement = {
+          employee: Id,
+          title: title,
+          description,
+        } as any;
+        const res = await postAd(announcement).unwrap();
+        toast.success(res.message);
+        if (res) {
+          if (image) {
+            const formData = new FormData();
+            formData.append("image", image);
+            const uploadImg = {
+              id: res.announcement._id,
+              image: formData,
+            } as any;
+            await mutate(uploadImg).unwrap();
+          }
         }
+        refetch();
+        handleClose();
+      } catch (error: any) {
+        console.error("Error adding for post:", error);
+        toast.error(error.data.message);
       }
-      refetch();
-      handleClose();
     }
   };
   const array =
@@ -305,10 +312,9 @@ export const AddNewPostDialog = (props: any) => {
                 },
                 "&.Mui-disabled": {
                   color: themeColors["#FFFFFF"],
-                  opacity:0.8
+                  opacity: 0.8,
                 },
               }}
-
             >
               Post
             </Button>

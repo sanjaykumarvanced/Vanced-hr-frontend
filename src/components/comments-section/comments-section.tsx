@@ -73,17 +73,17 @@ export const CommentSection = ({
       setTotalLikes(totalLikes - 1);
     }
     try {
-      await addLike({
+      const res = await addLike({
         id,
         employee: UserId,
         image: image._id,
-      });
-    } catch (error) {
+      }).unwrap();
+      toast.success(res.message);
+    } catch (error: any) {
       console.error("Error for add like on post:", error);
-      toast.error("Something went wrong.");
+      toast.error(error.data.message);
     }
     refetch();
-
   };
   console.log(totalLikes, "totalLikes", value, "value");
 
@@ -112,15 +112,16 @@ export const CommentSection = ({
   const hashtags = {};
   const handleAddComment = async () => {
     try {
-      await addComments({
+      const res = await addComments({
         id,
         employee: UserId,
         image: image._id,
         text: description,
-      });
-    } catch (error) {
+      }).unwrap();
+      toast.success(res.message);
+    } catch (error: any) {
       console.error("Error for add comment on post:", error);
-      toast.error("Something went wrong.");
+      toast.error(error.data.message);
     }
     refetch();
     setEditorState(EditorState.createEmpty());

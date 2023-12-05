@@ -177,9 +177,10 @@ button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today {
   min-height: 150px;
 }
 
-.wrapper-class.rdw-suggestion-dropdown {
+.wrapper-class .rdw-suggestion-dropdown {
   min-height: 100px;
   max-height: 109px !important;
+  min-width: max-content !important;
 }
 
 .public-DraftStyleDefault-block {
@@ -234,6 +235,7 @@ button.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-today {
 .wrapper .rdw-suggestion-dropdown {
   min-height: 100px;
   max-height: 170px !important;
+  min-width: max-content !important;
 }
 
 .time-picker .MuiPickersPopper-root.css-1anqmj6-MuiPopper-root-MuiPickersPopper-root.MuiPopper-root {

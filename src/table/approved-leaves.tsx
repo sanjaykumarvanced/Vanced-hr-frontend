@@ -71,14 +71,15 @@ export const ApprovedLeaves = () => {
   }));
   const handleApproved = async (id: any) => {
     try {
-      await updateLeaveStatus({
+      const res = await updateLeaveStatus({
         id,
         status: "Approved",
         employerId: Id,
-      });
-    } catch (error) {
+      }).unwrap();
+      toast.success(res.message);
+    } catch (error: any) {
       console.error("Error approving for leave:", error);
-      toast.error("Something went wrong.");
+      toast.error(error.data);
     }
     refetch();
     leaveRefetch();

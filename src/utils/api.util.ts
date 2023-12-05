@@ -48,9 +48,9 @@ export const fetchbase: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
     }
   } else if (result.error && result.error.status) {
     let msg = getFirstErrorFromObject(result.error.data);
-    if (!msg) {
-      msg = `Internal server error`;
-    }
+    // if (!msg) {
+    //   msg = `Internal server error`;
+    // }
     if (!(result.error.data instanceof Blob)) toast.error(msg);
   }
 

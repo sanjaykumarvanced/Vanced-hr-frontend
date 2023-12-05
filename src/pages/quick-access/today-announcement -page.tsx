@@ -38,16 +38,17 @@ export const TodaysAnnouncement = ({
   const handleOpen = () => {
     setIsOpen(true);
   };
-  const handleDelete = async (id: number) => {
-    try {
-      await deleteItem({ id });
-      console.log("Item successfully deleted.");
-    } catch (error) {
-      console.log("Error deleting item:", error);
-      toast.error("Something went wrong.");
-    }
-    refetch();
-  };
+  // const handleDelete = async (id: number) => {
+  //   try {
+  //     await deleteItem({ id });
+  //     console.log("Item successfully deleted.");
+  //     toast.success("Item Deleted successfully");
+  //   } catch (error) {
+  //     console.log("Error deleting item:", error);
+  //     toast.error("Something went wrong.");
+  //   }
+  //   refetch();
+  // };
   return (
     <>
       <Grid

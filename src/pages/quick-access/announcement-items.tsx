@@ -34,11 +34,12 @@ export const AnnouncementsItem = ({
   const [deleteItem] = useDeleteAnnouncementMutation();
   const handleDelete = async (id: number) => {
     try {
-      await deleteItem({ id });
+      const res = await deleteItem({ id }).unwrap();
       console.log("Item successfully deleted.");
-    } catch (error) {
+      toast.success(res.message);
+    } catch (error: any) {
       console.log("Error deleting item:", error);
-      toast.error("Something went wrong.");
+      toast.error(error.data.message);
     }
     refetch();
   };
