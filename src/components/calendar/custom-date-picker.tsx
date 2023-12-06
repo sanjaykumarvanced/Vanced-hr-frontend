@@ -22,6 +22,7 @@ export const CustomDatePicker = ({
   helperText,
   minDate,
   disabled,
+  maxDate,
 }: {
   label?: any;
   width?: any;
@@ -36,6 +37,7 @@ export const CustomDatePicker = ({
   helperText?: any;
   minDate?: any;
   disabled?: any;
+  maxDate?: any;
 }) => {
   const customDayOfWeekFormatter = (dayAbbreviation: string) => {
     const daysAbbreviations = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -101,6 +103,7 @@ export const CustomDatePicker = ({
         disablePast
         minDate={minDate}
         disabled={disabled}
+        maxDate={maxDate}
       />
       {helperText && (
         <FormHelperText

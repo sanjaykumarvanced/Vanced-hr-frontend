@@ -31,20 +31,6 @@ import { toast } from "react-toastify";
 import { convertTextToUppercase } from "../../utils/helpers";
 import { CustomTimePicker } from "../calendar/cutom-time-picker";
 
-const validationSchema = Yup.object({
-  leaveType: Yup.string().required("Leave Type is required"),
-  notify: Yup.array()
-    .min(1, "At least one recipient must be selected") // Minimum length of 1
-    .of(Yup.string()),
-  startDate: Yup.string().required("From is required"),
-  endDate: Yup.string().required("To is required"),
-  noOfDays: Yup.number().required("Number of Days is required"),
-  reason: Yup.string().required("Reason is required"),
-  durations: Yup.string().required("Duration is required"),
-  startTime: Yup.string().required("Start Time is required"),
-  endTime: Yup.string().required("End Time is required"),
-});
-
 export const RequestLeavesDialog = (props: any) => {
   const { onClose, open, refetch, editedData, employeeList } = props;
   const handleClose = () => {
@@ -106,7 +92,7 @@ export const RequestLeavesDialog = (props: any) => {
         let formattedStartTime = "";
         let formattedEndTime = "";
 
-        if (formManager.values.leaveType == "SHORT_LEAVE") {
+        if (formManager.values.leaveType === "SHORT_LEAVE") {
           formattedStartTime = dayjs(formManager.values.startTime).format(
             "YYYY-MM-DDTHH:mm"
           );
@@ -151,10 +137,46 @@ export const RequestLeavesDialog = (props: any) => {
       noOfDays: editedData?.noOfDays || parseInt(""),
       reason: editedData?.reason || "",
       durations: convertTextToUppercase(editedData?.durations) || "",
-      startTime: dayjs(editedData?.startTime) || "",
-      endTime: dayjs(editedData?.endTime) || "",
+      startTime: editedData?.startTime || "",
+      endTime: editedData?.endTime || "",
     },
-    validationSchema,
+    validate: (values: any) => {
+      const errors: any = {};
+      if (!values.leaveType) {
+        errors.leaveType = "Leave Type is required";
+      }
+      if (!values.notify.length) {
+        errors.notify = "At least one recipient must be selected";
+      }
+      if (!values.startDate) {
+        errors.startDate = "Start Date is required";
+      }
+      if (!values.endDate) {
+        errors.endDate = "End Date is required";
+      }
+      // if (values.leaveType === "FULL_DAY_LEAVE") {
+      //   if (!values.noOfDays) {
+      //     errors.noOfDays = "Required";
+      //   }
+      // } else
+      if (values.leaveType === "HALF_DAY_LEAVE") {
+        if (!values.durations) {
+          errors.durations = "Duration Type is required";
+        }
+      } else if (values.leaveType === "SHORT_LEAVE") {
+        if (!values.startTime) {
+          errors.startTime = "Start Time is required";
+        }
+        if (!values.endTime) {
+          errors.endTime = "End Time is required";
+        }
+      }
+      if (!values.reason) {
+        errors.reason = "reason is required";
+      }
+
+      return errors;
+    },
     onSubmit: () => {
       handleSubmitLeaveRequest();
     },
@@ -236,10 +258,10 @@ export const RequestLeavesDialog = (props: any) => {
                 onChange={(selectedValue: any) => {
                   formManager.handleChange("leaveType")(selectedValue);
                   setSelectedLeaveType(selectedValue);
-                  if (selectedValue == "SHORT_LEAVE") {
+                  if (selectedValue === "SHORT_LEAVE") {
                     formManager.handleChange("durations")("");
                   }
-                  if (selectedValue == "HALF_DAY_LEAVE") {
+                  if (selectedValue === "HALF_DAY_LEAVE") {
                     formManager.setFieldValue("startTime", "");
                     formManager.setFieldValue("endTime", "");
                   }
@@ -363,12 +385,17 @@ export const RequestLeavesDialog = (props: any) => {
                     "startDate",
                     selectedValue.format("YYYY-MM-DD")
                   );
-                  const endDateValue =
-                    formManager.values.leaveType === "SHORT_LEAVE" ||
-                    formManager.values.leaveType === "HALF_DAY_LEAVE"
-                      ? selectedValue.format("YYYY-MM-DD")
-                      : "";
-                  formManager.setFieldValue("endDate", endDateValue);
+                  (formManager.values.leaveType === "SHORT_LEAVE" &&
+                    formManager.setFieldValue(
+                      "endDate",
+                      selectedValue.format("YYYY-MM-DD")
+                    )) ||
+                    (formManager.values.leaveType === "HALF_DAY_LEAVE" &&
+                      formManager.setFieldValue(
+                        "endDate",
+                        selectedValue.format("YYYY-MM-DD")
+                      ));
+
                   const days =
                     calculateNumberOfDays(
                       selectedValue.format("YYYY-MM-DD"),
@@ -376,7 +403,7 @@ export const RequestLeavesDialog = (props: any) => {
                     ) + 1;
                   formManager.setFieldValue("noOfDays", days);
                 }}
-                minDate={dayjs().startOf("day")}
+                maxDate={dayjs(formManager.values.endDate).startOf("day")}
                 value={dayjs(formManager.values.startDate)}
                 name="startDate"
                 fontFamily="Poppins-Regular"
@@ -397,10 +424,10 @@ export const RequestLeavesDialog = (props: any) => {
                   value={formManager.values.durations}
                   name="durations"
                   color="#2F353B"
-                  // helperText={
-                  //   formManager.touched.durations &&
-                  //   formManager.errors.durations
-                  // }
+                  helperText={
+                    formManager.touched.durations &&
+                    formManager.errors.durations
+                  }
                 />
               </Grid>
             )}
@@ -428,16 +455,6 @@ export const RequestLeavesDialog = (props: any) => {
                         formManager.touched.startTime &&
                         formManager.errors.startTime
                       }
-                      // sx={{
-                      //   "& .MuiInputBase-root": {
-                      //     width: "100%",
-                      //     fontSize: "14px",
-                      //     height: "39px",
-                      //   },
-                      //   "& .MuiSvgIcon-root": {
-                      //     height: "20px",
-                      //   },
-                      // }}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -494,10 +511,10 @@ export const RequestLeavesDialog = (props: any) => {
                     border="1px solid rgb(0 0 0 / 30%)"
                     value={formManager.values.noOfDays}
                     readOnly
-                    helperText={
-                      formManager.touched.noOfDays &&
-                      formManager.errors.noOfDays
-                    }
+                    // helperText={
+                    //   formManager.touched.noOfDays &&
+                    //   formManager.errors.noOfDays
+                    // }
                   />
                 </Grid>
               </>
@@ -596,6 +613,7 @@ export const RequestLeavesDialog = (props: any) => {
             </Button>
             <Button
               type="submit"
+              // disabled={!formManager.isValid}
               sx={{
                 width: 117,
                 height: 39,
