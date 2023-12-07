@@ -1,4 +1,4 @@
-import { Grid, Box, Typography, Button } from "@mui/material";
+import { Grid, Box, Typography} from "@mui/material";
 import { themeFonts, themeColors } from "../../../configs";
 import { AllEmployeeListTable } from "../../../table/all-employees-table";
 export const AllEmployee = () => {

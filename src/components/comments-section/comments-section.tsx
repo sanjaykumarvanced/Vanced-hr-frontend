@@ -1,18 +1,8 @@
-import {
-  Box,
-  Button,
-  Typography,
-  Divider,
-  TextField,
-  InputAdornment,
-  List,
-  ListItem,
-  Grid,
-} from "@mui/material";
+import { Box, Button, Typography, List, ListItem, Grid } from "@mui/material";
 import moment from "moment";
 import React, { useState } from "react";
 import { themeFonts, themeColors } from "../../configs";
-import { ThumbsUpIcon, CommentsIcon, Emojis } from "../../svgs";
+import { ThumbsUpIcon, CommentsIcon } from "../../svgs";
 import { apiBaseUrl } from "../consts/api-url.const";
 import { useCreateCommentsMutation } from "../apis/addCommentsApi";
 import { useSelector } from "react-redux";
@@ -32,11 +22,9 @@ export const CommentSection = ({
   data?: any;
   refetch?: any;
 }) => {
+  debugger
   console.log(data);
   const [isOpen, setIsOpen] = useState(false);
-  const handleClose = () => {
-    setIsOpen(false);
-  };
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -63,7 +51,7 @@ export const CommentSection = ({
   const [value, setValue] = useState(
     likeEmployeeID.find(likeId) ? true : false
   );
-  const [totalLikes, setTotalLikes] = useState(data.likes.length);
+  const [totalLikes, setTotalLikes] = useState(data?.likes?.length);
   const handleAddLike = async () => {
     debugger;
     setValue(!value);

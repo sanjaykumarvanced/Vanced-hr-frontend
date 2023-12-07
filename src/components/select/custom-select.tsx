@@ -7,7 +7,6 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { themeFonts, themeColors } from "../../configs";
-import { ErrorStatusMessage } from "../input/error-status-message";
 import { CustomLabel } from "../label";
 import { DownArrowIcon2 } from "../../svgs";
 
@@ -109,8 +108,10 @@ export const CustomSelect = ({
           sx={{
             fontFamily: themeFonts["Poppins-Bold"],
             color: themeColors["#FF3939"],
-            fontSize: 14,
+            fontSize: 10,
             marginLeft: 0,
+            position: "absolute",
+            bottom: "-15px",
           }}
         >
           {helperText}

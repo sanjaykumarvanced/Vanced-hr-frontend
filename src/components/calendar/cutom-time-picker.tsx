@@ -1,9 +1,7 @@
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { CalenderIcon1Svg } from "../../svgs";
 import "../../assets/components/styles.css";
 import {
-  DatePicker,
   TimePicker,
   renderTimeViewClock,
 } from "@mui/x-date-pickers";
@@ -108,8 +106,10 @@ export const CustomTimePicker = ({
           sx={{
             fontFamily: themeFonts["Poppins-Bold"],
             color: themeColors["#FF3939"],
-            fontSize: 14,
+            fontSize: 10,
             marginLeft: 0,
+            position: "absolute",
+            bottom: "-15px",
           }}
         >
           {helperText}

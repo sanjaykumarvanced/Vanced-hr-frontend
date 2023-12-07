@@ -20,7 +20,6 @@ import { AdminDashboard } from "../pages/admin/admin-dashboard/admin-dashboard";
 import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AllEmployeeListTable } from "../table/all-employees-table";
 import { AllEmployee } from "../pages/admin/all-employee";
 
 export const RootNavigator = () => {

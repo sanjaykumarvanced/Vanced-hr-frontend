@@ -18,7 +18,6 @@ import {
   TotalClients,
   TotalProjects,
   ActiveTasks,
-  Profile,
   HolidaysPicture,
 } from "../../../pngs";
 import { OnTodayLeaveTable } from "../../../table/today-leaves-table";

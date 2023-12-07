@@ -29,6 +29,7 @@ export const TodaysAnnouncement = ({
   maxHeight?: any;
   AdminDashboard?: any;
 }) => {
+  debugger
   const { data, refetch } = useGetAnnouncementListQuery<any>();
   const [deleteItem] = useDeleteAnnouncementMutation();
   const [isOpen, setIsOpen] = useState(false);

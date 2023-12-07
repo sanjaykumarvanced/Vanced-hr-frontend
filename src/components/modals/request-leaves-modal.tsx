@@ -17,7 +17,6 @@ import { CustomFilledInput } from "../input";
 import { CustomDatePicker } from "../calendar/custom-date-picker";
 import { CustomLabel } from "../label";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 import {
@@ -172,7 +171,7 @@ export const RequestLeavesDialog = (props: any) => {
         }
       }
       if (!values.reason) {
-        errors.reason = "reason is required";
+        errors.reason = "Reason is required";
       }
 
       return errors;
@@ -282,6 +281,7 @@ export const RequestLeavesDialog = (props: any) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
+                position: "relative",
               }}
             >
               <CustomLabel label={"Notify"} fontSize="14px" />
@@ -321,8 +321,10 @@ export const RequestLeavesDialog = (props: any) => {
                       "& .MuiFormHelperText-root": {
                         fontFamily: themeFonts["Poppins-Bold"],
                         color: themeColors["#FF3939"],
-                        fontSize: 14,
+                        fontSize: 10,
                         marginLeft: 0,
+                        position: "absolute",
+                        bottom: "-15px",
                       },
                       "& span.MuiChip-label.MuiChip-labelMedium": {
                         paddingZLeft: "9px",
@@ -371,6 +373,7 @@ export const RequestLeavesDialog = (props: any) => {
                   ? 6
                   : 4
               }
+              sx={{ position: "relative" }}
             >
               <CustomDatePicker
                 label={
@@ -414,7 +417,7 @@ export const RequestLeavesDialog = (props: any) => {
               />
             </Grid>
             {selectedLeaveType === "HALF_DAY_LEAVE" && (
-              <Grid item xs={6}>
+              <Grid item xs={6} sx={{ position: "relative" }}>
                 <CustomSelect
                   label="Durations"
                   options={durationsOptions}
@@ -444,7 +447,7 @@ export const RequestLeavesDialog = (props: any) => {
                     gap: "10px",
                   }}
                 >
-                  <Grid item xs={6}>
+                  <Grid item xs={6} sx={{ position: "relative" }}>
                     <CustomTimePicker
                       label="Start Time"
                       value={formManager.values.startTime}
@@ -457,7 +460,7 @@ export const RequestLeavesDialog = (props: any) => {
                       }
                     />
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={6} sx={{ position: "relative" }}>
                     <CustomTimePicker
                       label="End Time"
                       value={formManager.values.endTime}
@@ -475,7 +478,7 @@ export const RequestLeavesDialog = (props: any) => {
             )}
             {selectedLeaveType === "FULL_DAY_LEAVE" && (
               <>
-                <Grid item xs={4}>
+                <Grid item xs={4} sx={{ position: "relative" }}>
                   <CustomDatePicker
                     label={"To"}
                     format={"DD/MM/YYYY"}
@@ -528,6 +531,7 @@ export const RequestLeavesDialog = (props: any) => {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
+              position: "relative",
             }}
           >
             <CustomLabel label={"Reason"} fontSize="14px" />
@@ -547,8 +551,10 @@ export const RequestLeavesDialog = (props: any) => {
                 "& .MuiFormHelperText-root.Mui-error": {
                   fontFamily: themeFonts["Poppins-Bold"],
                   color: themeColors["#FF3939"],
-                  fontSize: 14,
+                  fontSize: 10,
                   marginLeft: 0,
+                  position: "absolute",
+                  bottom: "-15px",
                 },
                 "& .MuiOutlinedInput-root.MuiInputBase-colorPrimary": {
                   fontFamily: themeFonts["Poppins-Regular"],

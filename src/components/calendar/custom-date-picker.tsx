@@ -110,8 +110,10 @@ export const CustomDatePicker = ({
           sx={{
             fontFamily: themeFonts["Poppins-Bold"],
             color: themeColors["#FF3939"],
-            fontSize: 14,
+            fontSize: 10,
             marginLeft: 0,
+            position: "absolute",
+            bottom: "-15px",
           }}
         >
           {helperText}

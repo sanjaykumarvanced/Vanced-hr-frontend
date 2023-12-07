@@ -2,26 +2,19 @@ import {
   Box,
   Button,
   CircularProgress,
-  Divider,
   Grid,
   IconButton,
   InputAdornment,
-  Link as MuiLink,
   Typography,
 } from "@mui/material";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { themeColors, themeFonts } from "../../../configs";
-import { Link } from "react-router-dom";
-import { ROUTES } from "../../consts/routes.consts";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { CustomInputField } from "../../input/custom-input-field";
 import { CustomRadioButton } from "../../radioButton";
 import { ErrorStatusMessage } from "../../input/error-status-message";
 import {
-  FacebookIconSvg,
-  GoogleIconSvg,
-  LinkedInIcon,
   LockIcon,
   UserIcon1,
 } from "../../../svgs";

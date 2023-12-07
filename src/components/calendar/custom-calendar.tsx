@@ -1,12 +1,12 @@
-import * as React from 'react';
-import dayjs from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import { themeColors, themeFonts } from '../../configs';
-import { ErrorStatusMessage } from '../input/error-status-message';
-import { FormHelperText } from '@mui/material';
+import * as React from "react";
+import dayjs from "dayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import { themeColors, themeFonts } from "../../configs";
+import { ErrorStatusMessage } from "../input/error-status-message";
+import { FormHelperText } from "@mui/material";
 interface CustomDatePickerCalendarProps {
   value?: any;
   onChange?: any;
@@ -19,7 +19,7 @@ interface CustomDatePickerCalendarProps {
   name?: string;
 }
 export const CustomDatePickerCalendar = ({
-  value = '',
+  value = "",
   onChange,
   errorStatus,
   formatValue = (value) => value,
@@ -29,9 +29,8 @@ export const CustomDatePickerCalendar = ({
   helperTextProps,
   name,
 }: CustomDatePickerCalendarProps) => {
-  
-  const [selectValue, setSelectValue] = React.useState(value ?? '');
-  const today = dayjs()
+  const [selectValue, setSelectValue] = React.useState(value ?? "");
+  const today = dayjs();
 
   const handleDateChange = (date: any) => {
     setSelectValue(date);
@@ -41,37 +40,38 @@ export const CustomDatePickerCalendar = ({
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer
-        components={['MobileDatePicker']}
+        components={["MobileDatePicker"]}
         sx={{
-          '& p.MuiTypography-body2.MuiTypography-root': {
-            color: themeColors['#1C223E'],
-            fontFamily: themeFonts['Poppins-SemiBold'],
-            fontSize: '13px',
+          "& p.MuiTypography-body2.MuiTypography-root": {
+            color: themeColors["#1C223E"],
+            fontFamily: themeFonts["Poppins-SemiBold"],
+            fontSize: "13px",
           },
-          '&.MuiStack-root': {
+          "&.MuiStack-root": {
             padding: 0,
-            width: '100% !important',
+            width: "100% !important",
           },
-          '& .MuiStack-root.css-11a8txn-MuiStack-root': {
-            width: '100%',
-            overflow: 'hidden',
+          "& .MuiStack-root.css-11a8txn-MuiStack-root": {
+            width: "100%",
+            overflow: "hidden",
           },
         }}
       >
         <DemoItem label="Date Of admit">
           <MobileDatePicker
             sx={{
-              '& .MuiInputBase-formControl.MuiInputBase-root.MuiOutlinedInput-root': {
-                height: '45px',
-                borderRadius: '8px',
-                background: themeColors['#F2F2F2'],
-                fontFamily: themeFonts['Poppins-Regular'],
-                fontSize: '14px',
+              "& .MuiInputBase-formControl.MuiInputBase-root.MuiOutlinedInput-root":
+                {
+                  height: "45px",
+                  borderRadius: "8px",
+                  background: themeColors["#F2F2F2"],
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "14px",
+                },
+              "& fieldset.MuiOutlinedInput-notchedOutline": {
+                border: "none",
               },
-              '& fieldset.MuiOutlinedInput-notchedOutline': {
-                border: 'none',
-              },
-              '& .MuiFormControl-root.MuiTextField-root': { margin: 0 },
+              "& .MuiFormControl-root.MuiTextField-root": { margin: 0 },
             }}
             onChange={handleDateChange}
             value={selectValue}
@@ -82,8 +82,8 @@ export const CustomDatePickerCalendar = ({
       {!!helperText && (
         <FormHelperText
           sx={{
-            fontFamily: themeFonts['Poppins-Bold'],
-            color: themeColors['#FF3939'],
+            fontFamily: themeFonts["Poppins-Bold"],
+            color: themeColors["#FF3939"],
             fontSize: 14,
             marginLeft: 0,
           }}
