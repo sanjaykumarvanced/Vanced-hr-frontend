@@ -6,59 +6,67 @@ import { apiBaseUrl } from "../components/consts/api-url.const";
 import { format } from "date-fns";
 import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
 
-
-const columns: GridColDef[] = [
-  {
-    field: "jj",
-    headerName: "",
-    width: 26,
-    minWidth: 10,
-  },
-  {
-    field: "employeeName",
-    headerName: "Employee Name",
-    flex: 1,
-  },
-  { field: "mail", headerName: "Mail", flex: 1 },
-  { field: "department", headerName: "Department", flex: 1 },
-  //   {
-  //     field: "contactNo",
-  //     headerName: "Contact No.",
-  //     flex: 1,
-  //   },
-  { field: "joiningDate", headerName: "Joining Date", flex: 1 },
-  //   {
-  //     field: "gender",
-  //     headerName: "Gender",
-  //     flex: 1,
-  //   },{
-  //     field: "status",
-  //     headerName: "Status",
-  //     flex: 1,
-  //   },
-  {
-    field: "action",
-    headerName: "Action",
-  },
-];
-
-export const AllEmployeeListTable = ({ maxHeight }: { maxHeight?: any }) => {
+export const AllEmployeeListTable = ({
+  maxHeight,
+  AllEmployees,
+}: {
+  maxHeight?: any;
+  AllEmployees?: any;
+}) => {
+  const columns: GridColDef[] = [
+    {
+      field: "jj",
+      headerName: "",
+      width: 26,
+      minWidth: 10,
+    },
+    {
+      field: "employeeName",
+      headerName: "Employee Name",
+      flex: 1,
+    },
+    { field: "mail", headerName: "Mail", flex: 1 },
+    { field: "department", headerName: "Department", flex: 1 },
+    { field: "joiningDate", headerName: "Joining Date", flex: 1 },
+    {
+      field: "action",
+      headerName: "Action",
+    },
+  ];
+  if (AllEmployees) {
+    columns.splice(4, 0, {
+      field: "contactNo",
+      headerName: "Contact No.",
+      flex: 1,
+    });
+    columns.splice(6, 0, {
+      field: "gender",
+      headerName: "Gender",
+      flex: 1,
+    });
+  }
   const { data } = useGetEmployeeListQuery();
   if (!data) {
     return null;
   }
 
-  const rows = data.map((item: any) => ({
-    id: item._id,
-    employeeName: `${item.firstName} ${item.lastName}`,
-    mail: item.email,
-    department: item.designation,
-    contactNo: item.telephones,
-    joiningDate: format(new Date(item.dateOfJoining), "dd/MM/yyyy"),
-    gender: item.gender,
-    status: item.status,
-    image: item.image.path,
-  }));
+  const rows = data.map((item: any) => {
+    const contactNo = item.personalInformation.telephones[0];
+
+    console.log(contactNo);
+
+    return {
+      id: item._id,
+      employeeName: `${item.firstName} ${item.lastName}`,
+      mail: item.email,
+      department: item.designation,
+      contactNo: contactNo ? contactNo : "-",
+      joiningDate: format(new Date(item.dateOfJoining), "dd/MM/yyyy"),
+      gender: item.gender,
+      image: item.image.path,
+    };
+  });
+  console.log(data);
 
   return (
     <>

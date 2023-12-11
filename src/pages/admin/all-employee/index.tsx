@@ -2,7 +2,7 @@ import { Grid, Box, Typography} from "@mui/material";
 import { themeFonts, themeColors } from "../../../configs";
 import { AllEmployeeListTable } from "../../../table/all-employees-table";
 export const AllEmployee = () => {
-
+const AllEmployees ="All Employee"
   return (
     <>
       <Grid
@@ -34,7 +34,7 @@ export const AllEmployee = () => {
             All Employee
           </Typography>
         </Box>
-        <AllEmployeeListTable maxHeight={580} />
+        <AllEmployeeListTable maxHeight={580} AllEmployees={AllEmployees} />
       </Grid>
     </>
   );

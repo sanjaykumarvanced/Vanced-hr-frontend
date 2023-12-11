@@ -3,7 +3,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { themeFonts, themeColors } from "../configs";
 import { useSelector } from "react-redux";
 import { useGetLeaveRequestByIdQuery } from "../components/apis/leaveRequestApi";
-import {  EditIconSvg } from "../svgs";
+import { EditIconSvg } from "../svgs";
 import { apiBaseUrl } from "../components/consts/api-url.const";
 import { format } from "date-fns";
 import { useState } from "react";
@@ -12,7 +12,6 @@ import { SingleInputDateRangePicker } from "../components/calendar/calendar";
 import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
 import { toCamelCaseFormat } from "../utils/helpers";
 import moment from "moment";
-
 
 const columns: GridColDef[] = [
   {
@@ -78,7 +77,7 @@ export const LeaveRequestTable = () => {
     reason: item.reason,
     approvedBy: item?.approvedBy,
     status: item.status,
-    durations: item.durations,
+    durations: toCamelCaseFormat(item.durations),
     startTime: item.startTime,
     endTime: item.endTime,
     employerImage: item?.approvedBy?.employer?.employerImage?.path,
@@ -174,7 +173,9 @@ export const LeaveRequestTable = () => {
                     }}
                   >
                     <Button
-                      disabled={moment(params.row.from, "DD/MM/YYYY").isBefore(currentDate)}
+                      disabled={moment(params.row.from, "DD/MM/YYYY").isBefore(
+                        currentDate
+                      )}
                       sx={{
                         height: "20px",
                         minWidth: "20px",
@@ -207,18 +208,18 @@ export const LeaveRequestTable = () => {
                         params.value === "Approved"
                           ? themeColors["#42971B"]
                           : params.value === "Pending"
-                            ? themeColors["#092ACC"]
-                            : params.value === "Declined"
-                              ? themeColors["#971B1B"]
-                              : "",
+                          ? themeColors["#092ACC"]
+                          : params.value === "Declined"
+                          ? themeColors["#971B1B"]
+                          : "",
                       background:
                         params.value === "Approved"
                           ? themeColors["rgb(128 199 98 / 31%)"]
                           : params.value === "Pending"
-                            ? themeColors["rgb(98 111 199 / 31%)"]
-                            : params.value === "Declined"
-                              ? themeColors["rgb(199 98 98 / 31%)"]
-                              : "",
+                          ? themeColors["rgb(98 111 199 / 31%)"]
+                          : params.value === "Declined"
+                          ? themeColors["rgb(199 98 98 / 31%)"]
+                          : "",
                       borderRadius: "11px",
                       paddingX: "11px",
                       paddingY: "2px",
