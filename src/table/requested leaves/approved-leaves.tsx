@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { useGetLeaveRequestByIdQuery } from "../../components/apis/leaveRequestApi";
 import { toast } from "react-toastify";
 import { format } from "date-fns";
-import { convertTextToUppercase, toCamelCaseFormat } from "../../utils/helpers";
+import { toCamelCaseFormat } from "../../utils/helpers";
 
 export const ApprovedLeaves = ({
   title,
@@ -225,7 +225,10 @@ export const ApprovedLeaves = ({
                     }}
                   >
                     <Button
-                      disabled={params.row.status === "Approved"}
+                      disabled={
+                        params.row.status === "Approved" ||
+                        params.row.status === "Declined"
+                      }
                       sx={{
                         height: "29px",
                         minWidth: "29px",
@@ -238,7 +241,10 @@ export const ApprovedLeaves = ({
                       <DoneIcon />
                     </Button>
                     <Button
-                      disabled={params.row.status === "Declined"}
+                      disabled={
+                        params.row.status === "Declined" ||
+                        params.row.status === "Approved"
+                      }
                       sx={{
                         height: "29px",
                         minWidth: "29px",
