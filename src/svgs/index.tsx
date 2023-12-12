@@ -60,3 +60,4 @@ export { ReactComponent as GraphSvg } from "../assets/images/svg/graph.svg";
 export { ReactComponent as ThumbsUpIcon } from "../assets/images/svg/thumbs-up-icon.svg";
 export { ReactComponent as CommentsIcon } from "../assets/images/svg/comment-icon.svg";
 export { ReactComponent as Emojis } from "../assets/images/svg/emojis.svg";
+export { ReactComponent as SearchIcon3 } from "../assets/images/svg/search-icon-3.svg";

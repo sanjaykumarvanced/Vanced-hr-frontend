@@ -5,6 +5,9 @@ import { DeleteIconSvg, EditIconSvg } from "../svgs";
 import { apiBaseUrl } from "../components/consts/api-url.const";
 import { format } from "date-fns";
 import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
+import { SearchComponents } from "../components/filter/search-component";
+import { useState } from "react";
+import { AddNewEmployeeDialog } from "../components/modals/add-new-employee";
 
 export const AllEmployeeListTable = ({
   maxHeight,
@@ -45,7 +48,22 @@ export const AllEmployeeListTable = ({
       flex: 1,
     });
   }
-  const { data } = useGetEmployeeListQuery();
+  const { data, refetch } = useGetEmployeeListQuery();
+  const [editedData, setEditedData] = useState<any>({});
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClose = () => {
+    setIsOpen(false);
+    setEditedData({});
+  };
+  const handleOpen = () => {
+    setIsOpen(true);
+    setEditedData({});
+  };
+  const handleClickEditOpen = (data: any, action?: string) => {
+    debugger;
+    setIsOpen(true);
+    setEditedData({ ...data, action });
+  };
   if (!data) {
     return null;
   }
@@ -81,7 +99,7 @@ export const AllEmployeeListTable = ({
           flexDirection: "column",
           paddingLeft: "0px !important",
           paddingTop: "13px",
-          marginTop: "20px",
+          marginTop: AllEmployees ? "0" : "20px",
           background: themeColors["#FFFFFF"],
         }}
       >
@@ -109,6 +127,48 @@ export const AllEmployeeListTable = ({
               All Employees
             </Typography>
           </Box>
+          <SearchComponents searchTitle={"Search"} isEmpty={true} />
+          <Button
+            variant="outlined"
+            // onClick={handleSubmit}
+            // disabled={disable}
+            sx={{
+              height: 39,
+              borderRadius: "6px",
+              border: "1px solid #0C345D",
+              color: themeColors["#0C345D"],
+              fontFamily: themeFonts["Poppins-SemiBold"],
+              fontSize: "15px",
+              "&.Mui-disabled": {
+                color: themeColors["#0C345D"],
+                opacity: 0.8,
+              },
+              marginRight: "20px",
+            }}
+          >
+            Export Report
+          </Button>
+          <Button
+            variant="contained"
+            // onClick={handleSubmit}
+            // disabled={disable}
+            sx={{
+              height: 39,
+              borderRadius: "6px",
+              backgroundColor: themeColors["#0C345D"],
+              color: themeColors["#FFFFFF"],
+              fontFamily: themeFonts["Poppins-SemiBold"],
+              fontSize: "15px",
+              "&.Mui-disabled": {
+                color: themeColors["#FFFFFF"],
+                opacity: 0.8,
+              },
+              marginRight: "13px",
+            }}
+            onClick={handleOpen}
+          >
+            Add Employee
+          </Button>
         </Box>
         <Box sx={{ maxHeight: maxHeight ? maxHeight : 400, width: "100%" }}>
           <DataGrid
@@ -158,6 +218,7 @@ export const AllEmployeeListTable = ({
                           "& svg path": { fill: "rgba(0, 0, 0, 0.26)" },
                         },
                       }}
+                      onClick={() => handleClickEditOpen(params.row, "edit")}
                     >
                       <EditIconSvg />
                     </Button>
@@ -219,6 +280,15 @@ export const AllEmployeeListTable = ({
           />
         </Box>
       </Grid>
+      {isOpen && (
+        <AddNewEmployeeDialog
+          open={isOpen}
+          onClose={handleClose}
+          refetch={refetch}
+          editedData={editedData}
+          data={data}
+        />
+      )}
     </>
   );
 };

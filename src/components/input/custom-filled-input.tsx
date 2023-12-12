@@ -101,7 +101,7 @@ export const CustomFilledInput = ({
           borderRadius: borderRadius ? { borderRadius } : "5px",
           paddingX: 1.5,
           height: height ? { height } : 45,
-          marginTop: 1,
+          marginTop: marginTop ? marginTop : 1,
           boxShadow: `${
             !!errorStatus && "0 0 0 2px " + themeColors["#E11900"]
           }`,

@@ -44,7 +44,7 @@ export const OnTodayLeaveTable = ({ minHeight }: { minHeight?: any }) => {
   const rows = data.map((item: any) => ({
     id: item._id,
     user: `${item.employee.firstName} ${item.employee.lastName}`,
-    mail: item.noOfDays,
+    mail: item.employee.email,
     leaveType: toCamelCaseFormat(item.leaveType),
     status: item.status,
     image: item.image.path,
@@ -91,6 +91,7 @@ export const OnTodayLeaveTable = ({ minHeight }: { minHeight?: any }) => {
             >
               On Leave Today
             </Typography>
+          
           </Box>
         </Box>
         <Box sx={{ height: minHeight ? minHeight : 400, width: "100%" }}>
