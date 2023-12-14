@@ -24,7 +24,6 @@ export const AnnouncementsItem = ({
   IsLoggedRole?: any;
   AdminDashboard?: any;
 }) => {
-  debugger
   // const { data, refetch } = useGetAnnouncementListQuery<any>(undefined, {
   //   pollingInterval: 60000,
   // });

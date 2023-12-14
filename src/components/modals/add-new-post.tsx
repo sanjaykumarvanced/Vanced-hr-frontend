@@ -24,7 +24,6 @@ import { useUploadImageMutation } from "../apis/imageApi";
 import { toast } from "react-toastify";
 
 export const AddNewPostDialog = (props: any) => {
-  debugger
   const [postAd] = useCreateAnnouncementMutation();
   const [mutate] = useUploadImageMutation();
   const { data } = useGetEmployeeListQuery();
@@ -53,7 +52,6 @@ export const AddNewPostDialog = (props: any) => {
   };
 
   const handleSubmit = async (e: any) => {
-    debugger
     e.preventDefault();
     if (description === "<p></p>\n") {
       handleClose();
@@ -79,8 +77,8 @@ export const AddNewPostDialog = (props: any) => {
         }
         setTimeout(() => {
           refetch();
-          handleClose();
         }, 2000);
+        handleClose();
       } catch (error: any) {
         console.error("Error adding for post:", error);
         toast.error(error.data.message);

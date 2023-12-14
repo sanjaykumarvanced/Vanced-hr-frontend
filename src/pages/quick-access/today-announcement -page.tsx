@@ -3,8 +3,6 @@ import {
   Button,
   Divider,
   Grid,
-  List,
-  ListItem,
   Typography,
 } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
@@ -14,13 +12,8 @@ import {
   useDeleteAnnouncementMutation,
   useGetAnnouncementListQuery,
 } from "../../components/apis/addAnnouncementsApi";
-import { apiBaseUrl } from "../../components/consts/api-url.const";
-import moment from "moment";
-import { DeleteIconSvg } from "../../svgs";
 import { IsLoggedRole } from "../../utils/helpers";
-import { Roles } from "../../components/consts/consts";
 import { AnnouncementsItem } from "./announcement-items";
-import { toast } from "react-toastify";
 
 export const TodaysAnnouncement = ({
   maxHeight,
@@ -29,7 +22,6 @@ export const TodaysAnnouncement = ({
   maxHeight?: any;
   AdminDashboard?: any;
 }) => {
-  debugger
   const { data, refetch } = useGetAnnouncementListQuery<any>();
   const [deleteItem] = useDeleteAnnouncementMutation();
   const [isOpen, setIsOpen] = useState(false);

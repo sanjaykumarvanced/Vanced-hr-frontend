@@ -57,7 +57,6 @@ export const RequestLeavesDialog = (props: any) => {
   const [updateApi] = useUpdateLeaveRequestMutation();
 
   const handleSubmitLeaveRequest = async () => {
-    debugger;
     if (editedData?.action === "edit") {
       try {
         const formattedStartTime = dayjs(formManager.values.startTime).format(

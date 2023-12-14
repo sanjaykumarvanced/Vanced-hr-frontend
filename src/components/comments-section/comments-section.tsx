@@ -1,6 +1,6 @@
 import { Box, Button, Typography, List, ListItem, Grid } from "@mui/material";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { themeFonts, themeColors } from "../../configs";
 import { ThumbsUpIcon, CommentsIcon } from "../../svgs";
 import { apiBaseUrl } from "../consts/api-url.const";
@@ -22,7 +22,6 @@ export const CommentSection = ({
   data?: any;
   refetch?: any;
 }) => {
-  debugger
   console.log(data);
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => {
@@ -42,38 +41,38 @@ export const CommentSection = ({
     EditorState.createEmpty()
   );
 
-  const likeEmployeeID = data?.likes?.map((val: any) => val.employee._id);
-  console.log(likeEmployeeID);
-  const likeId = (likeEmployeeID: any) => {
-    return likeEmployeeID === UserId;
-  };
+  const likeEmployeeID =
+    data && data?.likes?.map((val: any) => val.employee._id);
 
-  const [value, setValue] = useState(
-    likeEmployeeID.find(likeId) ? true : false
-  );
+  const [value, setValue] = useState(likeEmployeeID.includes(UserId));
   const [totalLikes, setTotalLikes] = useState(data?.likes?.length);
+
+  useEffect(() => {
+    setTotalLikes(data?.likes?.length);
+    setValue(likeEmployeeID.includes(UserId));
+  }, [UserId, data?.likes?.length, likeEmployeeID]);
+
   const handleAddLike = async () => {
-    debugger;
-    setValue(!value);
-    if (!value === true) {
-      setTotalLikes(totalLikes + 1);
-    } else {
-      setTotalLikes(totalLikes - 1);
-    }
+    // setValue(!value);
+    // if (!value === true) {
+    //   setTotalLikes(totalLikes + 1);
+    // } else {
+    //   setTotalLikes(totalLikes - 1);
+    // }
     try {
       const res = await addLike({
         id,
         employee: UserId,
         image: image._id,
       }).unwrap();
-      toast.success(res.message);
+      refetch();
+      //toast.success(res.message);
     } catch (error: any) {
       console.error("Error for add like on post:", error);
       toast.error(error.data.message);
     }
     refetch();
   };
-  console.log(totalLikes, "totalLikes", value, "value");
 
   const onEditorStateChange = (newEditorState: any) => {
     setEditorState(newEditorState);
@@ -230,57 +229,6 @@ export const CommentSection = ({
                 hashtag={hashtags}
               />
             </Grid>
-            {/* <TextField
-              multiline
-              placeholder="Add a comment...."
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="start">
-                    <Button
-                      sx={{
-                        padding: "0px",
-                        height: 30,
-                        minWidth: 30,
-                      }}
-                    >
-                      <Emojis />
-                    </Button>
-                  </InputAdornment>
-                ),
-              }}
-              sx={{
-                "&.MuiFormControl-root.MuiTextField-root": {
-                  width: "100%",
-                },
-                "& .MuiInputBase-colorPrimary.Mui-error": {
-                  color: themeColors["#323B4B"],
-                  border: "1px solid #1C223E6E",
-                  fontSize: 14,
-                },
-                "& .Mui-error": {
-                  fontFamily: themeFonts["Poppins-Bold"],
-                  color: themeColors["#FF3939"],
-                  fontSize: 14,
-                  marginLeft: 0,
-                },
-                "& .MuiOutlinedInput-root.MuiInputBase-colorPrimary": {
-                  fontFamily: themeFonts["Poppins-Regular"],
-                  color: themeColors["#2F353B"],
-                  fontSize: 14,
-                  paddingY: "10px",
-                },
-                "& .Mui-error .MuiOutlinedInput-notchedOutline": {
-                  border: 0,
-                },
-                "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  border: "1px solid #1C223E6E",
-                },
-                "& :hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#1C223E6E",
-                },
-              }}
-              onChange={handleChange}
-            /> */}
             <Button
               sx={{
                 height: 40,
