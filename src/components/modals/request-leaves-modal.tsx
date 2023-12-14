@@ -25,7 +25,7 @@ import {
 } from "../apis/applyLeaveApi";
 import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
 import { Roles, durationsOptions, leaveOptions } from "../consts/consts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { convertTextToUppercase } from "../../utils/helpers";
 import { CustomTimePicker } from "../calendar/cutom-time-picker";
@@ -184,11 +184,23 @@ export const RequestLeavesDialog = (props: any) => {
     if (startDate && endDate) {
       const start = dayjs(startDate);
       const end = dayjs(endDate);
+
+
+
+      
       const days = end.diff(start, "days");
       return days;
     }
     return 0;
   }
+
+  useEffect(() => {
+    if (selectedLeaveType === "FULL_DAY_LEAVE") {
+      formManager.setFieldValue("startDate", null);
+      formManager.setFieldValue("endDate", null);
+      formManager.setFieldValue("noOfDays", parseInt(""));
+    }
+  }, [selectedLeaveType]);
 
   return (
     <Dialog
@@ -405,7 +417,12 @@ export const RequestLeavesDialog = (props: any) => {
                     ) + 1;
                   formManager.setFieldValue("noOfDays", days);
                 }}
-                maxDate={dayjs(formManager.values.endDate).startOf("day")}
+                maxDate={
+                  selectedLeaveType === "SHORT_LEAVE" ||
+                  selectedLeaveType === "HALF_DAY_LEAVE"
+                    ? undefined
+                    : dayjs(formManager.values.endDate).startOf("day")
+                }
                 value={dayjs(formManager.values.startDate)}
                 name="startDate"
                 fontFamily="Poppins-Regular"
