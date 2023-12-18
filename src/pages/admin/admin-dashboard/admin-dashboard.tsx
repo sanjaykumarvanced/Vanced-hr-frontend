@@ -380,127 +380,148 @@ export const AdminDashboard = () => {
                       gap: "20px",
                       maxHeight: "380px",
                       overflow: "auto",
+                      height: "100%",
                     }}
                   >
-                    <Box sx={{ width: "100%" }}>
-                      <List
-                        sx={{
-                          padding: "0px",
-                          "&:before": {
-                            content: '" "',
-                            display: "block",
-                            position: "absolute",
-                            zIndex: 1,
-                            left: "7px",
-                            height: "-webkit-fill-available",
-                            top: "0px",
-                            width: "1px",
-                            opacity: 1,
-                            background: "#B9B9B9",
-                          },
-                          position: "relative",
-                        }}
-                      >
-                        {data &&
-                          data.map((val: any, idx: number) => {
-                            const joiningDate = format(
-                              new Date(val.dateOfJoining),
-                              "dd/MM/yyyy"
-                            );
-                            const firstName = val.firstName;
-                            const lastName = val.lastName;
-                            const name = `${firstName || ""} ${lastName || ""}`;
-                            return (
-                              <>
-                                <ListItem
-                                  sx={{
-                                    padding: "0px",
-                                    marginTop: "26px",
-                                    paddingLeft: "27px",
-                                    "&:after": {
-                                      content: '" "',
-                                      display: "block",
-                                      position: "absolute",
-                                      zIndex: 5,
-                                      left: "0px",
-                                      height: "14px",
-                                      width: "14px",
-                                      borderRadius: "10px",
-                                      opacity: 1,
-                                      border: " 1px solid #B9B9B9",
-                                      background: themeColors["#FFFFFF"],
-                                    },
-                                    display: "flex",
-                                  }}
-                                >
-                                  <ListItemText
+                    <Box sx={{ width: "100%", height: "100%" }}>
+                      {data.length ? (
+                        <List
+                          sx={{
+                            padding: "0px",
+                            "&:before": {
+                              content: '" "',
+                              display: "block",
+                              position: "absolute",
+                              zIndex: 1,
+                              left: "7px",
+                              height: "-webkit-fill-available",
+                              top: "0px",
+                              width: "1px",
+                              opacity: 1,
+                              background: "#B9B9B9",
+                            },
+                            position: "relative",
+                          }}
+                        >
+                          {data &&
+                            data.map((val: any, idx: number) => {
+                              const joiningDate = format(
+                                new Date(val.dateOfJoining),
+                                "dd/MM/yyyy"
+                              );
+                              const firstName = val.firstName;
+                              const lastName = val.lastName;
+                              const name = `${firstName || ""} ${
+                                lastName || ""
+                              }`;
+                              return (
+                                <>
+                                  <ListItem
                                     sx={{
-                                      "& .MuiListItemText-primary": {
-                                        display: "flex",
-                                        gap: "10px",
-                                        fontSize: "12px",
-                                        fontFamily:
-                                          themeFonts["Poppins-Regular"],
-                                        color: themeColors["#000000"],
-                                        alignItems: "center",
+                                      padding: "0px",
+                                      marginTop: "26px",
+                                      paddingLeft: "27px",
+                                      "&:after": {
+                                        content: '" "',
+                                        display: "block",
+                                        position: "absolute",
+                                        zIndex: 5,
+                                        left: "0px",
+                                        height: "14px",
+                                        width: "14px",
+                                        borderRadius: "10px",
+                                        opacity: 1,
+                                        border: " 1px solid #B9B9B9",
+                                        background: themeColors["#FFFFFF"],
                                       },
-                                      width: "50%",
+                                      display: "flex",
                                     }}
                                   >
-                                    <Box
+                                    <ListItemText
                                       sx={{
-                                        width: "30px",
-                                        height: "30px",
-                                        borderRadius: "5px",
-                                        overflow: "hidden",
-                                        alignItems: "center",
-                                        display: "flex",
-                                        justifyContent: "center",
+                                        "& .MuiListItemText-primary": {
+                                          display: "flex",
+                                          gap: "10px",
+                                          fontSize: "12px",
+                                          fontFamily:
+                                            themeFonts["Poppins-Regular"],
+                                          color: themeColors["#000000"],
+                                          alignItems: "center",
+                                        },
+                                        width: "50%",
                                       }}
                                     >
-                                      <img
-                                        src={apiBaseUrl + "/" + val.image.path}
-                                        height={30}
-                                        width={30}
-                                        alt="USER"
-                                      />
-                                    </Box>
-                                    {name}
-                                  </ListItemText>
+                                      <Box
+                                        sx={{
+                                          width: "30px",
+                                          height: "30px",
+                                          borderRadius: "5px",
+                                          overflow: "hidden",
+                                          alignItems: "center",
+                                          display: "flex",
+                                          justifyContent: "center",
+                                        }}
+                                      >
+                                        <img
+                                          src={
+                                            apiBaseUrl + "/" + val.image.path
+                                          }
+                                          height={30}
+                                          width={30}
+                                          alt="USER"
+                                        />
+                                      </Box>
+                                      {name}
+                                    </ListItemText>
 
-                                  <ListItemText
-                                    sx={{
-                                      "& .MuiListItemText-primary": {
-                                        fontSize: "10px",
-                                        fontFamily:
-                                          themeFonts["Poppins-Regular"],
-                                        color: themeColors["#2B468B"],
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: "4px",
-                                      },
-                                      width: "50%",
-                                      textAlign: "end",
-                                    }}
-                                  >
-                                    {val.designation}
-                                    <Typography
-                                      component={"span"}
+                                    <ListItemText
                                       sx={{
-                                        fontSize: "8px",
-                                        fontFamily:
-                                          themeFonts["Poppins-Regular"],
-                                        color: themeColors["#8B2B5B"],
+                                        "& .MuiListItemText-primary": {
+                                          fontSize: "10px",
+                                          fontFamily:
+                                            themeFonts["Poppins-Regular"],
+                                          color: themeColors["#2B468B"],
+                                          display: "flex",
+                                          flexDirection: "column",
+                                          gap: "4px",
+                                        },
+                                        width: "50%",
+                                        textAlign: "end",
                                       }}
                                     >
-                                      Joining date : {joiningDate}
-                                    </Typography>
-                                  </ListItemText>
-                                </ListItem>
-                              </>
-                            );
-                          })}
-                      </List>
+                                      {val.designation}
+                                      <Typography
+                                        component={"span"}
+                                        sx={{
+                                          fontSize: "8px",
+                                          fontFamily:
+                                            themeFonts["Poppins-Regular"],
+                                          color: themeColors["#8B2B5B"],
+                                        }}
+                                      >
+                                        Joining date : {joiningDate}
+                                      </Typography>
+                                    </ListItemText>
+                                  </ListItem>
+                                </>
+                              );
+                            })}
+                        </List>
+                      ) : (
+                        <Typography
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: "100%",
+                            fontSize: "20px",
+                            color: "#000000",
+                            fontFamily: "Poppins-SemiBold",
+                          }}
+                        >
+                          No Records Found
+                        </Typography>
+                      )}
                     </Box>
                   </Box>
                 </Grid>
