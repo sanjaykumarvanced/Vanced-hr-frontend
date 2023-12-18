@@ -148,6 +148,7 @@ export const themeColors = {
   "#8B2B5B": "#8B2B5B",
   "#7E7E7E": "#7E7E7E",
   "#9E9E9E": "#9E9E9E",
+  "rgb(241 241 241 / 55%)": "rgb(241 241 241 / 55%)",
 };
 
 export const themeFonts = {

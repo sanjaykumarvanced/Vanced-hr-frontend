@@ -1,159 +1,96 @@
 import {
-  Autocomplete,
   Box,
   Button,
-  Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Drawer,
   Grid,
   IconButton,
   TextField,
+  Typography,
 } from "@mui/material";
 import { themeFonts, themeColors } from "../../configs";
 import { CloseIconSvg1 } from "../../svgs";
 import { CustomSelect } from "../select/custom-select";
 import { CustomFilledInput } from "../input";
 import { CustomDatePicker } from "../calendar/custom-date-picker";
-import { CustomLabel } from "../label";
 import { useFormik } from "formik";
-import { useSelector } from "react-redux";
 import dayjs from "dayjs";
-import {
-  useCreateApplyLeaveRequestMutation,
-  useUpdateLeaveRequestMutation,
-} from "../apis/applyLeaveApi";
-import { useGetRequestedLeavesByIdQuery } from "../apis/requestedLeavesApi";
-import { Roles, durationsOptions, leaveOptions } from "../consts/consts";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import { convertTextToUppercase } from "../../utils/helpers";
-import { CustomTimePicker } from "../calendar/cutom-time-picker";
 import * as Yup from "yup";
-import { CustomInputField } from "../input/custom-input-field";
-import { CustomFilledSelect } from "../select";
+import { useCreateNewEmployeeMutation } from "../apis/employeeListApi";
+import { toast } from "react-toastify";
+import { Profile } from "../../pngs";
+import { CustomLabel } from "../label";
+import { EmployeeDetails } from "../../pages/admin/employee-details/employee-details";
 
 const validationSchema = Yup.object({
-  employeeName: Yup.string().required("Employee Name is required"),
-  emailId: Yup.string()
+  userName: Yup.string().required("User Name is required"),
+  email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
+  firstName: Yup.string().required("First Name is required"),
+  lastName: Yup.string().required("Last Name is required"),
+  password: Yup.string().required("Password is required"),
+  role: Yup.string().required("Role is required"),
+  birthday: Yup.string().required("Gender is required"),
   joiningDate: Yup.string().required("Joining Date is required"),
   department: Yup.string().required("Department is required"),
-  contactNo: Yup.string().required("Contact No. is required"),
+  address: Yup.string().required("Contact No. is required"),
   gender: Yup.string().required("Gender is required"),
 });
 
 export const AddNewEmployeeDialog = (props: any) => {
   debugger;
-  const { onClose, open, refetch, editedData, data } = props;
+  const { onClose, open, refetch } = props;
   const handleClose = () => {
     onClose();
   };
-  //   const [createApplyLeaveRequest] = useCreateApplyLeaveRequestMutation();
-  //   const employeeRoles = Roles[2].key;
-  //   const [selectedLeaveType, setSelectedLeaveType] = useState(
-  //     convertTextToUppercase(editedData?.leaveType) || "FULL_DAY_LEAVE"
-  //   );
-  //   const employeeOptions =
-  //     data &&
-  //     data
-  //       .filter((option: any) => option.role !== employeeRoles)
-  //       .map((option: any) => ({
-  //         id: option._id,
-  //         label: `${option.firstName || ""} ${option.lastName || ""}`,
-  //       }));
-  //   const user = useSelector((state: any) => state.authentication.user);
-  //   const Id = user[0].id;
-  //   const adminId = "652d31fc3d93ae86647ec0fe";
-  //   const { refetch: leaveStatusRefetch }: any = useGetRequestedLeavesByIdQuery({
-  //     employerId: adminId,
-  //   });
-  //   const [updateApi] = useUpdateLeaveRequestMutation();
 
-  //   const handleSubmitLeaveRequest = async () => {
-  //     debugger;
-  //     if (editedData?.action === "edit") {
-  //       try {
-  //         const formattedStartTime = dayjs(formManager.values.startTime).format(
-  //           "YYYY-MM-DDTHH:mm"
-  //         );
-  //         const formattedEndTime = dayjs(formManager.values.endTime).format(
-  //           "YYYY-MM-DDTHH:mm"
-  //         );
+  const [addNewEmployee] = useCreateNewEmployeeMutation();
 
-  //         const response = await updateApi({
-  //           id: formManager.values.id,
-  //           employee: Id,
-  //           leaveType: formManager.values.leaveType,
-  //           notify: formManager.values.notify,
-  //           startDate: formManager.values.startDate,
-  //           endDate: formManager.values.endDate,
-  //           noOfDays: formManager.values.noOfDays,
-  //           reason: formManager.values.reason,
-  //           durations: formManager.values.durations,
-  //           startTime: formattedStartTime,
-  //           endTime: formattedEndTime,
-  //         }).unwrap();
-  //         toast.success(response.message);
-  //       } catch (error: any) {
-  //         console.error("Error applying for leave:", error);
-  //         toast.error(error.data.message);
-  //       }
-  //       onClose();
-  //     } else {
-  //       try {
-  //         let formattedStartTime = "";
-  //         let formattedEndTime = "";
+  const handleSubmit = async () => {
+    debugger;
 
-  //         if (formManager.values.leaveType === "SHORT_LEAVE") {
-  //           formattedStartTime = dayjs(formManager.values.startTime).format(
-  //             "YYYY-MM-DDTHH:mm"
-  //           );
-  //           formattedEndTime = dayjs(formManager.values.endTime).format(
-  //             "YYYY-MM-DDTHH:mm"
-  //           );
-  //         }
-  //         const res = await createApplyLeaveRequest({
-  //           employee: Id,
-  //           leaveType: formManager.values.leaveType,
-  //           notify: formManager.values.notify,
-  //           startDate: formManager.values.startDate,
-  //           endDate: formManager.values.endDate,
-  //           noOfDays: formManager.values.noOfDays,
-  //           reason: formManager.values.reason,
-  //           durations: formManager.values.durations,
-  //           startTime: formattedStartTime,
-  //           endTime: formattedEndTime,
-  //         }).unwrap();
-  //         toast.success(res.message);
-  //       } catch (error: any) {
-  //         console.error("Error applying for leave:", error);
-  //         toast.error(error.data.message);
-  //       }
-  //       onClose();
-  //     }
-  //     refetch();
-  //     leaveStatusRefetch();
-  //   };
-  const parseDateString = (dateString: any) => {
-    const [day, month, year] = dateString.split("/");
-    return new Date(`${year}-${month}-${day}`);
-  };
-  const handleSubmit = () => {
-    return;
+    try {
+      const res = await addNewEmployee({
+        userName: formManager.values.userName,
+        firstName: formManager.values.firstName,
+        lastName: formManager.values.lastName,
+        password: formManager.values.password,
+        role: formManager.values.role,
+        email: formManager.values.email,
+        birthday: formManager.values.birthday,
+        designation: formManager.values.department,
+        gender: formManager.values.gender,
+        employeeId: formManager.values.employeeId,
+        address: formManager.values.address,
+        dateOfJoining: formManager.values.joiningDate,
+      }).unwrap();
+      toast.success(res.message);
+    } catch (error: any) {
+      console.error("Error applying for leave:", error);
+      toast.error(error.data.message);
+    }
+    onClose();
+
+    refetch();
   };
   const formManager: any = useFormik({
     initialValues: {
-      id: editedData?.id || "",
-      employeeName: editedData?.employeeName || "",
-      emailId: editedData?.mail || [],
-      joiningDate: editedData?.joiningDate
-        ? parseDateString(editedData.joiningDate)
-        : null,
-      department: editedData?.department || "",
-      contactNo: editedData?.contactNo || "",
-      gender: editedData?.gender || "",
+      id: "",
+      employeeId: "",
+      userName: "",
+      firstName: "",
+      lastName: "",
+      role: "",
+      password: "",
+      birthday: "",
+      email: "",
+      joiningDate: null,
+      department: "",
+      address: "",
+      gender: "",
     },
     validationSchema,
     onSubmit: () => {
@@ -161,27 +98,17 @@ export const AddNewEmployeeDialog = (props: any) => {
     },
   });
 
-  //   function calculateNumberOfDays(startDate: any, endDate: any) {
-  //     if (startDate && endDate) {
-  //       const start = dayjs(startDate);
-  //       const end = dayjs(endDate);
-  //       const days = end.diff(start, "days");
-  //       return days;
-  //     }
-  //     return 0;
-  //   }
-
   return (
-    <Dialog
+    <Drawer
       onClose={handleClose}
       open={open}
       sx={{
         flexShrink: 0,
-        "& .MuiDialog-paper": {
-          width: "100%",
-          maxWidth: "850px",
+        "& .MuiDrawer-paper": {
+          width: "calc(100% - 800px)",
         },
       }}
+      anchor="right"
     >
       <DialogTitle
         sx={{
@@ -212,13 +139,106 @@ export const AddNewEmployeeDialog = (props: any) => {
         <DialogContent
           dividers
           sx={{
-            borderBottom: 0,
             paddingX: "27px",
             display: "flex",
             flexDirection: "column",
-            gap: "26px",
+            gap: "16px",
+            height: "calc(100vh - 150px)",
           }}
         >
+          <Grid
+            item
+            xs={12}
+            sx={{
+              paddingRight: "0px !important",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: "20px",
+            }}
+          >
+            <Box
+              sx={{
+                maxWidth: "80px !important",
+                maxHeight: "80px !important",
+                borderRadius: "5px",
+                overflow: "hidden",
+                alignItems: "center",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <img src={Profile} alt="Profile Pic" height={80} width={80} />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "row",
+                  gap: "10px",
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  component="label"
+                  sx={{
+                    height: 36,
+                    color: themeColors["#0C345D"],
+                    fontFamily: themeFonts["Poppins-SemiBold"],
+                    fontSize: "14px",
+                    paddingX: "16px",
+                    border: "1px solid #707070",
+                    borderStyle: "dashed",
+                    paddingY: "10px",
+                    borderRadius: 0,
+                  }}
+                  // onClick={handleUpdateImage}
+                >
+                  Upload New Photo
+                  <input
+                    type="file"
+                    accept="image/*"
+                    hidden
+                    // onChange={handleImageChange}
+                  />
+                </Button>
+                <Button
+                  component="label"
+                  sx={{
+                    height: 36,
+                    color: themeColors["#737373"],
+                    fontFamily: themeFonts["Poppins-SemiBold"],
+                    fontSize: "14px",
+                    paddingX: "15px",
+                    paddingY: "10px",
+                    borderRadius: 0,
+                    backgroundColor: themeColors["#D4D4D4"],
+                  }}
+                  // onClick={handleReset}
+                >
+                  Reset
+                </Button>
+              </Box>
+              <Box>
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    fontFamily: themeFonts["Poppins-SemiBold"],
+                    color: themeColors["#1B64B8"],
+                  }}
+                >
+                  ( Allowed PNG , JPG , JPEG ) ( Size : 1.0 MB )
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
           <Grid
             item
             xs={12}
@@ -230,28 +250,235 @@ export const AddNewEmployeeDialog = (props: any) => {
               gap: "20px",
             }}
           >
-            <Grid item xs={6}>
+            <Grid
+              item
+              xs={4}
+              sx={{
+                paddingRight: "0px !important",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                position: "relative",
+              }}
+            >
               <CustomFilledInput
                 autoFocus={true}
-                label="Employee Name"
+                label="UserName*"
                 type="text"
                 placeholder="Username*"
-                name="employeeName"
+                name="userName"
                 height="39px"
                 fontSize="14px"
                 border="1px solid rgb(0 0 0 / 30%)"
-                value={formManager.values.employeeName}
-                onChangeValue={(value: any) =>
-                  formManager.setFieldValue("employeeName", value)
-                }
+                value={formManager.values.userName}
+                onChangeValue={formManager.handleChange}
                 error={
-                  formManager.touched.employeeName &&
-                  Boolean(formManager.errors.employeeName)
+                  formManager.touched.userName &&
+                  Boolean(formManager.errors.userName)
                 }
                 helperText={
-                  formManager.touched.employeeName &&
-                  formManager.errors.employeeName
+                  formManager.touched.userName && formManager.errors.userName
                 }
+              />
+            </Grid>
+            <Grid
+              item
+              xs={4}
+              sx={{
+                paddingRight: "0px !important",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                position: "relative",
+              }}
+            >
+              <CustomFilledInput
+                autoFocus={true}
+                label="First Name*"
+                type="text"
+                placeholder="Harsh"
+                name="firstName"
+                height="39px"
+                fontSize="14px"
+                border="1px solid rgb(0 0 0 / 30%)"
+                value={formManager.values.firstName}
+                onChangeValue={formManager.handleChange}
+                error={
+                  formManager.touched.firstName &&
+                  Boolean(formManager.errors.firstName)
+                }
+                helperText={
+                  formManager.touched.firstName && formManager.errors.firstName
+                }
+              />
+            </Grid>
+            <Grid
+              item
+              xs={4}
+              sx={{
+                paddingRight: "0px !important",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                position: "relative",
+              }}
+            >
+              <CustomFilledInput
+                autoFocus={true}
+                label="Last Name*"
+                type="text"
+                placeholder="Roy"
+                name="lastName"
+                height="39px"
+                fontSize="14px"
+                border="1px solid rgb(0 0 0 / 30%)"
+                value={formManager.values.lastName}
+                onChangeValue={formManager.handleChange}
+                error={
+                  formManager.touched.lastName &&
+                  Boolean(formManager.errors.lastName)
+                }
+                helperText={
+                  formManager.touched.lastName && formManager.errors.lastName
+                }
+              />
+            </Grid>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              paddingRight: "0px !important",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "flex-start",
+              gap: "20px",
+            }}
+          >
+            <Grid
+              item
+              xs={6}
+              sx={{
+                paddingRight: "0px !important",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                position: "relative",
+              }}
+            >
+              <CustomSelect
+                label={"Designation"}
+                options={[
+                  { label: "Development", value: "Development" },
+                  { label: "Designing", value: "Designing" },
+                  { label: "Marketing", value: "Marketing" },
+                ]}
+                value={formManager.values.department}
+                onChange={(selectedValue: any) => {
+                  formManager.handleChange("department")(selectedValue);
+                }}
+                helperText={
+                  formManager.touched.department &&
+                  formManager.errors.department
+                }
+                name={"department"}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={6}
+              sx={{
+                paddingRight: "0px !important",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                position: "relative",
+              }}
+            >
+              <CustomFilledInput
+                autoFocus={true}
+                label="Role"
+                type="tex"
+                placeholder="Manager"
+                name="role"
+                height="39px"
+                fontSize="14px"
+                border="1px solid rgb(0 0 0 / 30%)"
+                value={formManager.values.role}
+                onChangeValue={formManager.handleChange}
+                error={
+                  formManager.touched.role && Boolean(formManager.errors.role)
+                }
+                helperText={formManager.touched.role && formManager.errors.role}
+              />
+            </Grid>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              paddingRight: "0px !important",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "flex-start",
+              gap: "20px",
+            }}
+          >
+            <Grid
+              item
+              xs={6}
+              sx={{
+                paddingRight: "0px !important",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                position: "relative",
+              }}
+            >
+              <CustomDatePicker
+                label={"Date of Birth*"}
+                format={"DD/MM/YYYY"}
+                name="birthday"
+                fontFamily="Poppins-Regular"
+                fontSize={"14px"}
+                value={dayjs(formManager.values.birthday)}
+                onChange={(selectedValue: any) => {
+                  formManager.setFieldValue(
+                    "birthday",
+                    selectedValue.format("YYYY-MM-DD")
+                  );
+                }}
+                helperText={
+                  formManager.touched.birthday && formManager.errors.birthday
+                }
+              />
+            </Grid>
+            <Grid
+              item
+              xs={6}
+              sx={{
+                paddingRight: "0px !important",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                position: "relative",
+              }}
+            >
+              <CustomSelect
+                label={"Gender"}
+                options={[
+                  { label: "Male", value: "male" },
+                  { label: "Female", value: "female" },
+                  { label: "Other", value: "Other" },
+                ]}
+                value={formManager.values.gender}
+                onChange={(selectedValue: any) => {
+                  formManager.handleChange("gender")(selectedValue);
+                }}
+                helperText={
+                  formManager.touched.gender && formManager.errors.gender
+                }
+                name={"gender"}
               />
             </Grid>
             <Grid
@@ -296,26 +523,34 @@ export const AddNewEmployeeDialog = (props: any) => {
               gap: "20px",
             }}
           >
-            <Grid item xs={6}>
+            <Grid
+              item
+              xs={6}
+              sx={{
+                paddingRight: "0px !important",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                position: "relative",
+              }}
+            >
               <CustomFilledInput
                 autoFocus={true}
-                label="Email ID"
-                type="email"
-                placeholder="@gmail.com"
-                name="emailId"
+                label="Password*"
+                type="password"
+                placeholder="password"
+                name="password"
                 height="39px"
                 fontSize="14px"
                 border="1px solid rgb(0 0 0 / 30%)"
-                value={formManager.values.emailId}
-                onChangeValue={(value: any) =>
-                  formManager.setFieldValue("emailId", value)
-                }
+                value={formManager.values.password}
+                onChangeValue={formManager.handleChange}
                 error={
-                  formManager.touched.emailId &&
-                  Boolean(formManager.errors.emailId)
+                  formManager.touched.password &&
+                  Boolean(formManager.errors.password)
                 }
                 helperText={
-                  formManager.touched.emailId && formManager.errors.emailId
+                  formManager.touched.password && formManager.errors.password
                 }
               />
             </Grid>
@@ -330,18 +565,23 @@ export const AddNewEmployeeDialog = (props: any) => {
                 position: "relative",
               }}
             >
-              <CustomSelect
-                label={"Department"}
-                options={[
-                  { label: "$ 57890", value: "$ 57890" },
-                  { label: "$ 67543", value: "$ 67543" },
-                  { label: "$ 64785", value: "$ 64785" },
-                ]}
-                value={formManager.values.department}
-                onChange={(selectedValue: any) => {
-                  formManager.handleChange("department")(selectedValue);
-                }}
-                name={"department"}
+              <CustomFilledInput
+                autoFocus={true}
+                label="Email ID*"
+                type="email"
+                placeholder="example@1.com"
+                name="email"
+                height="39px"
+                fontSize="14px"
+                border="1px solid rgb(0 0 0 / 30%)"
+                value={formManager.values.email}
+                onChangeValue={formManager.handleChange}
+                error={
+                  formManager.touched.email && Boolean(formManager.errors.email)
+                }
+                helperText={
+                  formManager.touched.email && formManager.errors.email
+                }
               />
             </Grid>
           </Grid>
@@ -351,59 +591,61 @@ export const AddNewEmployeeDialog = (props: any) => {
             sx={{
               paddingRight: "0px !important",
               display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
               alignItems: "flex-start",
-              gap: "20px",
+              position: "relative",
             }}
           >
-            <Grid item xs={6}>
-              <CustomFilledInput
-                autoFocus={true}
-                label="Contact No."
-                type="text"
-                placeholder="@gmail.com"
-                name="contactNo"
-                height="39px"
-                fontSize="14px"
-                border="1px solid rgb(0 0 0 / 30%)"
-                value={formManager.values.contactNo}
-                onChangeValue={(value: any) =>
-                  formManager.setFieldValue("contactNo", value)
-                }
-                error={
-                  formManager.touched.contactNo &&
-                  Boolean(formManager.errors.contactNo)
-                }
-                helperText={
-                  formManager.touched.contactNo && formManager.errors.contactNo
-                }
-              />
-            </Grid>
-            <Grid
-              item
-              xs={6}
+            <CustomLabel label={"Full Address*"} fontSize="14px" />
+            <TextField
+              multiline
+              rows={1.5}
+              placeholder=""
               sx={{
-                paddingRight: "0px !important",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                position: "relative",
+                "&.MuiFormControl-root.MuiTextField-root": {
+                  width: "100%",
+                },
+                "& .MuiInputBase-colorPrimary.Mui-error": {
+                  color: themeColors["#323B4B"],
+                  border: "1px solid #1C223E6E",
+                  fontSize: 14,
+                },
+                "& .MuiFormHelperText-root.Mui-error": {
+                  fontFamily: themeFonts["Poppins-Bold"],
+                  color: themeColors["#FF3939"],
+                  fontSize: 10,
+                  marginLeft: 0,
+                  position: "absolute",
+                  bottom: "-15px",
+                },
+                "& .MuiOutlinedInput-root.MuiInputBase-colorPrimary": {
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  color: themeColors["#2F353B"],
+                  fontSize: 14,
+                },
+                "& .Mui-error .MuiOutlinedInput-notchedOutline": {
+                  border: 0,
+                },
+                "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  border: "1px solid #1C223E6E",
+                },
+                "& :hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#1C223E6E",
+                },
               }}
-            >
-              <CustomSelect
-                label={"Gender"}
-                options={[
-                  { label: "Male", value: "Male" },
-                  { label: "Female", value: "female" },
-                ]}
-                value={formManager.values.gender}
-                onChange={(selectedValue: any) => {
-                  formManager.handleChange("gender")(selectedValue);
-                }}
-                name={"gender"}
-              />
-            </Grid>
+              onChange={formManager.handleChange}
+              value={formManager.values.address}
+              name="address"
+              error={
+                formManager.touched.address &&
+                Boolean(formManager.errors.address)
+              }
+              helperText={
+                formManager.touched.address && formManager.errors.address
+              }
+            />
           </Grid>
+          <EmployeeDetails />
         </DialogContent>
         <DialogActions
           sx={{
@@ -450,6 +692,6 @@ export const AddNewEmployeeDialog = (props: any) => {
           </Box>
         </DialogActions>
       </form>
-    </Dialog>
+    </Drawer>
   );
 };

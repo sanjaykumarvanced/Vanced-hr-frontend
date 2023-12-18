@@ -4,10 +4,14 @@ import { themeFonts, themeColors } from "../configs";
 import { DeleteIconSvg, EditIconSvg } from "../svgs";
 import { apiBaseUrl } from "../components/consts/api-url.const";
 import { format } from "date-fns";
-import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
+import {
+  useDeleteEmployeeDetailMutation,
+  useGetEmployeeListQuery,
+} from "../components/apis/employeeListApi";
 import { SearchComponents } from "../components/filter/search-component";
 import { useState } from "react";
 import { AddNewEmployeeDialog } from "../components/modals/add-new-employee";
+import { toast } from "react-toastify";
 
 export const AllEmployeeListTable = ({
   maxHeight,
@@ -51,6 +55,18 @@ export const AllEmployeeListTable = ({
   const { data, refetch } = useGetEmployeeListQuery();
   const [editedData, setEditedData] = useState<any>({});
   const [isOpen, setIsOpen] = useState(false);
+  const [deleteItem] = useDeleteEmployeeDetailMutation();
+  const handleDelete = async (id: number) => {
+    try {
+      const res = await deleteItem({ id }).unwrap();
+      console.log("Item successfully deleted.");
+      toast.success(res.message);
+    } catch (error: any) {
+      console.log("Error deleting item:", error);
+      toast.error(error.data.message);
+    }
+    refetch();
+  };
   const handleClose = () => {
     setIsOpen(false);
     setEditedData({});
@@ -127,48 +143,52 @@ export const AllEmployeeListTable = ({
               All Employees
             </Typography>
           </Box>
-          <SearchComponents searchTitle={"Search"} isEmpty={true} />
-          <Button
-            variant="outlined"
-            // onClick={handleSubmit}
-            // disabled={disable}
-            sx={{
-              height: 39,
-              borderRadius: "6px",
-              border: "1px solid #0C345D",
-              color: themeColors["#0C345D"],
-              fontFamily: themeFonts["Poppins-SemiBold"],
-              fontSize: "15px",
-              "&.Mui-disabled": {
-                color: themeColors["#0C345D"],
-                opacity: 0.8,
-              },
-              marginRight: "20px",
-            }}
-          >
-            Export Report
-          </Button>
-          <Button
-            variant="contained"
-            // onClick={handleSubmit}
-            // disabled={disable}
-            sx={{
-              height: 39,
-              borderRadius: "6px",
-              backgroundColor: themeColors["#0C345D"],
-              color: themeColors["#FFFFFF"],
-              fontFamily: themeFonts["Poppins-SemiBold"],
-              fontSize: "15px",
-              "&.Mui-disabled": {
-                color: themeColors["#FFFFFF"],
-                opacity: 0.8,
-              },
-              marginRight: "13px",
-            }}
-            onClick={handleOpen}
-          >
-            Add Employee
-          </Button>
+          {AllEmployees && (
+            <>
+              <SearchComponents searchTitle={"Search"} isEmpty={true} />
+              <Button
+                variant="outlined"
+                // onClick={handleSubmit}
+                // disabled={disable}
+                sx={{
+                  height: 39,
+                  borderRadius: "6px",
+                  border: "1px solid #0C345D",
+                  color: themeColors["#0C345D"],
+                  fontFamily: themeFonts["Poppins-SemiBold"],
+                  fontSize: "15px",
+                  "&.Mui-disabled": {
+                    color: themeColors["#0C345D"],
+                    opacity: 0.8,
+                  },
+                  marginRight: "20px",
+                }}
+              >
+                Export Report
+              </Button>
+              <Button
+                variant="contained"
+                // onClick={handleSubmit}
+                // disabled={disable}
+                sx={{
+                  height: 39,
+                  borderRadius: "6px",
+                  backgroundColor: themeColors["#0C345D"],
+                  color: themeColors["#FFFFFF"],
+                  fontFamily: themeFonts["Poppins-SemiBold"],
+                  fontSize: "15px",
+                  "&.Mui-disabled": {
+                    color: themeColors["#FFFFFF"],
+                    opacity: 0.8,
+                  },
+                  marginRight: "13px",
+                }}
+                onClick={handleOpen}
+              >
+                Add Employee
+              </Button>
+            </>
+          )}
         </Box>
         <Box sx={{ maxHeight: maxHeight ? maxHeight : 400, width: "100%" }}>
           <DataGrid
@@ -228,7 +248,7 @@ export const AllEmployeeListTable = ({
                         minWidth: "20px",
                         padding: "0px ",
                       }}
-                      // onClick={() => handleDelete(params.row.id)}
+                      onClick={() => handleDelete(params.row.id)}
                     >
                       <DeleteIconSvg />
                     </Button>

@@ -60,13 +60,12 @@ export const CommentSection = ({
     //   setTotalLikes(totalLikes - 1);
     // }
     try {
-      const res = await addLike({
+      await addLike({
         id,
         employee: UserId,
         image: image._id,
       }).unwrap();
       refetch();
-      //toast.success(res.message);
     } catch (error: any) {
       console.error("Error for add like on post:", error);
       toast.error(error.data.message);
@@ -80,6 +79,7 @@ export const CommentSection = ({
   const description = draftToHtml(
     convertToRaw(editorState.getCurrentContent())
   );
+  const disable = description !== "<p></p>\n" ? false : true;
   const array =
     employeeList &&
     employeeList.map((val: any) => {
@@ -235,6 +235,7 @@ export const CommentSection = ({
                 width: 40,
               }}
               onClick={handleAddComment}
+              disabled={disable}
             >
               Send
             </Button>

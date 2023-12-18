@@ -1,6 +1,6 @@
 export const TodaysLeavesTabs = [
   { label: "All", value: "ALL" },
-  { label: "Short Leave", value: "SHORT_LEAVE", },
+  { label: "Short Leave", value: "SHORT_LEAVE" },
   { label: "Half Day Leave", value: "HALF_DAY_LEAVE" },
   { label: "Full Day Leave", value: "FULL_DAY_LEAVE" },
 ];
@@ -33,13 +33,11 @@ export const FinanceTabs = [
   { label: "Manage Tax ", value: "Manage Tax" },
 ];
 
-
 export const MyPayTabs = [
   { label: "My Salary ", value: "My Salary" },
   { label: "Pay Slips ", value: "Pay Slips" },
   { label: "Income Tax ", value: "Income Tax" },
 ];
-
 
 export const Roles = [
   { key: "admin", label: "Admin" },
@@ -48,18 +46,23 @@ export const Roles = [
   { key: "hr", label: "Human Resources" },
 ];
 
-
 export const leaveOptions = [
-  { label: "Short Leave", value: "SHORT_LEAVE", },
+  { label: "Short Leave", value: "SHORT_LEAVE" },
   { label: "Half Day Leave", value: "HALF_DAY_LEAVE" },
   { label: "Full Day Leave", value: "FULL_DAY_LEAVE" },
-]
+];
 
 export const durationsOptions = [
   { label: "First Half of Day", value: "FIRST_HALF_OF_DAY" },
   { label: "Second Half of Day", value: "SECOND_HALF_OF_DAY" },
-]
+];
 
-
-
-
+export const EmployeeDetailTabs = [
+  { label: "Personal Information ", value: "personal_information" },
+  { label: "Emergency Contact ", value: "emergency_contact" },
+  { label: "Bank Information ", value: "bank_information" },
+  { label: "Education ", value: "education" },
+  { label: "Experience ", value: "experience" },
+  { label: "Documents ", value: "documents" },
+  { label: "Projects ", value: "projects" },
+];

@@ -8,27 +8,29 @@ const injectedRtkApi = api.injectEndpoints({
         };
       },
     }),
-    getEmployeeListById: builder.query<[], EmployeeListApiArg>({
-      query: (queryArg) => {
+    createNewEmployee: builder.mutation<any, Partial<EmployeeListApiArg>>({
+      query: (item) => {
         return {
-          url: `/api/employee/list/${queryArg.id}`,
+          url: `/api/employee/add-employee`,
+          method: "POST",
+          body: item,
         };
       },
     }),
-    deleteEmployeeList: builder.mutation<any, EmployeeListApiArg>({
+    updateEmployeeDetail: builder.mutation<any, Partial<EmployeeListApiArg>>({
       query: (queryArg) => {
         return {
-          url: `/api/employee/list/${queryArg.id}`,
-          method: "DELETE",
-        };
-      },
-    }),
-    updateEmployeeList: builder.mutation<any, Partial<EmployeeListApiArg>>({
-      query: (queryArg) => {
-        return {
-          url: `/api/employee/list/${queryArg.id}`,
+          url: `/api/employee/update-employee`,
           method: "PUT",
           body: queryArg,
+        };
+      },
+    }),
+    deleteEmployeeDetail: builder.mutation<any, EmployeeListApiArg>({
+      query: (queryArg) => {
+        return {
+          url: `/api/employee/delete/${queryArg.id}`,
+          method: "DELETE",
         };
       },
     }),
@@ -36,11 +38,25 @@ const injectedRtkApi = api.injectEndpoints({
 });
 export { injectedRtkApi as enhancedApi };
 
-export type EmployeeListApiArg = { id?: number };
+export type EmployeeListApiArg = {
+  id?: number;
+  userName?: any;
+  firstName?: string;
+  lastName?: string;
+  role?: string;
+  email?: string;
+  birthday?: string;
+  designation?: any;
+  gender?: string;
+  employeeId?: string;
+  password?: any;
+  dateOfJoining?: any;
+  address?: any;
+};
 
 export const {
   useGetEmployeeListQuery,
-  useGetEmployeeListByIdQuery,
-  useUpdateEmployeeListMutation,
-  useDeleteEmployeeListMutation,
+  useCreateNewEmployeeMutation,
+  useUpdateEmployeeDetailMutation,
+  useDeleteEmployeeDetailMutation,
 } = injectedRtkApi;
