@@ -138,6 +138,7 @@ export const Experience = () => {
                 name="birthday"
                 fontFamily="Poppins-Regular"
                 fontSize={"14px"}
+                disablePast
                 // value={dayjs(formManager.values.birthday)}
                 // onChange={(selectedValue: any) => {
                 //   formManager.setFieldValue(
@@ -168,6 +169,7 @@ export const Experience = () => {
                 name="birthday"
                 fontFamily="Poppins-Regular"
                 fontSize={"14px"}
+                disablePast
                 // value={dayjs(formManager.values.birthday)}
                 // onChange={(selectedValue: any) => {
                 //   formManager.setFieldValue(
@@ -184,7 +186,7 @@ export const Experience = () => {
           </Grid>
         </Grid>
         <Button
-        //   type="submit"
+          //   type="submit"
           // disabled={!formManager.isValid}
           sx={{
             height: 39,
@@ -194,7 +196,7 @@ export const Experience = () => {
             fontFamily: themeFonts["Poppins-Regular"],
             fontSize: "15px",
             "&:hover": {
-              backgroundColor: "transparent", 
+              backgroundColor: "transparent",
               color: themeColors["#0C345D"],
               border: "1px solid #0C345D",
             },

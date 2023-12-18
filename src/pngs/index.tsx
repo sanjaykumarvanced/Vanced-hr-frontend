@@ -10,6 +10,7 @@ import TotalProjects from "../assets/images/png/total-projects.png";
 import TotalClients from "../assets/images/png/total-clients.png";
 import ActiveTasks from "../assets/images/png/Active-tasks.png";
 import HolidaysPicture from "../assets/images/png/santa.png";
+import Avatar from "../assets/images/png/avatar-Img.png";
 export {
   LogBackground,
   Inbox,
@@ -23,4 +24,5 @@ export {
   TotalClients,
   ActiveTasks,
   HolidaysPicture,
+  Avatar
 };

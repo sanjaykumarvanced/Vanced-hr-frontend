@@ -32,7 +32,11 @@ export const AllEmployeeListTable = ({
       headerName: "Employee Name",
       flex: 1,
     },
-    { field: "mail", headerName: "Mail", flex: 1 },
+    {
+      field: "mail",
+      headerName: "Mail",
+      flex: 1,
+    },
     { field: "department", headerName: "Department", flex: 1 },
     { field: "joiningDate", headerName: "Joining Date", flex: 1 },
     {

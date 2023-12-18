@@ -23,6 +23,7 @@ export const CustomDatePicker = ({
   minDate,
   disabled,
   maxDate,
+  disablePast,
 }: {
   label?: any;
   width?: any;
@@ -38,6 +39,7 @@ export const CustomDatePicker = ({
   minDate?: any;
   disabled?: any;
   maxDate?: any;
+  disablePast?: any;
 }) => {
   const customDayOfWeekFormatter = (dayAbbreviation: string) => {
     const daysAbbreviations = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -100,7 +102,7 @@ export const CustomDatePicker = ({
         showDaysOutsideCurrentMonth={true}
         dayOfWeekFormatter={customDayOfWeekFormatter}
         format={`${format ? format : "MM/YY"}`}
-        disablePast
+        disablePast={disablePast ? disablePast : ""}
         minDate={minDate}
         disabled={disabled}
         maxDate={maxDate}

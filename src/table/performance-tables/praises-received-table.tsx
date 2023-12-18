@@ -162,6 +162,7 @@ export const PraisesReceivedTable = () => {
               fontFamily={"Poppins-SemiBold"}
               color={"#0C345D"}
               fontSize={"14px"}
+              disablePast
             />
           </Box>
         </Box>

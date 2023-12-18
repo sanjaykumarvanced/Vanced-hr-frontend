@@ -185,9 +185,6 @@ export const RequestLeavesDialog = (props: any) => {
       const start = dayjs(startDate);
       const end = dayjs(endDate);
 
-
-
-      
       const days = end.diff(start, "days");
       return days;
     }
@@ -430,6 +427,7 @@ export const RequestLeavesDialog = (props: any) => {
                 helperText={
                   formManager.touched.startDate && formManager.errors.startDate
                 }
+                disablePast
               />
             </Grid>
             {selectedLeaveType === "HALF_DAY_LEAVE" && (
@@ -518,6 +516,7 @@ export const RequestLeavesDialog = (props: any) => {
                     helperText={
                       formManager.touched.endDate && formManager.errors.endDate
                     }
+                    disablePast
                   />
                 </Grid>
                 <Grid item xs={4}>

@@ -384,7 +384,7 @@ export const AdminDashboard = () => {
                     }}
                   >
                     <Box sx={{ width: "100%", height: "100%" }}>
-                      {data.length ? (
+                      {data?.length ? (
                         <List
                           sx={{
                             padding: "0px",
@@ -403,109 +403,104 @@ export const AdminDashboard = () => {
                             position: "relative",
                           }}
                         >
-                          {data &&
-                            data.map((val: any, idx: number) => {
-                              const joiningDate = format(
-                                new Date(val.dateOfJoining),
-                                "dd/MM/yyyy"
-                              );
-                              const firstName = val.firstName;
-                              const lastName = val.lastName;
-                              const name = `${firstName || ""} ${
-                                lastName || ""
-                              }`;
-                              return (
-                                <>
-                                  <ListItem
+                          {data.map((val: any, idx: number) => {
+                            const joiningDate = format(
+                              new Date(val.dateOfJoining),
+                              "dd/MM/yyyy"
+                            );
+                            const firstName = val.firstName;
+                            const lastName = val.lastName;
+                            const name = `${firstName || ""} ${lastName || ""}`;
+                            return (
+                              <>
+                                <ListItem
+                                  sx={{
+                                    padding: "0px",
+                                    marginTop: "26px",
+                                    paddingLeft: "27px",
+                                    "&:after": {
+                                      content: '" "',
+                                      display: "block",
+                                      position: "absolute",
+                                      zIndex: 5,
+                                      left: "0px",
+                                      height: "14px",
+                                      width: "14px",
+                                      borderRadius: "10px",
+                                      opacity: 1,
+                                      border: " 1px solid #B9B9B9",
+                                      background: themeColors["#FFFFFF"],
+                                    },
+                                    display: "flex",
+                                  }}
+                                >
+                                  <ListItemText
                                     sx={{
-                                      padding: "0px",
-                                      marginTop: "26px",
-                                      paddingLeft: "27px",
-                                      "&:after": {
-                                        content: '" "',
-                                        display: "block",
-                                        position: "absolute",
-                                        zIndex: 5,
-                                        left: "0px",
-                                        height: "14px",
-                                        width: "14px",
-                                        borderRadius: "10px",
-                                        opacity: 1,
-                                        border: " 1px solid #B9B9B9",
-                                        background: themeColors["#FFFFFF"],
+                                      "& .MuiListItemText-primary": {
+                                        display: "flex",
+                                        gap: "10px",
+                                        fontSize: "12px",
+                                        fontFamily:
+                                          themeFonts["Poppins-Regular"],
+                                        color: themeColors["#000000"],
+                                        alignItems: "center",
                                       },
-                                      display: "flex",
+                                      width: "50%",
                                     }}
                                   >
-                                    <ListItemText
+                                    <Box
                                       sx={{
-                                        "& .MuiListItemText-primary": {
-                                          display: "flex",
-                                          gap: "10px",
-                                          fontSize: "12px",
-                                          fontFamily:
-                                            themeFonts["Poppins-Regular"],
-                                          color: themeColors["#000000"],
-                                          alignItems: "center",
-                                        },
-                                        width: "50%",
+                                        width: "30px",
+                                        height: "30px",
+                                        borderRadius: "5px",
+                                        overflow: "hidden",
+                                        alignItems: "center",
+                                        display: "flex",
+                                        justifyContent: "center",
                                       }}
                                     >
-                                      <Box
-                                        sx={{
-                                          width: "30px",
-                                          height: "30px",
-                                          borderRadius: "5px",
-                                          overflow: "hidden",
-                                          alignItems: "center",
-                                          display: "flex",
-                                          justifyContent: "center",
-                                        }}
-                                      >
-                                        <img
-                                          src={
-                                            apiBaseUrl + "/" + val.image.path
-                                          }
-                                          height={30}
-                                          width={30}
-                                          alt="USER"
-                                        />
-                                      </Box>
-                                      {name}
-                                    </ListItemText>
+                                      <img
+                                        src={apiBaseUrl + "/" + val.image.path}
+                                        height={30}
+                                        width={30}
+                                        alt="USER"
+                                      />
+                                    </Box>
+                                    {name}
+                                  </ListItemText>
 
-                                    <ListItemText
+                                  <ListItemText
+                                    sx={{
+                                      "& .MuiListItemText-primary": {
+                                        fontSize: "10px",
+                                        fontFamily:
+                                          themeFonts["Poppins-Regular"],
+                                        color: themeColors["#2B468B"],
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "4px",
+                                      },
+                                      width: "50%",
+                                      textAlign: "end",
+                                    }}
+                                  >
+                                    {val.designation}
+                                    <Typography
+                                      component={"span"}
                                       sx={{
-                                        "& .MuiListItemText-primary": {
-                                          fontSize: "10px",
-                                          fontFamily:
-                                            themeFonts["Poppins-Regular"],
-                                          color: themeColors["#2B468B"],
-                                          display: "flex",
-                                          flexDirection: "column",
-                                          gap: "4px",
-                                        },
-                                        width: "50%",
-                                        textAlign: "end",
+                                        fontSize: "8px",
+                                        fontFamily:
+                                          themeFonts["Poppins-Regular"],
+                                        color: themeColors["#8B2B5B"],
                                       }}
                                     >
-                                      {val.designation}
-                                      <Typography
-                                        component={"span"}
-                                        sx={{
-                                          fontSize: "8px",
-                                          fontFamily:
-                                            themeFonts["Poppins-Regular"],
-                                          color: themeColors["#8B2B5B"],
-                                        }}
-                                      >
-                                        Joining date : {joiningDate}
-                                      </Typography>
-                                    </ListItemText>
-                                  </ListItem>
-                                </>
-                              );
-                            })}
+                                      Joining date : {joiningDate}
+                                    </Typography>
+                                  </ListItemText>
+                                </ListItem>
+                              </>
+                            );
+                          })}
                         </List>
                       ) : (
                         <Typography

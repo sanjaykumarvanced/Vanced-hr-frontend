@@ -20,9 +20,11 @@ import dayjs from "dayjs";
 import * as Yup from "yup";
 import { useCreateNewEmployeeMutation } from "../apis/employeeListApi";
 import { toast } from "react-toastify";
-import { Profile } from "../../pngs";
+import { Avatar, Profile } from "../../pngs";
 import { CustomLabel } from "../label";
 import { EmployeeDetails } from "../../pages/admin/employee-details/employee-details";
+import { useState } from "react";
+import { useUploadImageMutation } from "../apis/imageApi";
 
 const validationSchema = Yup.object({
   userName: Yup.string().required("User Name is required"),
@@ -33,22 +35,32 @@ const validationSchema = Yup.object({
   lastName: Yup.string().required("Last Name is required"),
   password: Yup.string().required("Password is required"),
   role: Yup.string().required("Role is required"),
-  birthday: Yup.string().required("Gender is required"),
+  birthday: Yup.string().required("Date of Birth is required"),
   joiningDate: Yup.string().required("Joining Date is required"),
   department: Yup.string().required("Department is required"),
-  address: Yup.string().required("Contact No. is required"),
+  address: Yup.string().required("Address is required"),
   gender: Yup.string().required("Gender is required"),
 });
 
 export const AddNewEmployeeDialog = (props: any) => {
   debugger;
   const { onClose, open, refetch } = props;
+  const [image, setImage] = useState<any>("");
   const handleClose = () => {
     onClose();
   };
-
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
+  const handleImageChange = (e: any) => {
+    const file = e.target.files?.[0] as any;
+    setImage(file);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setSelectedImageUrl(event.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
   const [addNewEmployee] = useCreateNewEmployeeMutation();
-
+  const [mutate] = useUploadImageMutation();
   const handleSubmit = async () => {
     debugger;
 
@@ -68,6 +80,19 @@ export const AddNewEmployeeDialog = (props: any) => {
         dateOfJoining: formManager.values.joiningDate,
       }).unwrap();
       toast.success(res.message);
+      console.log(res, "res");
+
+      if (res) {
+        if (image) {
+          const formData = new FormData();
+          formData.append("image", image);
+          const uploadImg = {
+            id: res.userId,
+            image: formData,
+          } as any;
+          await mutate(uploadImg).unwrap();
+        }
+      }
     } catch (error: any) {
       console.error("Error applying for leave:", error);
       toast.error(error.data.message);
@@ -93,9 +118,7 @@ export const AddNewEmployeeDialog = (props: any) => {
       gender: "",
     },
     validationSchema,
-    onSubmit: () => {
-      handleSubmit();
-    },
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -143,7 +166,7 @@ export const AddNewEmployeeDialog = (props: any) => {
             display: "flex",
             flexDirection: "column",
             gap: "16px",
-            height: "calc(100vh - 150px)",
+            height: "calc(100vh - 116px)",
           }}
         >
           <Grid
@@ -168,7 +191,12 @@ export const AddNewEmployeeDialog = (props: any) => {
                 justifyContent: "center",
               }}
             >
-              <img src={Profile} alt="Profile Pic" height={80} width={80} />
+              <img
+                src={selectedImageUrl ? selectedImageUrl : Avatar}
+                alt="Profile Pic"
+                height={80}
+                width={80}
+              />
             </Box>
             <Box
               sx={{
@@ -201,12 +229,12 @@ export const AddNewEmployeeDialog = (props: any) => {
                   }}
                   // onClick={handleUpdateImage}
                 >
-                  Upload New Photo
+                  {image === "" ? "Upload New Photo" : "Image Uploaded"}
                   <input
                     type="file"
                     accept="image/*"
                     hidden
-                    // onChange={handleImageChange}
+                    onChange={handleImageChange}
                   />
                 </Button>
                 <Button
@@ -647,11 +675,11 @@ export const AddNewEmployeeDialog = (props: any) => {
           </Grid>
           <EmployeeDetails />
         </DialogContent>
+
         <DialogActions
           sx={{
             justifyContent: "end",
-            paddingTop: "20px",
-            paddingBottom: "26px",
+            paddingY: "10px",
             paddingX: "26px",
           }}
         >
@@ -668,7 +696,7 @@ export const AddNewEmployeeDialog = (props: any) => {
               type="submit"
               // disabled={!formManager.isValid}
               sx={{
-                height: 39,
+                height: 36,
                 borderRadius: "5px",
                 backgroundColor: themeColors["#0C345D"],
                 color: themeColors["#FFFFFF"],

@@ -33,6 +33,7 @@ export const TeamTime = () => {
           fontFamily={"Poppins-SemiBold"}
           color={"#0C345D"}
           fontSize={"15px"}
+          disablePast
         />
       </Grid>
     </>

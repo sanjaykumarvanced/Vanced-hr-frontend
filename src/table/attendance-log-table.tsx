@@ -38,8 +38,6 @@ const columns: GridColDef[] = [
 ];
 
 export const AttendanceLogTable = () => {
-
- 
   return (
     <>
       <Grid
@@ -109,6 +107,7 @@ export const AttendanceLogTable = () => {
               fontFamily={"Poppins-SemiBold"}
               color={"#0C345D"}
               fontSize={"14px"}
+              disablePast
             />
           </Box>
         </Box>
