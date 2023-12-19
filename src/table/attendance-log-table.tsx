@@ -151,7 +151,7 @@ export const AttendanceLogTable = () => {
                   <Typography
                     sx={{
                       fontFamily: themeFonts["Poppins-Regular"],
-                      fontSize: "12px",
+                      fontSize: "14px",
                       color:
                         params.value === "Approved"
                           ? themeColors["#42971B"]

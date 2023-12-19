@@ -59,7 +59,7 @@ export const EmployeeDetails = () => {
             maxHeight: "34px",
           }}
         >
-          {EmployeeDetailTabs.map((val) => (
+          {EmployeeDetailTabs.map((val, ind) => (
             <>
               <CustomTab
                 sx={styles.tabsButtons}
@@ -67,6 +67,7 @@ export const EmployeeDetails = () => {
                 onChange={handleChange}
                 value={val.value}
                 value1={value}
+                key={ind}
               />
             </>
           ))}
@@ -79,6 +80,7 @@ export const EmployeeDetails = () => {
             sx={styles.tabPanel}
             value={tabs.value}
             value1={value}
+            key={ind}
           >
             {value === "personal_information" && <PersonalInfo />}
             {value === "emergency_contact" && <EmergencyContact />}

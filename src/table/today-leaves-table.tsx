@@ -104,7 +104,7 @@ export const OnTodayLeaveTable = ({ minHeight }: { minHeight?: any }) => {
                   <Typography
                     sx={{
                       fontFamily: themeFonts["Poppins-Regular"],
-                      fontSize: "12px",
+                      fontSize: "14px",
                       color: themeColors["#000000"],
                       display: "flex",
                       alignItems: "center",
@@ -123,7 +123,7 @@ export const OnTodayLeaveTable = ({ minHeight }: { minHeight?: any }) => {
                   <Typography
                     sx={{
                       fontFamily: themeFonts["Poppins-Regular"],
-                      fontSize: "12px",
+                      fontSize: "14px",
                       color:
                         params.value === "Approved"
                           ? themeColors["#42971B"]
