@@ -240,101 +240,104 @@ export const CommentSection = ({
               Send
             </Button>
           </Box>
-          {data.comment?.map((val: any, idx: any) => {
-            let html = val.text;
-            return (
-              <List
-                sx={{
-                  listStyle: "none",
-                  padding: 0,
-                }}
-              >
-                <>
-                  <ListItem
-                    sx={{
-                      fontFamily: themeFonts["Poppins-SemiBold"],
-                      fontSize: "14px",
-                      color: themeColors["#0C345D"],
-                      paddingBottom: "10px",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "start",
-                    }}
-                  >
-                    <Box
+          {data.comment
+            ?.slice()
+            .reverse()
+            .map((val: any, idx: any) => {
+              let html = val.text;
+              return (
+                <List
+                  sx={{
+                    listStyle: "none",
+                    padding: 0,
+                  }}
+                >
+                  <>
+                    <ListItem
                       sx={{
+                        fontFamily: themeFonts["Poppins-SemiBold"],
+                        fontSize: "14px",
+                        color: themeColors["#0C345D"],
+                        paddingBottom: "10px",
                         display: "flex",
-                        justifyContent: "space-between",
+                        flexDirection: "column",
+                        alignItems: "start",
                       }}
                     >
                       <Box
                         sx={{
                           display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
+                          justifyContent: "space-between",
                         }}
                       >
                         <Box
                           sx={{
-                            height: 30,
-                            width: 30,
-                            borderRadius: "5px",
-                            overflow: "hidden",
-                          }}
-                        >
-                          <img
-                            src={apiBaseUrl + "/" + val.image.path}
-                            height={30}
-                            width={30}
-                            alt="pic"
-                          />
-                        </Box>
-                        <Box
-                          sx={{
                             display: "flex",
                             alignItems: "center",
-                            gap: "7px",
+                            gap: "10px",
                           }}
                         >
-                          <Typography
+                          <Box
                             sx={{
-                              fontFamily: themeFonts["Poppins-SemiBold"],
-                              fontSize: "12px",
-                              color: themeColors["#000000"],
+                              height: 30,
+                              width: 30,
+                              borderRadius: "5px",
+                              overflow: "hidden",
                             }}
                           >
-                            {val.employee.firstName}
-                            {val.employee.lastName}
-                          </Typography>
-                          <Typography
+                            <img
+                              src={apiBaseUrl + "/" + val.image.path}
+                              height={30}
+                              width={30}
+                              alt="pic"
+                            />
+                          </Box>
+                          <Box
                             sx={{
-                              fontFamily: themeFonts["Poppins-Regular"],
-                              fontSize: "10px",
-                              color: themeColors["#9E9E9E"],
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "7px",
                             }}
                           >
-                            (
-                            {moment
-                              .utc(val.date)
-                              .local()
-                              .startOf("seconds")
-                              .fromNow()}
-                            )
-                          </Typography>
+                            <Typography
+                              sx={{
+                                fontFamily: themeFonts["Poppins-SemiBold"],
+                                fontSize: "12px",
+                                color: themeColors["#000000"],
+                              }}
+                            >
+                              {val.employee.firstName}
+                              {val.employee.lastName}
+                            </Typography>
+                            <Typography
+                              sx={{
+                                fontFamily: themeFonts["Poppins-Regular"],
+                                fontSize: "10px",
+                                color: themeColors["#9E9E9E"],
+                              }}
+                            >
+                              (
+                              {moment
+                                .utc(val.date)
+                                .local()
+                                .startOf("seconds")
+                                .fromNow()}
+                              )
+                            </Typography>
+                          </Box>
                         </Box>
                       </Box>
-                    </Box>
-                    <Box sx={{ paddingLeft: "40px" }}>
-                      <div
-                        className="comment"
-                        dangerouslySetInnerHTML={{ __html: html }}
-                      />
-                    </Box>
-                  </ListItem>
-                </>
-              </List>
-            );
-          })}
+                      <Box sx={{ paddingLeft: "40px" }}>
+                        <div
+                          className="comment"
+                          dangerouslySetInnerHTML={{ __html: html }}
+                        />
+                      </Box>
+                    </ListItem>
+                  </>
+                </List>
+              );
+            })}
         </Box>
       )}
     </>
