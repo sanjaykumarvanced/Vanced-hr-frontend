@@ -14,7 +14,7 @@ export const SidebarMenuHeader = ({ open }: { open?: any }) => {
       }}
     >
       {!open ? (
-        <Logo1Svg />
+        <Logo1Svg height={30} />
       ) : (
         <Typography
           sx={{
