@@ -194,7 +194,12 @@ export const AllEmployeeListTable = ({
             </>
           )}
         </Box>
-        <Box sx={{ height: maxHeight ? maxHeight : 560, width: "100%" }}>
+        <Box
+          sx={{
+            height: maxHeight ? maxHeight : 560,
+            width: "100%",
+          }}
+        >
           <DataGrid
             rows={rows || []}
             columns={columns.map((col) => ({
@@ -300,6 +305,7 @@ export const AllEmployeeListTable = ({
             sx={{
               border: 0,
               paddingY: 2,
+              "& .MuiDataGrid-virtualScroller": { overflowX: "hidden" },
             }}
           />
         </Box>
