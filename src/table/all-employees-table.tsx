@@ -194,7 +194,7 @@ export const AllEmployeeListTable = ({
             </>
           )}
         </Box>
-        <Box sx={{ maxHeight: maxHeight ? maxHeight : 400, width: "100%" }}>
+        <Box sx={{ maxHeight: maxHeight ? maxHeight : 560, width: "100%" }}>
           <DataGrid
             rows={rows || []}
             columns={columns.map((col) => ({
