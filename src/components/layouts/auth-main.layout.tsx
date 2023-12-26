@@ -7,7 +7,7 @@ interface AuthMainLayoutProps {
 }
 
 export const AuthMainLayout: FC<AuthMainLayoutProps> = (props) => {
-  const { children } = props;
+  const { children} = props;
   return (
     <Box
       component="main"

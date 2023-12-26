@@ -1,3 +1,9 @@
+import { BankInformation } from "../../pages/admin/employee-details/bank-information";
+import { Education } from "../../pages/admin/employee-details/education";
+import { EmergencyContact } from "../../pages/admin/employee-details/emergency-contact";
+import { Experience } from "../../pages/admin/employee-details/experience";
+import { PersonalInfo } from "../../pages/admin/employee-details/personal-info";
+
 export const TodaysLeavesTabs = [
   { label: "All", value: "ALL" },
   { label: "Short Leave", value: "SHORT_LEAVE" },
@@ -58,11 +64,23 @@ export const durationsOptions = [
 ];
 
 export const EmployeeDetailTabs = [
-  { label: "Personal Information ", value: "personal_information" },
-  { label: "Emergency Contact ", value: "emergency_contact" },
-  { label: "Bank Information ", value: "bank_information" },
-  { label: "Education ", value: "education" },
-  { label: "Experience ", value: "experience" },
-  { label: "Documents ", value: "documents" },
-  { label: "Projects ", value: "projects" },
+  {
+    label: "Personal Information ",
+    value: "personal_information",
+    tabContent: <PersonalInfo />,
+  },
+  {
+    label: "Emergency Contact ",
+    value: "emergency_contact",
+    tabContent: <EmergencyContact />,
+  },
+  {
+    label: "Bank Information ",
+    value: "bank_information",
+    tabContent: <BankInformation />,
+  },
+  { label: "Education ", value: "education", tabContent: <Education /> },
+  { label: "Experience ", value: "experience", tabContent: <Experience /> },
+  { label: "Documents ", value: "documents", tabContent: <></> },
+  { label: "Projects ", value: "projects", tabContent: <></> },
 ];

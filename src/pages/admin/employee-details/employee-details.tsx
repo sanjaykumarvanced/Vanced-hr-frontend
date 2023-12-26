@@ -60,7 +60,6 @@ export const EmployeeDetails = () => {
           }}
         >
           {EmployeeDetailTabs.map((val, ind) => (
-            <>
               <CustomTab
                 sx={styles.tabsButtons}
                 label={val.label}
@@ -69,7 +68,6 @@ export const EmployeeDetails = () => {
                 value1={value}
                 key={ind}
               />
-            </>
           ))}
         </Box>
       </Grid>
@@ -82,13 +80,7 @@ export const EmployeeDetails = () => {
             value1={value}
             key={ind}
           >
-            {value === "personal_information" && <PersonalInfo />}
-            {value === "emergency_contact" && <EmergencyContact />}
-            {value === "bank_information" && <BankInformation />}
-            {value === "education" && <Education />}
-            {value === "experience" && <Experience />}
-            {value === "documents" && <></>}
-            {value === "projects" && <></>}
+            {tabs.tabContent}
           </CustomTabsPanel>
         ))}
       </Box>

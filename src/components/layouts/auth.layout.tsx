@@ -1,10 +1,10 @@
-import { Outlet } from 'react-router-dom';
-import { Box} from '@mui/material';
+import { Outlet } from "react-router-dom";
+import { Box } from "@mui/material";
 
-import { AuthLeftSidebarLayout } from './auth-left-sidebar.layout';
-import { AuthMainLayout } from './auth-main.layout';
-import { AuthHeaderLayout } from './auth-header-layout';
-import { useState } from 'react';
+import { AuthLeftSidebarLayout } from "./auth-left-sidebar.layout";
+import { AuthMainLayout } from "./auth-main.layout";
+import { AuthHeaderLayout } from "./auth-header-layout";
+import { useState } from "react";
 
 export const AuthLayout = () => {
   const [open, setOpen] = useState(false);
@@ -17,7 +17,7 @@ export const AuthLayout = () => {
     setOpen(false);
   };
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <AuthHeaderLayout
         handleDrawerOpen={handleDrawerOpen}
         handleDrawerClose={handleDrawerClose}
@@ -29,7 +29,6 @@ export const AuthLayout = () => {
       <AuthMainLayout>
         <Outlet />
       </AuthMainLayout>
-      
     </Box>
   );
 };
