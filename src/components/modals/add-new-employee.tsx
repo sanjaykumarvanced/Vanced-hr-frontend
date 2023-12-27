@@ -742,9 +742,28 @@ export const AddNewEmployeeDialog = (props: any) => {
             }}
           >
             <Button
+              sx={{
+                width: 117,
+                height: 36,
+                borderRadius: "5px",
+                border: "1px solid #0C345D",
+                color: themeColors["#0C345D"],
+                fontFamily: themeFonts["Poppins-Regular"],
+                fontSize: "15px",
+                "&:hover": {
+                  backgroundColor: themeColors["#0C345D"],
+                  color: themeColors["#FFFFFF"],
+                },
+              }}
+              onClick={handleClose}
+            >
+              Cancel
+            </Button>
+            <Button
               type="submit"
               // disabled={!formManager.isValid}
               sx={{
+                width: 117,
                 height: 36,
                 borderRadius: "5px",
                 backgroundColor: themeColors["#0C345D"],
@@ -760,7 +779,6 @@ export const AddNewEmployeeDialog = (props: any) => {
                   color: themeColors["#FFFFFF"],
                   opacity: 0.8,
                 },
-                paddingX: "40px",
               }}
               // onClick={handleSubmit}
             >
