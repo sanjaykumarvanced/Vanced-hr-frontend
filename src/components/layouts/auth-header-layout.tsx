@@ -187,7 +187,7 @@ export const AuthHeaderLayout = ({
                     textAlign: "center",
                   }}
                 >
-                  {user[0].firstName} {user[0].lastName}
+                  {user[0].firstName || ""} {user[0].lastName || ""}
                 </Typography>
               </Box>
 

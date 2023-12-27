@@ -6,11 +6,6 @@ import {
   CustomTabsPanel,
 } from "../../../components/tabs/custom-tabs";
 import { themeFonts, themeColors } from "../../../configs";
-import { PersonalInfo } from "./personal-info";
-import { EmergencyContact } from "./emergency-contact";
-import { BankInformation } from "./bank-information";
-import { Education } from "./education";
-import { Experience } from "./experience";
 export const getStyles = () => {
   return {
     tabsButtons: {

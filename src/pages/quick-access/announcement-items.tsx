@@ -13,7 +13,7 @@ import {
 } from "../../components/apis/addAnnouncementsApi";
 import { apiBaseUrl } from "../../components/consts/api-url.const";
 import moment from "moment";
-import {  DeleteIconSvg} from "../../svgs";
+import { DeleteIconSvg } from "../../svgs";
 import { CommentSection } from "../../components/comments-section/comments-section";
 import { toast } from "react-toastify";
 
@@ -108,7 +108,8 @@ export const AnnouncementsItem = ({
                                   color: themeColors["#000000"],
                                 }}
                               >
-                                {val.employee.firstName} {val.employee.lastName}
+                                {val.employee.firstName || ""}{" "}
+                                {val.employee.lastName || ""}
                               </Typography>
                               <Typography
                                 sx={{

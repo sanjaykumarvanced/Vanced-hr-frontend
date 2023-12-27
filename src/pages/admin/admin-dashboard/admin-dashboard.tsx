@@ -584,21 +584,26 @@ export const AdminDashboard = () => {
                         color: themeColors["rgb(255 255 255 / 60%)"],
                       }}
                     >
-                      {new Date(upcomingHoliday?.startDate).toLocaleString(
-                        "en-us",
-                        {
-                          weekday: "short",
-                        }
-                      )}{" "}
-                      ,{" "}
-                      {new Date(upcomingHoliday?.startDate).toLocaleString(
-                        "en-us",
-                        {
-                          month: "short",
-                          year: "numeric",
-                          day: "numeric",
-                        }
+                      {upcomingHoliday && (
+                        <>
+                          {new Date(upcomingHoliday?.startDate).toLocaleString(
+                            "en-us",
+                            {
+                              weekday: "short",
+                            }
+                          )}{" "}
+                          ,{" "}
+                          {new Date(upcomingHoliday?.startDate).toLocaleString(
+                            "en-us",
+                            {
+                              month: "short",
+                              year: "numeric",
+                              day: "numeric",
+                            }
+                          )}
+                        </>
                       )}
+
                       {/* Tue , 24 Oct , 2023 */}
                     </Typography>
                   </Box>

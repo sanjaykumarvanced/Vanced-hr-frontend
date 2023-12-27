@@ -114,7 +114,7 @@ export const ProfileMenu = ({
                       paddingLeft: "14px",
                     }}
                   >
-                    {user[0].firstName} {user[0].lastName}
+                    {user[0].firstName || ""} {user[0].lastName || ""}
                   </Typography>
                 </Box>
                 <Divider sx={{ width: "100%", paddingTop: "8px" }} />

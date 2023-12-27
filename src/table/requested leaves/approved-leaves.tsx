@@ -115,7 +115,9 @@ export const ApprovedLeaves = ({
   }
   const rows = data.map((item: any) => ({
     id: item._id,
-    employeeName: `${item.employee.firstName} ${item.employee.lastName}`,
+    employeeName: `${item.employee.firstName || ""} ${
+      item.employee.lastName || ""
+    }`,
     date: format(new Date(item.startDate), "dd/MM/yyyy"),
     startTime: new Date(item.startTime).toLocaleTimeString("en-US", {
       hour12: true,

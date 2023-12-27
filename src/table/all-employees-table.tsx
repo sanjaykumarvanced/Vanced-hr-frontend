@@ -95,13 +95,20 @@ export const AllEmployeeListTable = ({
 
     return {
       id: item._id,
-      employeeName: `${item.firstName} ${item.lastName}`,
+      employeeId: item.employeeId,
+      employeeName: `${item.firstName || ""} ${item.lastName || ""}`,
+      firstName: item.firstName,
+      lastName: item.lastName,
+      userName: item.userName,
+      role: item.role,
       mail: item.email,
+      birthday: format(new Date(item.birthday), "dd/MM/yyyy"),
       department: item.designation,
       contactNo: contactNo ? contactNo : "-",
       joiningDate: format(new Date(item.dateOfJoining), "dd/MM/yyyy"),
       gender: item.gender,
       image: item.image.path,
+      address: item.address,
     };
   });
   console.log(data);

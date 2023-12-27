@@ -24,7 +24,7 @@ export const ClientsListTable = ({ minHeight }: { minHeight?: any }) => {
 
   const rows = data.map((item: any) => ({
     id: item._id,
-    clientName: `${item.firstName} ${item.lastName}`,
+    clientName: `${item.firstName || ""} ${item.lastName || ""}`,
     mail: item.mail,
     dueDate: format(new Date(item.dueDate), "dd/MM/yyyy"),
     amount: item.money,

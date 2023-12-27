@@ -18,7 +18,10 @@ import { CustomDatePicker } from "../calendar/custom-date-picker";
 import { useFormik } from "formik";
 import dayjs from "dayjs";
 import * as Yup from "yup";
-import { useCreateNewEmployeeMutation } from "../apis/employeeListApi";
+import {
+  useCreateNewEmployeeMutation,
+  useUpdateEmployeeDetailMutation,
+} from "../apis/employeeListApi";
 import { toast } from "react-toastify";
 import { Avatar, Profile } from "../../pngs";
 import { CustomLabel } from "../label";
@@ -33,7 +36,7 @@ const validationSchema = Yup.object({
     .required("Email is required"),
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
-  password: Yup.string().required("Password is required"),
+  // password: Yup.string().required("Password is required"),
   role: Yup.string().required("Role is required"),
   birthday: Yup.string().required("Date of Birth is required"),
   joiningDate: Yup.string().required("Joining Date is required"),
@@ -44,7 +47,7 @@ const validationSchema = Yup.object({
 
 export const AddNewEmployeeDialog = (props: any) => {
   debugger;
-  const { onClose, open, refetch } = props;
+  const { onClose, open, refetch, editedData } = props;
   const [image, setImage] = useState<any>("");
   const handleClose = () => {
     onClose();
@@ -61,61 +64,107 @@ export const AddNewEmployeeDialog = (props: any) => {
   };
   const [addNewEmployee] = useCreateNewEmployeeMutation();
   const [mutate] = useUploadImageMutation();
+  const [updateEmployeeDetail] = useUpdateEmployeeDetailMutation();
+  const parseDateString = (dateString: any) => {
+    const [day, month, year] = dateString.split("/");
+    return new Date(`${year}-${month}-${day}`);
+  };
   const handleSubmit = async () => {
     debugger;
-
-    try {
-      const res = await addNewEmployee({
-        userName: formManager.values.userName,
-        firstName: formManager.values.firstName,
-        lastName: formManager.values.lastName,
-        password: formManager.values.password,
-        role: formManager.values.role,
-        email: formManager.values.email,
-        birthday: formManager.values.birthday,
-        designation: formManager.values.department,
-        gender: formManager.values.gender,
-        employeeId: formManager.values.employeeId,
-        address: formManager.values.address,
-        dateOfJoining: formManager.values.joiningDate,
-      }).unwrap();
-      toast.success(res.message);
-      console.log(res, "res");
-
-      if (res) {
-        if (image) {
-          const formData = new FormData();
-          formData.append("image", image);
-          const uploadImg = {
-            id: res.userId,
-            image: formData,
-          } as any;
-          await mutate(uploadImg).unwrap();
+    const passwordChanged = formManager.values.password !== "";
+    if (editedData?.action === "edit") {
+      try {
+        const payload: any = {
+          id: formManager.values.id,
+          userName: formManager.values.userName,
+          firstName: formManager.values.firstName,
+          lastName: formManager.values.lastName,
+          role: formManager.values.role,
+          email: formManager.values.mail,
+          birthday: formManager.values.birthday,
+          designation: formManager.values.department,
+          gender: formManager.values.gender,
+          employeeId: formManager.values.employeeId,
+          address: formManager.values.address,
+          dateOfJoining: formManager.values.joiningDate,
+        };
+        if (passwordChanged) {
+          payload.password = formManager.values.password;
         }
+        const response = await updateEmployeeDetail(payload).unwrap();
+        toast.success(response.message);
+        if (response) {
+          if (image) {
+            const formData = new FormData();
+            formData.append("image", image);
+            const uploadImg = {
+              id: response.userId,
+              image: formData,
+            } as any;
+            await mutate(uploadImg).unwrap();
+          }
+        }
+      } catch (error: any) {
+        console.error("Error applying for leave:", error);
+        toast.error(error.data.message);
       }
-    } catch (error: any) {
-      console.error("Error applying for leave:", error);
-      toast.error(error.data.message);
+    } else {
+      try {
+        const res = await addNewEmployee({
+          userName: formManager.values.userName,
+          firstName: formManager.values.firstName,
+          lastName: formManager.values.lastName,
+          // password: formManager.values.password,
+          role: formManager.values.role,
+          email: formManager.values.mail,
+          birthday: formManager.values.birthday,
+          designation: formManager.values.department,
+          gender: formManager.values.gender,
+          employeeId: formManager.values.employeeId,
+          address: formManager.values.address,
+          dateOfJoining: formManager.values.joiningDate,
+        }).unwrap();
+        toast.success(res.message);
+        console.log(res, "res");
+
+        if (res) {
+          if (image) {
+            const formData = new FormData();
+            formData.append("image", image);
+            const uploadImg = {
+              id: res.userId,
+              image: formData,
+            } as any;
+            await mutate(uploadImg).unwrap();
+          }
+        }
+      } catch (error: any) {
+        console.error("Error applying for leave:", error);
+        toast.error(error.data.message);
+      }
     }
     onClose();
-
     refetch();
   };
   const formManager: any = useFormik({
     initialValues: {
-      id: "",
-      employeeId: "",
-      userName: "",
-      firstName: "",
-      lastName: "",
-      role: "",
-      password: "",
-      birthday: "",
-      email: "",
-      joiningDate: null,
-      department: "",
-      address: "",
-      gender: "",
+      id: editedData?.id || "",
+      employeeId: editedData?.employeeId || "",
+      userName: editedData?.userName || "",
+      firstName: editedData?.firstName || "",
+      lastName: editedData?.lastName || "",
+      role: editedData?.role || "",
+      password: editedData?.password || "",
+      birthday: editedData?.birthday
+        ? parseDateString(editedData.birthday)
+        : null,
+      email: editedData?.mail || "",
+      joiningDate: editedData?.joiningDate
+        ? parseDateString(editedData.joiningDate)
+        : null,
+      department: editedData?.department || "",
+      address: editedData?.address || "",
+      gender: editedData?.gender || "",
     },
     validationSchema,
     onSubmit: handleSubmit,
