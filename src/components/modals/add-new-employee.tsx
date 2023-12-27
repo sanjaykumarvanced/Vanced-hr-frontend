@@ -27,7 +27,11 @@ import { Avatar, Profile } from "../../pngs";
 import { CustomLabel } from "../label";
 import { EmployeeDetails } from "../../pages/admin/employee-details/employee-details";
 import { useState } from "react";
-import { useUpdateImageMutation, useUploadImageMutation } from "../apis/imageApi";
+import {
+  useUpdateImageMutation,
+  useUploadImageMutation,
+} from "../apis/imageApi";
+import { apiBaseUrl } from "../consts/api-url.const";
 
 const validationSchema = Yup.object({
   userName: Yup.string().required("User Name is required"),
@@ -242,7 +246,13 @@ export const AddNewEmployeeDialog = (props: any) => {
               }}
             >
               <img
-                src={selectedImageUrl ? selectedImageUrl : Avatar}
+                src={
+                  selectedImageUrl
+                    ? selectedImageUrl
+                    : editedData.action === "edit"
+                    ? apiBaseUrl + "/" + editedData.image
+                    : Avatar
+                }
                 alt="Profile Pic"
                 height={80}
                 width={80}
