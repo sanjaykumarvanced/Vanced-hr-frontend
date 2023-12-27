@@ -17,6 +17,15 @@ const injectedRtkApi = api.injectEndpoints({
         };
       },
     }),
+    updateImage: builder.mutation<any, Partial<ImageApiArg>>({
+      query: (queryArg) => {
+        return {
+          url: `/api/image/update/${queryArg.id}`,
+          method: "PUT",
+          body: queryArg?.image,
+        };
+      },
+    }),
   }),
 });
 export { injectedRtkApi as enhancedApi };
@@ -26,5 +35,8 @@ export type ImageApiArg = {
   image?: FormData;
 };
 
-export const { useGetImageQuery, useUploadImageMutation } =
-  injectedRtkApi;
+export const {
+  useGetImageQuery,
+  useUploadImageMutation,
+  useUpdateImageMutation,
+} = injectedRtkApi;

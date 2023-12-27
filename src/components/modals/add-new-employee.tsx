@@ -27,7 +27,7 @@ import { Avatar, Profile } from "../../pngs";
 import { CustomLabel } from "../label";
 import { EmployeeDetails } from "../../pages/admin/employee-details/employee-details";
 import { useState } from "react";
-import { useUploadImageMutation } from "../apis/imageApi";
+import { useUpdateImageMutation, useUploadImageMutation } from "../apis/imageApi";
 
 const validationSchema = Yup.object({
   userName: Yup.string().required("User Name is required"),
@@ -64,6 +64,7 @@ export const AddNewEmployeeDialog = (props: any) => {
   };
   const [addNewEmployee] = useCreateNewEmployeeMutation();
   const [mutate] = useUploadImageMutation();
+  const [updateImage] = useUpdateImageMutation();
   const [updateEmployeeDetail] = useUpdateEmployeeDetailMutation();
   const parseDateString = (dateString: any) => {
     const [day, month, year] = dateString.split("/");
@@ -98,10 +99,10 @@ export const AddNewEmployeeDialog = (props: any) => {
             const formData = new FormData();
             formData.append("image", image);
             const uploadImg = {
-              id: response.userId,
+              id: formManager.values.id,
               image: formData,
             } as any;
-            await mutate(uploadImg).unwrap();
+            await updateImage(uploadImg).unwrap();
           }
         }
       } catch (error: any) {
