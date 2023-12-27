@@ -114,7 +114,7 @@ export const AddNewEmployeeDialog = (props: any) => {
           userName: formManager.values.userName,
           firstName: formManager.values.firstName,
           lastName: formManager.values.lastName,
-          // password: formManager.values.password,
+          password: formManager.values.password,
           role: formManager.values.role,
           email: formManager.values.mail,
           birthday: formManager.values.birthday,
