@@ -77,6 +77,39 @@ export const AddNewEmployeeDialog = (props: any) => {
   const handleSubmit = async () => {
     debugger;
     const passwordChanged = formManager.values.password !== "";
+    const personalInformationData = {
+      telephones: formManager.values.telephones !== "",
+      nationality: formManager.values.nationality !== "",
+      maritalStatus: formManager.values.maritalStatus !== "",
+      // religion: formManager.values.religion,
+    };
+    const bankInformationDetails =
+      formManager.values.bankInformation.bankName !== "" ||
+      formManager.values.bankInformation.bankAccountNumber !== "" ||
+      formManager.values.bankInformation.ifscCode !== "" ||
+      formManager.values.bankInformation.panNo !== "";
+
+    const emergencyContactsData =
+      formManager.values.emergencyContact.primary.name !== "" ||
+      formManager.values.emergencyContact.primary.relationship !== "" ||
+      formManager.values.emergencyContact.primary.phone !== "" ||
+      formManager.values.emergencyContact.secondary.name !== "" ||
+      formManager.values.emergencyContact.secondary.relationship !== "" ||
+      formManager.values.emergencyContact.secondary.phone !== "";
+
+    const education = formManager.values.education?.map((edu: any) => ({
+      institution: edu.institution,
+      degree: edu.degree,
+      fieldOfStudy: edu.fieldOfStudy,
+      startYear: edu.startYear,
+      endYear: edu.endYear,
+    }));
+    const experience = formManager.values.experience?.map((exp: any) => ({
+      jobTitle: exp.jobTitle,
+      companyName: exp.companyName,
+      startDate: exp.startDate,
+      endDate: exp.endDate,
+    }));
     if (editedData?.action === "edit") {
       try {
         const payload: any = {
@@ -92,49 +125,25 @@ export const AddNewEmployeeDialog = (props: any) => {
           employeeId: formManager.values.employeeId,
           address: formManager.values.address,
           dateOfJoining: formManager.values.joiningDate,
-          personalInformation: {
-            telephones: formManager.values.telephones,
-            nationality: formManager.values.nationality,
-            // religion: formManager.values.religion,
-            maritalStatus: formManager.values.maritalStatus,
-          },
-          emergencyContact: {
-            primary: {
-              name: formManager.values.emergencyContact.primary.name,
-              relationship:
-                formManager.values.emergencyContact.primary.relationship,
-              phone: formManager.values.emergencyContact.primary.phone,
-            },
-            secondary: {
-              name: formManager.values.emergencyContact.secondary.name,
-              relationship:
-                formManager.values.emergencyContact.secondary.relationship,
-              phone: formManager.values.emergencyContact.secondary.phone,
-            },
-          },
-          bankInformation: {
-            bankName: formManager.values.bankInformation.bankName,
-            bankAccountNumber:
-              formManager.values.bankInformation.bankAccountNumber,
-            ifscCode: formManager.values.bankInformation.ifscCode,
-            panNo: formManager.values.bankInformation.panNo,
-          },
-          education: formManager.values.education?.map((edu: any) => ({
-            institution: edu.institution,
-            degree: edu.degree,
-            fieldOfStudy: edu.fieldOfStudy,
-            startYear: edu.startYear,
-            endYear: edu.endYear,
-          })),
-          experience: formManager.values.experience?.map((exp: any) => ({
-            jobTitle: exp.jobTitle,
-            companyName: exp.companyName,
-            startDate: exp.startDate,
-            endDate: exp.endDate,
-          })),
         };
         if (passwordChanged) {
           payload.password = formManager.values.password;
+        }
+        if (personalInformationData) {
+          payload.personalInformation = formManager.values.personalInformation;
+        }
+        if (emergencyContactsData) {
+          payload.emergencyContact = formManager.values.emergencyContact;
+        }
+        if (bankInformationDetails) {
+          payload.bankInformation = formManager.values.bankInformation;
+        }
+
+        if (education.length !== 0) {
+          payload.education = formManager.values.education;
+        }
+        if (experience.length !== 0) {
+          payload.experience = formManager.values.experience;
         }
         const response = await updateEmployeeDetail(payload).unwrap();
         toast.success(response.message);
@@ -155,7 +164,7 @@ export const AddNewEmployeeDialog = (props: any) => {
       }
     } else {
       try {
-        const res = await addNewEmployee({
+        const addEmployee: any = {
           userName: formManager.values.userName,
           firstName: formManager.values.firstName,
           lastName: formManager.values.lastName,
@@ -168,47 +177,25 @@ export const AddNewEmployeeDialog = (props: any) => {
           employeeId: formManager.values.employeeId,
           address: formManager.values.address,
           dateOfJoining: formManager.values.joiningDate,
-          personalInformation: {
-            telephones: formManager.values.telephones,
-            nationality: formManager.values.nationality,
-            // religion: formManager.values.religion,
-            maritalStatus: formManager.values.maritalStatus,
-          },
-          emergencyContact: {
-            primary: {
-              name: formManager.values.emergencyContact.primary.name,
-              relationship:
-                formManager.values.emergencyContact.primary.relationship,
-              phone: formManager.values.emergencyContact.primary.phone,
-            },
-            secondary: {
-              name: formManager.values.emergencyContact.secondary.name,
-              relationship:
-                formManager.values.emergencyContact.secondary.relationship,
-              phone: formManager.values.emergencyContact.secondary.phone,
-            },
-          },
-          bankInformation: {
-            bankName: formManager.values.bankInformation.bankName,
-            bankAccountNumber:
-              formManager.values.bankInformation.bankAccountNumber,
-            ifscCode: formManager.values.bankInformation.ifscCode,
-            panNo: formManager.values.bankInformation.panNo,
-          },
-          education: formManager.values.education?.map((edu: any) => ({
-            institution: edu.institution,
-            degree: edu.degree,
-            fieldOfStudy: edu.fieldOfStudy,
-            startYear: edu.startYear,
-            endYear: edu.endYear,
-          })),
-          experience: formManager.values.experience?.map((exp: any) => ({
-            jobTitle: exp.jobTitle,
-            companyName: exp.companyName,
-            startDate: exp.startDate,
-            endDate: exp.endDate,
-          })),
-        }).unwrap();
+        };
+        if (personalInformationData) {
+          addEmployee.personalInformation =
+            formManager.values.personalInformation;
+        }
+        if (emergencyContactsData) {
+          addEmployee.emergencyContact = formManager.values.emergencyContact;
+        }
+        if (bankInformationDetails) {
+          addEmployee.bankInformation = formManager.values.bankInformation;
+        }
+
+        if (education.length !== 0) {
+          addEmployee.education = formManager.values.education;
+        }
+        if (experience.length !== 0) {
+          addEmployee.experience = formManager.values.experience;
+        }
+        const res = await addNewEmployee(addEmployee).unwrap();
         toast.success(res.message);
         console.log(res, "res");
 
@@ -604,7 +591,21 @@ export const AddNewEmployeeDialog = (props: any) => {
                 position: "relative",
               }}
             >
-              <CustomFilledInput
+              <CustomSelect
+                label={"Role"}
+                options={[
+                  { label: "Manager", value: "manager" },
+                  { label: "HR", value: "hr" },
+                  { label: "Employee", value: "employee" },
+                ]}
+                value={formManager.values.role}
+                onChange={(selectedValue: any) => {
+                  formManager.handleChange("role")(selectedValue);
+                }}
+                helperText={formManager.touched.role && formManager.errors.role}
+                name={"role"}
+              />
+              {/* <CustomFilledInput
                 autoFocus={true}
                 label="Role"
                 type="tex"
@@ -619,7 +620,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                   formManager.touched.role && Boolean(formManager.errors.role)
                 }
                 helperText={formManager.touched.role && formManager.errors.role}
-              />
+              /> */}
             </Grid>
           </Grid>
           <Grid
