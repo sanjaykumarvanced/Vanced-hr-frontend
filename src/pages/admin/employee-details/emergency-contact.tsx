@@ -2,7 +2,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { themeColors, themeFonts } from "../../../configs";
 import { CustomFilledInput } from "../../../components/input";
 
-export const EmergencyContact = () => {
+export const EmergencyContact = ({ formManager }: { formManager?: any }) => {
   return (
     <Grid
       item
@@ -67,16 +67,12 @@ export const EmergencyContact = () => {
                 label="Name"
                 type="text"
                 placeholder=""
-                name="name"
+                name="emergencyContact.primary.name"
                 height="39px"
                 fontSize="14px"
                 border="1px solid rgb(0 0 0 / 30%)"
-                // value={formManager.values.role}
-                // onChangeValue={formManager.handleChange}
-                // error={
-                //   formManager.touched.role && Boolean(formManager.errors.role)
-                // }
-                // helperText={formManager.touched.role && formManager.errors.role}
+                value={formManager.values.emergencyContact.primary.name}
+                onChangeValue={formManager.handleChange}
               />
             </Grid>
             <Grid
@@ -95,16 +91,12 @@ export const EmergencyContact = () => {
                 label="Relationship"
                 type="text"
                 placeholder=""
-                name="relationship"
+                name="emergencyContact.primary.relationship"
                 height="39px"
                 fontSize="14px"
                 border="1px solid rgb(0 0 0 / 30%)"
-                // value={formManager.values.role}
-                // onChangeValue={formManager.handleChange}
-                // error={
-                //   formManager.touched.role && Boolean(formManager.errors.role)
-                // }
-                // helperText={formManager.touched.role && formManager.errors.role}
+                value={formManager.values.emergencyContact.primary.relationship}
+                onChangeValue={formManager.handleChange}
               />
             </Grid>
           </Grid>
@@ -125,19 +117,26 @@ export const EmergencyContact = () => {
               label="Telephone No.*"
               type="tex"
               placeholder="9876543210"
-              name="telephoneNo"
+              name="emergencyContact.primary.phone"
               height="39px"
               fontSize="14px"
               border="1px solid rgb(0 0 0 / 30%)"
-              // value={formManager.values.role}
-              // onChangeValue={formManager.handleChange}
-              // error={
-              //   formManager.touched.role && Boolean(formManager.errors.role)
-              // }
-              // helperText={formManager.touched.role && formManager.errors.role}
+              value={formManager.values.emergencyContact.primary.phone?.join(
+                ", "
+              )}
+              onChangeValue={(e: any) => {
+                const { value } = e.target;
+                const telephoneArray = value
+                  .split(", ")
+                  .map((item: any) => item.trim());
+                formManager.setFieldValue(
+                  "emergencyContact.primary.phone",
+                  telephoneArray
+                );
+              }}
             />
             <Button
-            //   type="submit"
+              //   type="submit"
               // disabled={!formManager.isValid}
               sx={{
                 height: 39,
@@ -214,16 +213,12 @@ export const EmergencyContact = () => {
                 label="Name"
                 type="text"
                 placeholder=""
-                name="name"
+                name="emergencyContact.secondary.name"
                 height="39px"
                 fontSize="14px"
                 border="1px solid rgb(0 0 0 / 30%)"
-                // value={formManager.values.role}
-                // onChangeValue={formManager.handleChange}
-                // error={
-                //   formManager.touched.role && Boolean(formManager.errors.role)
-                // }
-                // helperText={formManager.touched.role && formManager.errors.role}
+                value={formManager.values.emergencyContact.secondary.name}
+                onChangeValue={formManager.handleChange}
               />
             </Grid>
             <Grid
@@ -242,16 +237,14 @@ export const EmergencyContact = () => {
                 label="Relationship"
                 type="text"
                 placeholder=""
-                name="relationship"
+                name="emergencyContact.secondary.relationship"
                 height="39px"
                 fontSize="14px"
                 border="1px solid rgb(0 0 0 / 30%)"
-                // value={formManager.values.role}
-                // onChangeValue={formManager.handleChange}
-                // error={
-                //   formManager.touched.role && Boolean(formManager.errors.role)
-                // }
-                // helperText={formManager.touched.role && formManager.errors.role}
+                value={
+                  formManager.values.emergencyContact.secondary.relationship
+                }
+                onChangeValue={formManager.handleChange}
               />
             </Grid>
           </Grid>
@@ -272,20 +265,25 @@ export const EmergencyContact = () => {
               label="Telephone No.*"
               type="tex"
               placeholder="9876543210"
-              name="telephoneNo"
+              name="emergencyContact.secondary.phone"
               height="39px"
               fontSize="14px"
               border="1px solid rgb(0 0 0 / 30%)"
-              // value={formManager.values.role}
-              // onChangeValue={formManager.handleChange}
-              // error={
-              //   formManager.touched.role && Boolean(formManager.errors.role)
-              // }
-              // helperText={formManager.touched.role && formManager.errors.role}
+              value={formManager.values.emergencyContact.secondary.phone?.join(
+                ", "
+              )}
+              onChangeValue={(e: any) => {
+                const { value } = e.target;
+                const telephoneArray = value
+                  .split(", ")
+                  .map((item: any) => item.trim());
+                formManager.setFieldValue(
+                  "emergencyContact.secondary.phone",
+                  telephoneArray
+                );
+              }}
             />
             <Button
-            //   type="submit"
-              // disabled={!formManager.isValid}
               sx={{
                 height: 39,
                 borderRadius: "5px",
@@ -304,7 +302,6 @@ export const EmergencyContact = () => {
                 },
                 paddingX: "40px",
               }}
-              // onClick={handleSubmit}
             >
               Add
             </Button>

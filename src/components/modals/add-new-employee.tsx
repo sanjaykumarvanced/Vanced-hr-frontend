@@ -85,13 +85,53 @@ export const AddNewEmployeeDialog = (props: any) => {
           firstName: formManager.values.firstName,
           lastName: formManager.values.lastName,
           role: formManager.values.role,
-          email: formManager.values.mail,
+          email: formManager.values.email,
           birthday: formManager.values.birthday,
           designation: formManager.values.department,
           gender: formManager.values.gender,
           employeeId: formManager.values.employeeId,
           address: formManager.values.address,
           dateOfJoining: formManager.values.joiningDate,
+          personalInformation: {
+            telephones: formManager.values.telephones,
+            nationality: formManager.values.nationality,
+            // religion: formManager.values.religion,
+            maritalStatus: formManager.values.maritalStatus,
+          },
+          emergencyContact: {
+            primary: {
+              name: formManager.values.emergencyContact.primary.name,
+              relationship:
+                formManager.values.emergencyContact.primary.relationship,
+              phone: formManager.values.emergencyContact.primary.phone,
+            },
+            secondary: {
+              name: formManager.values.emergencyContact.secondary.name,
+              relationship:
+                formManager.values.emergencyContact.secondary.relationship,
+              phone: formManager.values.emergencyContact.secondary.phone,
+            },
+          },
+          bankInformation: {
+            bankName: formManager.values.bankInformation.bankName,
+            bankAccountNumber:
+              formManager.values.bankInformation.bankAccountNumber,
+            ifscCode: formManager.values.bankInformation.ifscCode,
+            panNo: formManager.values.bankInformation.panNo,
+          },
+          education: formManager.values.education?.map((edu: any) => ({
+            institution: edu.institution,
+            degree: edu.degree,
+            fieldOfStudy: edu.fieldOfStudy,
+            startYear: edu.startYear,
+            endYear: edu.endYear,
+          })),
+          experience: formManager.values.experience?.map((exp: any) => ({
+            jobTitle: exp.jobTitle,
+            companyName: exp.companyName,
+            startDate: exp.startDate,
+            endDate: exp.endDate,
+          })),
         };
         if (passwordChanged) {
           payload.password = formManager.values.password;
@@ -121,13 +161,53 @@ export const AddNewEmployeeDialog = (props: any) => {
           lastName: formManager.values.lastName,
           password: formManager.values.password,
           role: formManager.values.role,
-          email: formManager.values.mail,
+          email: formManager.values.email,
           birthday: formManager.values.birthday,
           designation: formManager.values.department,
           gender: formManager.values.gender,
           employeeId: formManager.values.employeeId,
           address: formManager.values.address,
           dateOfJoining: formManager.values.joiningDate,
+          personalInformation: {
+            telephones: formManager.values.telephones,
+            nationality: formManager.values.nationality,
+            // religion: formManager.values.religion,
+            maritalStatus: formManager.values.maritalStatus,
+          },
+          emergencyContact: {
+            primary: {
+              name: formManager.values.emergencyContact.primary.name,
+              relationship:
+                formManager.values.emergencyContact.primary.relationship,
+              phone: formManager.values.emergencyContact.primary.phone,
+            },
+            secondary: {
+              name: formManager.values.emergencyContact.secondary.name,
+              relationship:
+                formManager.values.emergencyContact.secondary.relationship,
+              phone: formManager.values.emergencyContact.secondary.phone,
+            },
+          },
+          bankInformation: {
+            bankName: formManager.values.bankInformation.bankName,
+            bankAccountNumber:
+              formManager.values.bankInformation.bankAccountNumber,
+            ifscCode: formManager.values.bankInformation.ifscCode,
+            panNo: formManager.values.bankInformation.panNo,
+          },
+          education: formManager.values.education?.map((edu: any) => ({
+            institution: edu.institution,
+            degree: edu.degree,
+            fieldOfStudy: edu.fieldOfStudy,
+            startYear: edu.startYear,
+            endYear: edu.endYear,
+          })),
+          experience: formManager.values.experience?.map((exp: any) => ({
+            jobTitle: exp.jobTitle,
+            companyName: exp.companyName,
+            startDate: exp.startDate,
+            endDate: exp.endDate,
+          })),
         }).unwrap();
         toast.success(res.message);
         console.log(res, "res");
@@ -151,6 +231,7 @@ export const AddNewEmployeeDialog = (props: any) => {
     onClose();
     refetch();
   };
+
   const formManager: any = useFormik({
     initialValues: {
       id: editedData?.id || "",
@@ -163,17 +244,57 @@ export const AddNewEmployeeDialog = (props: any) => {
       birthday: editedData?.birthday
         ? parseDateString(editedData.birthday)
         : null,
-      email: editedData?.mail || "",
+      email: editedData?.email || "",
       joiningDate: editedData?.joiningDate
         ? parseDateString(editedData.joiningDate)
         : null,
       department: editedData?.department || "",
       address: editedData?.address || "",
       gender: editedData?.gender || "",
+      telephones: editedData?.telephones || [],
+      nationality: editedData?.nationality || "",
+      maritalStatus: editedData?.maritalStatus || "",
+      emergencyContact: {
+        primary: {
+          name: editedData?.emergencyContact?.primary?.name || "",
+          relationship:
+            editedData?.emergencyContact?.primary?.relationship || "",
+          phone: editedData?.emergencyContact?.primary?.phone || [],
+        },
+        secondary: {
+          name: editedData?.emergencyContact?.secondary?.name || "",
+          relationship:
+            editedData?.emergencyContact?.secondary?.relationship || "",
+          phone: editedData?.emergencyContact?.secondary?.phone || [],
+        },
+      },
+      bankInformation: {
+        bankName: editedData?.bankInformation?.bankName || "",
+        bankAccountNumber: editedData?.bankInformation?.bankAccountNumber || "",
+        ifscCode: editedData?.bankInformation?.ifscCode || "",
+        panNo: editedData?.bankInformation?.panNo || "",
+      },
+      education:
+        editedData?.education?.map((edu: any) => ({
+          institution: edu.institution || "",
+          degree: edu.degree || "",
+          fieldOfStudy: edu.fieldOfStudy || "",
+          startYear: edu.startYear || "",
+          endYear: edu.endYear || "",
+        })) || [],
+
+      experience:
+        editedData?.experience?.map((exp: any) => ({
+          jobTitle: exp.jobTitle || "",
+          companyName: exp.companyName || "",
+          startDate: exp.startDate || "",
+          endDate: exp.endDate || "",
+        })) || [],
     },
     validationSchema,
     onSubmit: handleSubmit,
   });
+  console.log(formManager, editedData);
 
   return (
     <Drawer
@@ -733,7 +854,7 @@ export const AddNewEmployeeDialog = (props: any) => {
               }
             />
           </Grid>
-          <EmployeeDetails />
+          <EmployeeDetails formManager={formManager} />
         </DialogContent>
 
         <DialogActions

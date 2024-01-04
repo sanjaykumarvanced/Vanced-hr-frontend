@@ -2,7 +2,8 @@ import { Button, Grid } from "@mui/material";
 import { themeColors, themeFonts } from "../../../configs";
 import { CustomFilledInput } from "../../../components/input";
 
-export const PersonalInfo = () => {
+export const PersonalInfo = ({ formManager }: { formManager?: any }) => {
+  debugger;
   return (
     <Grid
       item
@@ -32,22 +33,22 @@ export const PersonalInfo = () => {
         <CustomFilledInput
           autoFocus={true}
           label="Telephone No.*"
-          type="tex"
+          type="tel"
           placeholder="9876543210"
-          name="telephoneNo"
+          name="telephones"
           height="39px"
           fontSize="14px"
           border="1px solid rgb(0 0 0 / 30%)"
-          // value={formManager.values.role}
-          // onChangeValue={formManager.handleChange}
-          // error={
-          //   formManager.touched.role && Boolean(formManager.errors.role)
-          // }
-          // helperText={formManager.touched.role && formManager.errors.role}
+          value={formManager.values.telephones?.join(", ")}
+          onChangeValue={(e: any) => {
+            const { value } = e.target;
+            const telephoneArray = value
+              .split(", ")
+              .map((item: any) => item.trim());
+            formManager.setFieldValue("telephones", telephoneArray);
+          }}
         />
         <Button
-          // type="submit"
-          // disabled={!formManager.isValid}
           sx={{
             height: 39,
             borderRadius: "5px",
@@ -66,7 +67,6 @@ export const PersonalInfo = () => {
             },
             paddingX: "40px",
           }}
-          // onClick={handleSubmit}
         >
           Add
         </Button>
@@ -102,12 +102,8 @@ export const PersonalInfo = () => {
             height="39px"
             fontSize="14px"
             border="1px solid rgb(0 0 0 / 30%)"
-            // value={formManager.values.role}
-            // onChangeValue={formManager.handleChange}
-            // error={
-            //   formManager.touched.role && Boolean(formManager.errors.role)
-            // }
-            // helperText={formManager.touched.role && formManager.errors.role}
+            value={formManager.values.nationality}
+            onChangeValue={formManager.handleChange}
           />
         </Grid>
         <Grid
@@ -130,17 +126,13 @@ export const PersonalInfo = () => {
             height="39px"
             fontSize="14px"
             border="1px solid rgb(0 0 0 / 30%)"
-            // value={formManager.values.role}
-            // onChangeValue={formManager.handleChange}
-            // error={
-            //   formManager.touched.role && Boolean(formManager.errors.role)
-            // }
-            // helperText={formManager.touched.role && formManager.errors.role}
+            value={formManager.values.maritalStatus}
+            onChangeValue={formManager.handleChange}
           />
         </Grid>
       </Grid>
 
-      <Grid
+      {/* <Grid
         item
         xs={12}
         sx={{
@@ -153,21 +145,17 @@ export const PersonalInfo = () => {
       >
         <CustomFilledInput
           autoFocus={true}
-          label="Social Media Profile"
+          label="Religion"
           type="text"
           placeholder=""
-          name="socialMediaProfile"
+          name="religion"
           height="39px"
           fontSize="14px"
           border="1px solid rgb(0 0 0 / 30%)"
-          // value={formManager.values.role}
-          // onChangeValue={formManager.handleChange}
-          // error={
-          //   formManager.touched.role && Boolean(formManager.errors.role)
-          // }
-          // helperText={formManager.touched.role && formManager.errors.role}
+          value={formManager.values.religion}
+          onChangeValue={formManager.handleChange}
         />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

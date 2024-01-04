@@ -33,7 +33,7 @@ export const AllEmployeeListTable = ({
       flex: 1,
     },
     {
-      field: "mail",
+      field: "email",
       headerName: "Mail",
       flex: 1,
     },
@@ -101,7 +101,7 @@ export const AllEmployeeListTable = ({
       lastName: item.lastName,
       userName: item.userName,
       role: item.role,
-      mail: item.email,
+      email: item.email,
       birthday: format(new Date(item.birthday), "dd/MM/yyyy"),
       department: item.designation,
       contactNo: contactNo ? contactNo : "-",
@@ -109,9 +109,32 @@ export const AllEmployeeListTable = ({
       gender: item.gender,
       image: item.image.path,
       address: item.address,
+      telephones: item.personalInformation.telephones,
+      nationality: item.personalInformation.nationality,
+      maritalStatus: item.personalInformation.maritalStatus,
+      emergencyContact: {
+        primary: {
+          name: item.emergencyContact.primary.name,
+          relationship: item.emergencyContact.primary.relationship,
+          phone: item.emergencyContact.primary.phone,
+        },
+        secondary: {
+          name: item.emergencyContact.secondary.name,
+          relationship: item.emergencyContact.secondary.relationship,
+          phone: item.emergencyContact.secondary.phone,
+        },
+      },
+      bankInformation: {
+        bankName: item.bankInformation.bankName,
+        bankAccountNumber: item.bankInformation.bankAccountNumber,
+        ifscCode: item.bankInformation.ifscCode,
+        panNo: item.bankInformation.panNo,
+      },
+      education: item.education,
+      experience: item.experience,
     };
   });
-  console.log(data);
+  console.log(data, editedData);
 
   return (
     <>

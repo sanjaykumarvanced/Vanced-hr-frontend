@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { themeColors } from "../../../configs";
 import { CustomFilledInput } from "../../../components/input";
-export const BankInformation = () => {
+export const BankInformation = ({ formManager }: { formManager?: any }) => {
   return (
     <Grid
       item
@@ -43,16 +43,12 @@ export const BankInformation = () => {
             label="Bank Name*"
             type="text"
             placeholder=""
-            name="bankName"
+            name="bankInformation.bankName"
             height="39px"
             fontSize="14px"
             border="1px solid rgb(0 0 0 / 30%)"
-            // value={formManager.values.role}
-            // onChangeValue={formManager.handleChange}
-            // error={
-            //   formManager.touched.role && Boolean(formManager.errors.role)
-            // }
-            // helperText={formManager.touched.role && formManager.errors.role}
+            value={formManager.values.bankInformation.bankName}
+            onChangeValue={formManager.handleChange}
           />
         </Grid>
         <Grid
@@ -71,16 +67,12 @@ export const BankInformation = () => {
             label="Account No. *"
             type="text"
             placeholder=""
-            name="accountNo"
+            name="bankInformation.bankAccountNumber"
             height="39px"
             fontSize="14px"
             border="1px solid rgb(0 0 0 / 30%)"
-            // value={formManager.values.role}
-            // onChangeValue={formManager.handleChange}
-            // error={
-            //   formManager.touched.role && Boolean(formManager.errors.role)
-            // }
-            // helperText={formManager.touched.role && formManager.errors.role}
+            value={formManager.values.bankInformation.bankAccountNumber}
+            onChangeValue={formManager.handleChange}
           />
         </Grid>
       </Grid>
@@ -111,16 +103,12 @@ export const BankInformation = () => {
             label="IFSC Code *"
             type="text"
             placeholder=""
-            name="IFSCCode"
+            name="bankInformation.ifscCode"
             height="39px"
             fontSize="14px"
             border="1px solid rgb(0 0 0 / 30%)"
-            // value={formManager.values.role}
-            // onChangeValue={formManager.handleChange}
-            // error={
-            //   formManager.touched.role && Boolean(formManager.errors.role)
-            // }
-            // helperText={formManager.touched.role && formManager.errors.role}
+            value={formManager.values.bankInformation.ifscCode}
+            onChangeValue={formManager.handleChange}
           />
         </Grid>
         <Grid
@@ -139,16 +127,12 @@ export const BankInformation = () => {
             label="PAN No. *"
             type="text"
             placeholder=""
-            name="PANNo."
+            name="bankInformation.panNo"
             height="39px"
             fontSize="14px"
             border="1px solid rgb(0 0 0 / 30%)"
-            // value={formManager.values.role}
-            // onChangeValue={formManager.handleChange}
-            // error={
-            //   formManager.touched.role && Boolean(formManager.errors.role)
-            // }
-            // helperText={formManager.touched.role && formManager.errors.role}
+            value={formManager.values.bankInformation.panNo}
+            onChangeValue={formManager.handleChange}
           />
         </Grid>
       </Grid>

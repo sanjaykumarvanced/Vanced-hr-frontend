@@ -52,6 +52,46 @@ export type EmployeeListApiArg = {
   password?: any;
   dateOfJoining?: any;
   address?: any;
+  personalInformation?: {
+    telephones?: any;
+    nationality?: any;
+    maritalStatus?: any;
+  };
+  emergencyContact?: {
+    primary?: {
+      name?: any;
+      relationship?: any;
+      phone?: any;
+    };
+    secondary?: {
+      name?: any;
+      relationship?: any;
+      phone?: any;
+    };
+  };
+  bankInformation?: {
+    bankName?: any;
+    bankAccountNumber?: any;
+    ifscCode?: any;
+    panNo?: any;
+  };
+  education?: [
+    {
+      institution?: any;
+      degree?: any;
+      fieldOfStudy?: any;
+      startYear?: any;
+      endYear?: any;
+    }
+  ];
+  experience?: [
+    {
+      jobTitle?: any;
+      companyName?: any;
+      startDate?: any;
+      endDate?: any;
+    }
+  ];
 };
 
 export const {

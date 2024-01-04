@@ -6,6 +6,11 @@ import {
   CustomTabsPanel,
 } from "../../../components/tabs/custom-tabs";
 import { themeFonts, themeColors } from "../../../configs";
+import { BankInformation } from "./bank-information";
+import { Education } from "./education";
+import { EmergencyContact } from "./emergency-contact";
+import { Experience } from "./experience";
+import { PersonalInfo } from "./personal-info";
 export const getStyles = () => {
   return {
     tabsButtons: {
@@ -30,7 +35,7 @@ export const getStyles = () => {
     },
   };
 };
-export const EmployeeDetails = () => {
+export const EmployeeDetails = ({ formManager }: { formManager?: any }) => {
   const [value, setValue] = useState("personal_information");
   const styles = getStyles();
   const handleChange = (event: any) => {
@@ -55,14 +60,14 @@ export const EmployeeDetails = () => {
           }}
         >
           {EmployeeDetailTabs.map((val, ind) => (
-              <CustomTab
-                sx={styles.tabsButtons}
-                label={val.label}
-                onChange={handleChange}
-                value={val.value}
-                value1={value}
-                key={ind}
-              />
+            <CustomTab
+              sx={styles.tabsButtons}
+              label={val.label}
+              onChange={handleChange}
+              value={val.value}
+              value1={value}
+              key={ind}
+            />
           ))}
         </Box>
       </Grid>
@@ -75,7 +80,19 @@ export const EmployeeDetails = () => {
             value1={value}
             key={ind}
           >
-            {tabs.tabContent}
+            {value === "personal_information" && (
+              <PersonalInfo formManager={formManager} />
+            )}
+            {value === "emergency_contact" && (
+              <EmergencyContact formManager={formManager} />
+            )}
+            {value === "bank_information" && (
+              <BankInformation formManager={formManager} />
+            )}
+            {value === "education" && <Education formManager={formManager} />}
+            {value === "experience" && <Experience formManager={formManager} />}
+            {value === "documents" && <></>}
+            {value === "projects" && <></>}
           </CustomTabsPanel>
         ))}
       </Box>
