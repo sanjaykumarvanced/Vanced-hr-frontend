@@ -4,7 +4,13 @@ import { CustomFilledInput } from "../../../components/input";
 import { CustomYearPicker } from "../../../components/calendar/custom-year-pickers";
 import dayjs from "dayjs";
 
-export const Education = ({ formManager }: { formManager?: any }) => {
+export const Education = ({
+  formManager,
+  editedData,
+}: {
+  formManager?: any;
+  editedData?: any;
+}) => {
   return (
     <Grid
       item
@@ -76,6 +82,7 @@ export const Education = ({ formManager }: { formManager?: any }) => {
                   border="1px solid rgb(0 0 0 / 30%)"
                   value={formManager.values.education[index].institution}
                   onChangeValue={formManager.handleChange}
+                  disabled={editedData.action === "view"}
                 />
               </Grid>
               <Grid
@@ -100,6 +107,7 @@ export const Education = ({ formManager }: { formManager?: any }) => {
                   border="1px solid rgb(0 0 0 / 30%)"
                   value={formManager.values.education[index].degree}
                   onChangeValue={formManager.handleChange}
+                  disabled={editedData.action === "view"}
                 />
               </Grid>
             </Grid>
@@ -136,6 +144,7 @@ export const Education = ({ formManager }: { formManager?: any }) => {
                   border="1px solid rgb(0 0 0 / 30%)"
                   value={formManager.values.education[index].fieldOfStudy}
                   onChangeValue={formManager.handleChange}
+                  disabled={editedData.action === "view"}
                 />
               </Grid>
               <Grid
@@ -175,6 +184,7 @@ export const Education = ({ formManager }: { formManager?: any }) => {
                           selectedValue.format("YYYY-MM-DD")
                         );
                       }}
+                      disabled={editedData.action === "view"}
                     />
                   </Grid>
 
@@ -201,6 +211,7 @@ export const Education = ({ formManager }: { formManager?: any }) => {
                           selectedValue.format("YYYY-MM-DD")
                         );
                       }}
+                      disabled={editedData.action === "view"}
                     />
                   </Grid>
                 </Grid>
@@ -209,41 +220,43 @@ export const Education = ({ formManager }: { formManager?: any }) => {
           </Grid>
         </Box>
       ))}
-      <Button
-        sx={{
-          width: 117,
-          height: 39,
-          borderRadius: "5px",
-          backgroundColor: themeColors["#0C345D"],
-          color: themeColors["#FFFFFF"],
-          fontFamily: themeFonts["Poppins-Regular"],
-          fontSize: "15px",
-          "&:hover": {
-            backgroundColor: "transparent",
-            color: themeColors["#0C345D"],
-            border: "1px solid #0C345D",
-          },
-          "&.Mui-disabled": {
+      {editedData.action !== "view" && (
+        <Button
+          sx={{
+            width: 117,
+            height: 39,
+            borderRadius: "5px",
+            backgroundColor: themeColors["#0C345D"],
             color: themeColors["#FFFFFF"],
-            opacity: 0.8,
-          },
-          paddingX: "40px",
-        }}
-        onClick={() => {
-          formManager.setFieldValue("education", [
-            ...formManager.values.education,
-            {
-              institution: "",
-              degree: "",
-              fieldOfStudy: "",
-              startYear: "",
-              endYear: "",
+            fontFamily: themeFonts["Poppins-Regular"],
+            fontSize: "15px",
+            "&:hover": {
+              backgroundColor: "transparent",
+              color: themeColors["#0C345D"],
+              border: "1px solid #0C345D",
             },
-          ]);
-        }}
-      >
-        Add
-      </Button>
+            "&.Mui-disabled": {
+              color: themeColors["#FFFFFF"],
+              opacity: 0.8,
+            },
+            paddingX: "40px",
+          }}
+          onClick={() => {
+            formManager.setFieldValue("education", [
+              ...formManager.values.education,
+              {
+                institution: "",
+                degree: "",
+                fieldOfStudy: "",
+                startYear: "",
+                endYear: "",
+              },
+            ]);
+          }}
+        >
+          Add
+        </Button>
+      )}
     </Grid>
   );
 };

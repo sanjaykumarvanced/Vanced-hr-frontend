@@ -4,7 +4,13 @@ import { CustomFilledInput } from "../../../components/input";
 import { CustomDatePicker } from "../../../components/calendar/custom-date-picker";
 import dayjs from "dayjs";
 
-export const Experience = ({ formManager }: { formManager?: any }) => {
+export const Experience = ({
+  formManager,
+  editedData,
+}: {
+  formManager?: any;
+  editedData?: any;
+}) => {
   return (
     <Grid
       item
@@ -76,6 +82,7 @@ export const Experience = ({ formManager }: { formManager?: any }) => {
                   border="1px solid rgb(0 0 0 / 30%)"
                   value={formManager.values.experience[index].jobTitle}
                   onChangeValue={formManager.handleChange}
+                  disabled={editedData.action === "view"}
                 />
               </Grid>
               <Grid
@@ -100,6 +107,7 @@ export const Experience = ({ formManager }: { formManager?: any }) => {
                   border="1px solid rgb(0 0 0 / 30%)"
                   value={formManager.values.experience[index].companyName}
                   onChangeValue={formManager.handleChange}
+                  disabled={editedData.action === "view"}
                 />
               </Grid>
             </Grid>
@@ -138,6 +146,7 @@ export const Experience = ({ formManager }: { formManager?: any }) => {
                       selectedValue.format("YYYY-MM-DD")
                     );
                   }}
+                  disabled={editedData.action === "view"}
                 />
               </Grid>
               <Grid
@@ -164,47 +173,50 @@ export const Experience = ({ formManager }: { formManager?: any }) => {
                       selectedValue.format("YYYY-MM-DD")
                     );
                   }}
+                  disabled={editedData.action === "view"}
                 />
               </Grid>
             </Grid>
           </Grid>
         </Box>
       ))}
-      <Button
-        sx={{
-          width: 117,
-          height: 39,
-          borderRadius: "5px",
-          backgroundColor: themeColors["#0C345D"],
-          color: themeColors["#FFFFFF"],
-          fontFamily: themeFonts["Poppins-Regular"],
-          fontSize: "15px",
-          "&:hover": {
-            backgroundColor: "transparent",
-            color: themeColors["#0C345D"],
-            border: "1px solid #0C345D",
-          },
-          "&.Mui-disabled": {
+      {editedData.action !== "view" && (
+        <Button
+          sx={{
+            width: 117,
+            height: 39,
+            borderRadius: "5px",
+            backgroundColor: themeColors["#0C345D"],
             color: themeColors["#FFFFFF"],
-            opacity: 0.8,
-          },
-          paddingX: "40px",
-        }}
-        onClick={() => {
-          formManager.setFieldValue("experience", [
-            ...formManager.values.experience,
-            {
-              institution: "",
-              degree: "",
-              fieldOfStudy: "",
-              startYear: "",
-              endYear: "",
+            fontFamily: themeFonts["Poppins-Regular"],
+            fontSize: "15px",
+            "&:hover": {
+              backgroundColor: "transparent",
+              color: themeColors["#0C345D"],
+              border: "1px solid #0C345D",
             },
-          ]);
-        }}
-      >
-        Add
-      </Button>
+            "&.Mui-disabled": {
+              color: themeColors["#FFFFFF"],
+              opacity: 0.8,
+            },
+            paddingX: "40px",
+          }}
+          onClick={() => {
+            formManager.setFieldValue("experience", [
+              ...formManager.values.experience,
+              {
+                institution: "",
+                degree: "",
+                fieldOfStudy: "",
+                startYear: "",
+                endYear: "",
+              },
+            ]);
+          }}
+        >
+          Add
+        </Button>
+      )}
     </Grid>
   );
 };

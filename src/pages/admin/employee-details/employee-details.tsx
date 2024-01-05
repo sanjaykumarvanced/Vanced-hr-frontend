@@ -35,7 +35,13 @@ export const getStyles = () => {
     },
   };
 };
-export const EmployeeDetails = ({ formManager }: { formManager?: any }) => {
+export const EmployeeDetails = ({
+  formManager,
+  editedData,
+}: {
+  formManager?: any;
+  editedData?: any;
+}) => {
   const [value, setValue] = useState("personal_information");
   const styles = getStyles();
   const handleChange = (event: any) => {
@@ -81,16 +87,26 @@ export const EmployeeDetails = ({ formManager }: { formManager?: any }) => {
             key={ind}
           >
             {value === "personal_information" && (
-              <PersonalInfo formManager={formManager} />
+              <PersonalInfo formManager={formManager} editedData={editedData} />
             )}
             {value === "emergency_contact" && (
-              <EmergencyContact formManager={formManager} />
+              <EmergencyContact
+                formManager={formManager}
+                editedData={editedData}
+              />
             )}
             {value === "bank_information" && (
-              <BankInformation formManager={formManager} />
+              <BankInformation
+                formManager={formManager}
+                editedData={editedData}
+              />
             )}
-            {value === "education" && <Education formManager={formManager} />}
-            {value === "experience" && <Experience formManager={formManager} />}
+            {value === "education" && (
+              <Education formManager={formManager} editedData={editedData} />
+            )}
+            {value === "experience" && (
+              <Experience formManager={formManager} editedData={editedData} />
+            )}
             {value === "documents" && <></>}
             {value === "projects" && <></>}
           </CustomTabsPanel>

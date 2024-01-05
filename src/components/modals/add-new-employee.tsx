@@ -305,7 +305,11 @@ export const AddNewEmployeeDialog = (props: any) => {
           paddingX: "27px",
         }}
       >
-        New Employee
+        {editedData.action === "view"
+          ? "Employee Profile Info"
+          : editedData.action === "edit"
+          ? "Edit Employee detail"
+          : "New Employee"}
       </DialogTitle>
       <IconButton
         aria-label="close"
@@ -357,7 +361,8 @@ export const AddNewEmployeeDialog = (props: any) => {
                 src={
                   selectedImageUrl
                     ? selectedImageUrl
-                    : editedData.action === "edit"
+                    : editedData.action === "edit" ||
+                      editedData.action === "view"
                     ? apiBaseUrl + "/" + editedData.image
                     : Avatar
                 }
@@ -366,74 +371,76 @@ export const AddNewEmployeeDialog = (props: any) => {
                 width={80}
               />
             </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-              }}
-            >
+            {editedData.action !== "view" && (
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
-                  flexDirection: "row",
+                  flexDirection: "column",
                   gap: "10px",
                 }}
               >
-                <Button
-                  variant="outlined"
-                  component="label"
+                <Box
                   sx={{
-                    height: 36,
-                    color: themeColors["#0C345D"],
-                    fontFamily: themeFonts["Poppins-SemiBold"],
-                    fontSize: "14px",
-                    paddingX: "16px",
-                    border: "1px solid #707070",
-                    borderStyle: "dashed",
-                    paddingY: "10px",
-                    borderRadius: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    gap: "10px",
                   }}
-                  // onClick={handleUpdateImage}
                 >
-                  {image === "" ? "Upload New Photo" : "Image Uploaded"}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    hidden
-                    onChange={handleImageChange}
-                  />
-                </Button>
-                <Button
-                  component="label"
-                  sx={{
-                    height: 36,
-                    color: themeColors["#737373"],
-                    fontFamily: themeFonts["Poppins-SemiBold"],
-                    fontSize: "14px",
-                    paddingX: "15px",
-                    paddingY: "10px",
-                    borderRadius: 0,
-                    backgroundColor: themeColors["#D4D4D4"],
-                  }}
-                  // onClick={handleReset}
-                >
-                  Reset
-                </Button>
+                  <Button
+                    variant="outlined"
+                    component="label"
+                    sx={{
+                      height: 36,
+                      color: themeColors["#0C345D"],
+                      fontFamily: themeFonts["Poppins-SemiBold"],
+                      fontSize: "14px",
+                      paddingX: "16px",
+                      border: "1px solid #707070",
+                      borderStyle: "dashed",
+                      paddingY: "10px",
+                      borderRadius: 0,
+                    }}
+                    // onClick={handleUpdateImage}
+                  >
+                    {image === "" ? "Upload New Photo" : "Image Uploaded"}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      hidden
+                      onChange={handleImageChange}
+                    />
+                  </Button>
+                  <Button
+                    component="label"
+                    sx={{
+                      height: 36,
+                      color: themeColors["#737373"],
+                      fontFamily: themeFonts["Poppins-SemiBold"],
+                      fontSize: "14px",
+                      paddingX: "15px",
+                      paddingY: "10px",
+                      borderRadius: 0,
+                      backgroundColor: themeColors["#D4D4D4"],
+                    }}
+                    // onClick={handleReset}
+                  >
+                    Reset
+                  </Button>
+                </Box>
+                <Box>
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                      fontFamily: themeFonts["Poppins-SemiBold"],
+                      color: themeColors["#1B64B8"],
+                    }}
+                  >
+                    ( Allowed PNG , JPG , JPEG ) ( Size : 1.0 MB )
+                  </Typography>
+                </Box>
               </Box>
-              <Box>
-                <Typography
-                  sx={{
-                    fontSize: "12px",
-                    fontFamily: themeFonts["Poppins-SemiBold"],
-                    color: themeColors["#1B64B8"],
-                  }}
-                >
-                  ( Allowed PNG , JPG , JPEG ) ( Size : 1.0 MB )
-                </Typography>
-              </Box>
-            </Box>
+            )}
           </Grid>
           <Grid
             item
@@ -475,6 +482,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                 helperText={
                   formManager.touched.userName && formManager.errors.userName
                 }
+                disabled={editedData.action === "view"}
               />
             </Grid>
             <Grid
@@ -506,6 +514,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                 helperText={
                   formManager.touched.firstName && formManager.errors.firstName
                 }
+                disabled={editedData.action === "view"}
               />
             </Grid>
             <Grid
@@ -537,6 +546,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                 helperText={
                   formManager.touched.lastName && formManager.errors.lastName
                 }
+                disabled={editedData.action === "view"}
               />
             </Grid>
           </Grid>
@@ -578,6 +588,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                   formManager.errors.department
                 }
                 name={"department"}
+                disabled={editedData.action === "view"}
               />
             </Grid>
             <Grid
@@ -604,6 +615,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                 }}
                 helperText={formManager.touched.role && formManager.errors.role}
                 name={"role"}
+                disabled={editedData.action === "view"}
               />
               {/* <CustomFilledInput
                 autoFocus={true}
@@ -661,6 +673,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                 helperText={
                   formManager.touched.birthday && formManager.errors.birthday
                 }
+                disabled={editedData.action === "view"}
               />
             </Grid>
             <Grid
@@ -689,6 +702,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                   formManager.touched.gender && formManager.errors.gender
                 }
                 name={"gender"}
+                disabled={editedData.action === "view"}
               />
             </Grid>
             <Grid
@@ -719,6 +733,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                   formManager.touched.joiningDate &&
                   formManager.errors.joiningDate
                 }
+                disabled={editedData.action === "view"}
               />
             </Grid>
           </Grid>
@@ -762,6 +777,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                 helperText={
                   formManager.touched.password && formManager.errors.password
                 }
+                disabled={editedData.action === "view"}
               />
             </Grid>
             <Grid
@@ -792,6 +808,7 @@ export const AddNewEmployeeDialog = (props: any) => {
                 helperText={
                   formManager.touched.email && formManager.errors.email
                 }
+                disabled={editedData.action === "view"}
               />
             </Grid>
           </Grid>
@@ -853,9 +870,10 @@ export const AddNewEmployeeDialog = (props: any) => {
               helperText={
                 formManager.touched.address && formManager.errors.address
               }
+              disabled={editedData.action === "view"}
             />
           </Grid>
-          <EmployeeDetails formManager={formManager} />
+          <EmployeeDetails formManager={formManager} editedData={editedData} />
         </DialogContent>
 
         <DialogActions
@@ -892,31 +910,33 @@ export const AddNewEmployeeDialog = (props: any) => {
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              // disabled={!formManager.isValid}
-              sx={{
-                width: 117,
-                height: 36,
-                borderRadius: "5px",
-                backgroundColor: themeColors["#0C345D"],
-                color: themeColors["#FFFFFF"],
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "15px",
-                "&:hover": {
-                  backgroundColor: "transparent",
-                  color: themeColors["#0C345D"],
-                  border: "1px solid #0C345D",
-                },
-                "&.Mui-disabled": {
+            {editedData.action !== "view" && (
+              <Button
+                type="submit"
+                // disabled={!formManager.isValid}
+                sx={{
+                  width: 117,
+                  height: 36,
+                  borderRadius: "5px",
+                  backgroundColor: themeColors["#0C345D"],
                   color: themeColors["#FFFFFF"],
-                  opacity: 0.8,
-                },
-              }}
-              // onClick={handleSubmit}
-            >
-              Save
-            </Button>
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "15px",
+                  "&:hover": {
+                    backgroundColor: "transparent",
+                    color: themeColors["#0C345D"],
+                    border: "1px solid #0C345D",
+                  },
+                  "&.Mui-disabled": {
+                    color: themeColors["#FFFFFF"],
+                    opacity: 0.8,
+                  },
+                }}
+                // onClick={handleSubmit}
+              >
+                Save
+              </Button>
+            )}
           </Box>
         </DialogActions>
       </form>

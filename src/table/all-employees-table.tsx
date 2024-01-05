@@ -58,6 +58,7 @@ export const AllEmployeeListTable = ({
   }
   const { data, refetch } = useGetEmployeeListQuery();
   const [editedData, setEditedData] = useState<any>({});
+  const [view, setView] = useState<any>({});
   const [isOpen, setIsOpen] = useState(false);
   const [deleteItem] = useDeleteEmployeeDetailMutation();
   const handleDelete = async (id: number) => {
@@ -84,6 +85,11 @@ export const AllEmployeeListTable = ({
     setIsOpen(true);
     setEditedData({ ...data, action });
   };
+  // const handleView = (action?: string) => {
+  //   debugger;
+  //   setIsOpen(true);
+  //   setView({ action });
+  // };
   if (!data) {
     return null;
   }
@@ -244,7 +250,9 @@ export const AllEmployeeListTable = ({
                       display: "flex",
                       alignItems: "center",
                       gap: "10px",
+                      cursor: "pointer",
                     }}
+                    onClick={() => handleClickEditOpen(params.row, "view")}
                   >
                     <img
                       src={

@@ -2,7 +2,13 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { themeColors, themeFonts } from "../../../configs";
 import { CustomFilledInput } from "../../../components/input";
 
-export const EmergencyContact = ({ formManager }: { formManager?: any }) => {
+export const EmergencyContact = ({
+  formManager,
+  editedData,
+}: {
+  formManager?: any;
+  editedData?: any;
+}) => {
   return (
     <Grid
       item
@@ -73,6 +79,7 @@ export const EmergencyContact = ({ formManager }: { formManager?: any }) => {
                 border="1px solid rgb(0 0 0 / 30%)"
                 value={formManager.values.emergencyContact.primary.name}
                 onChangeValue={formManager.handleChange}
+                disabled={editedData.action === "view"}
               />
             </Grid>
             <Grid
@@ -97,6 +104,7 @@ export const EmergencyContact = ({ formManager }: { formManager?: any }) => {
                 border="1px solid rgb(0 0 0 / 30%)"
                 value={formManager.values.emergencyContact.primary.relationship}
                 onChangeValue={formManager.handleChange}
+                disabled={editedData.action === "view"}
               />
             </Grid>
           </Grid>
@@ -134,32 +142,33 @@ export const EmergencyContact = ({ formManager }: { formManager?: any }) => {
                   telephoneArray
                 );
               }}
+              disabled={editedData.action === "view"}
             />
-            <Button
-              //   type="submit"
-              // disabled={!formManager.isValid}
-              sx={{
-                height: 39,
-                borderRadius: "5px",
-                backgroundColor: themeColors["#0C345D"],
-                color: themeColors["#FFFFFF"],
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "15px",
-                "&:hover": {
-                  backgroundColor: "transparent",
-                  color: themeColors["#0C345D"],
-                  border: "1px solid #0C345D",
-                },
-                "&.Mui-disabled": {
+            {editedData.action !== "view" && (
+              <Button
+                sx={{
+                  height: 39,
+                  borderRadius: "5px",
+                  backgroundColor: themeColors["#0C345D"],
                   color: themeColors["#FFFFFF"],
-                  opacity: 0.8,
-                },
-                paddingX: "40px",
-              }}
-              // onClick={handleSubmit}
-            >
-              Add
-            </Button>
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "15px",
+                  "&:hover": {
+                    backgroundColor: "transparent",
+                    color: themeColors["#0C345D"],
+                    border: "1px solid #0C345D",
+                  },
+                  "&.Mui-disabled": {
+                    color: themeColors["#FFFFFF"],
+                    opacity: 0.8,
+                  },
+                  paddingX: "40px",
+                }}
+                // onClick={handleSubmit}
+              >
+                Add
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Box>
@@ -219,6 +228,7 @@ export const EmergencyContact = ({ formManager }: { formManager?: any }) => {
                 border="1px solid rgb(0 0 0 / 30%)"
                 value={formManager.values.emergencyContact.secondary.name}
                 onChangeValue={formManager.handleChange}
+                disabled={editedData.action === "view"}
               />
             </Grid>
             <Grid
@@ -245,6 +255,7 @@ export const EmergencyContact = ({ formManager }: { formManager?: any }) => {
                   formManager.values.emergencyContact.secondary.relationship
                 }
                 onChangeValue={formManager.handleChange}
+                disabled={editedData.action === "view"}
               />
             </Grid>
           </Grid>
@@ -282,29 +293,32 @@ export const EmergencyContact = ({ formManager }: { formManager?: any }) => {
                   telephoneArray
                 );
               }}
+              disabled={editedData.action === "view"}
             />
-            <Button
-              sx={{
-                height: 39,
-                borderRadius: "5px",
-                backgroundColor: themeColors["#0C345D"],
-                color: themeColors["#FFFFFF"],
-                fontFamily: themeFonts["Poppins-Regular"],
-                fontSize: "15px",
-                "&:hover": {
-                  backgroundColor: "transparent",
-                  color: themeColors["#0C345D"],
-                  border: "1px solid #0C345D",
-                },
-                "&.Mui-disabled": {
+            {editedData.action !== "view" && (
+              <Button
+                sx={{
+                  height: 39,
+                  borderRadius: "5px",
+                  backgroundColor: themeColors["#0C345D"],
                   color: themeColors["#FFFFFF"],
-                  opacity: 0.8,
-                },
-                paddingX: "40px",
-              }}
-            >
-              Add
-            </Button>
+                  fontFamily: themeFonts["Poppins-Regular"],
+                  fontSize: "15px",
+                  "&:hover": {
+                    backgroundColor: "transparent",
+                    color: themeColors["#0C345D"],
+                    border: "1px solid #0C345D",
+                  },
+                  "&.Mui-disabled": {
+                    color: themeColors["#FFFFFF"],
+                    opacity: 0.8,
+                  },
+                  paddingX: "40px",
+                }}
+              >
+                Add
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Box>

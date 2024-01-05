@@ -25,6 +25,7 @@ interface CustomSelectProps {
   defaultValue?: any;
   name?: any;
   color?: any;
+  disabled?: any;
 }
 
 export const CustomSelect = ({
@@ -37,6 +38,7 @@ export const CustomSelect = ({
   name,
   defaultValue,
   color,
+  disabled,
 }: CustomSelectProps) => {
   const [selectValue, setSelectValue] = useState(value ?? "");
 
@@ -55,6 +57,7 @@ export const CustomSelect = ({
         IconComponent={() => <DownArrowIcon2 height={10} />}
         defaultValue={defaultValue ? defaultValue : ""}
         name={name}
+        disabled={disabled}
         sx={{
           height: 39,
           borderRadius: 2,

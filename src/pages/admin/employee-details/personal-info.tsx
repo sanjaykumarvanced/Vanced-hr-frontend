@@ -2,7 +2,13 @@ import { Button, Grid } from "@mui/material";
 import { themeColors, themeFonts } from "../../../configs";
 import { CustomFilledInput } from "../../../components/input";
 
-export const PersonalInfo = ({ formManager }: { formManager?: any }) => {
+export const PersonalInfo = ({
+  formManager,
+  editedData,
+}: {
+  formManager?: any;
+  editedData?: any;
+}) => {
   debugger;
   return (
     <Grid
@@ -47,29 +53,32 @@ export const PersonalInfo = ({ formManager }: { formManager?: any }) => {
               .map((item: any) => item.trim());
             formManager.setFieldValue("telephones", telephoneArray);
           }}
+          disabled={editedData.action === "view"}
         />
-        <Button
-          sx={{
-            height: 39,
-            borderRadius: "5px",
-            backgroundColor: themeColors["#0C345D"],
-            color: themeColors["#FFFFFF"],
-            fontFamily: themeFonts["Poppins-Regular"],
-            fontSize: "15px",
-            "&:hover": {
-              backgroundColor: "transparent",
-              color: themeColors["#0C345D"],
-              border: "1px solid #0C345D",
-            },
-            "&.Mui-disabled": {
+        {editedData.action !== "view" && (
+          <Button
+            sx={{
+              height: 39,
+              borderRadius: "5px",
+              backgroundColor: themeColors["#0C345D"],
               color: themeColors["#FFFFFF"],
-              opacity: 0.8,
-            },
-            paddingX: "40px",
-          }}
-        >
-          Add
-        </Button>
+              fontFamily: themeFonts["Poppins-Regular"],
+              fontSize: "15px",
+              "&:hover": {
+                backgroundColor: "transparent",
+                color: themeColors["#0C345D"],
+                border: "1px solid #0C345D",
+              },
+              "&.Mui-disabled": {
+                color: themeColors["#FFFFFF"],
+                opacity: 0.8,
+              },
+              paddingX: "40px",
+            }}
+          >
+            Add
+          </Button>
+        )}
       </Grid>
       <Grid
         item
@@ -104,6 +113,7 @@ export const PersonalInfo = ({ formManager }: { formManager?: any }) => {
             border="1px solid rgb(0 0 0 / 30%)"
             value={formManager.values.nationality}
             onChangeValue={formManager.handleChange}
+            disabled={editedData.action === "view"}
           />
         </Grid>
         <Grid
@@ -128,6 +138,7 @@ export const PersonalInfo = ({ formManager }: { formManager?: any }) => {
             border="1px solid rgb(0 0 0 / 30%)"
             value={formManager.values.maritalStatus}
             onChangeValue={formManager.handleChange}
+            disabled={editedData.action === "view"}
           />
         </Grid>
       </Grid>

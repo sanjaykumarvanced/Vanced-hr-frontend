@@ -1,7 +1,13 @@
 import { Grid } from "@mui/material";
 import { themeColors } from "../../../configs";
 import { CustomFilledInput } from "../../../components/input";
-export const BankInformation = ({ formManager }: { formManager?: any }) => {
+export const BankInformation = ({
+  formManager,
+  editedData,
+}: {
+  formManager?: any;
+  editedData?: any;
+}) => {
   return (
     <Grid
       item
@@ -49,6 +55,7 @@ export const BankInformation = ({ formManager }: { formManager?: any }) => {
             border="1px solid rgb(0 0 0 / 30%)"
             value={formManager.values.bankInformation.bankName}
             onChangeValue={formManager.handleChange}
+            disabled={editedData.action === "view"}
           />
         </Grid>
         <Grid
@@ -73,6 +80,7 @@ export const BankInformation = ({ formManager }: { formManager?: any }) => {
             border="1px solid rgb(0 0 0 / 30%)"
             value={formManager.values.bankInformation.bankAccountNumber}
             onChangeValue={formManager.handleChange}
+            disabled={editedData.action === "view"}
           />
         </Grid>
       </Grid>
@@ -109,6 +117,7 @@ export const BankInformation = ({ formManager }: { formManager?: any }) => {
             border="1px solid rgb(0 0 0 / 30%)"
             value={formManager.values.bankInformation.ifscCode}
             onChangeValue={formManager.handleChange}
+            disabled={editedData.action === "view"}
           />
         </Grid>
         <Grid
@@ -133,6 +142,7 @@ export const BankInformation = ({ formManager }: { formManager?: any }) => {
             border="1px solid rgb(0 0 0 / 30%)"
             value={formManager.values.bankInformation.panNo}
             onChangeValue={formManager.handleChange}
+            disabled={editedData.action === "view"}
           />
         </Grid>
       </Grid>
