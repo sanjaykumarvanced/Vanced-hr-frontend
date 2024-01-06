@@ -13,7 +13,7 @@ import { useState } from "react";
 import { AddNewEmployeeDialog } from "../components/modals/add-new-employee";
 import { toast } from "react-toastify";
 
-export const AllEmployeeListTable = ({
+export const  AllEmployeeListTable = ({
   maxHeight,
   AllEmployees,
 }: {
@@ -58,7 +58,6 @@ export const AllEmployeeListTable = ({
   }
   const { data, refetch } = useGetEmployeeListQuery();
   const [editedData, setEditedData] = useState<any>({});
-  const [view, setView] = useState<any>({});
   const [isOpen, setIsOpen] = useState(false);
   const [deleteItem] = useDeleteEmployeeDetailMutation();
   const handleDelete = async (id: number) => {

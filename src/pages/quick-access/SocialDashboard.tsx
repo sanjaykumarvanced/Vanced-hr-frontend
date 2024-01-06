@@ -2,7 +2,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { themeColors, themeFonts } from "../../configs";
 import { HolidaysBackground, Inbox } from "../../pngs";
 import { useGetHolidaysDetailsQuery } from "../../components/apis/holidaysDetailsApi";
-import { ViewAllHolidaysDialog } from "../../components/modals/view-all-modal";
+import { ViewAllHolidaysDialog } from "../../components/modals/view-all-holidays-modal";
 import { useState } from "react";
 
 export const getStyles = () => {

@@ -1,8 +1,6 @@
 import { Grid, Box, Typography, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { themeFonts, themeColors } from "../configs";
-import { useSelector } from "react-redux";
-import { useGetLeaveRequestByIdQuery } from "../components/apis/leaveRequestApi";
 import { EditIconSvg } from "../svgs";
 import { apiBaseUrl } from "../components/consts/api-url.const";
 import { format } from "date-fns";
@@ -12,45 +10,68 @@ import { SingleInputDateRangePicker } from "../components/calendar/calendar";
 import { useGetEmployeeListQuery } from "../components/apis/employeeListApi";
 import { toCamelCaseFormat } from "../utils/helpers";
 import moment from "moment";
+import { SearchComponents } from "../components/filter/search-component";
+import ClearIcon from "@mui/icons-material/Clear";
+import DoneIcon from "@mui/icons-material/Done";
+import { toast } from "react-toastify";
+import {
+  useGetRequestedLeavesByIdQuery,
+  useUpdateRequestedLeavesMutation,
+} from "../components/apis/requestedLeavesApi";
 
-const columns: GridColDef[] = [
-  {
-    field: "jj",
-    headerName: "",
-    width: 26,
-    minWidth: 10,
-  },
-  {
-    field: "leaveType",
-    headerName: "Leave Type",
-    flex: 1,
-  },
-  { field: "from", headerName: "From", flex: 1 },
-  { field: "to", headerName: "To", flex: 1 },
-  {
-    field: "noOfDays",
-    headerName: "No. of Days",
-    flex: 1,
-  },
-  { field: "reason", headerName: "Reason", flex: 1 },
-  { field: "approvedBy", headerName: "Approved By", flex: 1 },
-  {
-    field: "status",
-    headerName: "Status",
-    flex: 1,
-  },
-  {
-    field: "action",
-    headerName: "Action",
-  },
-];
-
-export const LeaveRequestTable = () => {
-  const user = useSelector((state: any) => state.authentication.user);
-  const Id = user[0].id;
-  const { data, refetch }: any = useGetLeaveRequestByIdQuery({ id: Id });
-
+export const LeaveRequestTable = ({
+  data,
+  refetch,
+  leaveRecords,
+  userId,
+}: {
+  data?: any;
+  refetch?: any;
+  leaveRecords?: any;
+  userId?: any;
+}) => {
+  const columns: GridColDef[] = [
+    {
+      field: "jj",
+      headerName: "",
+      width: 26,
+      minWidth: 10,
+    },
+    {
+      field: "leaveType",
+      headerName: "Leave Type",
+      flex: 1,
+    },
+    { field: "from", headerName: "From", flex: 1 },
+    { field: "to", headerName: "To", flex: 1 },
+    {
+      field: "noOfDays",
+      headerName: "No. of Days",
+      flex: 1,
+    },
+    { field: "reason", headerName: "Reason", flex: 1 },
+    { field: "approvedBy", headerName: "Approved By", flex: 1 },
+    {
+      field: "status",
+      headerName: "Status",
+      flex: 1,
+    },
+    {
+      field: "action",
+      headerName: "Action",
+    },
+  ];
+  if (leaveRecords) {
+    columns.splice(1, 0, {
+      field: "employeeName",
+      headerName: "Employee Name",
+      flex: 1,
+    });
+  }
   const { data: employeeList } = useGetEmployeeListQuery<any>();
+  const { refetch: leaveRefetch }: any = useGetRequestedLeavesByIdQuery({
+    employerId: userId,
+  });
   const [editedData, setEditedData] = useState<any>({});
   const currentDate = moment();
   const [isOpen, setIsOpen] = useState(false);
@@ -62,13 +83,45 @@ export const LeaveRequestTable = () => {
     setIsOpen(true);
     setEditedData({});
   };
-
+  const [updateLeaveStatus] = useUpdateRequestedLeavesMutation();
   if (!data) {
     return null;
   }
-
+  const handleApproved = async (id: any) => {
+    try {
+      const res = await updateLeaveStatus({
+        id,
+        status: "Approved",
+        employerId: userId,
+      }).unwrap();
+      toast.success(res.message);
+    } catch (error: any) {
+      console.error("Error approving for leave:", error);
+      toast.error(error.data);
+    }
+    refetch();
+    leaveRefetch();
+  };
+  const handleDecline = async (id: any) => {
+    try {
+      const res = await updateLeaveStatus({
+        id,
+        status: "Declined",
+        employerId: userId,
+      }).unwrap();
+      toast.success(res.message);
+    } catch (error: any) {
+      console.error("Error approving for leave:", error);
+      toast.error(error.data);
+    }
+    refetch();
+    leaveRefetch();
+  };
   const rows = data.map((item: any) => ({
     id: item._id,
+    employeeName: `${item.employee.firstName || ""} ${
+      item.employee.lastName || ""
+    }`,
     leaveType: toCamelCaseFormat(item.leaveType),
     from: format(new Date(item.startDate), "dd/MM/yyyy"),
     to: format(new Date(item.endDate), "dd/MM/yyyy"),
@@ -77,6 +130,7 @@ export const LeaveRequestTable = () => {
     reason: item.reason,
     approvedBy: item?.approvedBy,
     status: item.status,
+    image: item.image.path,
     durations: toCamelCaseFormat(item.durations),
     startTime: item.startTime,
     endTime: item.endTime,
@@ -135,26 +189,31 @@ export const LeaveRequestTable = () => {
               display: "flex",
               alignItems: "center",
               paddingX: "24px !important",
-              gap: "20px",
+              gap: leaveRecords ? 0 : "20px",
             }}
           >
+            {leaveRecords && (
+              <SearchComponents searchTitle={"Search"} isEmpty={true} />
+            )}
             <SingleInputDateRangePicker placeholder={"Jan 2023 - Dec 2023"} />
-            <Button
-              sx={{
-                height: 39,
-                borderRadius: "6px",
-                backgroundColor: themeColors["#0C345D"],
-                fontFamily: themeFonts["Poppins-SemiBold"],
-                fontSize: "15px",
-                color: themeColors["#FFFFFF"],
-                "&:hover": {
-                  backgroundColor: "rgb(21 94 158)",
-                },
-              }}
-              onClick={handleOpen}
-            >
-              Request Leaves
-            </Button>
+            {!leaveRecords && (
+              <Button
+                sx={{
+                  height: 39,
+                  borderRadius: "6px",
+                  backgroundColor: themeColors["#0C345D"],
+                  fontFamily: themeFonts["Poppins-SemiBold"],
+                  fontSize: "15px",
+                  color: themeColors["#FFFFFF"],
+                  "&:hover": {
+                    backgroundColor: "rgb(21 94 158)",
+                  },
+                }}
+                onClick={handleOpen}
+              >
+                Request Leaves
+              </Button>
+            )}
           </Box>
         </Box>
         <Box sx={{ height: 400, width: "100%" }}>
@@ -163,7 +222,74 @@ export const LeaveRequestTable = () => {
             columns={columns.map((col) => ({
               ...col,
               renderCell: (params) =>
-                col.field === "action" ? (
+                col.field === "employeeName" ? (
+                  <Typography
+                    sx={{
+                      fontFamily: themeFonts["Poppins-Regular"],
+                      fontSize: "14px",
+                      color: themeColors["#000000"],
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <img
+                      src={
+                        params.row.image
+                          ? apiBaseUrl + "/" + params.row.image
+                          : ""
+                      }
+                      height={40}
+                      width={40}
+                      alt="ProfilePicture"
+                    />
+
+                    {params.value}
+                  </Typography>
+                ) : col.field === "action" && leaveRecords ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: "15px",
+                    }}
+                  >
+                    <Button
+                      disabled={
+                        params.row.status === "Approved" ||
+                        params.row.status === "Declined"
+                      }
+                      sx={{
+                        height: "29px",
+                        minWidth: "29px",
+                        backgroundColor: themeColors["rgb(128 199 98 / 31%)"],
+                        padding: "0px ",
+                        color: themeColors["#42971B"],
+                      }}
+                      onClick={() => handleApproved(params.row.id)}
+                    >
+                      <DoneIcon />
+                    </Button>
+                    <Button
+                      disabled={
+                        params.row.status === "Declined" ||
+                        params.row.status === "Approved"
+                      }
+                      sx={{
+                        height: "29px",
+                        minWidth: "29px",
+                        backgroundColor: themeColors["rgb(199 98 98 / 31%)"],
+                        padding: "0px ",
+                        color: themeColors["#971B1B"],
+                      }}
+                      onClick={() => handleDecline(params.row.id)}
+                    >
+                      <ClearIcon />
+                    </Button>
+                  </Box>
+                ) : col.field === "action" && !leaveRecords ? (
                   <Box
                     sx={{
                       display: "flex",

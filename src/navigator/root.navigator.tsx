@@ -21,6 +21,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AllEmployee } from "../pages/admin/all-employee";
 import { RequestedLeaves } from "../pages/admin/requested-leaves/requested-leaves";
+import { LeavesRecords } from "../pages/admin/leaves-recods/leaves-records";
+import { EmployeesPerformancePage } from "../pages/admin/admin-performance/employees-performance-page";
 
 export const RootNavigator = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -66,9 +68,12 @@ export const RootNavigator = () => {
 
           <Route path={ROUTES.ALL_EMPLOYEE} element={<AllEmployee />} />
           <Route path={ROUTES.ATTACHMENT} element={<></>} />
-          <Route path={ROUTES.LEAVES} element={<></>} />
+          <Route path={ROUTES.LEAVES} element={<LeavesRecords />} />
           <Route path={ROUTES.LEAVES_SETTING} element={<></>} />
-          <Route path={ROUTES.PERFORMANCE} element={<></>} />
+          <Route
+            path={ROUTES.PERFORMANCE}
+            element={<EmployeesPerformancePage />}
+          />
           <Route path={ROUTES.TEAM_LEADERS} element={<></>} />
           <Route path={ROUTES.SHIFT_SCHEDULE} element={<></>} />
           <Route path={ROUTES.Clients} element={<></>} />

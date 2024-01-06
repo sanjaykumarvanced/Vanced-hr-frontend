@@ -3,11 +3,15 @@ import React from "react";
 import { LeaveRequestTable } from "../../../table/leave-request-table";
 import { LeaveHistory } from "./leave-history";
 import { MyLeaveStats } from "./my-leaves-stats";
+import { useSelector } from "react-redux";
+import { useGetLeaveRequestByIdQuery } from "../../../components/apis/leaveRequestApi";
 
 export const LeavePage = () => {
+  const user = useSelector((state: any) => state.authentication.user);
+  const Id = user[0].id;
+  const { data, refetch }: any = useGetLeaveRequestByIdQuery({ id: Id });
   return (
     <>
-      
       <Grid
         item
         xs={12}
@@ -24,7 +28,7 @@ export const LeavePage = () => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <LeaveRequestTable />
+        <LeaveRequestTable data={data} refetch={refetch} userId={Id}/>
       </Grid>
     </>
   );
