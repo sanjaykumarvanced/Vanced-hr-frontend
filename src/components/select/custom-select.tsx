@@ -52,7 +52,7 @@ export const CustomSelect = ({
       {label && <CustomLabel label={label} fontSize="14px" />}
 
       <Select
-        value={selectValue.toString()}
+        value={selectValue?.toString()}
         onChange={handleChange}
         IconComponent={() => <DownArrowIcon2 height={10} />}
         defaultValue={defaultValue ? defaultValue : ""}

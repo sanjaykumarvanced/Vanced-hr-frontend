@@ -20,6 +20,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import { SearchComponents } from "../../components/filter/search-component";
+import { AddNewPerformanceDialog } from "../../components/modals/add-new-performance";
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -82,11 +83,12 @@ const columns: GridColDef[] = [
 
 export const PerformanceTable = () => {
   const [selectedValue, setSelectedValue] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+  const { data, refetch }: any = useGetPerformanceListQuery();
+  const [open, setOpen] = useState(false);
   const handleChange = (event: any) => {
     setSelectedValue(event.target.value);
   };
-  const { data }: any = useGetPerformanceListQuery();
-  const [open, setOpen] = useState(false);
   if (!data) {
     return null;
   }
@@ -109,8 +111,14 @@ export const PerformanceTable = () => {
     debugger;
     setOpen(!open);
   };
-  const handleClose = () => {
+  const handleTooltipClose = () => {
     setOpen(false);
+  };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+  const handleOpen = () => {
+    setIsOpen(true);
   };
   console.log(open);
 
@@ -231,7 +239,7 @@ export const PerformanceTable = () => {
               },
               marginRight: "13px",
             }}
-            // onClick={handleOpen}
+            onClick={handleOpen}
           >
             Add New
           </Button>
@@ -292,7 +300,7 @@ export const PerformanceTable = () => {
                     <HtmlTooltip
                       placement="bottom-end"
                       open={open}
-                      onClose={handleClose}
+                      onClose={handleTooltipClose}
                       disableHoverListener
                       disableTouchListener
                       title={
@@ -427,6 +435,14 @@ export const PerformanceTable = () => {
           />
         </Box>
       </Grid>
+      {isOpen && (
+        <AddNewPerformanceDialog
+          open={isOpen}
+          onClose={handleClose}
+          refetch={refetch}
+          data={data}
+        />
+      )}
     </>
   );
 };

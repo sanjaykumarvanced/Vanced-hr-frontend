@@ -8,21 +8,27 @@ const injectedRtkApi = api.injectEndpoints({
         };
       },
     }),
-    createNewPerformance: builder.mutation<any, Partial<EmployeeListApiArg>>({
-      query: (item) => {
-        return {
-          url: `/api/performance/add-performance`,
-          method: "POST",
-          body: item,
-        };
-      },
-    }),
+    createNewPerformance: builder.mutation<any, Partial<PerformanceListApiArg>>(
+      {
+        query: (item) => {
+          return {
+            url: `/api/performance/add-performance`,
+            method: "POST",
+            body: item,
+          };
+        },
+      }
+    ),
   }),
 });
 export { injectedRtkApi as enhancedApi };
 
-export type EmployeeListApiArg = {
-  id?: number;
+export type PerformanceListApiArg = {
+  addedBy: any;
+  projectName: any;
+  comments: any;
+  date: any;
+  employee: any;
 };
 
 export const { useGetPerformanceListQuery, useCreateNewPerformanceMutation } =
