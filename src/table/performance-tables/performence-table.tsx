@@ -13,7 +13,10 @@ import {
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { apiBaseUrl } from "../../components/consts/api-url.const";
 import { themeColors, themeFonts } from "../../configs";
-import { useGetPerformanceListQuery } from "../../components/apis/performanceApi";
+import {
+  useDeletePerformanceDetailMutation,
+  useGetPerformanceListQuery,
+} from "../../components/apis/performanceApi";
 import { format } from "date-fns";
 import { DeleteIconSvg, DownArrowIcon4, EditIconSvg } from "../../svgs";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -21,6 +24,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import { SearchComponents } from "../../components/filter/search-component";
 import { AddNewPerformanceDialog } from "../../components/modals/add-new-performance";
+import { useGetEmployeeListQuery } from "../../components/apis/employeeListApi";
+import { useGetProjectsListQuery } from "../../components/apis/projectApi";
+import { toast } from "react-toastify";
 
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -85,7 +91,29 @@ export const PerformanceTable = () => {
   const [selectedValue, setSelectedValue] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const { data, refetch }: any = useGetPerformanceListQuery();
-  const [open, setOpen] = useState(false);
+  const { data: employeeList } = useGetEmployeeListQuery<any>();
+  const { data: projectList } = useGetProjectsListQuery<any>();
+  const [open, setOpen] = useState<any>({});
+  const [editedData, setEditedData] = useState<any>({});
+  const [deleteItem] = useDeletePerformanceDetailMutation();
+  const handleDelete = async (employee: number) => {
+    try {
+      const res = await deleteItem({
+        employee,
+      }).unwrap();
+      console.log("Item successfully deleted.");
+      toast.success(res.message);
+    } catch (error: any) {
+      console.log("Error deleting item:", error);
+      toast.error(error.data.message);
+    }
+    refetch();
+  };
+  const handleClickEditOpen = (data: any, action?: string) => {
+    debugger;
+    setIsOpen(true);
+    setEditedData({ ...data, action });
+  };
   const handleChange = (event: any) => {
     setSelectedValue(event.target.value);
   };
@@ -99,25 +127,34 @@ export const PerformanceTable = () => {
     employeeName: `${item.employee.firstName || ""} ${
       item.employee.lastName || ""
     }`,
+    employeeID: item.employee._id,
+    addedById: item.addedBy._id,
     addedBy: `${item.addedBy.firstName || ""} ${item.addedBy.lastName || ""}`,
     projectName: item.projectName.projectName,
+    projectId: item.projectName._id,
     comments: item.comments,
     date: format(new Date(item.date), "dd/MM/yyyy"),
     image: item.employeeImage.path,
     addedByImage: item.addedByImage.path,
   }));
 
-  const handleTooltipOpen = () => {
-    debugger;
-    setOpen(!open);
+  const handleTooltipOpen = (id: any) => {
+    setOpen((prevState: any) => ({
+      ...prevState,
+      [id]: !prevState[id], // Toggle the state for the specific row ID
+    }));
   };
-  const handleTooltipClose = () => {
+  const handleTooltipClose = (id: any) => {
+    console.log(id);
+
     setOpen(false);
   };
   const handleClose = () => {
     setIsOpen(false);
+    setEditedData({});
   };
   const handleOpen = () => {
+    debugger;
     setIsOpen(true);
   };
   console.log(open);
@@ -299,8 +336,8 @@ export const PerformanceTable = () => {
                   >
                     <HtmlTooltip
                       placement="bottom-end"
-                      open={open}
-                      onClose={handleTooltipClose}
+                      open={open[params.row.id] || false}
+                      onClose={() => handleTooltipClose(params.row.id)}
                       disableHoverListener
                       disableTouchListener
                       title={
@@ -314,7 +351,7 @@ export const PerformanceTable = () => {
                             // gap: "10px",
                           }}
                         >
-                          Good Performance ,{" "}
+                          {params.row.comments}{" "}
                           <Typography
                             component={"span"}
                             sx={{
@@ -340,9 +377,9 @@ export const PerformanceTable = () => {
                           minWidth: "20px",
                           padding: "0px ",
                         }}
-                        onClick={handleTooltipOpen}
+                        onClick={() => handleTooltipOpen(params.row.id)}
                       >
-                        {open === true ? (
+                        {open[params.row.id] ? (
                           <VisibilityIcon
                             sx={{
                               fill: "#38ACE6",
@@ -401,7 +438,7 @@ export const PerformanceTable = () => {
                           "& svg path": { fill: "rgba(0, 0, 0, 0.26)" },
                         },
                       }}
-                      // onClick={() => handleClickEditOpen(params.row, "edit")}
+                      onClick={() => handleClickEditOpen(params.row, "edit")}
                     >
                       <EditIconSvg />
                     </Button>
@@ -411,7 +448,7 @@ export const PerformanceTable = () => {
                         minWidth: "20px",
                         padding: "0px ",
                       }}
-                      // onClick={() => handleDelete(params.row.id)}
+                      onClick={() => handleDelete(params.row.id)}
                     >
                       <DeleteIconSvg />
                     </Button>
@@ -441,6 +478,9 @@ export const PerformanceTable = () => {
           onClose={handleClose}
           refetch={refetch}
           data={data}
+          employeeList={employeeList}
+          projectList={projectList}
+          editedData={editedData}
         />
       )}
     </>

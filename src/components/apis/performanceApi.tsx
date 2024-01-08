@@ -19,17 +19,42 @@ const injectedRtkApi = api.injectEndpoints({
         },
       }
     ),
+    deletePerformanceDetail: builder.mutation<any, PerformanceListApiArg>({
+      query: (queryArg) => {
+        return {
+          url: `/api/performance/delete/${queryArg.employee}`,
+          method: "DELETE",
+        };
+      },
+    }),
+    updatePerformanceDetail: builder.mutation<
+      any,
+      Partial<PerformanceListApiArg>
+    >({
+      query: (queryArg) => {
+        return {
+          url: `/api/performance/update-performance`,
+          method: "PUT",
+          body: queryArg,
+        };
+      },
+    }),
   }),
 });
 export { injectedRtkApi as enhancedApi };
 
 export type PerformanceListApiArg = {
-  addedBy: any;
-  projectName: any;
-  comments: any;
-  date: any;
-  employee: any;
+  id?: any;
+  addedBy?: any;
+  projectName?: any;
+  comments?: any;
+  date?: any;
+  employee?: any;
 };
 
-export const { useGetPerformanceListQuery, useCreateNewPerformanceMutation } =
-  injectedRtkApi;
+export const {
+  useGetPerformanceListQuery,
+  useCreateNewPerformanceMutation,
+  useUpdatePerformanceDetailMutation,
+  useDeletePerformanceDetailMutation,
+} = injectedRtkApi;

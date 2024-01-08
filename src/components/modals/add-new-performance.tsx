@@ -17,10 +17,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { CustomLabel } from "../label";
-import { useCreateNewPerformanceMutation } from "../apis/performanceApi";
+import {
+  useCreateNewPerformanceMutation,
+  useUpdatePerformanceDetailMutation,
+} from "../apis/performanceApi";
 import { useSelector } from "react-redux";
-import { useGetEmployeeListQuery } from "../apis/employeeListApi";
 import { Roles } from "../consts/consts";
+import dayjs from "dayjs";
 
 const validationSchema = Yup.object({
   employee: Yup.string().required("Employee Name is required"),
@@ -31,14 +34,17 @@ const validationSchema = Yup.object({
 
 export const AddNewPerformanceDialog = (props: any) => {
   debugger;
-  const { onClose, open, refetch } = props;
+  const { onClose, open, refetch, employeeList, projectList, editedData } =
+    props;
   const handleClose = () => {
     onClose();
   };
+
   const [addNewPerformance] = useCreateNewPerformanceMutation();
+  const [updateApi] = useUpdatePerformanceDetailMutation();
+
   const user = useSelector((state: any) => state.authentication.user);
   const addedBy = user[0].id;
-  const { data: employeeList } = useGetEmployeeListQuery<any>();
   const adminRoles = Roles[0].key;
   console.log(adminRoles, "user");
   const employeeOptions =
@@ -48,34 +54,66 @@ export const AddNewPerformanceDialog = (props: any) => {
       .map((option: any) => ({
         id: option._id,
         label: `${option.firstName || ""} ${option.lastName || ""}`,
-        value: option.firstName || "",
+        value: option._id,
       }));
+  const projectOptions =
+    projectList &&
+    projectList
+      .filter((option: any) => option.role !== adminRoles)
+      .map((option: any) => ({
+        id: option._id,
+        label: option.projectName || "",
+        value: option._id,
+      }));
+
   const handleSubmit = async () => {
-    try {
-      const response = await addNewPerformance({
-        addedBy: formManager.values.addedBy,
-        employee: formManager.values.employee,
-        projectName: formManager.values.projectName,
-        comments: formManager.values.comments,
-        date: formManager.values.date,
-      }).unwrap();
-      toast.success(response.message);
-    } catch (error: any) {
-      console.error("Error applying for leave:", error);
-      toast.error(error.data.message);
+    if (editedData?.action === "edit") {
+      try {
+        const response = await updateApi({
+          id: formManager.values.id,
+          addedBy: formManager.values.addedBy,
+          employee: formManager.values.employee,
+          projectName: formManager.values.projectName,
+          comments: formManager.values.comments,
+          date: formManager.values.date,
+        }).unwrap();
+        toast.success(response.message);
+      } catch (error: any) {
+        console.error("Error applying for leave:", error);
+        toast.error(error.data.message);
+      }
+    } else {
+      try {
+        const res = await addNewPerformance({
+          addedBy: formManager.values.addedBy,
+          employee: formManager.values.employee,
+          projectName: formManager.values.projectName,
+          comments: formManager.values.comments,
+          date: formManager.values.date,
+        }).unwrap();
+        toast.success(res.message);
+      } catch (error: any) {
+        console.error("Error applying for leave:", error);
+        toast.error(error.data.message);
+      }
     }
 
     onClose();
     refetch();
   };
+  const parseDateString = (dateString: any) => {
+    const [day, month, year] = dateString.split("/");
+    return new Date(`${year}-${month}-${day}`);
+  };
 
   const formManager: any = useFormik({
     initialValues: {
-      employee: "",
-      addedBy: addedBy,
-      projectName: "656097caff0efb3f7f6a8897",
-      comments: "",
-      date: "",
+      id: editedData?.id || "",
+      employee: editedData?.employeeID || "",
+      addedBy: editedData?.addedById || addedBy,
+      projectName: editedData?.projectId || "",
+      comments: editedData?.comments || "",
+      date: editedData?.date ? parseDateString(editedData?.date) : "",
     },
     validationSchema,
     onSubmit: handleSubmit,
@@ -104,7 +142,9 @@ export const AddNewPerformanceDialog = (props: any) => {
           paddingX: "27px",
         }}
       >
-        Give Performance Appraisal
+        {editedData?.action === "edit"
+          ? "Edit Performance Appraisal"
+          : "Give Performance Appraisal"}
       </DialogTitle>
       <IconButton
         aria-label="close"
@@ -187,7 +227,7 @@ export const AddNewPerformanceDialog = (props: any) => {
                 name="date"
                 fontFamily="Poppins-Regular"
                 fontSize={"14px"}
-                value={formManager.values.date}
+                value={dayjs(formManager.values.date)}
                 onChange={(selectedValue: any) => {
                   formManager.setFieldValue(
                     "date",
@@ -222,14 +262,15 @@ export const AddNewPerformanceDialog = (props: any) => {
             >
               <CustomSelect
                 label={"Project Name"}
-                options={[
-                  { label: "Development", value: "Development" },
-                  { label: "Designing", value: "Designing" },
-                  { label: "Marketing", value: "Marketing" },
-                ]}
+                options={projectOptions}
                 value={formManager.values.projectName}
                 onChange={(selectedValue: any) => {
-                  formManager.handleChange("projectName")(selectedValue);
+                  debugger;
+                  const selectedProjectIDs = projectOptions?.find(
+                    (val: any) => val.value === selectedValue && val.id
+                  );
+                  const filteredProjectIDs = selectedProjectIDs.id;
+                  formManager.setFieldValue("projectName", filteredProjectIDs);
                 }}
                 helperText={
                   formManager.touched.projectName &&

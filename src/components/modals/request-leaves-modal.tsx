@@ -197,7 +197,7 @@ export const RequestLeavesDialog = (props: any) => {
       formManager.setFieldValue("endDate", null);
       formManager.setFieldValue("noOfDays", parseInt(""));
     }
-  }, [selectedLeaveType]);
+  }, [formManager, selectedLeaveType]);
 
   return (
     <Dialog
